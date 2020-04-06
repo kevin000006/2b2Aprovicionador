@@ -1,0 +1,162 @@
+<div id="orders" class="page-layout carded fullwidth inner-scroll">
+  <div class="top-bg accent"></div>
+  <div class="center">
+      <!-- HEADER -->
+      <div class="header accent" fxLayout="column" fxLayoutAlign="center center"
+            fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+
+          <!-- APP TITLE -->
+          <div class="logo mb-24 mb-sm-0"
+                fxLayout="row" fxLayoutAlign="start center">
+              <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                  shopping_basket
+              </mat-icon>
+              <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">Bandeja de Ofertas</span>
+          </div>
+          <!-- / APP TITLE -->
+
+          <!-- SEARCH -->
+          <!--<div class="search-wrapper  ml-sm-32">
+              <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                  <mat-icon>search</mat-icon>
+                  <input #filter placeholder="Search for an order">
+              </div>
+          </div>-->
+          <!-- / SEARCH --> 
+
+      </div>
+      <!-- / HEADER -->
+
+      <div class="content-card">
+        <mat-table class="orders-table"
+                      #table [dataSource]="lstBandeja"
+                       matSort
+                        class="mat-cell"
+                       [@animateStagger]="{value:'50'}"
+                       fusePerfectScrollbar>
+
+                      <ng-container matColumnDef="codigo">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.codigo}}</mat-cell>
+                      </ng-container> 
+
+                       <ng-container matColumnDef="version">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Versión</mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.version}}</mat-cell>
+                      </ng-container>
+                  
+                      <ng-container matColumnDef="oportunidad">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Oportunidad</mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.oportunidad}}</mat-cell>
+                      </ng-container>
+                  
+                      <ng-container matColumnDef="cliente">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Cliente</mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.cliente.descripcion}}</mat-cell>
+                      </ng-container>
+                  
+                      <ng-container matColumnDef="descripcion">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Descripción</mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.descripcion}}</mat-cell>
+                      </ng-container>
+                  
+                      <ng-container matColumnDef="estado">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Estado</mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.mtrestado.descripcion}}</mat-cell>
+                      </ng-container>
+                  
+                      
+                      <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef>
+                          <button class="link_basic" mat-icon-button color="primary" (click)="addNew()">
+                            <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+                          </button>
+
+                          <button class="link_basic" mat-icon-button color="primary" (click)="getofertasAll()">
+                            <mat-icon aria-label="Example icon-button with a heart icon">cached</mat-icon>
+                          </button>
+
+                        </mat-header-cell>
+                  
+                        <mat-cell *matCellDef="let row; let i=index;">
+                          <button class="link_basic" mat-icon-button color="accent" (click)="editItem(row)">
+                            <mat-icon aria-label="Edit">edit</mat-icon>
+                          </button>
+                  
+                          <button class="link_basic" mat-icon-button color="accent" (click)="deleteItem(row)" >
+                            <mat-icon aria-label="Delete">delete</mat-icon>
+                          </button>
+                        </mat-cell>
+                      </ng-container>
+                  
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                      </mat-table>
+      </div>
+
+  </div>
+</div>
+
+
+<!--<div class="container container-k mat-elevation-z8">
+
+  <mat-table #table [dataSource]="lstBandeja" matSort class="mat-cell">
+
+    <ng-container matColumnDef="idoferta">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+      <mat-cell *matCellDef="let row" >{{row.idoferta}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="codigo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.codigo}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="version">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Versión</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.version}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="oportunidad">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Oportunidad</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.oportunidad}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="cliente">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Cliente</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.cliente}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="descripcion">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Descripción</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.descripcion}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="estado">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Estado</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.estado}}</mat-cell>
+    </ng-container>
+
+    
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>
+        <button class="link_basic" mat-icon-button color="primary" (click)="addNew()">
+          <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+        </button>
+      </mat-header-cell>
+
+      <mat-cell *matCellDef="let row; let i=index;">
+        <button class="link_basic" mat-icon-button color="accent" (click)="editItem(row)">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+
+        <button class="link_basic" mat-icon-button color="accent" (click)="deleteItem(row)" >
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>-->

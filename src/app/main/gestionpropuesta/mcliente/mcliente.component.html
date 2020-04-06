@@ -1,0 +1,27 @@
+<div id="orders" class="page-layout carded fullwidth inner-scroll">
+    <div class="top-bg accent"></div>
+    <div class="center">
+        <div class="header accent" fxLayout="column" fxLayoutAlign="center center"
+        fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+            <div class="logo mb-24 mb-sm-0"
+                    fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon s-32 mr-16">
+                    perm_identity
+                </mat-icon>
+                <span class="logo-text h1">Clientes</span>
+            </div>
+        </div>
+
+        <div>
+            <div><br/><br/><br/><br/><br/><br/></div>
+            <input type="file" name="fileUpload" #fileUpload id="fileUpload" accept=".txt" (change)="fileProgress($event)" />
+        </div>
+        <br/>
+        <div>
+           <button class="btn btn-sm btn-primary" (click)="uploadfile()">Cargar archivo</button> 
+        </div>
+
+
+
+    </div>
+</div>
