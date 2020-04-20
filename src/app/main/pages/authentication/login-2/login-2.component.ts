@@ -5,14 +5,13 @@ import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
 
 @Component({
-    selector     : 'login-2',
-    templateUrl  : './login-2.component.html',
-    styleUrls    : ['./login-2.component.scss'],
+    selector: 'login-2',
+    templateUrl: './login-2.component.html',
+    styleUrls: ['./login-2.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    animations   : fuseAnimations
+    animations: fuseAnimations
 })
-export class Login2Component implements OnInit
-{
+export class Login2Component implements OnInit {
     loginForm: FormGroup;
 
     /**
@@ -24,18 +23,17 @@ export class Login2Component implements OnInit
     constructor(
         private _fuseConfigService: FuseConfigService,
         private _formBuilder: FormBuilder
-    )
-    {
+    ) {
         // Configure the layout
         this._fuseConfigService.config = {
             layout: {
-                navbar   : {
+                navbar: {
                     hidden: true
                 },
-                toolbar  : {
+                toolbar: {
                     hidden: true
                 },
-                footer   : {
+                footer: {
                     hidden: true
                 },
                 sidepanel: {
@@ -52,10 +50,9 @@ export class Login2Component implements OnInit
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
         this.loginForm = this._formBuilder.group({
-            email   : ['', [Validators.required, Validators.email]],
+            usuario: ['', [Validators.required]],
             password: ['', Validators.required]
         });
     }

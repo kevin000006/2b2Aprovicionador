@@ -17,8 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "aot": true,
-            "outputPath": "dist/sdio",
+            "outputPath": "dist/fuse",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -29,7 +28,6 @@
               "src/app/main/angular-material-elements"
             ],
             "styles": [
-              "./node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.scss"
             ],
             "scripts": [],
@@ -57,30 +55,14 @@
                   "type": "initial",
                   "maximumWarning": "4mb",
                   "maximumError": "6mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
                 }
               ]
             },
             "ec": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
               "sourceMap": true,
               "extractCss": true
             },
             "hmr": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -161,8 +143,5 @@
       }
     }
   },
-  "defaultProject": "fuse",
-  "cli": {
-    "analytics": false
-  }
+  "defaultProject": "fuse"
 }

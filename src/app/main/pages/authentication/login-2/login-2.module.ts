@@ -12,7 +12,7 @@ import { Login2Component } from 'app/main/pages/authentication/login-2/login-2.c
 
 const routes = [
     {
-        path     : 'auth/login-2',
+        path: 'auth/login-2',
         component: Login2Component
     }
 ];
@@ -21,7 +21,7 @@ const routes = [
     declarations: [
         Login2Component
     ],
-    imports     : [
+    imports: [
         RouterModule.forChild(routes),
 
         MatButtonModule,
@@ -33,6 +33,5 @@ const routes = [
         FuseSharedModule
     ]
 })
-export class Login2Module
-{
+export class Login2Module {
 }

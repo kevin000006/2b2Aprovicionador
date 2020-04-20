@@ -8,13 +8,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { TranslateModule } from '@ngx-translate/core';
 import 'hammerjs';
 
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { FuseModule } from '@fuse/fuse.module';
 import { FuseSharedModule } from '@fuse/shared.module';
@@ -28,30 +28,29 @@ import { AppStoreModule } from 'app/store/store.module';
 import { LayoutModule } from 'app/layout/layout.module';
 
 const appRoutes: Routes = [
-    {   
-        path        : 'gestion-propuesta',
-        loadChildren: ()=> import('./main/gestionpropuesta/gestionpropuesta.module').then(m => m.GestionPropuestaModule)
+    {
+        path: 'gestion-propuesta',
+        loadChildren: () => import('./main/gestionpropuesta/gestionpropuesta.module').then(m => m.GestionPropuestaModule)
     },
     {
-        path        : 'apps',
+        path: 'apps',
         loadChildren: () => import('./main/apps/apps.module').then(m => m.AppsModule)
     },
     {
-        path        : 'pages',
+        path: 'pages',
         loadChildren: () => import('./main/pages/pages.module').then(m => m.PagesModule)
     },
     {
-        path        : 'ui',
+        path: 'ui',
         loadChildren: () => import('./main/ui/ui.module').then(m => m.UIModule)
     },
     {
-        path        : 'documentation',
+        path: 'documentation',
         loadChildren: () => import('./main/documentation/documentation.module').then(m => m.DocumentationModule)
     },
     {
-        path      : '**',
-        //redirectTo: 'apps/dashboards/analytics'
-        redirectTo: 'pages/auth/login'
+        path: '**',
+        redirectTo: 'pages/auth/login-2'
     }
 ];
 
@@ -59,7 +58,7 @@ const appRoutes: Routes = [
     declarations: [
         AppComponent
     ],
-    imports     : [
+    imports: [
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
@@ -67,7 +66,7 @@ const appRoutes: Routes = [
 
         TranslateModule.forRoot(),
         InMemoryWebApiModule.forRoot(FakeDbService, {
-            delay             : 0,
+            delay: 0,
             passThruUnknownUrl: true
         }),
 
@@ -96,10 +95,9 @@ const appRoutes: Routes = [
         LayoutModule,
         AppStoreModule
     ],
-    bootstrap   : [
+    bootstrap: [
         AppComponent
     ]
 })
-export class AppModule
-{
+export class AppModule {
 }
