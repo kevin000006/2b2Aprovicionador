@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { Router } from '@angular/router';
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
 
@@ -22,7 +22,8 @@ export class Login2Component implements OnInit {
      */
     constructor(
         private _fuseConfigService: FuseConfigService,
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private _router: Router
     ) {
         // Configure the layout
         this._fuseConfigService.config = {
@@ -46,6 +47,11 @@ export class Login2Component implements OnInit {
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
     // -----------------------------------------------------------------------------------------------------
+
+    login(): void {
+        console.log('ss');
+        this._router.navigate(['gestion-propuesta/bandeja']);
+    }
 
     /**
      * On init
