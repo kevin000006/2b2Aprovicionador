@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BandejaModel, ClienteModel, EstadoModel } from '../models/oferta';
 
@@ -8,30 +8,28 @@ import { BandejaModel, ClienteModel, EstadoModel } from '../models/oferta';
   providedIn: 'root'
 })
 export class BandejaService {
-  private readonly urlBase:string = "https://webapp-b2b.azurewebsites.net/api"; 
+  private readonly urlBase: string = "https://cors-anywhere.herokuapp.com/https://webapp-b2b.azurewebsites.net/api";
 
 
   constructor(private http: HttpClient) { }
 
-  getBandejaAll(): Observable<BandejaModel[]>{
+  getBandejaAll(): Observable<BandejaModel[]> {
     return this.http.get<BandejaModel[]>(this.urlBase + '/oferta/listOferta');
   }
 
-  newOferta(data: BandejaModel):Observable<any>
-  {
-    return this.http.post<BandejaModel>(this.urlBase + '/oferta/saveOferta',data);
+  newOferta(data: BandejaModel): Observable<any> {
+    return this.http.post<BandejaModel>(this.urlBase + '/oferta/saveOferta', data);
   }
 
-  deleteOferta(data:BandejaModel):Observable<any>
-  {
+  deleteOferta(data: BandejaModel): Observable<any> {
     return this.http.delete(this.urlBase + "/oferta/deleteOferta/" + data.id);
   }
-  
-  getClienteAll(): Observable<ClienteModel[]>{
+
+  getClienteAll(): Observable<ClienteModel[]> {
     return this.http.get<ClienteModel[]>(this.urlBase + '/clientes/listClientes');
   }
 
-  getEstadoAll(): Observable<EstadoModel[]>{
+  getEstadoAll(): Observable<EstadoModel[]> {
     return this.http.get<EstadoModel[]>(this.urlBase + '/estados/listEstados');
   }
 
