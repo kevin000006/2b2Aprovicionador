@@ -143,5 +143,8 @@
       }
     }
   },
-  "defaultProject": "fuse"
+  "defaultProject": "fuse",
+  "cli": {
+    "analytics": false
+  }
 }
