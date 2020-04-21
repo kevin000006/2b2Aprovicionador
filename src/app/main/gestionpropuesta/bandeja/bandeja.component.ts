@@ -19,7 +19,7 @@ export class BandejaComponent implements OnInit {
   lstCliente= new Array<ClienteModel>();
   lstEstado= new Array<EstadoModel>();
 
-  displayedColumns: string[] = ['codigo','version','oportunidad','cliente','descripcion','estado','actions'];
+  displayedColumns: string[] = ['menu','codigo','version','oportunidad','cliente','descripcion','estado','actions'];
   constructor(private bandejaService : BandejaService, public dialog : MatDialog) { 
 
    

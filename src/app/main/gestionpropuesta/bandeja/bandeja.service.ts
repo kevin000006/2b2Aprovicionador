@@ -8,13 +8,13 @@ import { BandejaModel, ClienteModel, EstadoModel } from '../models/oferta';
   providedIn: 'root'
 })
 export class BandejaService {
-  private readonly urlBase: string = "https://cors-anywhere.herokuapp.com/https://webapp-b2b.azurewebsites.net/api";
+  private readonly urlBase: string = "https://webapp-b2b.azurewebsites.net/api";
 
 
   constructor(private http: HttpClient) { }
 
   getBandejaAll(): Observable<BandejaModel[]> {
-    return this.http.get<BandejaModel[]>(this.urlBase + '/oferta/listOferta');
+    return this.http.get<BandejaModel[]>(this.urlBase + '/oferta/list');
   }
 
   newOferta(data: BandejaModel): Observable<any> {
@@ -26,11 +26,11 @@ export class BandejaService {
   }
 
   getClienteAll(): Observable<ClienteModel[]> {
-    return this.http.get<ClienteModel[]>(this.urlBase + '/clientes/listClientes');
+    return this.http.get<ClienteModel[]>(this.urlBase + '/clientes/list');
   }
 
   getEstadoAll(): Observable<EstadoModel[]> {
-    return this.http.get<EstadoModel[]>(this.urlBase + '/estados/listEstados');
+    return this.http.get<EstadoModel[]>(this.urlBase + '/estadosRest/list');
   }
 
 

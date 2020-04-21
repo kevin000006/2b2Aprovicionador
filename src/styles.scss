@@ -2,3 +2,84 @@
 @import "@fuse/scss/core";
 // Import app.theme.scss
 @import "app/app.theme";
+
+body.theme-default .mat-toolbar{
+    background: linear-gradient(270deg, #5BC6DA 0%, #005B83 100%) !important;
+    box-shadow: 0px 8px 28px rgba(72, 89, 102, 0.1);
+}
+
+.fuse-navy-900 {
+    background-color: #035e86 !important;
+    color: white !important;
+}
+
+navbar navbar-vertical-style-1 .navbar-top .logo .logo-icon{
+    height: 30px !important;
+    width: auto !important;
+}
+    
+navbar navbar-vertical-style-1 .navbar-top .logo{
+    margin: 0 auto;;
+}
+
+body.theme-default .accent {
+    background-color: #e5e5e5 !important;
+    color: #2593B5 !important;
+}
+
+.page-layout.carded.fullwidth.inner-scroll {
+    background: #e5e5e5;
+}
+
+.fuse-navy-700 {
+    background-color: #ffffff !important;
+    color: #909090 !important;
+}
+
+.nav.material2 .nav-item .nav-link, .material2 .nav .nav-item .nav-link
+{
+    height: 40px;
+    padding: 0 12px 0 24px;
+}
+
+body.theme-default .hint-text{
+    font-family: Baloo Thambi 2;
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 12px;
+color: #003245 !important;
+font-family: Baloo Thambi 2;
+}
+
+.nav .nav-item.nav-collapsable a{
+    background-color: #fff !important;
+    border-radius: 0 !important;
+    margin-right: 0 !important;
+    font-family: Baloo Thambi 2;
+    font-size: 13px;;
+}
+
+.nav .nav-item.nav-collapsable.open >  a:first-child{
+    background: #F5F6FA !important;
+    color: #2593B5 !important;
+    font-weight: 600; 
+    font-family: Baloo Thambi 2;
+}
+
+body.theme-default .mat-header-cell {
+    color: #003245;
+    font-size: 13px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
+
+body.theme-default .mat-cell, body.theme-default .mat-footer-cell{
+    color: #50535A;
+    align-items: center;
+    text-align: center;
+    font-size: 11px;
+    -webkit-box-pack: center;
+    justify-content: center;
+}

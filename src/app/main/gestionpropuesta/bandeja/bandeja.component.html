@@ -7,11 +7,9 @@
 
           <!-- APP TITLE -->
           <div class="logo mb-24 mb-sm-0"
-                fxLayout="row" fxLayoutAlign="start center">
-              <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
-                  shopping_basket
-              </mat-icon>
-              <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">Bandeja de Ofertas</span>
+                fxLayout="row" fxLayoutAlign=" center" style="display: block;width: 100%;">
+             
+              <p style="display: block; width: 100%; text-align: center;color: #003245; font-size: 24px;font-weight: bold;" class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">!Hola, María Ramos¡<br/> <span style="font-size: 16px;">Aquí podrás consultar y realizar nuevas peticiones</span></p>
           </div>
           <!-- / APP TITLE -->
 
@@ -26,7 +24,13 @@
 
       </div>
       <!-- / HEADER -->
-
+    <div>
+     
+      <button style="background: linear-gradient(90deg, #980098 0%, #CE0ECE 100%);border-radius: 10px;color: #fff;font-size: 13px;padding: 5px 15px 0px 15px;margin-bottom: 10px;" class="link_basic" mat-icon-button color="primary" (click)="addNew()">
+        <mat-icon style="font-size: 15px;" aria-label="Example icon-button with a heart icon">add</mat-icon>
+        Nueva oferta
+      </button>
+    </div>
       <div class="content-card">
         <mat-table class="orders-table"
                       #table [dataSource]="lstBandeja"
@@ -34,6 +38,23 @@
                         class="mat-cell"
                        [@animateStagger]="{value:'50'}"
                        fusePerfectScrollbar>
+
+                      <ng-container matColumnDef="menu">
+                          <mat-header-cell *matHeaderCellDef>
+                            
+                          </mat-header-cell>
+
+                        <mat-cell *matCellDef="let row; let i=index;">
+                          <mat-menu #appMenu="matMenu">
+                            <button mat-menu-item>Ver pertición</button>
+                            <button mat-menu-item>Ceco</button>
+                          </mat-menu>
+                          
+                          <a style="cursor:pointer;color: #2493B4;" mat-icon-button [matMenuTriggerFor]="appMenu">
+                            <mat-icon>more_vert</mat-icon>
+                          </a>
+                         </mat-cell>
+                      </ng-container>
 
                       <ng-container matColumnDef="codigo">
                         <mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
@@ -62,19 +83,19 @@
                   
                       <ng-container matColumnDef="estado">
                         <mat-header-cell *matHeaderCellDef mat-sort-header>Estado</mat-header-cell>
-                        <mat-cell *matCellDef="let row"> {{row.mtrestado.descripcion}}</mat-cell>
+                        <mat-cell *matCellDef="let row"> {{row.estado.descripcion}}</mat-cell>
                       </ng-container>
                   
                       
                       <ng-container matColumnDef="actions">
                         <mat-header-cell *matHeaderCellDef>
-                          <button class="link_basic" mat-icon-button color="primary" (click)="addNew()">
-                            <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
-                          </button>
+                          
 
-                          <button class="link_basic" mat-icon-button color="primary" (click)="getofertasAll()">
+                         <!-- <button class="link_basic" mat-icon-button color="primary" (click)="getofertasAll()">
                             <mat-icon aria-label="Example icon-button with a heart icon">cached</mat-icon>
-                          </button>
+                          </button>-->
+
+                          
 
                         </mat-header-cell>
                   
@@ -86,6 +107,10 @@
                           <button class="link_basic" mat-icon-button color="accent" (click)="deleteItem(row)" >
                             <mat-icon aria-label="Delete">delete</mat-icon>
                           </button>
+
+                         
+
+
                         </mat-cell>
                       </ng-container>
                   

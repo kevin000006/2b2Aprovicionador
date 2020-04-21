@@ -16,7 +16,7 @@ export class BandejaModel {
     codigo: string = "---";
     version: number = 1;
     salesforce:string;
-    mtrestado: EstadoModel;
+    estado: EstadoModel;
     gerente:string;
     preventa:string;    
     cliente: ClienteModel;

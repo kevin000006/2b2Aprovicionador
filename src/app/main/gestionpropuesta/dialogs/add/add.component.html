@@ -40,7 +40,7 @@
                 <div class="form col-xs-12">
                   <mat-form-field color="accent">
                   <mat-label class="font-normal">Estado</mat-label>
-                  <select matNativeControl [(ngModel)]="dato.mtrestado" name="mtrestado" [compareWith]="compareEstado">
+                  <select matNativeControl [(ngModel)]="dato.estado" name="estado" [compareWith]="compareEstado">
                       <option value="-1" selected>[Seleccione]</option>
                       <option *ngFor="let cl of lstEstado" [ngValue]="cl">{{cl.descripcion}}</option>
                   </select>

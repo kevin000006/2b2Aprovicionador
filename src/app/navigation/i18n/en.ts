@@ -3,8 +3,8 @@ export const locale = {
     data: {
         'NAV': {
             'NAV.INTEGRACION' : 'Integración',
-            'APPLICATIONS': 'MODULOS',
-            'GESTIONPROPUESTA': 'Gestión de la Oferta',
+            'APPLICATIONS': 'Gestión',
+            'GESTIONPROPUESTA': 'Oferta',
             'CALENDAR'    : 'Calendar',
             'ECOMMERCE'   : 'E-Commerce',
             'ACADEMY'     : 'Academy',

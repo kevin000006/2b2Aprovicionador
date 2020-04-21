@@ -9,6 +9,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 import {BandejaService} from './bandeja.service';
@@ -43,7 +44,8 @@ const routes: Routes = [
         MatDividerModule,
         MatDialogModule,
         MatInputModule,
-        MatSelectModule
+        MatSelectModule,
+        MatMenuModule
     ],
     entryComponents: [
         AddDialogComponent,
