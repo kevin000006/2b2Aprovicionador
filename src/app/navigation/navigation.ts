@@ -17,7 +17,7 @@ export const navigation: FuseNavigation[] = [
                 children : [
                     {
                         id   : 'bandeja',
-                        title: 'bandeja',
+                        title: 'Bandeja',
                         type : 'item',
                         url  : '/gestion-propuesta/bandeja'
                     },

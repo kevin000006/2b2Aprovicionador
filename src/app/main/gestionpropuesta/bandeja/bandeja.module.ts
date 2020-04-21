@@ -10,6 +10,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 import {BandejaService} from './bandeja.service';
@@ -45,7 +47,9 @@ const routes: Routes = [
         MatDialogModule,
         MatInputModule,
         MatSelectModule,
-        MatMenuModule
+        MatMenuModule,
+        MatExpansionModule,
+        MatCheckboxModule
     ],
     entryComponents: [
         AddDialogComponent,

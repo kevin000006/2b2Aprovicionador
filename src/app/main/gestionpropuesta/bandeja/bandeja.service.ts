@@ -30,7 +30,7 @@ export class BandejaService {
   }
 
   getEstadoAll(): Observable<EstadoModel[]> {
-    return this.http.get<EstadoModel[]>(this.urlBase + '/estadosRest/list');
+    return this.http.get<EstadoModel[]>(this.urlBase + '/estadoRest/list');
   }
 
 

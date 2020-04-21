@@ -18,8 +18,9 @@ export class BandejaComponent implements OnInit {
   lstBandeja= new Array<BandejaModel>();
   lstCliente= new Array<ClienteModel>();
   lstEstado= new Array<EstadoModel>();
+  checked = false;
 
-  displayedColumns: string[] = ['menu','codigo','version','oportunidad','cliente','descripcion','estado','actions'];
+  displayedColumns: string[] = ['menu','codigo','version','oportunidad','cliente','descripcion','estado'];
   constructor(private bandejaService : BandejaService, public dialog : MatDialog) { 
 
    
