@@ -5,9 +5,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-
 import { FuseSharedModule } from '@fuse/shared.module';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { Login2Component } from 'app/main/pages/authentication/login-2/login-2.component';
 
 const routes = [
@@ -23,13 +22,12 @@ const routes = [
     ],
     imports: [
         RouterModule.forChild(routes),
-
+        MatSnackBarModule,
         MatButtonModule,
         MatCheckboxModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
-
         FuseSharedModule
     ]
 })
