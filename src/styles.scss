@@ -2,3 +2,191 @@
 @import "@fuse/scss/core";
 // Import app.theme.scss
 @import "app/app.theme";
+
+
+
+.col-xs-6{
+    width: 50%;
+    float: left;
+}
+
+.col-xs-9{
+    width: 75%;
+    float: left;
+}
+.col-xs-12{
+    width: 100%;
+}
+
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.col-sm-3{
+    width: 25%;
+    float: left;
+}
+
+.col-sm-6{
+    width: 50%;
+    float: left;
+}
+
+body.theme-default .mat-toolbar{
+    background: linear-gradient(270deg, #5BC6DA 0%, #005B83 100%) !important;
+    box-shadow: 0px 8px 28px rgba(72, 89, 102, 0.1);
+}
+
+.fuse-navy-900 {
+    background-color: #035e86 !important;
+    color: white !important;
+}
+
+navbar navbar-vertical-style-1 .navbar-top .logo .logo-icon{
+    height: 30px !important;
+    width: auto !important;
+}
+    
+navbar navbar-vertical-style-1 .navbar-top .logo{
+    margin: 0 auto;;
+}
+
+body.theme-default .accent {
+    background-color: #e5e5e5 !important;
+    color: #2593B5 !important;
+}
+
+.page-layout.carded.fullwidth.inner-scroll {
+    background: #e5e5e5;
+}
+
+.fuse-navy-700 {
+    background-color: #ffffff !important;
+    color: #909090 !important;
+}
+
+.nav.material2 .nav-item .nav-link, .material2 .nav .nav-item .nav-link
+{
+    height: 40px;
+    padding: 0 12px 0 24px;
+}
+
+body.theme-default .hint-text{
+    font-family: Baloo Thambi 2;
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 12px;
+color: #003245 !important;
+font-family: Baloo Thambi 2;
+}
+
+.nav .nav-item.nav-collapsable a{
+    background-color: #fff !important;
+    border-radius: 0 !important;
+    margin-right: 0 !important;
+    font-family: Baloo Thambi 2;
+    font-size: 13px;;
+}
+
+.nav .nav-item.nav-collapsable.open >  a:first-child{
+    background: #F5F6FA !important;
+    color: #2593B5 !important;
+    font-weight: 600; 
+    font-family: Baloo Thambi 2;
+}
+
+body.theme-default .mat-header-cell {
+    color: #003245;
+    font-size: 13px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
+
+body.theme-default .mat-cell, body.theme-default .mat-footer-cell{
+    color: #50535A;
+    align-items: center;
+    text-align: center;
+    font-size: 11px;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.example-container .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+  
+  .example-right-align {
+    text-align: right;
+  }
+  
+  input.example-right-align::-webkit-outer-spin-button,
+  input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+  }
+  
+  input.example-right-align {
+    -moz-appearance: textfield;
+  }
+
+
+  .page-layout.carded.fullwidth > .center{
+      background: #E5E5E5;
+  }
+
+
+  .filtro >  .mat-form-field-infix{
+      font-size: 12px;
+  }
+
+  .mat-form-field-label-wrapper{
+      font-size:13px;
+  }
+
+  .mat-column-menu{
+    flex: 0 0 50px;
+  }
+
+  .mat-column-cliente{
+    flex: 0 0 210px;
+  }
+
+  
+  .mat-column-descripcion{
+    flex: 0 0 280px;
+  }
+
+  .mat-column-oportunidad{
+    flex: 0 0 200px;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-infix{
+    height: 40px;
+    margin: 0;
+    padding: 0 !important;
+  }
+  
+  .mat-form-field-appearance-outline .mat-form-field-flex{
+    height: 40px;
+  }
+
+  body.theme-default .mat-form-field-appearance-outline .mat-form-field-outline-thick{
+      background: #fff;
+      border-radius: 5px;
+  }
+
+  body.theme-default .mat-form-field-appearance-outline .mat-form-field-outline
+  {
+    background: #fff;
+    border-radius: 5px;
+  }
+
+  body.theme-default .mat-form-field-appearance-outline .mat-form-field-outline-thick{
+      color: transparent;
+  }
+
+  body.theme-default .mat-form-field-type-mat-native-select .mat-form-field-infix::after {
+    color: #2493B4;
+    }

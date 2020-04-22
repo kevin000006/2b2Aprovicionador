@@ -9,6 +9,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { TranslateModule } from '@ngx-translate/core';
@@ -79,6 +82,9 @@ const appRoutes: Routes = [
         MatDialogModule,
         MatInputModule,
         MatSelectModule,
+        MatMenuModule,
+        MatExpansionModule,
+        MatCheckboxModule,
 
         // Fuse modules
         FuseModule.forRoot(fuseConfig),

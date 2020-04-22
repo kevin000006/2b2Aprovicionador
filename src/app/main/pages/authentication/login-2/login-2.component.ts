@@ -3,9 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
-import { LoginService } from './login-2.service'
-import { UsuarioModel } from 'app/model/Usuario';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'login-2',
@@ -23,15 +20,10 @@ export class Login2Component implements OnInit {
      * @param {FuseConfigService} _fuseConfigService
      * @param {FormBuilder} _formBuilder
      */
-
-    public authError: boolean;
-
     constructor(
         private _fuseConfigService: FuseConfigService,
         private _formBuilder: FormBuilder,
-        private _router: Router,
-        private _loginService: LoginService,
-        private _snack: MatSnackBar
+        private _router: Router
     ) {
         // Configure the layout
         this._fuseConfigService.config = {
@@ -50,7 +42,6 @@ export class Login2Component implements OnInit {
                 }
             }
         };
-        this.authError = false;
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -58,6 +49,7 @@ export class Login2Component implements OnInit {
     // -----------------------------------------------------------------------------------------------------
 
     login(): void {
+<<<<<<< HEAD
         const u = new UsuarioModel();
         u.id = 0;
         u.usuario = this.loginForm.value.usuario;
@@ -79,6 +71,10 @@ export class Login2Component implements OnInit {
                 });
             }
         });
+=======
+        console.log('ss');
+        this._router.navigate(['gestion-propuesta/bandeja']);
+>>>>>>> 35ad2440df29c8bbf7902e37d68856689122c153
     }
 
     /**
