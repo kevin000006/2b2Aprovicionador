@@ -49,7 +49,6 @@ export class Login2Component implements OnInit {
     // -----------------------------------------------------------------------------------------------------
 
     login(): void {
-<<<<<<< HEAD
         const u = new UsuarioModel();
         u.id = 0;
         u.usuario = this.loginForm.value.usuario;
@@ -71,10 +70,8 @@ export class Login2Component implements OnInit {
                 });
             }
         });
-=======
         console.log('ss');
         this._router.navigate(['gestion-propuesta/bandeja']);
->>>>>>> 35ad2440df29c8bbf7902e37d68856689122c153
     }
 
     /**
