@@ -22,6 +22,12 @@ export const navigation: FuseNavigation[] = [
                         url  : '/gestion-propuesta/bandeja'
                     },
                     {
+                        id   : 'subirTrama',
+                        title: 'Subir Trama',
+                        type : 'item',
+                        url  : '/gestion-propuesta/subirTrama'
+                    },
+                    {
                         id       : 'gestionpropuestareporte',
                         title    : 'Reportes',
                         type     : 'collapsable',

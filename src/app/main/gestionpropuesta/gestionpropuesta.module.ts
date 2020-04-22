@@ -12,8 +12,11 @@ const routes = [
   {
     path        : 'cliente',
     loadChildren: () => import('./mcliente/mcliente.module').then(m => m.MClienteModule)
+  },
+  {
+    path        : 'subirTrama',
+    loadChildren: () => import('./subirTrama/subirTrama.module').then(m => m.SubirTramaModule)
   }
-
 ];
 
 

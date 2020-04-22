@@ -62,6 +62,7 @@ export class Login2Component implements OnInit {
         u.id = 0;
         u.usuario = this.loginForm.value.usuario;
         u.clave = this.loginForm.value.password;
+        debugger;
         this._loginService.autenticacion(u).subscribe(res => {
             debugger;
             if (res != null) {

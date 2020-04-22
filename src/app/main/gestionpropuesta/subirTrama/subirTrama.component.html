@@ -1,0 +1,44 @@
+<div id="orders" class="page-layout carded fullwidth inner-scroll">
+    <div class="top-bg accent"></div>
+    <div class="center">
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+  
+            <!-- APP TITLE -->
+            <div class="logo mb-24 mb-sm-0"
+                  fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    shopping_basket
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">Bandeja de Ofertas</span>
+            </div>
+            <!-- / APP TITLE -->           
+  
+        </div>
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="  col-sm-2">Maestras : </label>
+                        <div class="col-sm-4">
+                            <select name="miselect" [(ngModel)]="seleccionado">
+                                <option [ngValue]="objeto" *ngFor="let objeto of lista">{{objeto.nombre}}</option>
+                            </select>                           
+                        </div>
+                        <label class="  col-sm-2">Cargar Archivo : </label>
+                        <div class="col-sm-4">
+                            <input type="file" name="fileUpload" #fileUpload id="fileUpload" accept=".csv" (change)="fileProgress($event)" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <button class="btn btn-sm btn-primary" (click)="clickGuardar()">Cargar archivo</button> 
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
