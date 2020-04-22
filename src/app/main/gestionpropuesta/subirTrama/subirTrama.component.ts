@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SubirTramaService } from './subirTrama.service';
+import { FormGroup, FormBuilder, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
 import { BandejaModel, ClienteModel, EstadoModel } from '../models/oferta';
 import { ModelMaestras } from './ModelMaestras';
 import { AddDialogComponent } from '../dialogs/add/add.component'
@@ -18,35 +19,54 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class SubirTramaComponent implements OnInit {
-  state$: Observable<object>;  
-  lista:ModelMaestras[]=[];
+  state$: Observable<object>;
+  lista: ModelMaestras[] = [];
   filedata: File;
+  fromDatosGenerales: FormGroup;
+
+  cboMaestraCtrl: FormControl;
+  FileCtrl: FormControl;
 
   constructor(
     private subirTramaService: SubirTramaService,
-    public dialog: MatDialog,
     public activatedRoute: ActivatedRoute
-  ) {  
+  ) {
   }
+  ngOnInit(): void {
 
+    this.cboMaestraCtrl = new FormControl('', [Validators.required]);
+    this.FileCtrl = new FormControl('', [Validators.required]);
+
+
+    this.fromDatosGenerales = new FormGroup({
+      cboMaestra: this.cboMaestraCtrl,
+      File: this.FileCtrl
+    });
+
+    this.lista.push(new ModelMaestras("1", "Maestra 1", "ciudad al lado del mar"));
+    this.lista.push(new ModelMaestras("2", "Maestra 2", "ciudad gastronomica"));
+    this.lista.push(new ModelMaestras("3", "Maestra 2", "ciudad cultural"));
+    this.state$ = window.history.state;
+  }
   fileProgress(fileInput: any): void {
     this.filedata = <File>fileInput.target.files[0];
   }
-  clickGuardar(): void {
-    const formData = new FormData();
-    formData.append('file', this.filedata);
-    this.subirTramaService.GuardarArchivo(formData).subscribe(
-      (res) => {
-        // if (res.Status == "OK") {
-        //     var listGaleria = JSON.parse(res.DataJson)
-        //     this.listarGaleria(listGaleria);
-        // }
-      }
-    );
-  }
-  ngOnInit(): void {   
-    this.lista.push(new ModelMaestras("1","Maestra 1","ciudad al lado del mar"))
-    this.lista.push(new ModelMaestras("2","Maestra 2","ciudad gastronomica"))
-    this.lista.push(new ModelMaestras("3","Maestra 2","ciudad cultural"))
+  async  clickGuardar() {
+    if (!this.fromDatosGenerales.valid)
+      return;
+
+    const uuid = this.subirTramaService.generateUUID();
+    const filename = uuid + "." + this.filedata.name.split(".").reverse()[0];
+    const responseAzureStorage = await this.subirTramaService.uploadFile(this.filedata, filename);
+    let entidad: any = {
+      Usuario: this.state$,
+      IdMaestra: "",
+      UrlFile: responseAzureStorage._response.request.url
+    };
+    await this.subirTramaService.GuardarArchivo(entidad);
+    this.fromDatosGenerales.reset({
+      cboMaestra: '',
+      File: ''     
+    });
   }
 }

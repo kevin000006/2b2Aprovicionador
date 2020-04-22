@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
+import { LoginService } from './login-2.service'
+import { UsuarioModel } from 'app/model/Usuario';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'login-2',
@@ -20,10 +23,15 @@ export class Login2Component implements OnInit {
      * @param {FuseConfigService} _fuseConfigService
      * @param {FormBuilder} _formBuilder
      */
+
+    public authError: boolean;
+
     constructor(
         private _fuseConfigService: FuseConfigService,
         private _formBuilder: FormBuilder,
-        private _router: Router
+        private _router: Router,
+        private _loginService: LoginService,
+        private _snack: MatSnackBar
     ) {
         // Configure the layout
         this._fuseConfigService.config = {
@@ -42,6 +50,7 @@ export class Login2Component implements OnInit {
                 }
             }
         };
+        this.authError = false;
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -49,8 +58,26 @@ export class Login2Component implements OnInit {
     // -----------------------------------------------------------------------------------------------------
 
     login(): void {
-        console.log('ss');
-        this._router.navigate(['gestion-propuesta/bandeja']);
+        const u = new UsuarioModel();
+        u.id = 0;
+        u.usuario = this.loginForm.value.usuario;
+        u.clave = this.loginForm.value.password;
+        this._loginService.autenticacion(u).subscribe(res => {
+            debugger;
+            if (res != null) {
+                this._router.navigate(['gestion-propuesta/bandeja'], { state: { usuario: res } });
+            } else {
+                this.authError = true;
+                console.log('SIN ACCESO');
+                // this._snack.open('Message', '', {
+                //     duration: 3000,
+                //     panelClass: ['simple-snack-bar']
+                // });
+                this._snack.open('SIN ACCESO', 'Ok', {
+                    duration: 2000,
+                });
+            }
+        });
     }
 
     /**

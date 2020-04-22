@@ -9,6 +9,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 import {SubirTramaService} from './subirTrama.service';
 import {MatDividerModule} from '@angular/material/divider';
@@ -39,7 +40,8 @@ const routes: Routes = [
         MatDividerModule,
         MatDialogModule,
         MatInputModule,
-        MatSelectModule
+        MatSelectModule,
+        MaterialFileInputModule
     ],
     entryComponents: [
         AddDialogComponent,
