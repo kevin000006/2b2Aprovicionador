@@ -3,8 +3,6 @@ import { MatDialogModule  } from '@angular/material/dialog';
 import { RouterModule, Routes } from '@angular/router';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { SubirTramaComponent} from './subirTrama.component';
-import {AddDialogComponent} from '../dialogs/add/add.component';
-import {DeleteDialogComponent} from '../dialogs/delete/delete.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -28,9 +26,7 @@ const routes: Routes = [
 
 @NgModule({
     declarations: [
-        SubirTramaComponent,
-        AddDialogComponent,
-        DeleteDialogComponent
+        SubirTramaComponent,        
     ],
     imports     : [
         RouterModule.forChild(routes),
@@ -43,9 +39,7 @@ const routes: Routes = [
         MatSelectModule,
         MaterialFileInputModule
     ],
-    entryComponents: [
-        AddDialogComponent,
-        DeleteDialogComponent
+    entryComponents: [        
     ],
     providers   : [
         SubirTramaService
