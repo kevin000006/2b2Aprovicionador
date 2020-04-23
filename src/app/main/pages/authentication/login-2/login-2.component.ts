@@ -63,12 +63,12 @@ export class Login2Component implements OnInit {
         u.usuario = this.loginForm.value.usuario;
         u.clave = this.loginForm.value.password;
         this._loginService.autenticacion(u).subscribe(res => {
-            debugger;
+            
             if (res != null) {
                 this._router.navigate(['gestion-propuesta/bandeja'], { state: { usuario: res } });
             } else {
                 this.authError = true;
-                console.log('SIN ACCESO');
+                //console.log('SIN ACCESO');
                 // this._snack.open('Message', '', {
                 //     duration: 3000,
                 //     panelClass: ['simple-snack-bar']

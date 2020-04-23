@@ -12,6 +12,8 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { TranslateModule } from '@ngx-translate/core';
@@ -85,6 +87,8 @@ const appRoutes: Routes = [
         MatMenuModule,
         MatExpansionModule,
         MatCheckboxModule,
+        MatPaginatorModule,
+        MatSortModule,
 
         // Fuse modules
         FuseModule.forRoot(fuseConfig),

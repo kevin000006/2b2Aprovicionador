@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient,HttpErrorResponse } from '@angular/common/http';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { BandejaModel, ClienteModel, EstadoModel } from '../models/oferta';
 
 
@@ -8,13 +8,36 @@ import { BandejaModel, ClienteModel, EstadoModel } from '../models/oferta';
   providedIn: 'root'
 })
 export class BandejaService {
-  private readonly urlBase: string = "https://cors-anywhere.herokuapp.com/https://webapp-b2b.azurewebsites.net/api";
+  private readonly urlBase: string = "https://webapp-b2b.azurewebsites.net/api";
+  dataChange : BehaviorSubject<BandejaModel[]> = new BehaviorSubject<BandejaModel[]>([]);
 
 
   constructor(private http: HttpClient) { }
 
-  getBandejaAll(): Observable<BandejaModel[]> {
-    return this.http.get<BandejaModel[]>(this.urlBase + '/oferta/listOferta');
+  get data():BandejaModel[]{
+    return this.dataChange.value;
+  }
+
+  getBandejaAll(): void {
+    this.http.get<BandejaModel[]>(this.urlBase + '/oferta/list').subscribe(data => {
+      
+    /*  for (var _i = 0; _i < 8; _i++) {
+        var _data = new BandejaModel;
+        _data.cliente = new ClienteModel;
+        _data.codigo = "OTE000003" + _i;
+        _data.oportunidad ="PER-00230730" + _i;
+        _data.descripcion = "descripción " + _i;
+          _data.cliente.descripcion = "cliente " +_i;
+          _data.estado = new EstadoModel;
+          _data.estado.descripcion = "estado " + _i;
+          _data.version = _i;
+        data.push(_data);
+      }*/
+      this.dataChange.next(data);      
+    },
+    (error: HttpErrorResponse) => {
+      console.log (error.name + ' ' + error.message);
+      });
   }
 
   newOferta(data: BandejaModel): Observable<any> {
@@ -26,11 +49,11 @@ export class BandejaService {
   }
 
   getClienteAll(): Observable<ClienteModel[]> {
-    return this.http.get<ClienteModel[]>(this.urlBase + '/clientes/listClientes');
+    return this.http.get<ClienteModel[]>(this.urlBase + '/clientes/list');
   }
 
   getEstadoAll(): Observable<EstadoModel[]> {
-    return this.http.get<EstadoModel[]>(this.urlBase + '/estados/listEstados');
+    return this.http.get<EstadoModel[]>(this.urlBase + '/estadoRest/list');
   }
 
 
