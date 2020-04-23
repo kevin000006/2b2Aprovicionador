@@ -1,17 +1,18 @@
-import { Component,ElementRef, OnInit,ViewChild } from '@angular/core';
-import { HttpClient,HttpErrorResponse } from '@angular/common/http';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
-import {BandejaService} from './bandeja.service';
-import {BandejaModel, ClienteModel, EstadoModel} from '../models/oferta';
-import {AddDialogComponent} from '../dialogs/add/add.component'
-import {DataSource} from '@angular/cdk/collections';
-import {DeleteDialogComponent} from '../dialogs/delete/delete.component'
+import { BandejaService } from './bandeja.service';
+import { BandejaModel, ClienteModel, EstadoModel } from '../models/oferta';
+import { AddDialogComponent } from '../dialogs/add/add.component'
+import { DataSource } from '@angular/cdk/collections';
+import { DeleteDialogComponent } from '../dialogs/delete/delete.component'
 import { fuseAnimations } from '@fuse/animations';
 import { MatPaginator } from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {BehaviorSubject, fromEvent, merge, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import * as XLSX from 'xlsx'; 
+import { MatSort } from '@angular/material/sort';
+import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import * as XLSX from 'xlsx';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -22,43 +23,46 @@ import * as XLSX from 'xlsx';
 })
 
 export class BandejaComponent implements OnInit {
+  state$: Observable<object>;
+  fileName = 'bandeja_oferta.xlsx';
 
-  fileName= 'bandeja_oferta.xlsx';
-
-  lstBandeja= new Array<BandejaModel>();
-  lstCliente= new Array<ClienteModel>();
-  lstEstado= new Array<EstadoModel>();
+  lstBandeja = new Array<BandejaModel>();
+  lstCliente = new Array<ClienteModel>();
+  lstEstado = new Array<EstadoModel>();
   checked = false;
 
-  displayedColumns: string[] = ['menu','codigo','version','oportunidad','cliente','descripcion','estado'];
+  displayedColumns: string[] = ['menu', 'codigo', 'version', 'oportunidad', 'cliente', 'descripcion', 'estado'];
   exampleDatabase: BandejaService | null;
-  dataSource: EjemploDataSource	 | null;
+  dataSource: EjemploDataSource | null;
   index: number;
   id: number;
 
   constructor(public httpClient: HttpClient,
-    private bandejaService : BandejaService, 
-    public dialog : MatDialog) { 
+    private bandejaService: BandejaService,
+    public activatedRoute: ActivatedRoute,
+    public dialog: MatDialog) {
 
     this.bandejaService.getClienteAll()
-    .subscribe( data => this.lstCliente = data);
+      .subscribe(data => this.lstCliente = data);
 
     this.bandejaService.getEstadoAll()
-    .subscribe( data => this.lstEstado = data);
+      .subscribe(data => this.lstEstado = data);
 
     //this.getofertasAll();
 
   }
 
-  
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild('filter',  {static: true}) filter: ElementRef;
-  @ViewChild('descripcion',  {static: true}) descripcion: ElementRef;
-  @ViewChild('cliente',  {static: true}) cliente: ElementRef;
-  @ViewChild('codigo',  {static: true}) codigo: ElementRef;
- 
+
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild('filter', { static: true }) filter: ElementRef;
+  @ViewChild('descripcion', { static: true }) descripcion: ElementRef;
+  @ViewChild('cliente', { static: true }) cliente: ElementRef;
+  @ViewChild('codigo', { static: true }) codigo: ElementRef;
+
   ngOnInit(): void {
+    debugger;
+    localStorage.setItem('u', JSON.stringify(window.history.state.usuario));
     this.loadData();
   }
 
@@ -67,57 +71,57 @@ export class BandejaComponent implements OnInit {
     .subscribe(data => this.lstBandeja = data);
   }*/
 
-  addNew():void{
-  
+  addNew(): void {
+
     const dialogRef = this.dialog.open(AddDialogComponent, {
-      data:{
-        data:new BandejaModel(),
+      data: {
+        data: new BandejaModel(),
         lstCliente: this.lstCliente,
         lstEstado: this.lstEstado
-      } 
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
-       // this.getofertasAll();
+        // this.getofertasAll();
       }
     });
 
   }
-  
-  editItem(oferta:BandejaModel):void{
+
+  editItem(oferta: BandejaModel): void {
 
     console.log(oferta);
     const dialogRef = this.dialog.open(AddDialogComponent, {
-      data:{
-        data:oferta,
+      data: {
+        data: oferta,
         lstCliente: this.lstCliente,
         lstEstado: this.lstEstado
-      } 
-      } );
+      }
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
         //this.getofertasAll();
       }
-    });      
+    });
   }
 
-  deleteItem(oferta:BandejaModel):void{
+  deleteItem(oferta: BandejaModel): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       data: oferta
-      } );
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
-       // this.getofertasAll();
+        // this.getofertasAll();
       }
     });
   }
 
-  public descargar_excel(){
-    let element = document.getElementById('excel-table'); 
-    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+  public descargar_excel() {
+    let element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
 
 
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
@@ -128,25 +132,25 @@ export class BandejaComponent implements OnInit {
 
   }
 
-  public filtrarData(){
-    if(this.descripcion.nativeElement.value)
-      this.dataSource.filter =this.descripcion.nativeElement.value;
+  public filtrarData() {
+    if (this.descripcion.nativeElement.value)
+      this.dataSource.filter = this.descripcion.nativeElement.value;
 
-      if(this.cliente.nativeElement.value)
-      this.dataSource.filter =this.cliente.nativeElement.value;
+    if (this.cliente.nativeElement.value)
+      this.dataSource.filter = this.cliente.nativeElement.value;
 
-      if(this.codigo.nativeElement.value)
-      this.dataSource.filter =this.codigo.nativeElement.value;
+    if (this.codigo.nativeElement.value)
+      this.dataSource.filter = this.codigo.nativeElement.value;
 
-      if(!this.descripcion.nativeElement.value && !this.cliente.nativeElement.value && !this.codigo.nativeElement.value)
-      this.dataSource.filter= '';
+    if (!this.descripcion.nativeElement.value && !this.cliente.nativeElement.value && !this.codigo.nativeElement.value)
+      this.dataSource.filter = '';
 
   }
 
-  public loadData(){
-    
+  public loadData() {
+
     this.exampleDatabase = new BandejaService(this.httpClient);
-    
+
     this.dataSource = new EjemploDataSource(this.exampleDatabase, this.paginator, this.sort);
     fromEvent(this.filter.nativeElement, 'keyup')
       .subscribe(() => {
@@ -157,11 +161,11 @@ export class BandejaComponent implements OnInit {
       });
   }
 
-  
+
 
 }
 
-export class EjemploDataSource  extends DataSource<BandejaModel>{
+export class EjemploDataSource extends DataSource<BandejaModel>{
   _filterChange = new BehaviorSubject('');
 
   get filter(): string {
@@ -183,7 +187,7 @@ export class EjemploDataSource  extends DataSource<BandejaModel>{
     this._filterChange.subscribe(() => this._paginator.pageIndex = 0);
   }
 
-  connect(): Observable<BandejaModel[]>{  
+  connect(): Observable<BandejaModel[]> {
     const displayDataChanges = [
       this._exampleDatabase.dataChange,
       this._sort.sortChange,
@@ -193,7 +197,7 @@ export class EjemploDataSource  extends DataSource<BandejaModel>{
 
     this._exampleDatabase.getBandejaAll();
 
-    return merge(...displayDataChanges).pipe(map( () => {
+    return merge(...displayDataChanges).pipe(map(() => {
       // Filter data
       this.filteredData = this._exampleDatabase.data.slice().filter((issue: BandejaModel) => {
         const searchStr = (issue.version + issue.codigo + issue.cliente.descripcion + issue.oportunidad + issue.descripcion).toLowerCase();
@@ -208,13 +212,13 @@ export class EjemploDataSource  extends DataSource<BandejaModel>{
       this.renderedData = sortedData.splice(startIndex, this._paginator.pageSize);
       return this.renderedData;
     }
-  ));
+    ));
 
   }
 
-  disconnect() {}
+  disconnect() { }
 
-  sortData(data: BandejaModel[]): BandejaModel[]{
+  sortData(data: BandejaModel[]): BandejaModel[] {
     if (!this._sort.active || this._sort.direction === '') {
       return data;
     }
