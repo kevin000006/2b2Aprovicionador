@@ -9,33 +9,32 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CambiarContraseniaComponent implements OnInit {
     registerForm: FormGroup;
-    submitted = false;    
-    hidePasswordActual = true;    
+    submitted = false;
+    hidePasswordActual = true;
     hidePassword = true;
     hideConfirmPassword = true;
     constructor(
         private formBuilder: FormBuilder,
         public dialogRef: MatDialogRef<CambiarContraseniaComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any
-        ) { }
-
+    ) { }
+    get f() { return this.registerForm.controls; }
     ngOnInit() {
-        this.registerForm = this.formBuilder.group({            
-            passwordActual: ['', Validators.required],            
+        this.registerForm = this.formBuilder.group({
+            passwordActual: ['', Validators.required],
             password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.{1,}$)(?=.*\W).*$/)]],
             confirmPassword: ['', Validators.required]
         }, {
             validator: compararContrasenia('password', 'confirmPassword')
         });
-    }    
-    get f() { return this.registerForm.controls; }
+    }
+
     onNoClick(): void {
         this.dialogRef.close();
     }
-    onSubmit() {
-        debugger;
+    onSubmit() {        
         this.submitted = true;
-        // stop here if form is invalid
+        // deténgase aquí si el formulario no es válido
         if (this.registerForm.invalid) {
             return;
         }

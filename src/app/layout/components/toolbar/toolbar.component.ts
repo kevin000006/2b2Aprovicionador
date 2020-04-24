@@ -96,12 +96,12 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
     openDialog(): void {
         const dialogRef = this.dialog.open(CambiarContraseniaComponent, {
-            
+            height: '100%',
             position: {
                 'top': '0',
                 'right': '0'
             },
-            panelClass: 'full-width-dialog',
+            panelClass: 'full-screen-modal',
             data: { name: this.name, animal: this.animal }
         });
 
