@@ -1,41 +1,84 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<!-- <h1 mat-dialog-title>
+</h1> -->
+<button mat-icon-button class="close-ico" [mat-dialog-close]="true">
+    <mat-icon>close</mat-icon>
+</button>
 <div mat-dialog-content>
-    <div class="container-fluid" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
-        <div fxFlex="15%">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="container container-padding" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+            <h1>
+                <mat-icon class="s-30 mr-sm-4">lock</mat-icon> Cambiar contraseña
+            </h1>
+            <p>*Por tu seguridad por favor ingresa tu contraseña actual</p>
+            <!-- -->
+            <mat-form-field appearance="standard">
+                <mat-label>Contraseña</mat-label>
+                <input formControlName="passwordActual" matInput [type]="hidePasswordActual ? 'password' : 'text'">
+                <mat-error *ngIf="submitted && f.passwordActual.errors">
+                    <p *ngIf="f.passwordActual.errors.required">se requiere contraseña</p>
+                </mat-error>
+                <button mat-icon-button matSuffix (click)="hidePasswordActual = !hidePasswordActual" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hidePasswordActual ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <p>Ingresar una contraseña de 6 caracteres alFanúmericos.</p>
+            <p>Debe contener como minimo 1 caracter especial (Ejemplo *,$,#, etc).</p>
+            <mat-form-field appearance="standard">
+                <mat-label>Nueva Contraseña (6 caracteres)</mat-label>
+                <input formControlName="password" matInput [type]="hidePassword ? 'password' : 'text'">
+                <mat-error *ngIf="submitted && f.password.errors">
+                    <p *ngIf="f.password.errors.required">Por favor se requiere passsword</p>
+                    <p *ngIf="f.password.errors.minlength">La contraseña debe tener al menos 6 caracteres</p>
+                    <p *ngIf="f.password.errors.pattern">La contraseña debe contener como minimo 1 caracter especial (Ejemplo *,$,#, etc)</p>
+                </mat-error>
+                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <mat-form-field appearance="standard">
+                <mat-label>Confirmación de nueva contraseña</mat-label>
+                <input formControlName="confirmPassword" matInput [type]="hideConfirmPassword ? 'password' : 'text'">
+                <mat-error *ngIf="submitted && f.confirmPassword.errors">
+                    <p *ngIf="f.confirmPassword.errors.required">Por favor se requiere passsword</p>
+                    <p *ngIf="f.confirmPassword.errors.mustMatch">Las contraseñas deben coincidir</p>
+
+                </mat-error>
+                <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+            <br>
+            <button mat-raised-button color="accent" cdkFocusInitial>Cambiar Contraseñas</button>
+
+            <!-- <div fxFlex="20%">            
             <mat-form-field color="accent">
                 <input autocomplete="off" matInput #codigo class="form-control" placeholder="Cód. Salesforce" name="nrocomtrato">
                 <span style="color: #2EA5B8;" matSuffix># &nbsp;</span>
             </mat-form-field>
-
         </div>
-        <div fxFlex="20%" fxFlexOrder="3">
+        <div fxFlex="20%">            
             <mat-form-field color="accent">
                 <input autocomplete="off" matInput #codigo class="form-control" placeholder="Cód. Salesforce" name="nrocomtrato">
                 <span style="color: #2EA5B8;" matSuffix># &nbsp;</span>
             </mat-form-field>
         </div>
-        <div fxFlex="15%">
+        <div fxFlex="20%">            
             <mat-form-field color="accent">
                 <input autocomplete="off" matInput #codigo class="form-control" placeholder="Cód. Salesforce" name="nrocomtrato">
                 <span style="color: #2EA5B8;" matSuffix># &nbsp;</span>
             </mat-form-field>
         </div>
-    </div>
-
-
-    <!-- <mat-form-field appearance="standard">
-        <mat-label>Standard form field</mat-label>
-        <input matInput placeholder="Placeholder" class="form-control" placeholder="Cód. Salesforce">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        <mat-hint>Hint</mat-hint>
-    </mat-form-field> -->
-
-    <!-- <mat-form-field>
-        <mat-label>Favorite Animal</mat-label>
-        <input matInput [(ngModel)]="data.animal">
-    </mat-form-field> -->
+        <div fxFlex="20%">            
+            <mat-form-field color="accent">
+                <input autocomplete="off" matInput #codigo class="form-control" placeholder="Cód. Salesforce" name="nrocomtrato">
+                <span style="color: #2EA5B8;" matSuffix># &nbsp;</span>
+            </mat-form-field>
+        </div> -->
+        </div>
+    </form>
 </div>
-<div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
-</div>
+<!-- <div mat-dialog-actions>    
+    <button [mat-dialog-close]="data.animal" mat-raised-button color="accent" cdkFocusInitial>Cambiar Contraseña</button>    
+</div> -->

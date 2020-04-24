@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
 import { FuseConfigService } from '@fuse/services/config.service';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import { navigation } from 'app/navigation/navigation';
-import {MatDialog} from '@angular/material/dialog';
-import {CambiarContraseniaComponent} from '../cambiocontrasenia/cambiocontrasenia.component';
+import { MatDialog } from '@angular/material/dialog';
+import { CambiarContraseniaComponent } from '../cambiocontrasenia/cambiocontrasenia.component';
 
 @Component({
     selector: 'toolbar',
@@ -96,15 +96,20 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
     openDialog(): void {
         const dialogRef = this.dialog.open(CambiarContraseniaComponent, {
-          panelClass: 'full-width-dialog',
-          data: {name: this.name, animal: this.animal}
+            
+            position: {
+                'top': '0',
+                'right': '0'
+            },
+            panelClass: 'full-width-dialog',
+            data: { name: this.name, animal: this.animal }
         });
-    
+
         dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed');
-          this.animal = result;
+            console.log('The dialog was closed');
+            this.animal = result;
         });
-      }
+    }
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
     // -----------------------------------------------------------------------------------------------------
