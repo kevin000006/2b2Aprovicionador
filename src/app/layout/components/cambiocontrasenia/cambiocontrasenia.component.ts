@@ -38,8 +38,11 @@ export class CambiarContraseniaComponent implements OnInit {
         if (this.registerForm.invalid) {
             return;
         }
-
-        alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value))
+        let data = {
+            respuesta :"ok"
+        }
+        this.dialogRef.close(data);
+        //alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value))
     }
 }
 
