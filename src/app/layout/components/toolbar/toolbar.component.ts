@@ -6,8 +6,9 @@ import * as _ from 'lodash';
 import { Router } from '@angular/router';
 import { FuseConfigService } from '@fuse/services/config.service';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
-
 import { navigation } from 'app/navigation/navigation';
+import {MatDialog} from '@angular/material/dialog';
+import {CambiarContraseniaComponent} from '../cambiocontrasenia/cambiocontrasenia.component';
 
 @Component({
     selector: 'toolbar',
@@ -25,6 +26,9 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     selectedLanguage: any;
     userStatusOptions: any[];
 
+
+    animal: string;
+    name: string;
     // Private
     private _unsubscribeAll: Subject<any>;
 
@@ -40,6 +44,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         private _fuseSidebarService: FuseSidebarService,
         private _translateService: TranslateService,
         private _router: Router,
+        public dialog: MatDialog
     ) {
         // Set the defaults
         this.userStatusOptions = [
@@ -89,6 +94,17 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         this._unsubscribeAll = new Subject();
     }
 
+    openDialog(): void {
+        const dialogRef = this.dialog.open(CambiarContraseniaComponent, {
+          panelClass: 'full-width-dialog',
+          data: {name: this.name, animal: this.animal}
+        });
+    
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+          this.animal = result;
+        });
+      }
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
     // -----------------------------------------------------------------------------------------------------
