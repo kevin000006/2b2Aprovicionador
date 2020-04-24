@@ -4,7 +4,8 @@
 
         <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
 
-            <button mat-icon-button class="navbar-toggle-button" *ngIf="!hiddenNavbar && !rightNavbar" (click)="toggleSidebarOpen('navbar')" fxHide.gt-md>
+            <button mat-icon-button class="navbar-toggle-button" *ngIf="!hiddenNavbar && !rightNavbar"
+                (click)="toggleSidebarOpen('navbar')" fxHide.gt-md>
                 <mat-icon class="secondary-text">menu</mat-icon>
             </button>
 
@@ -45,7 +46,7 @@
                     <span style="font-size: 11px;">Contáctanos</span>
                 </button>
 
-                <button mat-menu-item class="" (click)="openDialog()">
+                <button mat-menu-item class="">
                     <mat-icon style="font-size: 20px;">mail</mat-icon>
                     <span style="font-size: 11px;">Cambiar contraseña</span>
                 </button>
@@ -109,9 +110,13 @@
 
             <div class="toolbar-separator" *ngIf="!hiddenNavbar && rightNavbar" fxHide fxShow.gt-xs></div>
 
-            <button mat-icon-button class="navbar-toggle-button" *ngIf="!hiddenNavbar && rightNavbar" (click)="toggleSidebarOpen('navbar')" fxHide.gt-md>
+            <button mat-icon-button class="navbar-toggle-button" *ngIf="!hiddenNavbar && rightNavbar"
+                (click)="toggleSidebarOpen('navbar')" fxHide.gt-md>
                 <mat-icon class="secondary-text">menu</mat-icon>
             </button>
+
         </div>
+
     </div>
+
 </mat-toolbar>
