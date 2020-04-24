@@ -2,17 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BlockBlobClient } from '@azure/storage-blob';
-
 @Injectable({
   providedIn: 'root'
 })
 export class SubirTramaService {
-  private readonly urlBase: string = "https://cors-anywhere.herokuapp.com/https://webapp-b2b.azurewebsites.net/api";
+
   constructor(private http: HttpClient) { }
 
   GuardarArchivo(data: any): Observable<any> {
-    return null;
-    //return this.http.post<BandejaModel>(this.urlBase + '/oferta/saveOferta', data);
+    debugger;
+    return this.http.post<any>('/IsisCliente/uploadCVS', data);
   }
 
   getConnectionURL(resourceName: any): string {
@@ -35,15 +34,15 @@ export class SubirTramaService {
     var d = new Date().getTime();
     var d2 = (performance && performance.now && (performance.now() * 1000)) || 0;
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        var r = Math.random() * 16;
-        if (d > 0) {
-            r = (d + r) % 16 | 0;
-            d = Math.floor(d / 16);
-        } else {
-            r = (d2 + r) % 16 | 0;
-            d2 = Math.floor(d2 / 16);
-        }
-        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+      var r = Math.random() * 16;
+      if (d > 0) {
+        r = (d + r) % 16 | 0;
+        d = Math.floor(d / 16);
+      } else {
+        r = (d2 + r) % 16 | 0;
+        d2 = Math.floor(d2 / 16);
+      }
+      return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
   }
 }

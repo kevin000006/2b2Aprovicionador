@@ -1,16 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { SubirTramaService } from './subirTrama.service';
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
-import { BandejaModel, ClienteModel, EstadoModel } from '../models/oferta';
 import { ModelMaestras } from './ModelMaestras';
-import { AddDialogComponent } from '../dialogs/add/add.component'
-import { DeleteDialogComponent } from '../dialogs/delete/delete.component'
 import { fuseAnimations } from '@fuse/animations';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-bandeja',
   templateUrl: './subirTrama.component.html',
@@ -19,7 +14,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class SubirTramaComponent implements OnInit {
+
+  loading = false;
   state$: Observable<object>;
+  usuario: Object;
   lista: ModelMaestras[] = [];
   filedata: File;
   fromDatosGenerales: FormGroup;
@@ -29,11 +27,12 @@ export class SubirTramaComponent implements OnInit {
 
   constructor(
     private subirTramaService: SubirTramaService,
-    public activatedRoute: ActivatedRoute
+    public activatedRoute: ActivatedRoute,
+    private _snack: MatSnackBar
   ) {
   }
   ngOnInit(): void {
-
+    this.usuario = JSON.parse(localStorage.getItem('u'));
     this.cboMaestraCtrl = new FormControl('', [Validators.required]);
     this.FileCtrl = new FormControl('', [Validators.required]);
 
@@ -52,6 +51,7 @@ export class SubirTramaComponent implements OnInit {
     this.filedata = <File>fileInput.target.files[0];
   }
   async  clickGuardar() {
+    this.loading = true;
     if (!this.fromDatosGenerales.valid)
       return;
 
@@ -59,11 +59,18 @@ export class SubirTramaComponent implements OnInit {
     const filename = uuid + "." + this.filedata.name.split(".").reverse()[0];
     const responseAzureStorage = await this.subirTramaService.uploadFile(this.filedata, filename);
     let entidad: any = {
-      Usuario: this.state$,
-      IdMaestra: "",
-      UrlFile: responseAzureStorage._response.request.url
+      usuario: Object(this.usuario)["id"].toString(),
+      tipo: this.fromDatosGenerales.value.cboMaestra,
+      url: responseAzureStorage._response.request.url,
+      fecha: new Date().toString()
     };
-    await this.subirTramaService.GuardarArchivo(entidad);
+    console.log(entidad);
+    await this.subirTramaService.GuardarArchivo(entidad).subscribe(res => {
+      this.loading = false;
+      this._snack.open('Se registro un total de ' + res.totalRecord + 'filas.', 'Ok', {
+        duration: 2000,
+      });
+    });
     this.fromDatosGenerales.reset({
       cboMaestra: '',
       File: ''     
