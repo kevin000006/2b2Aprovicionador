@@ -1,5 +1,4 @@
 export interface FuseConfig {
-    corsUrl: string;
     colorTheme: string;
     customScrollbars: boolean;
     layout: {

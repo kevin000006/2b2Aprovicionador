@@ -61,7 +61,6 @@ export class BandejaComponent implements OnInit {
   @ViewChild('codigo', { static: true }) codigo: ElementRef;
 
   ngOnInit(): void {
-    debugger;
     localStorage.setItem('u', JSON.stringify(window.history.state.usuario));
     this.loadData();
   }

@@ -1,16 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { SubirTramaService } from './subirTrama.service';
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
-import { BandejaModel, ClienteModel, EstadoModel } from '../models/oferta';
 import { ModelMaestras } from './ModelMaestras';
-import { AddDialogComponent } from '../dialogs/add/add.component'
-import { DeleteDialogComponent } from '../dialogs/delete/delete.component'
 import { fuseAnimations } from '@fuse/animations';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { Variable } from '@angular/compiler/src/render3/r3_ast';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-bandeja',
@@ -20,6 +14,9 @@ import { Variable } from '@angular/compiler/src/render3/r3_ast';
 })
 
 export class SubirTramaComponent implements OnInit {
+
+  loading = false;
+
   usuario: Object;
   lista: ModelMaestras[] = [];
   filedata: File;
@@ -30,12 +27,12 @@ export class SubirTramaComponent implements OnInit {
 
   constructor(
     private subirTramaService: SubirTramaService,
-    public activatedRoute: ActivatedRoute
+    public activatedRoute: ActivatedRoute,
+    private _snack: MatSnackBar
   ) {
   }
 
   ngOnInit(): void {
-    debugger;
     this.usuario = JSON.parse(localStorage.getItem('u'));
     this.cboMaestraCtrl = new FormControl('', [Validators.required]);
     this.FileCtrl = new FormControl('', [Validators.required]);
@@ -54,20 +51,26 @@ export class SubirTramaComponent implements OnInit {
   }
 
   async  clickGuardar() {
+    this.loading = true;
     if (!this.fromDatosGenerales.valid)
       return;
 
     const uuid = this.subirTramaService.generateUUID();
     const filename = uuid + "." + this.filedata.name.split(".").reverse()[0];
     const responseAzureStorage = await this.subirTramaService.uploadFile(this.filedata, filename);
-    debugger;
     let entidad: any = {
-      idusuario: Object(this.usuario)["id"],
-      idmaestra: this.fromDatosGenerales.value.cboMaestra,
+      usuario: Object(this.usuario)["id"].toString(),
+      tipo: this.fromDatosGenerales.value.cboMaestra,
       url: responseAzureStorage._response.request.url,
-      fecha: new Date()
+      fecha: new Date().toString()
     };
-    await this.subirTramaService.GuardarArchivo(entidad);
+    console.log(entidad);
+    await this.subirTramaService.GuardarArchivo(entidad).subscribe(res => {
+      this.loading = false;
+      this._snack.open('Se registro un total de ' + res.totalRecord + 'filas.', 'Ok', {
+        duration: 2000,
+      });
+    });
     this.fromDatosGenerales.reset({
       cboMaestra: '',
       File: ''

@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { BandejaModel, ClienteModel, EstadoModel } from '../models/oferta';
-import { fuseConfig } from '../../../fuse-config'
 
 @Injectable({
   providedIn: 'root'
 })
 export class BandejaService {
-  private readonly urlBase: string = fuseConfig.corsUrl + "https://webapp-b2b.azurewebsites.net/api";
+  private readonly urlBase: string = "https://webapp-b2b.azurewebsites.net/api";
   dataChange: BehaviorSubject<BandejaModel[]> = new BehaviorSubject<BandejaModel[]>([]);
 
 
