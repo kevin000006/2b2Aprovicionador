@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { SubirTramaService } from './subirTrama.service';
-import { FormGroup, FormBuilder, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
-import { BandejaModel, ClienteModel, EstadoModel } from '../models/oferta';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { ModelMaestras } from './ModelMaestras';
-import { AddDialogComponent } from '../dialogs/add/add.component'
-import { DeleteDialogComponent } from '../dialogs/delete/delete.component'
 import { fuseAnimations } from '@fuse/animations';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -23,7 +19,7 @@ export class SubirTramaComponent implements OnInit {
   lista: ModelMaestras[] = [];
   filedata: File;
   fromDatosGenerales: FormGroup;
-
+  panelOpenState = false;
   cboMaestraCtrl: FormControl;
   FileCtrl: FormControl;
 
