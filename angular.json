@@ -28,7 +28,9 @@
               "src/app/main/angular-material-elements"
             ],
             "styles": [
-              "src/styles.scss"
+              
+              "src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.css"
             ],
             "scripts": [],
             "showCircularDependencies": false

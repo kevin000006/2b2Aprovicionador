@@ -13,7 +13,7 @@ export const navigation: FuseNavigation[] = [
                 title    : 'Gestión de la Oferta',
                 translate: 'NAV.GESTIONPROPUESTA',
                 type     : 'collapsable',
-                icon     : 'visibility',
+                icon     : 'monetization_on',
                 children : [
                     {
                         id   : 'bandeja',
@@ -36,12 +36,43 @@ export const navigation: FuseNavigation[] = [
                                 id   : 'reportepropuestas',
                                 title: 'Propuestas',
                                 type : 'item',
-                                url  : '/gestion-propuesta/reportes/propuestas'
+                                url  : '/gestion-propuesta/reporte-propuestas'
                             }
                         ]
                     }
                 ]
-            }/*,
+            },
+            {
+                id       : 'proyectos',
+                title    : 'Proyectos',
+                translate: 'NAV.PROYECTOS',
+                type     : 'collapsable',
+                icon     : 'calendar_today',
+                children:[
+                    {
+                        id   : 'bandeja',
+                        title: 'Bandeja',
+                        type : 'item',
+                        url  : '/gestion-propuesta/reporte-propuestas'
+                    }
+                ]
+            },
+            {
+                id       : 'compras',
+                title    : 'Compras',
+                translate: 'NAV.COMPRAS',
+                type     : 'collapsable',
+                icon     : 'shopping_cart',
+                children:[
+                    {
+                        id   : 'bandeja',
+                        title: 'Bandeja',
+                        type : 'item',
+                        url  : '/gestion-propuesta/reporte-propuestas'
+                    }
+                ]
+            }
+            /*,
             {
                 id       : 'integration',
                 title    : 'Integración',

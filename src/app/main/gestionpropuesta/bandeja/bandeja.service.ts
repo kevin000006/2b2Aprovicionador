@@ -18,21 +18,9 @@ export class BandejaService {
     return this.dataChange.value;
   }
 
-  getBandejaAll(): void {
-    this.http.get<BandejaModel[]>(this.urlBase + '/oferta/list').subscribe(data => {
+  getBandejaAll(param:any): void {
+    this.http.post<BandejaModel[]>(this.urlBase + '/oferta/findQuery',param || {}).subscribe(data => {
 
-      /*  for (var _i = 0; _i < 8; _i++) {
-          var _data = new BandejaModel;
-          _data.cliente = new ClienteModel;
-          _data.codigo = "OTE000003" + _i;
-          _data.oportunidad ="PER-00230730" + _i;
-          _data.descripcion = "descripción " + _i;
-            _data.cliente.descripcion = "cliente " +_i;
-            _data.estado = new EstadoModel;
-            _data.estado.descripcion = "estado " + _i;
-            _data.version = _i;
-          data.push(_data);
-        }*/
       this.dataChange.next(data);
     },
       (error: HttpErrorResponse) => {
@@ -49,11 +37,11 @@ export class BandejaService {
   }
 
   getClienteAll(): Observable<ClienteModel[]> {
-    return this.http.get<ClienteModel[]>(this.urlBase + '/clientes/list');
+    return this.http.post<ClienteModel[]>(this.urlBase + '/clientes/findAll',null);
   }
 
   getEstadoAll(): Observable<EstadoModel[]> {
-    return this.http.get<EstadoModel[]>(this.urlBase + '/estadoRest/list');
+    return this.http.post<EstadoModel[]>(this.urlBase + '/estadoRest/findAll',null);
   }
 
 

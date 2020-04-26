@@ -2,9 +2,11 @@ export const locale = {
     lang: 'en',
     data: {
         'NAV': {
-            'NAV.INTEGRACION' : 'Integración',
-            'APPLICATIONS': 'Gestión',
-            'GESTIONPROPUESTA': 'Oferta',
+            'INTEGRACION' : 'Integración',
+            'PROYECTOS' : 'Proyectos',
+            'COMPRAS' : 'Compras',
+            'APPLICATIONS': ' ',
+            'GESTIONPROPUESTA': 'Ofertas',
             'CALENDAR'    : 'Calendar',
             'ECOMMERCE'   : 'E-Commerce',
             'ACADEMY'     : 'Academy',

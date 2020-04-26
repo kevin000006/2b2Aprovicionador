@@ -1,3 +1,8 @@
+export class UsuarioModel{
+  nombres:String;
+  apellidos: String;
+}
+
 export class EstadoModel{
   id : number;
   codigo_agrupado : string;
@@ -5,6 +10,7 @@ export class EstadoModel{
   descripcion : string;
   idSet : boolean
 }
+
 
 export class ClienteModel{
   id : number;

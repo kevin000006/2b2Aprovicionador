@@ -3,11 +3,18 @@ import { RouterModule } from '@angular/router';
 import { FuseSharedModule } from '@fuse/shared.module';
 
 
-
 const routes = [
+  {
+    path        : 'oferta',
+    loadChildren: () => import('./oferta/oferta.module').then(m => m.OfertaModule)
+  },
   {
     path        : 'bandeja',
     loadChildren: () => import('./bandeja/bandeja.module').then(m => m.BandejaModule)
+  },
+  {
+    path        : 'reporte-propuestas',
+    loadChildren: () => import('./reportepropuesta/reportepropuesta.module').then(m => m.ReportepropuestaModule)
   },
   {
     path        : 'cliente',
@@ -25,7 +32,6 @@ const routes = [
     RouterModule.forChild(routes),
     FuseSharedModule
   ],
-  declarations: [
-  ]
+  declarations: []
 })
 export class GestionPropuestaModule { }

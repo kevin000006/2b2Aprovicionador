@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,6 +15,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { TranslateModule } from '@ngx-translate/core';
@@ -61,10 +63,11 @@ const appRoutes: Routes = [
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent 
     ],
     imports: [
-        BrowserModule,
+        CommonModule,
+        BrowserModule, 
         BrowserAnimationsModule,
         HttpClientModule,
         RouterModule.forRoot(appRoutes),
@@ -89,6 +92,7 @@ const appRoutes: Routes = [
         MatCheckboxModule,
         MatPaginatorModule,
         MatSortModule,
+        MatTabsModule,
 
         // Fuse modules
         FuseModule.forRoot(fuseConfig),

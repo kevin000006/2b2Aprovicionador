@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatDialogModule  } from '@angular/material/dialog';
 import { RouterModule, Routes } from '@angular/router';
 import { FuseSharedModule } from '@fuse/shared.module';
@@ -41,6 +42,7 @@ const routes: Routes = [
         DeleteDialogComponent
     ],
     imports     : [
+        CommonModule,
         RouterModule.forChild(routes),
         FuseSharedModule,
         MatTableModule,
@@ -53,7 +55,8 @@ const routes: Routes = [
         MatExpansionModule,
         MatCheckboxModule,
         MatPaginatorModule,
-        MatSortModule
+        MatSortModule,
+        FormsModule
     ],
     entryComponents: [
         AddDialogComponent,

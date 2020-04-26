@@ -1,0 +1,54 @@
+content{
+    background: #00A9E0 !important;
+}
+
+.row{
+    display: block;
+    position: absolute;
+    width: 100%;
+}
+
+.space-img-constr{
+    padding: 7% 5% 0 0;
+}
+
+.space-img{
+    max-width: 200px;
+    margin-top: 5%;
+    height: 40px;
+    margin-left: 3%;
+}
+
+.content-pag-const{
+    max-height: 400px;
+    max-width: 350px;
+    margin-bottom: 5%;
+    position: absolute;
+    bottom: 0;
+    color: #fff;
+    margin-left: 3%;
+}
+
+.content-pag-const h1{
+    display: block;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 12px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+    
+button.btn.btn-default{
+    border: 2px solid #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background: transparent;
+    min-width: 170px;
+    min-height: 33px;
+    color: #FFFFFF;
+}
+
+
+
+
+

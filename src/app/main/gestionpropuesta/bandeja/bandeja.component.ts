@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { BandejaService } from './bandeja.service';
-import { BandejaModel, ClienteModel, EstadoModel } from '../models/oferta';
+import { BandejaModel, ClienteModel, EstadoModel, UsuarioModel } from '../models/oferta';
 import { AddDialogComponent } from '../dialogs/add/add.component'
 import { DataSource } from '@angular/cdk/collections';
 import { DeleteDialogComponent } from '../dialogs/delete/delete.component'
@@ -13,6 +13,8 @@ import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as XLSX from 'xlsx';
 import { ActivatedRoute } from '@angular/router';
+import * as Cookies from 'js-cookie';
+
 
 
 @Component({
@@ -25,17 +27,20 @@ import { ActivatedRoute } from '@angular/router';
 export class BandejaComponent implements OnInit {
   state$: Observable<object>;
   fileName = 'bandeja_oferta.xlsx';
+  _filtro:any={};
 
   lstBandeja = new Array<BandejaModel>();
   lstCliente = new Array<ClienteModel>();
   lstEstado = new Array<EstadoModel>();
   checked = false;
+  _visible= true;
 
   displayedColumns: string[] = ['menu', 'codigo', 'version', 'oportunidad', 'cliente', 'descripcion', 'estado'];
   exampleDatabase: BandejaService | null;
   dataSource: EjemploDataSource | null;
   index: number;
   id: number;
+  currentUser:any=null;
 
   constructor(public httpClient: HttpClient,
     private bandejaService: BandejaService,
@@ -61,62 +66,18 @@ export class BandejaComponent implements OnInit {
   @ViewChild('codigo', { static: true }) codigo: ElementRef;
 
   ngOnInit(): void {
-    debugger;
-    localStorage.setItem('u', JSON.stringify(window.history.state.usuario));
+    
+    setTimeout(() => {
+      this._visible = false;
+    }, 2500);
+    
+
+    if(Cookies.get('currentUser') === "undefined")
+      Cookies.set('currentUser', JSON.stringify(window.history.state.usuario), { expires: 1 });
+
+      this.currentUser={};
+    //this.currentUser = JSON.parse(Cookies.get('currentUser'));
     this.loadData();
-  }
-
-  /*getofertasAll():void{
-    this.bandejaService.getBandejaAll()
-    .subscribe(data => this.lstBandeja = data);
-  }*/
-
-  addNew(): void {
-
-    const dialogRef = this.dialog.open(AddDialogComponent, {
-      data: {
-        data: new BandejaModel(),
-        lstCliente: this.lstCliente,
-        lstEstado: this.lstEstado
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 1) {
-        // this.getofertasAll();
-      }
-    });
-
-  }
-
-  editItem(oferta: BandejaModel): void {
-
-    console.log(oferta);
-    const dialogRef = this.dialog.open(AddDialogComponent, {
-      data: {
-        data: oferta,
-        lstCliente: this.lstCliente,
-        lstEstado: this.lstEstado
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 1) {
-        //this.getofertasAll();
-      }
-    });
-  }
-
-  deleteItem(oferta: BandejaModel): void {
-    const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: oferta
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 1) {
-        // this.getofertasAll();
-      }
-    });
   }
 
   public descargar_excel() {
@@ -133,18 +94,10 @@ export class BandejaComponent implements OnInit {
   }
 
   public filtrarData() {
-    if (this.descripcion.nativeElement.value)
-      this.dataSource.filter = this.descripcion.nativeElement.value;
+    
+    console.log(this._filtro);
 
-    if (this.cliente.nativeElement.value)
-      this.dataSource.filter = this.cliente.nativeElement.value;
-
-    if (this.codigo.nativeElement.value)
-      this.dataSource.filter = this.codigo.nativeElement.value;
-
-    if (!this.descripcion.nativeElement.value && !this.cliente.nativeElement.value && !this.codigo.nativeElement.value)
-      this.dataSource.filter = '';
-
+      this.dataSource.filtrar(this._filtro);
   }
 
   public loadData() {
@@ -176,6 +129,10 @@ export class EjemploDataSource extends DataSource<BandejaModel>{
     this._filterChange.next(filter);
   }
 
+  filtrar(param){
+    this._exampleDatabase.getBandejaAll(param);
+  }
+
   filteredData: BandejaModel[] = [];
   renderedData: BandejaModel[] = [];
 
@@ -195,7 +152,7 @@ export class EjemploDataSource extends DataSource<BandejaModel>{
       this._paginator.page
     ];
 
-    this._exampleDatabase.getBandejaAll();
+    this._exampleDatabase.getBandejaAll({});
 
     return merge(...displayDataChanges).pipe(map(() => {
       // Filter data

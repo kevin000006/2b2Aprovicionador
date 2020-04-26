@@ -10,7 +10,7 @@ import { FuseConfig } from '@fuse/types';
 
 export const fuseConfig: FuseConfig = {
     // Color themes can be defined in src/app/app.theme.scss
-    corsUrl: 'https://cors-anywhere.herokuapp.com/',
+    corsUrl: '',
     colorTheme: 'theme-default',
     customScrollbars: true,
     layout: {
