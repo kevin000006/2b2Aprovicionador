@@ -15,7 +15,7 @@ import { map, catchError } from 'rxjs/operators';
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
 
-    //private readonly urlBase: string = "https://cors-anywhere.herokuapp.com/http://localhost:8080/api";
+    //private readonly urlBase: string = "http://localhost:8080/api";
     private readonly urlBase: string = "https://cors-anywhere.herokuapp.com/https://webapp-b2b.azurewebsites.net/api";
 
     constructor(public errorDialogService: ErrorDialogService) { }

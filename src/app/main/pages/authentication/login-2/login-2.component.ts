@@ -64,6 +64,7 @@ export class Login2Component implements OnInit {
         u.clave = this.loginForm.value.password;
         this._loginService.autenticacion(u).subscribe(res => {
             if (res.id != null) {
+                localStorage.setItem('u', JSON.stringify(res));
                 this._router.navigate(['gestion-propuesta/bandeja'], { state: { usuario: res } });
             } else {
                 this.authError = true;
