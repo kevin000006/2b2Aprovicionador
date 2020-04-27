@@ -6,6 +6,7 @@ import { fuseAnimations } from '@fuse/animations';
 import { LoginService } from './login-2.service'
 import { UsuarioModel } from 'app/model/Usuario';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import * as Cookies from 'js-cookie';
 
 @Component({
     selector: 'login-2',
@@ -63,18 +64,16 @@ export class Login2Component implements OnInit {
         u.usuario = this.loginForm.value.usuario;
         u.clave = this.loginForm.value.password;
         this._loginService.autenticacion(u).subscribe(res => {
-            
-            if (res != null) {
+            if (res.id != null) {
+                localStorage.setItem('u', JSON.stringify(res));
+
+                Cookies.set('currentUser', JSON.stringify(res), { expires: 1 });
+
                 this._router.navigate(['gestion-propuesta/bandeja'], { state: { usuario: res } });
             } else {
                 this.authError = true;
-                //console.log('SIN ACCESO');
-                // this._snack.open('Message', '', {
-                //     duration: 3000,
-                //     panelClass: ['simple-snack-bar']
-                // });
-                this._snack.open('SIN ACCESO', 'Ok', {
-                    duration: 2000,
+                this._snack.open(res.mensaje, 'Ok', {
+                    duration: 3000,
                 });
             }
         });

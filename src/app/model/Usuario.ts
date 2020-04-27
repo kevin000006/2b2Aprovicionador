@@ -4,4 +4,6 @@ export class UsuarioModel {
     clave: string;
     nombres: string;
     apelldos: string;
+    passwordActual: string;
+    confirmPassword: string;
 }

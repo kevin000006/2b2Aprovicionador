@@ -1,34 +1,34 @@
 import { NgModule } from '@angular/core';
-import { MatDialogModule  } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule, Routes } from '@angular/router';
 import { FuseSharedModule } from '@fuse/shared.module';
-import { SubirTramaComponent} from './subirTrama.component';
-import {MatTableModule} from '@angular/material/table';
-import {MatIconModule} from '@angular/material/icon';
+import { SubirTramaComponent } from './subirTrama.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
-
-import {SubirTramaService} from './subirTrama.service';
-import {MatDividerModule} from '@angular/material/divider';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { SubirTramaService } from './subirTrama.service';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatButtonModule } from '@angular/material/button';
 
 const routes: Routes = [
     {
-        path     : '**',
+        path: '**',
         component: SubirTramaComponent,
-        resolve  : {
-            
+        resolve: {
+
         }
     }
 ];
 
-
 @NgModule({
     declarations: [
-        SubirTramaComponent,        
+        SubirTramaComponent,
     ],
-    imports     : [
+    imports: [
         RouterModule.forChild(routes),
         FuseSharedModule,
         MatTableModule,
@@ -37,14 +37,16 @@ const routes: Routes = [
         MatDialogModule,
         MatInputModule,
         MatSelectModule,
-        MaterialFileInputModule
+        MaterialFileInputModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
+        MatButtonModule
     ],
-    entryComponents: [        
+    entryComponents: [
     ],
-    providers   : [
+    providers: [
         SubirTramaService
     ]
 })
-export class SubirTramaModule
-{
+export class SubirTramaModule {
 }

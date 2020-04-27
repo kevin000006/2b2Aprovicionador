@@ -15,7 +15,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-
+import {MatCardModule} from '@angular/material/card';
 
 import {BandejaService} from './bandeja.service';
 import {MatDividerModule} from '@angular/material/divider';
@@ -56,7 +56,8 @@ const routes: Routes = [
         MatCheckboxModule,
         MatPaginatorModule,
         MatSortModule,
-        FormsModule
+        FormsModule,
+        MatCardModule
     ],
     entryComponents: [
         AddDialogComponent,

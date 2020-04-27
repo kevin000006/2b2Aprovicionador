@@ -1,0 +1,11 @@
+@media screen and (max-width:580px) and (min-width:500px) {
+    .container-padding {
+        padding: 3rem;
+    }
+}
+
+@media screen and (min-width:580px) {
+    .container-padding {
+        padding: 8rem;
+    }
+}

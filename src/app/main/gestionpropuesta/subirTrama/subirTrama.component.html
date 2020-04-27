@@ -1,74 +1,68 @@
 <div id="orders" class="page-layout carded fullwidth ">
-  <div class="top-bg accent"></div>
-  <div class="center">
-    <!-- HEADER -->
-    <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
-      fxLayoutAlign.gt-xs="space-between center">
-      <!-- APP TITLE -->
-      <div class="logo mb-24 mb-sm-0" fxLayout="row" fxLayoutAlign=" center" style="display: block;width: 100%;">
-        <p style="display: block; width: 100%; text-align: center;color: #003245; font-size: 24px;font-weight: bold;"
-          class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">!Hola, María Ramos¡<br /> <span
-            style="font-size: 16px;">Aquí podrás cargar los archivos</span></p>
-      </div>
-    </div>
-    <div>
-
-      <mat-accordion>
-        <mat-expansion-panel class="filtro">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <!--Personal data-->
-              Cargar Archivos
-            </mat-panel-title>
-            <mat-panel-description>
-              <!--Type your name and age-->
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <form [formGroup]='fromDatosGenerales' (ngSubmit)='clickGuardar()' novalidate>
-            <div class="row">
-              <div class="col-xs-12 col-sm-3">
-                <mat-form-field color="accent">
-                  <mat-label class="font-normal">Tablas Maestras</mat-label>
-                  <select matNativeControl name="miselect" [formControl]="cboMaestraCtrl" [(ngModel)]="seleccionado">
-                    <option value="">--Seleccione--</option>
-                    <option [ngValue]="o.id" *ngFor="let o of lista">{{o.nombre}}</option>
-                  </select>
-                  <span matSuffix>&nbsp; &nbsp;</span>
-                </mat-form-field>
-              </div>
-              <div class="col-xs-12 col-sm-3">
-                <mat-form-field>
-                  <ngx-mat-file-input [formControl]="FileCtrl" (change)="fileProgress($event)" accept=".csv"
-                    placeholder="Seleccionar Archivo"></ngx-mat-file-input>
-                  <mat-icon matSuffix>folder</mat-icon>
-                </mat-form-field>
-              </div>
+    <div class="top-bg accent"></div>
+    <div class="center">
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+            <!-- APP TITLE -->
+            <div class="logo mb-24 mb-sm-0" fxLayout="row" fxLayoutAlign=" center" style="display: block;width: 100%;">
+                <p style="display: block; width: 100%; text-align: center;color: #003245; font-size: 24px;font-weight: bold;" class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">!Hola, María Ramos¡<br/> <span style="font-size: 16px;">Aquí podrás cargar los archivos</span></p>
             </div>
-            <div class="row">
+        </div>
+        <div>
 
-              <div class="col-xs-9">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-              </div>
-              <div class="col-xs-12 col-sm-3" style="text-align: left;">
-                <button
-                  style="background: linear-gradient(90deg, #2F9CB3 0%, #5AC4D9 100%);border-radius: 4px;padding: 5px 15px;color: #fff;font-size: 13px;min-width: 100px;"
-                  class="link_basic" mat-icon-button color="primary">
-                  Procesar
-                </button>
-              </div>
-            </div>
+            <mat-accordion>
+                <mat-expansion-panel class="filtro">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <!--Personal data-->
+                            Cargar Archivos
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            <!--Type your name and age-->
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <!-- <form [formGroup]='fromDatosGenerales' (ngSubmit)='clickGuardar()' novalidate>
+            
 
-          </form>
+          </form> -->
 
-        </mat-expansion-panel>
-      </mat-accordion>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-3">
+                            <mat-form-field color="accent">
+                                <mat-label class="font-normal">Tablas Maestras</mat-label>
+                                <select matNativeControl name="miselect" [formControl]="cboMaestraCtrl" [(ngModel)]="seleccionado">
+                  <option value="">--Seleccione--</option>
+                  <option [ngValue]="o.id" *ngFor="let o of lista">{{o.nombre}}</option>
+                </select>
+                                <span matSuffix>&nbsp; &nbsp;</span>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-xs-12 col-sm-3">
+                            <mat-form-field>
+                                <ngx-mat-file-input [formControl]="FileCtrl" (change)="fileProgress($event)" accept=".csv" placeholder="Seleccionar Archivo"></ngx-mat-file-input>
+                                <mat-icon matSuffix>folder</mat-icon>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-xs-9">
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+                        <div class="col-xs-12 col-sm-3" style="text-align: left;">
+                            <button class="btn-subir" mat-raised-button color="primary" [class.spinner]="loading" [disabled]="loading" (click)="clickGuardar()">Procesar</button>
+                        </div>
+                    </div>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+
+
+        </div>
 
 
     </div>
-
-
-  </div>
-  <br /><br /><br />
+    <br/><br/><br/>
 </div>
 
 

@@ -27,9 +27,10 @@
 
             <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
                 <div fxLayout="row" fxLayoutAlign="center center">
-                    <span class="username mr-12" style="color: #fff;font-size: 13px;" fxHide fxShow.gt-sm>Maria
-                        Ramos</span>
-                    <img class="avatar mr-0 mr-sm-16" src="assets/images/avatars/MariaRosa.jfif">
+                    <span class="username mr-12" style="color: #fff;font-size: 13px;" fxHide fxShow.gt-sm>{{currentUser.nombres}}
+                        {{currentUser.apellidos}}</span>
+                    
+                    <div class="avatar mr-0 content-iniciales mr-sm-16" ><span>{{currentUser.nombrecorto}}</span></div>
                     <mat-icon style="color:#fff;" class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
                 </div>
             </button>
@@ -46,7 +47,7 @@
                     <span style="font-size: 11px;">Contáctanos</span>
                 </button>
 
-                <button mat-menu-item class="">
+                <button mat-menu-item class="" (click)="openDialog()">
                     <mat-icon style="font-size: 20px;">mail</mat-icon>
                     <span style="font-size: 11px;">Cambiar contraseña</span>
                 </button>

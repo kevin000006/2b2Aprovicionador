@@ -6,8 +6,11 @@ import * as _ from 'lodash';
 import { Router } from '@angular/router';
 import { FuseConfigService } from '@fuse/services/config.service';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
-
 import { navigation } from 'app/navigation/navigation';
+import { MatDialog } from '@angular/material/dialog';
+import { CambiarContraseniaComponent } from '../cambiocontrasenia/cambiocontrasenia.component';
+import * as Cookies from 'js-cookie';
+
 
 @Component({
     selector: 'toolbar',
@@ -24,7 +27,10 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     navigation: any;
     selectedLanguage: any;
     userStatusOptions: any[];
+    currentUser = {};
 
+    animal: string;
+    name: string;
     // Private
     private _unsubscribeAll: Subject<any>;
 
@@ -40,6 +46,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         private _fuseSidebarService: FuseSidebarService,
         private _translateService: TranslateService,
         private _router: Router,
+        public dialog: MatDialog
     ) {
         // Set the defaults
         this.userStatusOptions = [
@@ -89,6 +96,23 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         this._unsubscribeAll = new Subject();
     }
 
+    openDialog(): void {
+        const dialogRef = this.dialog.open(CambiarContraseniaComponent, {
+            height: '100%',
+            position: {
+                'top': '0',
+                'right': '0'
+            },
+            panelClass: 'full-screen-modal',
+            data: { name: this.name, animal: this.animal }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            debugger;
+            console.log('The dialog was closed');
+            this.animal = result;
+        });
+    }
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
     // -----------------------------------------------------------------------------------------------------
@@ -97,6 +121,9 @@ export class ToolbarComponent implements OnInit, OnDestroy {
      * On init
      */
     ngOnInit(): void {
+
+        this.currentUser = JSON.parse(Cookies.get('currentUser'));
+
         // Subscribe to the config changes
         this._fuseConfigService.config
             .pipe(takeUntil(this._unsubscribeAll))
@@ -143,6 +170,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     }
 
     cerrarsesion(): void {
+        localStorage.clear();
+        Cookies.remove('currentUser');
         this._router.navigate(['auth/login-2']);
     }
 
