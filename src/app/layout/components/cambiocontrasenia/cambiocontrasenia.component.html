@@ -17,7 +17,7 @@
                 <mat-error *ngIf="submitted && f.passwordActual.errors">
                     <p *ngIf="f.passwordActual.errors.required">se requiere contraseña</p>
                 </mat-error>
-                <button mat-icon-button matSuffix (click)="hidePasswordActual = !hidePasswordActual" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <button mat-icon-button matSuffix (click)="hidePasswordActual = !hidePasswordActual" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePasswordActual">
                     <mat-icon>{{hidePasswordActual ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
             </mat-form-field>
@@ -32,7 +32,7 @@
                     <p *ngIf="f.password.errors.minlength">La contraseña debe tener al menos 6 caracteres</p>
                     <p *ngIf="f.password.errors.pattern">La contraseña debe contener como minimo 1 caracter especial (Ejemplo *,$,#, etc)</p>
                 </mat-error>
-                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
                     <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
             </mat-form-field>
@@ -45,7 +45,7 @@
                     <p *ngIf="f.confirmPassword.errors.mustMatch">Las contraseñas deben coincidir</p>
 
                 </mat-error>
-                <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPassword">
                     <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
             </mat-form-field>

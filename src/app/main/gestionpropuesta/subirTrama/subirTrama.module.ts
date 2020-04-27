@@ -13,6 +13,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 const routes: Routes = [
     {
@@ -31,6 +32,7 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         FuseSharedModule,
+        MatExpansionModule,
         MatTableModule,
         MatIconModule,
         MatDividerModule,

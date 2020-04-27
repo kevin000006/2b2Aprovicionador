@@ -30,7 +30,7 @@
                         <div class="col-xs-12 col-sm-3">
                             <mat-form-field color="accent">
                                 <mat-label class="font-normal">Tablas Maestras</mat-label>
-                                <select matNativeControl name="miselect" [formControl]="cboMaestraCtrl" [(ngModel)]="seleccionado">
+                                <select matNativeControl name="miselect" [formControl]="cboMaestraCtrl">
                   <option value="">--Seleccione--</option>
                   <option [ngValue]="o.id" *ngFor="let o of lista">{{o.nombre}}</option>
                 </select>
