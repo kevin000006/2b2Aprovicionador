@@ -27,7 +27,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     navigation: any;
     selectedLanguage: any;
     userStatusOptions: any[];
-    currentUser = {};
+    currentUser = {nombres:'',apellidos:'',nombrecorto:''};
 
     animal: string;
     name: string;

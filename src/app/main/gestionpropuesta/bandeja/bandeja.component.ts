@@ -43,7 +43,7 @@ export class BandejaComponent implements OnInit {
   dataSource: EjemploDataSource	 | null;
   index: number;
   id: number;
-  currentUser:any=null;
+  currentUser:any= {nombres:'',apellidos:'',nombrecorto:''};;
 
   constructor(public httpClient: HttpClient,
     private bandejaService : BandejaService, 
