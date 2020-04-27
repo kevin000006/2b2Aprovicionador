@@ -48,7 +48,8 @@
                 <br>
                 <br>
 
-                <div class="remember-forgot-password" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+                <div class="remember-forgot-password" fxLayout="row" fxLayout.xs="column"
+                    fxLayoutAlign="space-between center">
                     <mat-checkbox class="remember-me" aria-label="Remember Me">
                         Recordar datos
                     </mat-checkbox>
@@ -60,11 +61,10 @@
                 <br>
                 <br>
                 <br>
-                <button mat-raised-button color="accent" class="submit-button2" aria-label="LOGIN" [disabled]="loginForm.invalid" (click)="login()">
+                <button mat-raised-button color="accent" class="submit-button2" aria-label="LOGIN"
+                    [disabled]="loginForm.invalid" (click)="login()">
                     INGRESAR
                 </button>
-                <mat-progress-spinner class="example-margin" [color]="color" [mode]="mode" [value]="value">
-                </mat-progress-spinner>
             </form>
 
 

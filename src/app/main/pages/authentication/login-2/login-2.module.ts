@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { Login2Component } from 'app/main/pages/authentication/login-2/login-2.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const routes = [
     {
@@ -22,6 +23,7 @@ const routes = [
     ],
     imports: [
         RouterModule.forChild(routes),
+        MatProgressSpinnerModule,
         MatSnackBarModule,
         MatButtonModule,
         MatCheckboxModule,
