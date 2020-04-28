@@ -14,7 +14,13 @@ export class SubirTramaService {
 
     if(data.tipo =="1"){
       return this.http.post<any>('/IsisAcceso/uploadCVS', data);
-    }else{
+    }else if(data.tipo =="2"){
+      return this.http.post<any>('/IsisEquipo/uploadCVS', data);
+    }
+    else if(data.tipo =="3"){
+      return this.http.post<any>('/IsisTarifa/uploadCVS', data);
+    }    
+    else{
       return this.http.post<any>('/IsisCliente/uploadCVS', data);
     }    
   }

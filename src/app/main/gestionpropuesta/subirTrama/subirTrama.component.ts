@@ -42,9 +42,9 @@ export class SubirTramaComponent implements OnInit {
       File: this.FileCtrl
     });
 
-    this.lista.push(new ModelMaestras("1", "Maestra 1", "ciudad al lado del mar"));
-    this.lista.push(new ModelMaestras("2", "Maestra 2", "ciudad gastronomica"));
-    this.lista.push(new ModelMaestras("3", "Maestra 2", "ciudad cultural"));
+    this.lista.push(new ModelMaestras("1", "Maestra Acceso", "ciudad al lado del mar"));
+    this.lista.push(new ModelMaestras("2", "Maestra Equipo 2", "ciudad gastronomica"));
+    this.lista.push(new ModelMaestras("3", "Maestra Tarifa", "ciudad cultural"));
     this.state$ = window.history.state;
   }
   fileProgress(fileInput: any): void {
