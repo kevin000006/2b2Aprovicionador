@@ -43,8 +43,9 @@ export class SubirTramaComponent implements OnInit {
     });
 
     this.lista.push(new ModelMaestras("1", "Maestra Acceso", "ciudad al lado del mar"));
-    this.lista.push(new ModelMaestras("2", "Maestra Equipo 2", "ciudad gastronomica"));
+    this.lista.push(new ModelMaestras("2", "Maestra Equipo", "ciudad gastronomica"));
     this.lista.push(new ModelMaestras("3", "Maestra Tarifa", "ciudad cultural"));
+    this.lista.push(new ModelMaestras("4", "Maestra Cliente", "ciudad cultural"));
     this.state$ = window.history.state;
   }
   fileProgress(fileInput: any): void {
