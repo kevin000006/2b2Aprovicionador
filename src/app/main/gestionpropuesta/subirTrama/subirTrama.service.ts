@@ -11,7 +11,12 @@ export class SubirTramaService {
 
   GuardarArchivo(data: any): Observable<any> {
     debugger;
-    return this.http.post<any>('/IsisCliente/uploadCVS', data);
+
+    if(data.tipo =="1"){
+      return this.http.post<any>('/IsisAcceso/uploadCVS', data);
+    }else{
+      return this.http.post<any>('/IsisCliente/uploadCVS', data);
+    }    
   }
 
   getConnectionURL(resourceName: any): string {
