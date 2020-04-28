@@ -15,8 +15,8 @@ import { map, catchError } from 'rxjs/operators';
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
 
-    private readonly urlBase: string = "http://localhost:8084/api";
-    //private readonly urlBase: string = "https://webapp-b2b.azurewebsites.net/api";
+    //private readonly urlBase: string = "http://localhost:8084/api";
+    private readonly urlBase: string = "https://webapp-b2b.azurewebsites.net/api";
 
     constructor(public errorDialogService: ErrorDialogService) { }
 
