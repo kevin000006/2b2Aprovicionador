@@ -1,0 +1,21 @@
+.oferta-head {
+    margin: 0;
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 15px 0;
+}
+
+table {
+    width: 100%;
+}
+
+.tb-oferta-equipamiento .mat-header-row {
+    background: #F4F6FB;
+    border-radius: 5px;
+    min-height: 45px !important;
+}
+
+.tb-oferta-equipamiento .mat-header-row .mat-column-accion,
+.tb-oferta-equipamiento .mat-row .mat-column-accion {
+    flex: 0 0 50px;
+}
