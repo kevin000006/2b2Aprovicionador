@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { Observable, BehaviorSubject, empty } from 'rxjs';
 import { BandejaModel, ClienteModel, EstadoModel } from '../models/oferta';
 
 @Injectable({
@@ -16,9 +16,22 @@ export class BandejaService {
     return this.dataChange.value;
   }
 
-  getBandejaAll(param:any): void {
-    this.http.post<BandejaModel[]>( '/oferta/findQuery',param || {}).subscribe(data => {
+  getBandejaAll(param: any): void {
+    debugger;
+    let formatoFecha = "yyyy/MM/dd";
 
+    let params = new HttpParams();
+    params = params.append('codoportunidad', '');
+    params = params.append('cliente', '');
+    params = params.append('descripcion', '');
+    params = params.append('complejidad', '');
+    params = params.append('estado', '');
+    params = params.append('desde', '');
+    params = params.append('hasta', '');
+    params = params.append('page', '0');
+    params = params.append('size', '5');
+
+    this.http.get<BandejaModel[]>('/oferta/obtenerofertas', { params: params }).subscribe(data => {
       this.dataChange.next(data);
     },
       (error: HttpErrorResponse) => {
@@ -27,19 +40,19 @@ export class BandejaService {
   }
 
   newOferta(data: BandejaModel): Observable<any> {
-    return this.http.post<BandejaModel>( '/oferta/saveOferta', data);
+    return this.http.post<BandejaModel>('/oferta/saveOferta', data);
   }
 
   deleteOferta(data: BandejaModel): Observable<any> {
-    return this.http.delete( "/oferta/deleteOferta/" + data.id);
+    return this.http.delete("/oferta/deleteOferta/" + data.id);
   }
 
   getClienteAll(): Observable<ClienteModel[]> {
-    return this.http.post<ClienteModel[]>( '/clientes/findAll',null);
+    return this.http.post<ClienteModel[]>('/clientes/findAll', null);
   }
 
   getEstadoAll(): Observable<EstadoModel[]> {
-    return this.http.post<EstadoModel[]>( '/estadoRest/findAll',null);
+    return this.http.post<EstadoModel[]>('/estadoRest/findAll', null);
   }
 
 

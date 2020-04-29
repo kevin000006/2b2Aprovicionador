@@ -1,5 +1,5 @@
-import { Component,ElementRef, OnInit,ViewChild } from '@angular/core';
-import { HttpClient,HttpErrorResponse } from '@angular/common/http';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { BandejaService } from './bandeja.service';
 import { BandejaModel, ClienteModel, EstadoModel, UsuarioModel } from '../models/oferta';
@@ -12,7 +12,7 @@ import { MatSort } from '@angular/material/sort';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as XLSX from 'xlsx';
-import { ActivatedRoute,Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as Cookies from 'js-cookie';
 
 
@@ -26,69 +26,69 @@ import * as Cookies from 'js-cookie';
 
 export class BandejaComponent implements OnInit {
 
-  _filtroCliente=null;
-  _filtroEstado=0;
-  _filtro:any={oportunidad:null,descripcion:null};
+  _filtroCliente = null;
+  _filtroEstado = 0;
+  _filtro: any = { oportunidad: null, descripcion: null };
 
-  fileName= 'bandeja_oferta.xlsx';
+  fileName = 'bandeja_oferta.xlsx';
 
-  lstBandeja= new Array<BandejaModel>();
-  lstCliente= new Array<ClienteModel>();
-  lstEstado= new Array<EstadoModel>();
+  lstBandeja = new Array<BandejaModel>();
+  lstCliente = new Array<ClienteModel>();
+  lstEstado = new Array<EstadoModel>();
   checked = false;
-  _visible= true;
+  _visible = true;
 
-  displayedColumns: string[] = ['menu','codigo','version','oportunidad','cliente','descripcion','estado'];
+  displayedColumns: string[] = ['menu', 'codigo', 'version', 'oportunidad', 'cliente', 'descripcion', 'estado'];
   exampleDatabase: BandejaService | null;
-  dataSource: EjemploDataSource	 | null;
+  dataSource: EjemploDataSource | null;
   index: number;
   id: number;
-  currentUser:any= {nombres:'',apellidos:'',nombrecorto:''};;
+  currentUser: any = { nombres: '', apellidos: '', nombrecorto: '' };;
 
   constructor(public httpClient: HttpClient,
-    private bandejaService : BandejaService, 
-    public dialog : MatDialog,
-    private _router : Router) { 
+    private bandejaService: BandejaService,
+    public dialog: MatDialog,
+    private _router: Router) {
 
     this.bandejaService.getClienteAll()
-    .subscribe( data => this.lstCliente = data);
+      .subscribe(data => this.lstCliente = data);
 
     this.bandejaService.getEstadoAll()
-    .subscribe( data => this.lstEstado = data);
+      .subscribe(data => this.lstEstado = data);
 
     //this.getofertasAll();
 
   }
 
-  
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild('filter',  {static: true}) filter: ElementRef;
-  @ViewChild('descripcion',  {static: true}) descripcion: ElementRef;
-  @ViewChild('cliente',  {static: true}) cliente: ElementRef;
-  @ViewChild('codigo',  {static: true}) codigo: ElementRef;
- 
+
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild('filter', { static: true }) filter: ElementRef;
+  @ViewChild('descripcion', { static: true }) descripcion: ElementRef;
+  @ViewChild('cliente', { static: true }) cliente: ElementRef;
+  @ViewChild('codigo', { static: true }) codigo: ElementRef;
+
   ngOnInit(): void {
-    
+
     setTimeout(() => {
       this._visible = false;
     }, 2500);
 
 
-    if(Cookies.get('currentUser') === undefined){
-      this._router.navigate(['pages/auth/login-2'], { state: { } });
+    if (Cookies.get('currentUser') === undefined) {
+      this._router.navigate(['pages/auth/login-2'], { state: {} });
     }
-    else{
+    else {
       this.currentUser = JSON.parse(Cookies.get('currentUser'));
       this.loadData();
     }
-    
-    
+
+
   }
 
-  public descargar_excel(){
-    let element = document.getElementById('excel-table'); 
-    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+  public descargar_excel() {
+    let element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
 
 
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
@@ -100,34 +100,33 @@ export class BandejaComponent implements OnInit {
   }
 
   public filtrarData() {
-    
-    var obj={
-        oportunidad:null,
-        cliente:{descripcion:null},
-        descripcion:null,
-        estado:{id:null}
+
+    var obj = {
+      oportunidad: null,
+      cliente: { descripcion: null },
+      descripcion: null,
+      estado: { id: null }
     }
 
-    if(this._filtro.oportunidad != null && this._filtro.oportunidad != "" && this._filtro.oportunidad !== undefined)
+    if (this._filtro.oportunidad != null && this._filtro.oportunidad != "" && this._filtro.oportunidad !== undefined)
       obj.oportunidad = this._filtro.oportunidad;
 
-    if(this._filtro.descripcion != null && this._filtro.descripcion != "" && this._filtro.descripcion !== undefined)
+    if (this._filtro.descripcion != null && this._filtro.descripcion != "" && this._filtro.descripcion !== undefined)
       obj.descripcion = this._filtro.descripcion;
 
-      if(this._filtroCliente != null && this._filtroCliente != "" && this._filtroCliente !== undefined)
+    if (this._filtroCliente != null && this._filtroCliente != "" && this._filtroCliente !== undefined)
       obj.cliente.descripcion = this._filtroCliente;
 
-      if(this._filtroEstado != null && this._filtroEstado != 0 && this._filtroEstado !== undefined)
+    if (this._filtroEstado != null && this._filtroEstado != 0 && this._filtroEstado !== undefined)
       obj.estado.id = this._filtroEstado;
-      
 
-      this.dataSource.filtrar(obj);
+
+    this.dataSource.filtrar(obj);
   }
 
-  public loadData(){
-    
+  public loadData() {
     this.exampleDatabase = new BandejaService(this.httpClient);
-    
+
     this.dataSource = new EjemploDataSource(this.exampleDatabase, this.paginator, this.sort);
     fromEvent(this.filter.nativeElement, 'keyup')
       .subscribe(() => {
@@ -138,11 +137,11 @@ export class BandejaComponent implements OnInit {
       });
   }
 
-  
+
 
 }
 
-export class EjemploDataSource  extends DataSource<BandejaModel>{
+export class EjemploDataSource extends DataSource<BandejaModel>{
   _filterChange = new BehaviorSubject('');
 
   get filter(): string {
@@ -153,7 +152,7 @@ export class EjemploDataSource  extends DataSource<BandejaModel>{
     this._filterChange.next(filter);
   }
 
-  filtrar(param){
+  filtrar(param) {
     this._exampleDatabase.getBandejaAll(param);
   }
 
@@ -168,7 +167,7 @@ export class EjemploDataSource  extends DataSource<BandejaModel>{
     this._filterChange.subscribe(() => this._paginator.pageIndex = 0);
   }
 
-  connect(): Observable<BandejaModel[]>{  
+  connect(): Observable<BandejaModel[]> {
     const displayDataChanges = [
       this._exampleDatabase.dataChange,
       this._sort.sortChange,
@@ -178,7 +177,7 @@ export class EjemploDataSource  extends DataSource<BandejaModel>{
 
     this._exampleDatabase.getBandejaAll({});
 
-    return merge(...displayDataChanges).pipe(map( () => {
+    return merge(...displayDataChanges).pipe(map(() => {
       // Filter data
       this.filteredData = this._exampleDatabase.data.slice().filter((issue: BandejaModel) => {
         const searchStr = (issue.version + issue.codigo + issue.cliente.descripcion + issue.oportunidad + issue.descripcion).toLowerCase();
@@ -193,13 +192,13 @@ export class EjemploDataSource  extends DataSource<BandejaModel>{
       this.renderedData = sortedData.splice(startIndex, this._paginator.pageSize);
       return this.renderedData;
     }
-  ));
+    ));
 
   }
 
-  disconnect() {}
+  disconnect() { }
 
-  sortData(data: BandejaModel[]): BandejaModel[]{
+  sortData(data: BandejaModel[]): BandejaModel[] {
     if (!this._sort.active || this._sort.direction === '') {
       return data;
     }
