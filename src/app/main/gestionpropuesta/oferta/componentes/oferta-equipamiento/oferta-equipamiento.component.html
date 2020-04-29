@@ -1,0 +1,86 @@
+<div class="row oferta-head">
+    <div class="row">
+        <div class="col-xs-6">
+            <button class="btn-primary-telefonica-2">
+                    <mat-icon>add</mat-icon>
+            </button>
+        </div>
+        <div class="col-xs-6 text-right">
+            <button class="btn-primary-telefonica btn-guardar">
+                Guardar
+        </button>
+        </div>
+    </div>
+
+    <br/>
+    <div class="col-sm-12">
+        <mat-table #table mat-table [dataSource]="dataSource"  class="tb-oferta-equipamiento">
+
+            <ng-container matColumnDef="accion">
+                <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                <mat-cell *matCellDef="let element"> 
+
+                    <mat-menu #appMenu="matMenu">
+                        <button style="font-size: 12px;" mat-menu-item> Editar </button>
+                        <button style="font-size: 12px;" mat-menu-item> Eliminar</button>
+                    </mat-menu>
+                    
+                    <a style="cursor:pointer;color: #2493B4;" mat-icon-button [matMenuTriggerFor]="appMenu">
+                        <mat-icon>more_vert</mat-icon>
+                    </a>
+
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="tipo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.tipo}}</mat-cell>
+              </ng-container> 
+
+          
+            <ng-container matColumnDef="condicion">
+              <mat-header-cell *matHeaderCellDef> Condición </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.condicion}} </mat-cell>
+            </ng-container>
+          
+            <ng-container matColumnDef="antigueadad">
+              <mat-header-cell *matHeaderCellDef> Antiguedad </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.antigueadad}} </mat-cell>
+            </ng-container>
+          
+            <ng-container matColumnDef="marca">
+              <mat-header-cell *matHeaderCellDef> Marca </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.marca}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="modelo">
+                <mat-header-cell *matHeaderCellDef> Modelo </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.modelo}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="cantidad">
+                <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.cantidad}} </mat-cell>
+              </ng-container>
+          
+              <ng-container matColumnDef="moneda">
+                <mat-header-cell *matHeaderCellDef> Moneda </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.moneda}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="costo">
+                <mat-header-cell *matHeaderCellDef> Costo </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.costo}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="costototal">
+                <mat-header-cell *matHeaderCellDef> Costo Total </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.costototal}} </mat-cell>
+              </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </div>
+
+</div>

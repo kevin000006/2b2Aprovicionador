@@ -2,328 +2,62 @@
     <div class="center">
         <div class="row">
             <br/>
-            <mat-tab-group>
-                <mat-tab label="Datos de proyecto"> 
+            <mat-tab-group class="mytab-oferta" >
+                <mat-tab   label="Datos de proyecto"> 
                     <br/>
-                    <div class="row oferta-head">
-                        <div class="col-xs-12 col-sm-3">
-                            <div class="row content-control-oferta">
-                                <div class="col-sm-6">
-                                    <div class="col-sm-12">
-                                        <label class="label-title">Código</label>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <span class="font-body-oferta">PP000003</span>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="col-sm-12">
-                                        <label class="label-title">Versión</label>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <label class="font-body-oferta">1</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row content-control-oferta">
-                            <div class="col-sm-12">
-                                <div class="col-sm-12 content-title-oferta">
-                                    <label class="label-title">Código SalesForce:</label>
-                                </div>
-                                <div class="col-sm-12 content-control-oferta">
-                                    <mat-form-field color="accent">
-                                        <span class="prefix font-body-oferta" matPrefix>PER- &nbsp;</span>
-                                        <input autocomplete="off" matInput  class="form-control font-body-oferta" placeholder=""  name="salesforce"  >
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            </div>
-                            <div class="row content-control-oferta">
-                            <div class="col-sm-12">
-                                <div class="col-sm-12">
-                                    <label class="label-title">Seguimiento de negocios:</label>
-                                </div>
-                                <div class="col-sm-12">
-                                    <span class="font-body-oferta">Empresas</span>
-                                </div>
-                            </div>
-                            </div>
-                            <div class="row content-control-oferta">
-                                <div class="col-sm-12">
-                                    <div class="col-sm-12">
-                                        <label class="label-title">Ingeniero Preventa:</label>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <span class="font-body-oferta">Maria Rosa Ramos</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row content-control-oferta">
-                                <div class="col-sm-12">
-                                    <div class="col-sm-12">
-                                        <label class="label-title">Gerente de cuentas:</label>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <span class="font-body-oferta">Rony Tapia Hechevarria</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row content-control-oferta">
-                                <div class="col-sm-12">
-                                    <div class="col-sm-12">
-                                        <label class="label-title">Analista Financiero:</label>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <span class="font-body-oferta">Karen Huaman</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row content-control-oferta">
-                                <div class="col-sm-12">
-                                    <button>Ganado</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-9">
-                            <div class=" content-title-oferta">
-                                <label class="label-title">Cliente</label>
-                            </div>
-                            <div class="row content-control-oferta">
-                               <div class="col-sm-3">
-                                <mat-form-field color="accent">
-                                    <input autocomplete="off" matInput  class="form-control font-body-oferta" placeholder=""  name="cliente"  >
-                                  </mat-form-field>
-                               </div> 
-                               <div class="col-sm-6">
-                                   <span class="font-body-oferta">20302241598 / KOMATSU-MITSUI MAQUINARIAS PERU S.A.</span>
-                               </div> 
-                                <div class="col-sm-3">
-                                    <button>Guardar</button>
-                                </div> 
-                            </div>
-                            <div class="row">
-                               <div class="col-sm-4">
-                                   <div class="content-title-oferta">
-                                       <label class="label-title">Contacto cliente:*</label>
-                                   </div>
-                                   <div class="content-control-oferta">
-                                        <mat-form-field color="accent">
-                                        <input autocomplete="off" class="font-body-oferta"  matInput  class="form-control font-body-oferta" placeholder="">
-                                        <mat-icon style="font-size: 15px;color: #2EA5B8;" matSuffix>person_outlin &nbsp;</mat-icon>
-                                    </mat-form-field>
-                                   </div>
-                                    
-                               </div> 
-                               <div class="col-sm-4">
-                                <div class="content-title-oferta">
-                                    <label class="label-title">Teléfono</label>
-                                </div>
-                                <div class="content-control-oferta">
-                                     <mat-form-field color="accent">
-                                            <input autocomplete="off"  matInput  class="form-control font-body-oferta" placeholder="">
-                                            <mat-icon style="font-size: 15px;color: #2EA5B8;" matSuffix>phone &nbsp;</mat-icon>
-                                        </mat-form-field> 
-                                </div>
-                                       
-                                </div> 
-                                <div class="col-sm-4">
-                                    <div class="content-title-oferta">
-                                        <label class="label-title">Correo</label>
-                                    </div>
-                                    <div class="content-control-oferta">
-                                        <mat-form-field color="accent">
-                                        <input autocomplete="off"  matInput  class="form-control font-body-oferta" placeholder="">
-                                        <mat-icon style="font-size: 15px;color: #2EA5B8;" matSuffix>mail &nbsp;</mat-icon>
-                                    </mat-form-field> 
-                                    </div>
-                                    
-                                </div> 
-                            </div> 
-                            <div class="row">
-                               <div class="col-sm-8">
-                                   <div class="row">
-                                       <div class="col-sm-12 content-title-oferta">
-                                           <label class="label-title">Descripción proyecto:*</label>
-                                       </div>
-                                       <div class="col-sm-12 content-control-oferta">
-                                        <mat-form-field color="accent">
-                                            <input autocomplete="off"  matInput  class="form-control font-body-oferta" placeholder="">
-                                            <mat-icon style="font-size: 15px;color: #2EA5B8;" matSuffix>description &nbsp;</mat-icon>
-                                        </mat-form-field> 
-                                       </div>
-                                   </div>
-                                   <div class="row">
-                                       <div class="col-sm-4">
-                                           <div class="content-title-oferta">
-                                               <label class="label-title">Tipo de proyecto</label>
-                                           </div>
-                                           <div class="content-control-oferta">
-                                               <mat-form-field color="accent">
-                                            <select matNativeControl class="font-body-oferta">
-                                            </select>                                           
-                                          </mat-form-field>
-                                           </div>
-                                        
-                                       </div>
-                                       <div class="col-sm-4">
-                                           <div class="content-title-oferta">
-                                            <label class="label-title">Complejidad</label>
-                                           </div>
-                                           <div class="content-control-oferta">
-                                            <mat-form-field color="accent">
-                                                <select matNativeControl  class="font-body-oferta">
-                                                </select>                                           
-                                              </mat-form-field>
-                                           </div>
-                                        
-                                       </div>
-                                       <div class="col-sm-4">
-                                        <div class="content-title-oferta">
-                                            <label class="label-title">Tipo de contrato</label>
-                                           </div>
-                                            <div class="content-control-oferta">
-                                                <mat-form-field color="accent">
-                                                    <select matNativeControl class="font-body-oferta">
-                                                    </select>                                           
-                                                  </mat-form-field>
-                                            </div>
-                                       </div>
-                                   </div>
-                                   <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="content-title-oferta">
-                                                <label class="label-title">Tiempo de implantación</label>
-                                            </div> 
-                                            <div class="content-control-oferta">
-                                                <mat-form-field color="accent">
-                                                    <span class="prefix font-body-oferta" matPrefix>Meses &nbsp;</span>
-                                                    <input autocomplete="off" matInput  class="form-control font-body-oferta" placeholder=""  name="salesforce"  >
-                                                  </mat-form-field>
-                                            </div>
-                                            
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="content-title-oferta">
-                                                <label class="label-title">Periodo de contrato</label>
-                                            </div> 
-                                            <div class="content-control-oferta">
-                                                <mat-form-field color="accent">
-                                                    <span class="prefix font-body-oferta" matPrefix>Meses &nbsp;</span>
-                                                    <input autocomplete="off" matInput  class="form-control font-body-oferta" placeholder=""  name="salesforce"  >
-                                                  </mat-form-field>
-                                            </div>
-                                        </div> 
-                                   </div>
-                                   <div class="row">
-                                       <div class="col-sm-6">
-                                        <div class=" content-title-oferta"><mat-label class="label-title">Precio único</mat-label></div> 
-                                        <div class="col-sm-2 padding-none content-control-oferta">
-                                         <mat-form-field>                                        
-                                         <select matNativeControl class="font-body-oferta">
-                                             <option value="" selected>S/.</option>
-                                         </select>                                           
-                                         </mat-form-field>
-                                        </div>
-                                         <div class="col-sm-10 content-control-oferta">
-                                             <mat-form-field color="accent">
-                                                 <input autocomplete="off"  matInput  class="form-control font-body-oferta" placeholder="">
-                                             </mat-form-field> 
-                                         </div> 
-                                       </div>
-                                       <div class="col-sm-6">
-                                        <div class=" content-title-oferta"><mat-label class="label-title">Precio recurrente</mat-label></div> 
-                                        <div class="col-sm-2 padding--none content-control-oferta">
-                                           
-                                         <mat-form-field>                                        
-                                         <select matNativeControl class="font-body-oferta">
-                                             <option value="" selected>S/.</option>
-                                         </select>                                           
-                                         </mat-form-field>
-                                        </div>
-                                         <div class="col-sm-10 content-control-oferta">
-                                             <mat-form-field color="accent">
-                                                 <input autocomplete="off"  matInput  class="form-control font-body-oferta" placeholder="">
-                                             </mat-form-field> 
-                                         </div> 
-                                       </div>
-                                   </div>
-                                   <div class="row">
-                                       <div class="col-sm-6"></div>
-                                       <div class="col-sm-6">
-                                        <div class=" content-title-oferta"><mat-label class="label-title">Fact. recurrente</mat-label></div> 
-                                        <div class="col-sm-2 padding-none content-control-oferta">
-                                         <mat-form-field>                                        
-                                         <select matNativeControl class="font-body-oferta">
-                                             <option value="" selected>S/.</option>
-                                         </select>                                           
-                                         </mat-form-field>
-                                        </div>
-                                         <div class="col-sm-10 padding-r-none content-control-oferta">
-                                             <mat-form-field color="accent">
-                                                 <input autocomplete="off"  matInput  class="form-control" placeholder="">
-                                             </mat-form-field> 
-                                         </div> 
-                                       </div>
-                                   </div>
-                               </div> 
-                               <div class="col-sm-4">
-                                   <div>
-                                       <div class="row content-control-oferta">
-                                           <div class="col-sm-8">
-                                               <div class="label-title">Tipo de servicio:</div>
-                                               <div>Recurrente</div>
-                                           </div>
-                                           <div class="col-sm-4">
-                                                <label class="label-title">Estaso</label>
-                                                <div> GO</div>
-                                            </div>
-                                       </div>
-                                        <div class="row content-control-oferta">
-                                            <div class="col-sm-4">
-                                                <label class="label-title">VAN/VAI:</label>
-                                                <div>8%</div>
-                                            </div> 
-                                            <div class="col-sm-4">
-                                                <label class="label-title">Payback:</label>
-                                                <div>23</div>
-                                            </div> 
-                                            <div class="col-sm-4">
-                                                <label class="label-title">Dif Ingresos:</label>
-                                                <div>2.9%</div>
-                                            </div> 
-                                        </div> 
-                                        <div class="row ">
-                                            <div class="col-sm-7"><label class="label-title">Capex a solicitar:</label></div>
-                                            <div class="col-sm-5"><label class="font-body-oferta">S/.35000</label></div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-7"><label class="label-title">Capex no solicitado:</label></div>
-                                            <div class="col-sm-5" class="font-body-oferta"><label>S/.2500</label></div>
-                                        </div>
-                                        <div class="row content-control-oferta">
-                                            <div><label class="label-title">Aprobador</label></div>
-                                            <div>
-                                                <mat-icon style="font-size: 15px;color: #2EA5B8;" matSuffix>person_outlin &nbsp;</mat-icon>
-                                                <label class="font-body-oferta">Gerente de cuenta</label>
-                                            </div>
-                                            <div>
-                                                <mat-icon style="font-size: 15px;color: #2EA5B8;" matSuffix>person_outlin &nbsp;</mat-icon>
-                                                <label class="font-body-oferta">Analista financiero</label>
-                                            </div>
-                                        </div>
-                                   </div>
-                               </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    
-                
+                     <oferta-cabecera></oferta-cabecera>
+                    <br/>
                 </mat-tab>
                 <mat-tab label="Servicios"> Servicios </mat-tab>
-                <mat-tab label="Equipamiento"> Equipamiento </mat-tab>
-                <mat-tab label="Gastos"> Gastos </mat-tab>
+                <mat-tab label="Facilidades técnicas"> Facilidades técnicas </mat-tab>
+                <mat-tab label="Equipamiento"> 
+                    <br/>
+                    <oferta-equipamiento></oferta-equipamiento>
+                    <br/>  
+                </mat-tab>
+                <mat-tab label="Gastos"> 
+                    <br/>
+                    <oferta-gastos></oferta-gastos>
+                    <br/>
+                </mat-tab>
               </mat-tab-group>
         </div>
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="opcion-oferta">
+                    <mat-icon class="icon" matSuffix>cloud_upload &nbsp;</mat-icon>
+                    <span>Adjuntar</span> 
+                </div>
+                <div class="opcion-oferta">
+                    <mat-icon class="icon" matSuffix>book &nbsp;</mat-icon>
+                    <span>Bitácora</span> 
+                </div >
+                <div class="opcion-oferta">
+                    <mat-icon class="icon" matSuffix>bar_chart &nbsp;</mat-icon>
+                    <span>F. Financiero</span> 
+                </div>
+                <div class="opcion-oferta">
+                    <mat-icon class="icon" matSuffix>file_copy &nbsp;</mat-icon>
+                    <span>Copiar Url</span> 
+                </div>
+            </div>
+            <div class="col-sm-5 text-right">
+
+                <mat-menu #appMenu="matMenu">
+                    <button mat-menu-item> Caratula </button>
+                    <button mat-menu-item>FET </button>
+                    <button mat-menu-item> FCA </button>
+                    <button mat-menu-item> P Implantación </button>
+                  </mat-menu>
+                  
+                  <a class="btn-green-telefonica btn-download-excel" mat-icon-button [matMenuTriggerFor]="appMenu">
+                    <mat-icon style="color: #fff;" class="icon">cloud_download</mat-icon>
+                       <label>Descargar xls</label> 
+                    <mat-icon style="color:#fff" class="icon">keyboard_arrow_down</mat-icon>
+                  </a>
+
+            </div>
+        </div>
+        <br/>
     </div>
 </div>

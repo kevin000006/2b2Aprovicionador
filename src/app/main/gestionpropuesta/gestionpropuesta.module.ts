@@ -17,6 +17,14 @@ const routes = [
     loadChildren: () => import('./reportepropuesta/reportepropuesta.module').then(m => m.ReportepropuestaModule)
   },
   {
+    path        : 'bandeja-proyectos',
+    loadChildren: () => import('./reportepropuesta/reportepropuesta.module').then(m => m.ReportepropuestaModule)
+  },
+  {
+    path        : 'bandeja-compras',
+    loadChildren: () => import('./reportepropuesta/reportepropuesta.module').then(m => m.ReportepropuestaModule)
+  },
+  {
     path        : 'cliente',
     loadChildren: () => import('./mcliente/mcliente.module').then(m => m.MClienteModule)
   },

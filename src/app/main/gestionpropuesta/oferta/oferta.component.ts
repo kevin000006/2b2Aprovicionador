@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OfertaCabeceraComponent } from './componentes/oferta-cabecera/oferta-cabecera.component';
 
 
 @Component({

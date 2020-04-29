@@ -23,7 +23,7 @@ export const navigation: FuseNavigation[] = [
                     },
                     {
                         id   : 'subirTrama',
-                        title: 'Subir Trama',
+                        title: 'Maestras ISIS',
                         type : 'item',
                         url  : '/gestion-propuesta/subirTrama'
                     },
@@ -53,7 +53,7 @@ export const navigation: FuseNavigation[] = [
                         id   : 'bandeja',
                         title: 'Bandeja',
                         type : 'item',
-                        url  : '/gestion-propuesta/reporte-propuestas'
+                        url  : '/gestion-propuesta/bandeja-proyectos'
                     }
                 ]
             },
@@ -68,7 +68,7 @@ export const navigation: FuseNavigation[] = [
                         id   : 'bandeja',
                         title: 'Bandeja',
                         type : 'item',
-                        url  : '/gestion-propuesta/reporte-propuestas'
+                        url  : '/gestion-propuesta/bandeja-compras'
                     }
                 ]
             }

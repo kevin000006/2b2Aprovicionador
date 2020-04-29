@@ -3,10 +3,10 @@ export const locale = {
     data: {
         'NAV': {
             'INTEGRACION' : 'Integración',
-            'PROYECTOS' : 'Proyectos',
-            'COMPRAS' : 'Compras',
+            'PROYECTOS' : 'Gestión de Proyectos',
+            'COMPRAS' : 'Gestión de Compras',
             'APPLICATIONS': ' ',
-            'GESTIONPROPUESTA': 'Ofertas',
+            'GESTIONPROPUESTA': 'Gestión de Ofertas',
             'CALENDAR'    : 'Calendar',
             'ECOMMERCE'   : 'E-Commerce',
             'ACADEMY'     : 'Academy',
