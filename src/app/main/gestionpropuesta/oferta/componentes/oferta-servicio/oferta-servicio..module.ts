@@ -3,6 +3,8 @@ import { OfertaServicioComponent } from './oferta-servicio.component'
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
     declarations: [
@@ -11,7 +13,9 @@ import { MatMenuModule } from '@angular/material/menu';
     imports: [
         MatIconModule,
         MatTableModule,
-        MatMenuModule
+        MatMenuModule,
+        MatPaginatorModule,
+        MatSortModule
     ],
     exports: [
         OfertaServicioComponent

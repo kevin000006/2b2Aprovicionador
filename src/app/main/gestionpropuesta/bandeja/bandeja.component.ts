@@ -16,7 +16,6 @@ import { ActivatedRoute,Router } from '@angular/router';
 import * as Cookies from 'js-cookie';
 
 
-
 @Component({
   selector: 'app-bandeja',
   templateUrl: './bandeja.component.html',
