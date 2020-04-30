@@ -1,19 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {OfertaComponent} from './oferta.component';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatIconModule} from '@angular/material/icon';
-import {MatTableModule} from '@angular/material/table';
-import { OfertaComponentModule} from './componentes/oferta-component.module';
-
-
+import { OfertaComponent } from './oferta.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { OfertaComponentModule } from './componentes/oferta-component.module';
 const routes: Routes = [
     {
-        path     : '**',
+        path: '**',
         component: OfertaComponent,
-        resolve  : {
-            
+        resolve: {
+
         }
     }
 ];
@@ -22,7 +20,7 @@ const routes: Routes = [
     declarations: [
         OfertaComponent
     ],
-    imports     : [
+    imports: [
         RouterModule.forChild(routes),
         OfertaComponentModule,
         MatMenuModule,
@@ -30,12 +28,12 @@ const routes: Routes = [
         MatTabsModule,
         MatTableModule
     ],
-    providers   : [
-        
+    providers: [
+
     ]
 })
 
-export class OfertaModule{
+export class OfertaModule {
 
 }
 

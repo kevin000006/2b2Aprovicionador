@@ -2,43 +2,47 @@
     <div class="center">
         <div class="row">
             <br/>
-            <mat-tab-group class="mytab-oferta" >
-                <mat-tab   label="Datos de proyecto"> 
+            <mat-tab-group class="mytab-oferta">
+                <mat-tab label="Datos de proyecto">
                     <br/>
-                     <oferta-cabecera></oferta-cabecera>
+                    <oferta-cabecera></oferta-cabecera>
                     <br/>
                 </mat-tab>
-                <mat-tab label="Servicios"> Servicios </mat-tab>
+                <mat-tab label="Servicios">
+                    <br/>
+                    <oferta-servicio></oferta-servicio>
+                    <br/>
+                </mat-tab>
                 <mat-tab label="Facilidades técnicas"> Facilidades técnicas </mat-tab>
-                <mat-tab label="Equipamiento"> 
+                <mat-tab label="Equipamiento">
                     <br/>
                     <oferta-equipamiento></oferta-equipamiento>
-                    <br/>  
+                    <br/>
                 </mat-tab>
-                <mat-tab label="Gastos"> 
+                <mat-tab label="Gastos">
                     <br/>
                     <oferta-gastos></oferta-gastos>
                     <br/>
                 </mat-tab>
-              </mat-tab-group>
+            </mat-tab-group>
         </div>
         <div class="row">
             <div class="col-sm-7">
                 <div class="opcion-oferta">
                     <mat-icon class="icon" matSuffix>cloud_upload &nbsp;</mat-icon>
-                    <span>Adjuntar</span> 
+                    <span>Adjuntar</span>
                 </div>
                 <div class="opcion-oferta">
                     <mat-icon class="icon" matSuffix>book &nbsp;</mat-icon>
-                    <span>Bitácora</span> 
-                </div >
+                    <span>Bitácora</span>
+                </div>
                 <div class="opcion-oferta">
                     <mat-icon class="icon" matSuffix>bar_chart &nbsp;</mat-icon>
-                    <span>F. Financiero</span> 
+                    <span>F. Financiero</span>
                 </div>
                 <div class="opcion-oferta">
                     <mat-icon class="icon" matSuffix>file_copy &nbsp;</mat-icon>
-                    <span>Copiar Url</span> 
+                    <span>Copiar Url</span>
                 </div>
             </div>
             <div class="col-sm-5 text-right">
@@ -48,13 +52,13 @@
                     <button mat-menu-item>FET </button>
                     <button mat-menu-item> FCA </button>
                     <button mat-menu-item> P Implantación </button>
-                  </mat-menu>
-                  
-                  <a class="btn-green-telefonica btn-download-excel" mat-icon-button [matMenuTriggerFor]="appMenu">
+                </mat-menu>
+
+                <a class="btn-green-telefonica btn-download-excel" mat-icon-button [matMenuTriggerFor]="appMenu">
                     <mat-icon style="color: #fff;" class="icon">cloud_download</mat-icon>
-                       <label>Descargar xls</label> 
+                    <label>Descargar xls</label>
                     <mat-icon style="color:#fff" class="icon">keyboard_arrow_down</mat-icon>
-                  </a>
+                </a>
 
             </div>
         </div>
