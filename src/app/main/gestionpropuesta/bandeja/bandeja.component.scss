@@ -39,3 +39,46 @@ span.clestado{
   width: 136px;
   
 }
+
+.control-page-item{
+  font-size: 12px;
+  text-align: center;
+}
+
+.control-bandeja-tabla{
+  height: 48px;
+}
+
+.control-bandeja-tabla mat-icon{
+  line-height: 40px;;
+}
+
+.content-control-tabla{
+  border-bottom: 1px solid #E9EAE8;
+}
+
+
+
+.content-table{
+  width: 100%;
+  display: block;
+  overflow-y: auto;
+}
+
+.oferta-bandeja .mat-header-row .mat-column-menu,
+.oferta-bandeja .mat-row .mat-column-menu{
+    flex: 0 0 50px;
+}
+
+.mat-column-cliente{
+  flex: 0 0 210px;
+}
+
+
+.mat-column-descripcion{
+  flex: 0 0 280px;
+}
+
+.mat-column-oportunidad{
+  flex: 0 0 200px;
+}
