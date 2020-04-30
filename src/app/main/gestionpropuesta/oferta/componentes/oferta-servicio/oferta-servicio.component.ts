@@ -13,6 +13,7 @@ export class OfertaServicioComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   constructor() { }
+  //
   ngOnInit(): void {
     debugger;
     this.dataSource.paginator = this.paginator;
