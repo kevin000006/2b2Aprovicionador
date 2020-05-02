@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-5 padding-l-none">
                         <mat-form-field appearance="outline" color="accent" class="gray-seatrch" style="height: 40px;min-width: 60%;">
-                            <input #filter_ matInput placeholder="Buscar" autocomplete="off" class="form-control">
+                            <input #filter matInput placeholder="Buscar" autocomplete="off" class="form-control">
                             <mat-icon matPrefix class="icon gray-seatrch">search</mat-icon>
                         </mat-form-field>
                     </div>
@@ -113,14 +113,14 @@
             <br/>
             <mat-card>
                 <div class="row content-control-tabla">
-                    <div class="col-xs-12 col-sm-2">
-                        <button (click)="descargar_excel()" class="btn-telefonica-gree-2">
+                    <div class="col-xs-12 col-sm-2 padding-none">
+                        <button (click)="descargar_excel()" style="height: 36px; padding: 0 36px;" class="btn-telefonica-gree-2">
                         Descargar
                     </button>
                     </div>
-                    <div class="col-xs-12 col-sm-2 control-bandeja-tabla">
+                    <div class="col-xs-12 col-sm-1 control-bandeja-tabla">
 
-                        <mat-form-field class="control-page-item" color="accent">
+                        <mat-form-field class="control-page-item" color="accent" style="margin-left: -30px;min-width: 90px;">
                             <select matNativeControl name="itemxpage">
                         <option value="5" selected>5 por pagina</option> 
                         <option value="10" >10 por pagina</option> 
@@ -130,15 +130,21 @@
                     </select>
                         </mat-form-field>
                     </div>
-                    <div class="col-xs-12 col-sm-8 text-right control-bandeja-tabla">
-                        <mat-icon color style="cursor: pointer;color: #2EA5B8; position: relative;" (click)="loadData()">refresh</mat-icon>
+                    <div class="col-xs-12 col-sm-9 text-right control-bandeja-tabla padding-none">
+                        <button (click)="loadData()" class="btn-telefonica-2" style="min-height: 36px;">
+                        <span> <mat-icon class="icon">refresh</mat-icon> Actualizar </span>
+                    </button>
+
                     </div>
                 </div>
                 <div class="content-table">
-                    <mat-table class="mat-cell oferta-bandeja" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
+                    <mat-table class="mat-cell oferta-bandeja" #tbofertabandeja [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
+
                         <ng-container matColumnDef="menu">
                             <mat-header-cell *matHeaderCellDef class="mat-column-menu">
+
                             </mat-header-cell>
+
                             <mat-cell class="mat-column-menu" *matCellDef="let row; let i=index;">
                                 <mat-menu #appMenu="matMenu">
                                     <button style="font-size: 12px;" mat-menu-item><mat-icon style="font-size: 15px; margin:5px 0 0 0;">visibility</mat-icon> Ver historial de versiones</button>
@@ -147,7 +153,8 @@
                                     <button style="font-size: 12px;" mat-menu-item><mat-icon style="font-size: 15px; margin:5px 0 0 0;">clear</mat-icon> Anular plantilla de proyecto</button>
                                     <button style="font-size: 12px;" mat-menu-item><mat-icon style="font-size: 15px; margin:5px 0 0 0;">show_chart</mat-icon> Seguimiento de estado</button>
                                 </mat-menu>
-                                <a style="cursor:pointer;color: #2493B4;" mat-icon-button [matMenuTriggerFor]="appMenu">
+
+                                <a style="cursor:pointer;color: #979797;" mat-icon-button [matMenuTriggerFor]="appMenu">
                                     <mat-icon>more_vert</mat-icon>
                                 </a>
                             </mat-cell>
@@ -187,7 +194,7 @@
 
 
                         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns; let i = index;" [ngClass]=" i % 2 != 0 ? 'row-color-tb' : ''"></mat-row>
                     </mat-table>
                 </div>
 
