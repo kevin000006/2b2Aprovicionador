@@ -13,59 +13,52 @@
     </div>
 
     <div class="col-sm-12">
-        <mat-table #table mat-table [dataSource]="dataSource"  class="orders-table">
-
+        <mat-table #table mat-table [dataSource]="dataSource" class="orders-table">
             <ng-container matColumnDef="accion">
                 <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-                <mat-cell *matCellDef="let element"> 
-
+                <mat-cell *matCellDef="let element">
                     <mat-menu #appMenu="matMenu">
                         <button style="font-size: 12px;" mat-menu-item> Editar </button>
                         <button style="font-size: 12px;" mat-menu-item> Eliminar</button>
                     </mat-menu>
-                    
                     <a style="cursor:pointer;color: #2493B4;" mat-icon-button [matMenuTriggerFor]="appMenu">
                         <mat-icon>more_vert</mat-icon>
                     </a>
-
                 </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="concepto">
+            </ng-container>
+            <ng-container matColumnDef="concepto">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Concepto</mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.concepto}}</mat-cell>
-              </ng-container> 
-
-          
+            </ng-container>
             <ng-container matColumnDef="cantidad">
-              <mat-header-cell *matHeaderCellDef> Camtidad </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.cantidad}} </mat-cell>
+                <mat-header-cell *matHeaderCellDef> Camtidad </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.cantidad}} </mat-cell>
             </ng-container>
-          
+
             <ng-container matColumnDef="nromeses">
-              <mat-header-cell *matHeaderCellDef> Nro. Meses </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.nromeses}} </mat-cell>
+                <mat-header-cell *matHeaderCellDef> Nro. Meses </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.nromeses}} </mat-cell>
             </ng-container>
-          
+
             <ng-container matColumnDef="factor">
-              <mat-header-cell *matHeaderCellDef> Factor </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.factor}} </mat-cell>
+                <mat-header-cell *matHeaderCellDef> Factor </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.factor}} </mat-cell>
             </ng-container>
-          
-              <ng-container matColumnDef="moneda">
+
+            <ng-container matColumnDef="moneda">
                 <mat-header-cell *matHeaderCellDef> Moneda </mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{element.moneda}} </mat-cell>
-              </ng-container>
+            </ng-container>
 
-              <ng-container matColumnDef="montounitmenusal">
+            <ng-container matColumnDef="montounitmenusal">
                 <mat-header-cell *matHeaderCellDef> Monto unitario mensual </mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{element.montounitmenusal}} </mat-cell>
-              </ng-container>
+            </ng-container>
 
-              <ng-container matColumnDef="montototalmensual">
+            <ng-container matColumnDef="montototalmensual">
                 <mat-header-cell *matHeaderCellDef> Monto Total mensual</mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{element.montototalmensual}} </mat-cell>
-              </ng-container>
+            </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

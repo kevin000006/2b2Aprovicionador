@@ -64,6 +64,7 @@ export class Login2Component implements OnInit {
         u.usuario = this.loginForm.value.usuario;
         u.clave = this.loginForm.value.password;
         this._loginService.autenticacion(u).subscribe(res => {
+            debugger;
             if (res.id != null) {
                 localStorage.setItem('u', JSON.stringify(res));
 
