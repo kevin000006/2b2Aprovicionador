@@ -1,0 +1,29 @@
+@font-face {
+    font-family: "TelefonicaBold";
+    src: url('../fonts/Telefonica-Bold.otf');
+}
+
+@font-face {
+    font-family: "TelefonicaCapRegular";
+    src: url("../fonts/TelefonicaCap-Regular.otf");
+}
+
+@font-face {
+    font-family: "TelefonicaExtraLight";
+    src: url("../fonts/Telefonica-ExtraLight.otf");
+}
+
+@font-face {
+    font-family: "TelefonicaLight";
+    src: url("../fonts/Telefonica-Light.otf");
+}
+
+@font-face {
+    font-family: "TelefonicaRegular";
+    src: url("../fonts/Telefonica-Regular.otf");
+}
+
+@font-face {
+    font-family: "TelefonicaRegularItalic";
+    src: url("../fonts/Telefonica-RegularItalic.otf");
+}
