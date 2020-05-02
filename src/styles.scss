@@ -4,6 +4,14 @@
 @import "app/app.theme";
 @import "assets/css/bootstrap.css";
 @import "assets/css/fonts-telefonica.css";
+#container-1 fuse-sidebar {
+    box-shadow: 0 9px 8px 0 rgba(0, 0, 0, 0.35) !important;
+}
+
+toolbar {
+    box-shadow: 0px 1px 6px rgba(119, 117, 147, 0.25);
+}
+
 app-reportepropuesta {
     background: #00A9E0 !important;
 }
@@ -13,8 +21,9 @@ app-reportepropuesta {
 }
 
 body.theme-default .mat-toolbar {
-    background: linear-gradient(270deg, #5BC6DA 0%, #005B83 100%) !important;
+    /* background: linear-gradient(270deg, #5BC6DA 0%, #005B83 100%) !important;*/
     box-shadow: 0px 8px 28px rgba(72, 89, 102, 0.1);
+    background: #fff !important;
 }
 
 .fuse-navy-900 {
@@ -34,7 +43,7 @@ navbar navbar-vertical-style-1 .navbar-top .logo {
 
 body.theme-default .accent {
     background-color: #e5e5e5 !important;
-    color: #2593B5 !important;
+    color: #954B97 !important;
 }
 
 .page-layout.carded.fullwidth.inner-scroll {
@@ -73,9 +82,10 @@ body.theme-default .hint-text {
 
 .nav .nav-item.nav-collapsable.open>a:first-child {
     background: #F5F6FA !important;
-    color: #2593B5 !important;
+    color: #954B97 !important;
     font-weight: 600;
     font-family: Baloo Thambi 2;
+    border-right: 3px solid;
 }
 
 body.theme-default .mat-header-cell {
@@ -212,4 +222,85 @@ div.mat-tab-label.mat-tab-label-active>div {
 
 .mytab-oferta mat-tab-header div.mat-tab-label-container div.mat-tab-list div.mat-tab-labels div.mat-tab-label {
     width: 20%;
+}
+
+.font-normal {
+    font-weight: normal;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+    margin: 0 !important;
+}
+
+.padding-none {
+    padding: 0;
+}
+
+.padding-l-none {
+    padding-left: 0;
+}
+
+.padding-r-none {
+    padding-right: 0;
+}
+
+.btn-primary-telefonica {
+    background: #01B1E3;
+    border-radius: 4px;
+    color: #fff !important;
+    font-size: 13px;
+    text-decoration: none !important;
+    cursor: pointer;
+    min-width: 140px;
+    text-align: center;
+    padding: 10px 15px;
+}
+
+a.btn-primary-telefonica {
+    line-height: 36px;
+    position: absolute;
+    right: 0;
+    padding: 0;
+    height: 36px;
+    ;
+}
+
+.btn-telefonica-gree {
+    background: #62CE0E;
+    border-radius: 4px;
+    color: #fff;
+    min-width: 110px;
+    font-size: 12px;
+    border: 0;
+    min-height: 26px;
+}
+
+.btn-telefonica-gree-2 {
+    background: transparent;
+    border-radius: 4px;
+    color: #62CE0E;
+    min-width: 110px;
+    font-size: 12px;
+    border: 1px solid #62CE0E;
+    min-height: 26px;
+}
+
+.btn-primary-telefonica mat-icon {
+    color: #fff !important;
+}
+
+.icon {
+    font-size: 15px !important;
+}
+
+.gray-seatrch {
+    color: #B6B7B7;
+}
+
+.form-control {
+    font-size: 13px !important;
+}
+
+.mat-checkbox-layout .mat-checkbox-label {
+    font-weight: normal !important;
 }

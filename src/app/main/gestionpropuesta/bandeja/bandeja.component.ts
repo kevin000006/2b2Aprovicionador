@@ -36,6 +36,7 @@ export class BandejaComponent implements OnInit {
   lstEstado = new Array<EstadoModel>();
   checked = false;
   _visible = true;
+  visible_filtro = false;
 
   displayedColumns: string[] = ['menu', 'codigo', 'version', 'oportunidad', 'cliente', 'descripcion', 'estado'];
   exampleDatabase: BandejaService | null;

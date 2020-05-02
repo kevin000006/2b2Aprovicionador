@@ -17,7 +17,7 @@ export class BandejaService {
   }
 
   getBandejaAll(param: any): void {
-    debugger;
+    
     let formatoFecha = "yyyy/MM/dd";
 
     let params = new HttpParams();
@@ -31,7 +31,7 @@ export class BandejaService {
     params = params.append('page', '0');
     params = params.append('size', '5');
 
-    this.http.get<BandejaModel[]>('/oferta/obtenerofertas', { params: params }).subscribe(data => {
+    this.http.get<BandejaModel[]>('/ofertas/findAll', { params: params }).subscribe(data => {
       this.dataChange.next(data);
     },
       (error: HttpErrorResponse) => {
