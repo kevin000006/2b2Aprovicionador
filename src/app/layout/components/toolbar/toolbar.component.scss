@@ -53,16 +53,31 @@ toolbar {
     }
 }
 
+.name-user-toolbar{
+    font-size: 11px;
+    color: #50535A;
+    text-align: right;
+}
+
+.name-user-toolbar .nombre{
+    font-weight: bold;
+}
+
+
 .content-iniciales{
     border-radius: 50%;
     border: none;
-    background: #fff;
+    background: #954B97;
     font-size: 13px;
-    color: #2593B5;
+    color: #f9fafb;
 }
 
 .content-iniciales span{
     font-size: 13px;
-    color: #2593B5;
+    color: #FFF;
     font-weight: bold;
+}
+
+.logoK{
+width: 70%;
 }
