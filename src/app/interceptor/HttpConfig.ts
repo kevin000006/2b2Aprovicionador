@@ -16,8 +16,9 @@ import { map, catchError } from 'rxjs/operators';
 export class HttpConfigInterceptor implements HttpInterceptor {
 
     //private readonly urlBase: string = "http://localhost:8084/api";
-    private readonly urlBase: string = "https://webapp-b2b.azurewebsites.net/api";
-
+    //private readonly urlBase: string = "https://webapp-b2b.azurewebsites.net/api";
+    private readonly urlBase: string = "https://webapp-b2b-dev.azurewebsites.net/api";
+    
     constructor(public errorDialogService: ErrorDialogService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

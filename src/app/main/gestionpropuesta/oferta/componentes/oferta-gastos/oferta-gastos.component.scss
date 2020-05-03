@@ -21,3 +21,16 @@
 .tb-oferta-gastos .mat-row .mat-column-accion {
     flex: 0 0 50px;
 }
+
+.mat-cell .flex-stretch {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-self: stretch;
+    -ms-flex-item-align: stretch;
+    align-self: stretch;
+    /* align-items center so that cell content is vertically centered */
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}

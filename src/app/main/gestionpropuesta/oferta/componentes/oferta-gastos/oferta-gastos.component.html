@@ -37,16 +37,38 @@
                         </ng-container>
                         <ng-container matColumnDef="concepto">
                             <mat-header-cell *matHeaderCellDef mat-sort-header>Concepto</mat-header-cell>
-                            <mat-cell *matCellDef="let row"> {{row.concepto}}</mat-cell>
+                            <mat-cell *matCellDef="let row">
+                                <mat-form-field style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                    <mat-select>
+                                        <mat-option value="1">Otros</mat-option>
+                                        <mat-option value="2">Valor 1</mat-option>
+                                        <mat-option value="3">Valor 3</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <!-- <mat-form-field appearance="legacy" [style.fontSize.px]="12">
+                                    <mat-label>Fill form field</mat-label>
+                                    <input matInput placeholder="Placeholder">
+                                </mat-form-field> -->
+                                <!-- {{row.concepto}} -->
+                            </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="cantidad">
                             <mat-header-cell *matHeaderCellDef> Camtidad </mat-header-cell>
-                            <mat-cell *matCellDef="let element"> {{element.cantidad}} </mat-cell>
+                            <mat-cell *matCellDef="let element">
+                                <mat-form-field style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                    <input matInput [(ngModel)]="element.cantidad">
+                                </mat-form-field>
+                            </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="nromeses">
                             <mat-header-cell *matHeaderCellDef> Nro. Meses </mat-header-cell>
-                            <mat-cell *matCellDef="let element"> {{element.nromeses}} </mat-cell>
+                            <mat-cell *matCellDef="let element">
+                                <mat-form-field style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                    <input matInput [(ngModel)]="element.nromeses">
+                                </mat-form-field>
+                                <!-- {{element.nromeses}} -->
+                            </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="factor">
@@ -56,13 +78,25 @@
 
                         <ng-container matColumnDef="moneda">
                             <mat-header-cell *matHeaderCellDef> Moneda </mat-header-cell>
-                            <mat-cell *matCellDef="let element"> {{element.moneda}} </mat-cell>
+                            <mat-cell *matCellDef="let element">
+                                <mat-form-field style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                    <mat-select>
+                                        <mat-option value="1">S/</mat-option>
+                                        <mat-option value="2">$</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <!-- {{element.moneda}}  -->
+                            </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="montounitmenusal">
                             <mat-header-cell *matHeaderCellDef> Monto unitario mensual </mat-header-cell>
-                            <mat-cell *matCellDef="let element"> {{element.montounitmenusal}} </mat-cell>
-                            <mat-footer-cell *matFooterCellDef> Total </mat-footer-cell>
+                            <mat-cell *matCellDef="let element">
+                                <mat-form-field style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                    <input matInput [(ngModel)]="element.montounitmenusal">
+                                </mat-form-field>
+                                <!-- {{element.montounitmenusal}}  -->
+                            </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="montototalmensual">
