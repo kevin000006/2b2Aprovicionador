@@ -108,7 +108,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            debugger;
+            
             console.log('The dialog was closed');
             this.animal = result;
         });

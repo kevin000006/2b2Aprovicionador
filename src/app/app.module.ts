@@ -37,6 +37,10 @@ import { HttpConfigInterceptor } from 'app/interceptor/HttpConfig';
 
 const appRoutes: Routes = [
     {
+        path: 'shared/:id',
+        loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule)
+    },
+    {
         path: 'gestion-propuesta',
         loadChildren: () => import('./main/gestionpropuesta/gestionpropuesta.module').then(m => m.GestionPropuestaModule)
     },
@@ -64,7 +68,7 @@ const appRoutes: Routes = [
 
 @NgModule({
     declarations: [
-        AppComponent 
+        AppComponent
     ],
     imports: [
         CommonModule,

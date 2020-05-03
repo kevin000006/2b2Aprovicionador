@@ -40,9 +40,9 @@
                     <mat-icon class="icon" matSuffix>bar_chart &nbsp;</mat-icon>
                     <span>F. Financiero</span>
                 </div>
-                <div class="opcion-oferta">
+                <div class="opcion-oferta" (click)="openShared()">
                     <mat-icon class="icon" matSuffix>file_copy &nbsp;</mat-icon>
-                    <span>Copiar Url</span>
+                    <span>Compartir</span>
                 </div>
             </div>
             <div class="col-sm-5 text-right">
@@ -62,6 +62,23 @@
 
             </div>
         </div>
+     
+        <div class="row" *ngIf="showShared">
+            <div class="col-xs-12">
+                <h1>Obtener Enlace</h1>
+            </div>
+            <div class="col-xs-12 col-sm-8">
+                <span>{{urlShared}}</span>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <button class="btn btn-sm btn-primary" (click)="obtenerUrl()" *ngIf="!hideSharedBtn">Obtener Url</button>
+                <button class="btn btn-sm btn-info" *ngIf="hideSharedBtn">Copiar url</button>
+            </div>
+            <div class="col-xs-12">
+                <button class="btn btn-sm btn-danger" (click)="closeShared()">Cancelar</button>
+            </div>
+        </div>
+       
         <br/>
     </div>
 </div>

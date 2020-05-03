@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { OfertaComponent } from './oferta.component';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -22,6 +23,7 @@ const routes: Routes = [
     ],
     imports: [
         RouterModule.forChild(routes),
+        CommonModule,
         OfertaComponentModule,
         MatMenuModule,
         MatIconModule,
