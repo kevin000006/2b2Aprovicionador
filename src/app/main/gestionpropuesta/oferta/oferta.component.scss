@@ -1,20 +1,19 @@
-.oferta-head{
+.oferta-head {
     margin: 0;
     background: #FFFFFF;
     border-radius: 10px;
     padding: 15px 0;
 }
 
-.label-title{
+.label-title {
     font-size: 11px;
 }
 
-.mat-form-field-appearance-legacy .mat-form-field-infix{
+.mat-form-field-appearance-legacy .mat-form-field-infix {
     padding: 0 !important;
 }
 
-
-.font-body-oferta{
+.font-body-oferta {
     font-size: 11px;
 }
 
@@ -22,71 +21,72 @@
     position: absolute;
 }
 
-.content-control-oferta{
+.content-control-oferta {
     height: 65.5px;
 }
 
-.padding-none{
+.padding-none {
     padding: 0;
 }
 
-.padding-l-none{
+.padding-l-none {
     padding-left: 0;
 }
 
-.padding-r-none{
+.padding-r-none {
     padding-right: 0;
 }
 
-.btn-guardar-oferta{
+.btn-guardar-oferta {
     padding: 8px 15px;
     font-size: 15px;
     min-width: 160px;
 }
 
-.content-btn-guardar{
+.content-btn-guardar {
     line-height: 50px;
     text-align: center;
 }
 
-.cliente-nombre{
+.cliente-nombre {
     font-size: 11px;
     white-space: nowrap;
     line-height: 65px;
 }
 
-.btn-ganada{
+.btn-ganada {
     font-size: 12px;
     min-width: 100px;
 }
 
-.content-btn-ganada{
+.content-btn-ganada {
     line-height: 50px;
 }
 
-.section-1{
+.section-1 {
     border-right: 1px solid #D8D8D8;
 }
 
-.icon{
+.icon {
     font-size: 15px;
 }
 
-.space-bottom-oferta{
-    margin-bottom: 13px;;
+.space-bottom-oferta {
+    margin-bottom: 13px;
+    ;
 }
 
-.icon-flotante{
+.icon-flotante {
     position: absolute;
     margin-top: 2px;
     color: #005B83 !important;
 }
 
-.desc-icon-flotante{
+.desc-icon-flotante {
     margin-left: 20px;
 }
 
-.bg-info{
+.bg-info {
     background: rgba(0, 169, 224, 0.1);
     border-radius: 5px;
     width: auto !important;
@@ -94,25 +94,26 @@
     margin-bottom: 10px;
 }
 
-.bg-info label{
+.bg-info label {
     color: #005B83 !important;
 }
 
-.sect-info-proy{
+.sect-info-proy {
     padding: 10px;
     border: 1px dashed #005B83;
     border-radius: 10px;
     background: #F8F9FA;
 }
-.text-right{
+
+.text-right {
     text-align: right;
 }
 
-.mat-tab-label{
+.mat-tab-label {
     width: 25% !important;
 }
 
-.estado-go{
+.estado-go {
     color: #fff;
     background: #73DE07;
     padding: 4px 3px;
@@ -121,7 +122,7 @@
     font-weight: bold;
 }
 
-.opcion-oferta{
+.opcion-oferta {
     margin-right: 20px;
     position: relative;
     display: inline-block;
@@ -131,34 +132,45 @@
     font-weight: bold;
 }
 
-.opcion-oferta .icon{
+.opcion-oferta .icon {
     font-size: 15px;
     position: absolute;
     top: 2px;
     color: #2493B4;
 }
 
-.opcion-oferta span{
+.opcion-oferta span {
     font-size: 14px;
     margin-left: 20px;
 }
 
-.btn-download-excel
-{
-    color:  #fff;
+.btn-download-excel {
+    color: #fff;
     cursor: pointer;
     padding: 10px 15px;
     font-weight: normal;
     background: linear-gradient(180deg, #009806 0%, #62CE0E 100%);
 }
-.bnt-download-excel mat-icon{
+
+.bnt-download-excel mat-icon {
     font-size: 15px;
     position: absolute;
     color: #fff;
 }
 
-.btn-download-excel label{
+.btn-download-excel label {
     color: #fff;
     margin: 0 10px;
     font-weight: normal;
+}
+
+.btn-green-telefonica {
+    font-size: 14px;
+    min-width: 100px;
+    border: 1px solid #62CE0E;
+    box-sizing: border-box;
+    border-radius: 4px;
+    color: white;
+    font-family: TelefonicaLight;
+    background: #5BC500;
 }
