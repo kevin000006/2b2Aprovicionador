@@ -1,20 +1,25 @@
 import { NgModule } from '@angular/core';
 import { OfertaGastosComponent } from './oferta-gastos.component'
-import {MatIconModule} from '@angular/material/icon';
-import {MatTableModule} from '@angular/material/table';
-import {MatMenuModule} from '@angular/material/menu';
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 @NgModule({
     declarations: [
         OfertaGastosComponent
     ],
-    imports     : [
+    imports: [
         MatIconModule,
         MatTableModule,
-        MatMenuModule
+        MatMenuModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule
     ],
-    exports:[
+    exports: [
         OfertaGastosComponent
     ]
 })
-export class OfertaGastosModule{}
+export class OfertaGastosModule { }
