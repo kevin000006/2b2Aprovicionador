@@ -112,6 +112,69 @@ const dataSourceList: EquipacmientoElement[] = [
     platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
     equipoterminal:"",router:"",facturacion:"",acccionisis:"",tiposede:""
   },  
+  {
+    sede: 'Av. Argentina 3', direccion: 'Av. Argentina 121', ubigeo: 'Callao. Callao, Callao', geo: 'Balanceador',
+    contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "", nrocircuito: "1", servicio: "1",
+    medio: "1", bw: "1", nrobw: "2", ldn: "1", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
+    platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
+    equipoterminal:"",router:"",facturacion:"",acccionisis:"",tiposede:""
+  },  
+  {
+    sede: 'Av. Argentina 3', direccion: 'Av. Argentina 121', ubigeo: 'Callao. Callao, Callao', geo: 'Balanceador',
+    contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "", nrocircuito: "1", servicio: "1",
+    medio: "1", bw: "1", nrobw: "2", ldn: "1", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
+    platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
+    equipoterminal:"",router:"",facturacion:"",acccionisis:"",tiposede:""
+  },  
+  {
+    sede: 'Av. Argentina 3', direccion: 'Av. Argentina 121', ubigeo: 'Callao. Callao, Callao', geo: 'Balanceador',
+    contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "", nrocircuito: "1", servicio: "1",
+    medio: "1", bw: "1", nrobw: "2", ldn: "1", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
+    platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
+    equipoterminal:"",router:"",facturacion:"",acccionisis:"",tiposede:""
+  },  
+  {
+    sede: 'Av. Argentina 3', direccion: 'Av. Argentina 121', ubigeo: 'Callao. Callao, Callao', geo: 'Balanceador',
+    contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "", nrocircuito: "1", servicio: "1",
+    medio: "1", bw: "1", nrobw: "2", ldn: "1", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
+    platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
+    equipoterminal:"",router:"",facturacion:"",acccionisis:"",tiposede:""
+  },  
+  {
+    sede: 'Av. Argentina 3', direccion: 'Av. Argentina 121', ubigeo: 'Callao. Callao, Callao', geo: 'Balanceador',
+    contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "", nrocircuito: "1", servicio: "1",
+    medio: "1", bw: "1", nrobw: "2", ldn: "1", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
+    platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
+    equipoterminal:"",router:"",facturacion:"",acccionisis:"",tiposede:""
+  },  
+  {
+    sede: 'Av. Argentina 3', direccion: 'Av. Argentina 121', ubigeo: 'Callao. Callao, Callao', geo: 'Balanceador',
+    contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "", nrocircuito: "1", servicio: "1",
+    medio: "1", bw: "1", nrobw: "2", ldn: "1", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
+    platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
+    equipoterminal:"",router:"",facturacion:"",acccionisis:"",tiposede:""
+  },  
+  {
+    sede: 'Av. Argentina 3', direccion: 'Av. Argentina 121', ubigeo: 'Callao. Callao, Callao', geo: 'Balanceador',
+    contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "", nrocircuito: "1", servicio: "1",
+    medio: "1", bw: "1", nrobw: "2", ldn: "1", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
+    platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
+    equipoterminal:"",router:"",facturacion:"",acccionisis:"",tiposede:""
+  },  
+  {
+    sede: 'Av. Argentina 3', direccion: 'Av. Argentina 121', ubigeo: 'Callao. Callao, Callao', geo: 'Balanceador',
+    contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "", nrocircuito: "1", servicio: "1",
+    medio: "1", bw: "1", nrobw: "2", ldn: "1", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
+    platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
+    equipoterminal:"",router:"",facturacion:"",acccionisis:"",tiposede:""
+  },  
+  {
+    sede: 'Av. Argentina 3', direccion: 'Av. Argentina 121', ubigeo: 'Callao. Callao, Callao', geo: 'Balanceador',
+    contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "", nrocircuito: "1", servicio: "1",
+    medio: "1", bw: "1", nrobw: "2", ldn: "1", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
+    platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
+    equipoterminal:"",router:"",facturacion:"",acccionisis:"",tiposede:""
+  },  
 ];
 export interface EquipacmientoElement {
   sede: string;

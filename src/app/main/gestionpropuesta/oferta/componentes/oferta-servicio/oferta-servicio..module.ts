@@ -1,4 +1,3 @@
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +10,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-
+import { getSpanishPaginatorIntl } from './spanish-paginator-intl';
+import { MatPaginatorIntl } from '@angular/material/paginator/';
 @NgModule({
     declarations: [
         OfertaServicioComponent
@@ -28,6 +28,9 @@ import { MatSelectModule } from '@angular/material/select';
         MatInputModule,
         MatSelectModule        
     ],
+    providers: [
+        { provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() }
+      ],
     exports: [
         OfertaServicioComponent
     ]
