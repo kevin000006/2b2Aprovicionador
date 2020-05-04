@@ -1,20 +1,12 @@
+<!-- <button mat-icon-button class="close-ico" [mat-dialog-close]="true">
+    <mat-icon>close</mat-icon>
+</button> -->
 <mat-dialog-content>
-    <div class="row">
-        <img src="" alt="">
+    <div class="row text-center imagenConfirmacion">
+        <img src="../../../.../../../../../assets/images/icon/ico-error.png" class="logoPrincipalLogin">
     </div>
     <div class="row text-center">
-
-        <p style="
-            font-family: TelefonicaBold;
-            font-style: normal;
-            font-weight: bold;
-            font-size: 20px;
-            line-height: 100%;            
-            align-items: center;
-            text-align: center;
-            color: #E9426D;">!Atento!</p>
-
-
+        <p class="mensajeConfirmacion" class="mensajeConfirmacion">!Atento!</p>
     </div>
     <div class="row text-center">
         <p>
@@ -23,7 +15,7 @@
     </div>
 </mat-dialog-content>
 <mat-dialog-actions align="center">
-    <div class="row">
+    <div class="row" style="margin-bottom: 24px;">
         <div class="col-sm-6">
             <button mat-raised-button class="btn btn-md btn-aceptar" (click)="onConfirmClick()" tabindex="1">{{confirmButtonText}}</button>
         </div>

@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AlertConfirmComponent } from '../alertConfirm/alertConfirm.component';
+import { GeodialogComponent } from '../geoDialog/geoDialog.component';
 import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'oferta-servicio',
@@ -22,9 +23,9 @@ export class OfertaServicioComponent implements OnInit {
   listOro: ModelCombo[] = [];
   listPlata: ModelCombo[] = [];
   listBronce: ModelCombo[] = [];
-
   listAccionISIS: ModelCombo[] = [];
   listTipoSede: ModelCombo[] = [];
+
 
 
   displayedColumns: string[] = [
@@ -107,43 +108,56 @@ export class OfertaServicioComponent implements OnInit {
     this.dataSource.filter = "";
   }
   deleteRow(item: any): void {
-
     const dialogRef = this.dialog.open(AlertConfirmComponent, {
-      // height: '400px',
-      width: '500px',
-      //panelClass: 'my-class',
-      // panelClass: 'modal-md',
+      width: '100%',    
+      // maxWidth: '100vw',
+      // maxHeight: '100vh',
+      //panelClass:"fullscreen-dialog",
+      //panelClass: 'full-screen-dialog',
+      // width: '100vw',
+      // height: '100vh',
+      // panelClass:['classmike'],
       data: {
-        message: '¿Esta seguro que desea eliminar este articulo?',
-        buttonText: {
-          ok: 'Aceptar',
-          cancel: 'Cancelar'
-        }
+      message: '¿Esta seguro que desea eliminar este articulo?',
+      buttonText: {
+        ok: 'Aceptar',
+        cancel: 'Cancelar'
       }
+    }
     });
 
-    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-      if (confirmed) {
-        const a = document.createElement('a');
-        a.click();
-        a.remove();
-        this.dataSource.data.splice(this.dataSource.data.indexOf(item.id), 1);
-        this.dataSource = new MatTableDataSource<ServicioElement>(dataSourceList);
-      }
-    });
-
-    // const dialogRef = this.dialog.open(AlertConfirmComponent, {      
-    //   panelClass: 'full-screen-modal',
-    //   data: { name: "¿Esta seguro que desea eliminar este articulo." }
-    // });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   debugger;
-    //   console.log('The dialog was closed');
-    //   this.dataSource.data.splice(this.dataSource.data.indexOf(item.id), 1);
-    //   this.dataSource = new MatTableDataSource<ServicioElement>(dataSourceList);      
-    // });
+  dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+    if (confirmed) {
+      const a = document.createElement('a');
+      a.click();
+      a.remove();
+      this.dataSource.data.splice(this.dataSource.data.indexOf(item.id), 1);
+      this.dataSource = new MatTableDataSource<ServicioElement>(dataSourceList);
+    }
+  });   
   }
+geoDialog(item: any): void {
+  const dialogRef = this.dialog.open(GeodialogComponent, {
+    width: '500px',
+    // height:"100%",
+    data: {
+      // message: '¿Esta seguro que desea eliminar este articulo?',
+      // buttonText: {
+      //   ok: 'Aceptar',
+      //   cancel: 'Cancelar'
+      // }
+    }
+  });
+  dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+    // if (confirmed) {
+    //   const a = document.createElement('a');
+    //   a.click();
+    //   a.remove();
+    //   this.dataSource.data.splice(this.dataSource.data.indexOf(item.id), 1);
+    //   this.dataSource = new MatTableDataSource<ServicioElement>(dataSourceList);
+    // }
+  });
+}
 }
 const dataSourceList: ServicioElement[] = [
   {
