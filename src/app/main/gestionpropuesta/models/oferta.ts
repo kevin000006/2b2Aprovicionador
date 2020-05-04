@@ -19,30 +19,11 @@ export class ClienteModel{
 
 export class BandejaModel {
     id: number;
-    codigo: string = "---";
+    codigo: string = "";
     version: number = 1;
-    salesforce:string;
-    estado: EstadoModel;
-    gerente:string;
-    preventa:string;    
-    cliente: ClienteModel;
-    contactocliente:string;
-    telefonocliente:string;
-    correocontacto:string;
-    descripcion: string;
-    complejidad:number;
-    tipocontrato:number;
-    tipoproyecto:number;
-    tiposervicio:number;
-    periodocontrato:number;
-    tiempoimplantacion:number;
-    pagounico:number;
-    pagorecurrente:number;
-    pagorecurrenteactual:number;
-    diferenciaingresos:number;
-    vanvai:number;
-    payback:number;
-    oportunidad: string;
-    
-    
+    estado: string;   
+    cliente: string;
+    tipoproyecto:string;
+    oportunidad:string;
+    descripcion:string;
   }

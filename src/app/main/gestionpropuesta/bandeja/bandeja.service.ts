@@ -8,7 +8,7 @@ import { BandejaModel, ClienteModel, EstadoModel } from '../models/oferta';
 })
 export class BandejaService {
   dataChange: BehaviorSubject<BandejaModel[]> = new BehaviorSubject<BandejaModel[]>([]);
-
+  totalDataBandeja:number=0;
 
   constructor(private http: HttpClient) { }
 
@@ -21,29 +21,23 @@ export class BandejaService {
     let formatoFecha = "yyyy/MM/dd";
 
     let params = new HttpParams();
-    params = params.append('codoportunidad', '');
-    params = params.append('cliente', '');
-    params = params.append('descripcion', '');
-    params = params.append('complejidad', '');
-    params = params.append('estado', '');
-    params = params.append('desde', '');
-    params = params.append('hasta', '');
-    params = params.append('page', '0');
-    params = params.append('size', '5');
+    params = params.append('codoportunidad', param.codoportunidad || '');
+    params = params.append('cliente', param.cliente || '');
+    params = params.append('descripcion', param.descripcion || '');
+    params = params.append('complejidad', param.complejidad || '');
+    params = params.append('estado', param.estado || '');
+    params = params.append('desde', param.desde || '');
+    params = params.append('hasta', param.hasta || '');
+    params = params.append('page', param.page || 0);
+    params = params.append('size', param.size || 5);
 
     this.http.get<BandejaModel[]>('/oferta/obtenerofertas', { params: params }).subscribe(data => {
 
       let _data = new BandejaModel();
-      _data.cliente = new ClienteModel();
-      _data.estado = new EstadoModel();
-
-      data.push(_data);
-      data.push(_data);
-      data.push(_data);
-      data.push(_data);
-      data.push(_data);
+     
 
       this.dataChange.next(data);
+
     },
       (error: HttpErrorResponse) => {
         console.log(error.name + ' ' + error.message);

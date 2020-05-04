@@ -174,3 +174,26 @@
     font-family: TelefonicaLight;
     background: #5BC500;
 }
+
+.contetnt-shared{
+    background: #FFFFFF;
+    box-shadow: -1px 0px 6px 3px rgba(28, 30, 31, 0.1);
+    padding: 10px;
+}
+
+.contetnt-shared div h1{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.contetnt-shared div .url{
+    border: 1px solid #ccc;
+    font-size: 12px;
+    min-height: 36px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    line-height: 36px;
+    color: #6d6666;
+    padding: 0 10px;
+}
+
