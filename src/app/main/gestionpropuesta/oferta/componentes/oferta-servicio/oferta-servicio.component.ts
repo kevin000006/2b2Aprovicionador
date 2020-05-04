@@ -109,7 +109,7 @@ export class OfertaServicioComponent implements OnInit {
   }
   deleteRow(item: any): void {
     const dialogRef = this.dialog.open(AlertConfirmComponent, {
-      width: '100%',    
+      width: '450px',    
       // maxWidth: '100vw',
       // maxHeight: '100vh',
       //panelClass:"fullscreen-dialog",
