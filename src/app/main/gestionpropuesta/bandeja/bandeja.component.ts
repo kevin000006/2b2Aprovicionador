@@ -25,9 +25,7 @@ import * as Cookies from 'js-cookie';
 
 export class BandejaComponent implements OnInit {
 
-  _filtroCliente = null;
-  _filtroEstado = 0;
-  _filtro: any = { oportunidad: null, descripcion: null };
+  _filtro: any = { codoportunidad: '', cliente: '', descripcion: '', complejidad:'', estado:'', desde: '', hasta:'' };
   pageIndex:number=0;
 
 
@@ -62,8 +60,6 @@ export class BandejaComponent implements OnInit {
     //this.getofertasAll();
 
   }
-
-  
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -105,31 +101,43 @@ export class BandejaComponent implements OnInit {
     this.filtrarData();
   }
 
+  public limpiar():void{
+
+    this._filtro.codoportunidad = '';
+    this._filtro.cliente = '';
+    this._filtro.descripcion= '';
+    this._filtro.complejidad='';
+    this._filtro.estado= '';
+    this._filtro.desde='';
+    this._filtro.hasta='';
+
+  }
+
   public filtrarData() {
 
     var obj = {
-      codoportunidad: null,
-      cliente: null,
-      descripcion: null,
-      complejidad:null,
-      estado: null,
-      desde:null,
-      hasta:null,
+      codoportunidad: this._filtro.codoportunidad,
+      cliente: this._filtro.cliente,
+      descripcion: this._filtro.descripcion,
+      complejidad:this._filtro.complejidad,
+      estado: this._filtro.estado,
+      desde:this._filtro.desde,
+      hasta:this._filtro.hasta,
       page:this.pageIndex,
       size:this.pagesize.nativeElement.value
     }
 
-    if (this._filtro.oportunidad != null && this._filtro.oportunidad != "" && this._filtro.oportunidad !== undefined)
-      obj.codoportunidad = this._filtro.oportunidad;
+    //if (this._filtro.oportunidad != null && this._filtro.oportunidad != "" && this._filtro.oportunidad !== undefined)
+     // obj.codoportunidad = this._filtro.oportunidad;
 
-    if (this._filtro.descripcion != null && this._filtro.descripcion != "" && this._filtro.descripcion !== undefined)
-      obj.descripcion = this._filtro.descripcion;
+   // if (this._filtro.descripcion != null && this._filtro.descripcion != "" && this._filtro.descripcion !== undefined)
+    //  obj.descripcion = this._filtro.descripcion;
 
-    if (this._filtroCliente != null && this._filtroCliente != "" && this._filtroCliente !== undefined)
-      obj.cliente = this._filtroCliente;
+   // if (this._filtro.cliente != null && this._filtro.cliente != "" && this._filtro.cliente !== undefined)
+    //  obj.cliente = this._filtro.cliente;
 
-    if (this._filtroEstado != null && this._filtroEstado != 0 && this._filtroEstado !== undefined)
-      obj.estado = this._filtroEstado;
+    //if (this._filtro.estado != null && this._filtro.estado != 0 && this._filtro.estado !== undefined)
+     // obj.estado = this._filtro.estado;
 
 
 
