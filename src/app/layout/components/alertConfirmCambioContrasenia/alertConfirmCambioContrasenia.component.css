@@ -1,0 +1,37 @@
+.btn-cancelar {
+    font-size: 14px;
+    min-width: 100px;
+    background: #FFFFFF;
+    border: 1px solid #62CE0E;
+    box-sizing: border-box;
+    border-radius: 4px;
+    color: #62CE0E;
+    font-family: TelefonicaLight;
+}
+
+.btn-aceptar {
+    font-size: 14px;
+    min-width: 100px;
+    border: 1px solid #62CE0E;
+    box-sizing: border-box;
+    border-radius: 4px;
+    color: white;
+    font-family: TelefonicaLight;
+    background: #5BC500;
+}
+
+.mensajeConfirmacion {
+    font-family: TelefonicaBold;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 100%;
+    align-items: center;
+    text-align: center;
+    color: #E9426D;
+}
+
+.imagenConfirmacion {
+    margin-bottom: 24px;
+    margin-top: 30px;
+}
