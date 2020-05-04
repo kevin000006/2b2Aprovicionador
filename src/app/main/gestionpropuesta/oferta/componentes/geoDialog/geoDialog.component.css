@@ -1,0 +1,10 @@
+.btn-georenferencia {
+    font-size: 14px;
+    min-width: 100px;
+    border: 1px solid #62CE0E;
+    box-sizing: border-box;
+    border-radius: 4px;
+    color: white;
+    font-family: TelefonicaLight;
+    background: #5BC500;
+}

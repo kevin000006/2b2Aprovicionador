@@ -1,0 +1,26 @@
+<!-- <button mat-icon-button class="close-ico" [mat-dialog-close]="true">
+    <mat-icon>close</mat-icon>
+</button> -->
+<mat-dialog-content>
+    <div class="row text-center imagenConfirmacion">
+        <img src="../../../.../../../../../assets/images/icon/ico-error.png" class="logoPrincipalLogin">
+    </div>
+    <div class="row text-center">
+        <p class="mensajeConfirmacion" class="mensajeConfirmacion">!Atento!</p>
+    </div>
+    <div class="row text-center">
+        <p>
+            {{message}}
+        </p>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <div class="row" style="margin-bottom: 24px;">
+        <div class="col-sm-6">
+            <button class="btn btn-md btn-aceptar" (click)="onConfirmClick()" tabindex="1">{{confirmButtonText}}</button>
+        </div>
+        <div class="col-sm-6">
+            <button class="btn btn-md btn-cancelar" mat-dialog-close tabindex="-1">{{cancelButtonText}}</button>
+        </div>
+    </div>
+</mat-dialog-actions>

@@ -3,9 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { BandejaService } from './bandeja.service';
 import { BandejaModel, ClienteModel, EstadoModel, UsuarioModel } from '../models/oferta';
-import { AddDialogComponent } from '../dialogs/add/add.component'
 import { DataSource } from '@angular/cdk/collections';
-import { DeleteDialogComponent } from '../dialogs/delete/delete.component'
 import { fuseAnimations } from '@fuse/animations';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';

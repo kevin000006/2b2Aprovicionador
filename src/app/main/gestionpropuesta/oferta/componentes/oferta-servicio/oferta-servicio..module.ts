@@ -12,25 +12,37 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { getSpanishPaginatorIntl } from './spanish-paginator-intl';
 import { MatPaginatorIntl } from '@angular/material/paginator/';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AlertConfirmComponent } from '../alertConfirm/alertConfirm.component';
+import { GeodialogComponent } from '../geoDialog/geoDialog.component';
+import { AgmCoreModule } from '@agm/core';
+import { MatButtonModule } from '@angular/material/button';
 @NgModule({
     declarations: [
-        OfertaServicioComponent
+        OfertaServicioComponent,
+        AlertConfirmComponent,
+        GeodialogComponent
     ],
     imports: [
         FormsModule,
         CommonModule,
-        MatIconModule,        
+        MatIconModule,
         MatTableModule,
         MatMenuModule,
         MatPaginatorModule,
         MatSortModule,
         MatFormFieldModule,
         MatInputModule,
-        MatSelectModule        
+        MatSelectModule,
+        MatDialogModule,
+        MatButtonModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyCkQSOz3XXowm3bOQlnCEUChPTgCmT0AXc'
+        })
     ],
     providers: [
         { provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() }
-      ],
+    ],
     exports: [
         OfertaServicioComponent
     ]
