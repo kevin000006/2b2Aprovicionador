@@ -12,9 +12,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { getSpanishPaginatorIntl } from './spanish-paginator-intl';
 import { MatPaginatorIntl } from '@angular/material/paginator/';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AlertConfirmComponent } from '../alertConfirm/alertConfirm.component';
 @NgModule({
     declarations: [
-        OfertaServicioComponent
+        OfertaServicioComponent,
+        AlertConfirmComponent
     ],
     imports: [
         FormsModule,
@@ -26,7 +29,8 @@ import { MatPaginatorIntl } from '@angular/material/paginator/';
         MatSortModule,
         MatFormFieldModule,
         MatInputModule,
-        MatSelectModule        
+        MatSelectModule,
+        MatDialogModule      
     ],
     providers: [
         { provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() }
