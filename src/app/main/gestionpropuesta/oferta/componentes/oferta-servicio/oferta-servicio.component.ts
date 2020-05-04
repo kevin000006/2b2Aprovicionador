@@ -15,7 +15,7 @@ export class OfertaServicioComponent implements OnInit {
   constructor() { }
   //
   ngOnInit(): void {
-    debugger;
+   
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }

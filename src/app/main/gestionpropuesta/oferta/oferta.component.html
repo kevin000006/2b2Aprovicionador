@@ -64,19 +64,22 @@
         </div>
      
         <div class="row" *ngIf="showShared">
-            <div class="col-xs-12">
-                <h1>Obtener Enlace</h1>
+            <div class="col-xs-7 contetnt-shared">
+                <div class="col-xs-12">
+                    <h1>Obtener Enlace</h1>
+                </div>
+                <div class="col-xs-12 col-sm-10">
+                    <div class="url">{{urlShared}}</div>
+                </div>
+                <div class="col-xs-12 col-sm-2 padding-none">
+                    <button class="btn btn-sm btn-primary" (click)="obtenerUrl()" *ngIf="!hideSharedBtn">Obtener Url</button>
+                    <button class="btn btn-sm btn-info" *ngIf="hideSharedBtn">Copiar url</button>
+                </div>
+                <div class="col-xs-12">
+                    <button class="btn btn-sm btn-danger" (click)="closeShared()">Cancelar</button>
+                </div>
             </div>
-            <div class="col-xs-12 col-sm-8">
-                <span>{{urlShared}}</span>
-            </div>
-            <div class="col-xs-12 col-sm-4">
-                <button class="btn btn-sm btn-primary" (click)="obtenerUrl()" *ngIf="!hideSharedBtn">Obtener Url</button>
-                <button class="btn btn-sm btn-info" *ngIf="hideSharedBtn">Copiar url</button>
-            </div>
-            <div class="col-xs-12">
-                <button class="btn btn-sm btn-danger" (click)="closeShared()">Cancelar</button>
-            </div>
+           
         </div>
        
         <br/>

@@ -1,6 +1,7 @@
 import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { OfertaService } from './oferta.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { Guid } from "guid-typescript";
 
@@ -22,7 +23,11 @@ export class OfertaComponent implements OnInit {
   
 
   ngOnInit(): void {
-    console.log(this.showShared);
+    
+    
+    console.log(window.history.state);
+    
+
   }
 
   openShared():void{
