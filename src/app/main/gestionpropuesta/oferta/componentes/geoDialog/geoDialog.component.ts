@@ -24,13 +24,32 @@ export class GeodialogComponent {
         private geocodeService: GeocodeService,
         private ref: ChangeDetectorRef,
     ) {
-        if (data) {        
-        }
+        
     }
     ngOnInit(): void {
-        if (this.pickedLat < 1) this.pickedLat = this.lat;
-        if (this.pickedLon < 1) this.pickedLon = this.lng;
-        let variable: any = this.data;      
+        if ((this.data.latitud == 0) || (this.data.longitud == 0)){
+            let variable: any = this.data;
+            this.geocodeService.geocodeAddress(variable.direccion).subscribe((location: Location) => {            
+                //console.log("doing this ...");
+                let locat: any = location;
+                this.pickedLat = locat.lat;
+                this.pickedLon = locat.lng;
+                // var locationmodel = new locatioModel() ;
+                // locationmodel.lat=locat.lat,
+                // locationmodel.lng=-locat.lng,
+                // locationmodel.label="Estoy Aqui",
+                // locationmodel.draggable=true,
+                // this.locationGobal.push(locationmodel); 
+                
+                this.zoom = 17;
+                this.ref.detectChanges();
+            });
+        }else{
+            this.pickedLat = this.data.latitud;
+            this.pickedLon = this.data.longitud;
+            this.zoom = 17;
+            this.ref.detectChanges();
+        }
 
     //    var locationmodel = new locatioModel() ;
     //    locationmodel.lat=-11.9904611,
@@ -42,22 +61,7 @@ export class GeodialogComponent {
 
         //falta agregar el metodo de spinner
         //this.loading = true;
-        this.geocodeService.geocodeAddress(variable.direccion).subscribe((location: Location) => {            
-            let locat: any = location;
-            this.pickedLat = locat.lat;
-            this.pickedLon = locat.lng;
-
-            // var locationmodel = new locatioModel() ;
-            // locationmodel.lat=locat.lat,
-            // locationmodel.lng=-locat.lng,
-            // locationmodel.label="Estoy Aqui",
-            // locationmodel.draggable=true,
-            // this.locationGobal.push(locationmodel); 
-            
-            this.zoom = 17;
-            // this.loading = false;
-            this.ref.detectChanges();
-        });
+        
     }
     markerDragEnd(event) {
         this.pickedLat = event.coords.lat;

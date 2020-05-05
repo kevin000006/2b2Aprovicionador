@@ -97,7 +97,7 @@ export class OfertaServicioComponent implements OnInit {
   }
   crearNuevoServicio(id: number): ServicioElement {
     return {
-      id: id, sede: '', direccion: '', ubigeo: '', geo: '',
+      id: id, sede: '', direccion: '', ubigeo: '', geo: '',longitud:0,latitud:0,
       contacto: '', telefono: '', circuito: "", nrocircuito: "", servicio: "",
       medio: "", bw: "", nrobw: "", ldn: "", voz: "", nrovoz: "", video: "", nrovideo: "",
       platinium: "", nroplatinium: "", oro: "", nrooro: "", plata: "", nroplata: "", bronce: "", nrobronce: "",
@@ -149,21 +149,24 @@ geoDialog(item: any): void {
 }
 const dataSourceList: ServicioElement[] = [
   {
-    id: 1, sede: 'Av. Argentina', direccion: 'puente camote', ubigeo: 'Callao. Callao, Callao', geo: 'Balanceador',
+    id: 1, sede: 'Av. Argentina', direccion: 'puente camote', ubigeo: 'Callao. Callao, Callao', 
+    geo: 'Balanceador',longitud:0,latitud:0,
     contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "1", nrocircuito: "1", servicio: "1",
     medio: "1", bw: "1", nrobw: "2", ldn: "1", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
     platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
     equipoterminal: "", router: "", facturacion: "", acccionisis: "", tiposede: ""
   },
   {
-    id: 2, sede: 'Av. Argentina 2', direccion: 'san borja', ubigeo: 'Callao. Callao, Callao', geo: 'Balanceador',
+    id: 2, sede: 'Av. Argentina 2', direccion: 'san borja', ubigeo: 'Callao. Callao, Callao', 
+    geo: 'Balanceador',longitud:0,latitud:0,
     contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "", nrocircuito: "1", servicio: "1",
     medio: "1", bw: "1", nrobw: "2", ldn: "1", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
     platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
     equipoterminal: "", router: "", facturacion: "", acccionisis: "", tiposede: ""
   },
   {
-    id: 3, sede: 'Av. Argentina 3', direccion: 'plaza norte', ubigeo: 'Callao. Callao, Callao', geo: 'Balanceador',
+    id: 3, sede: 'Av. Argentina 3', direccion: 'plaza norte', ubigeo: 'Callao. Callao, Callao', 
+    geo: 'Balanceador',longitud:-70.2190587197085,latitud:-17.9966159197085,
     contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "", nrocircuito: "1", servicio: "1",
     medio: "1", bw: "1", nrobw: "2", ldn: "1", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
     platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
@@ -177,6 +180,8 @@ export interface ServicioElement {
   direccion: string;
   ubigeo: string;
   geo: string;
+  longitud :number;
+  latitud :number;
   contacto: string;
   telefono: string;
   circuito: string;
