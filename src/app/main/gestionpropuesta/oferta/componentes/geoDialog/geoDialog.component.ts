@@ -32,18 +32,28 @@ export class GeodialogComponent {
         if (this.pickedLon < 1) this.pickedLon = this.lng;
         let variable: any = this.data;      
 
-       var locationmodel = new locatioModel() ;
-       locationmodel.lat=-11.9904611,
-       locationmodel.lng=-77.09691,
-       locationmodel.label="Estoy Aqui",
-       locationmodel.draggable=true,
-       this.locationGobal.push(locationmodel);        
+    //    var locationmodel = new locatioModel() ;
+    //    locationmodel.lat=-11.9904611,
+    //    locationmodel.lng=-77.09691,
+    //    locationmodel.label="Estoy Aqui",
+    //    locationmodel.draggable=true,
+    //    this.locationGobal.push(locationmodel);        
+
+
         //falta agregar el metodo de spinner
         //this.loading = true;
         this.geocodeService.geocodeAddress(variable.direccion).subscribe((location: Location) => {            
             let locat: any = location;
             this.pickedLat = locat.lat;
             this.pickedLon = locat.lng;
+
+            // var locationmodel = new locatioModel() ;
+            // locationmodel.lat=locat.lat,
+            // locationmodel.lng=-locat.lng,
+            // locationmodel.label="Estoy Aqui",
+            // locationmodel.draggable=true,
+            // this.locationGobal.push(locationmodel); 
+            
             this.zoom = 17;
             // this.loading = false;
             this.ref.detectChanges();

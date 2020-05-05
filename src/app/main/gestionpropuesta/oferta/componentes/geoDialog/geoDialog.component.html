@@ -1,15 +1,15 @@
 <mat-dialog-content>
     <agm-map [zoom]="zoom" [latitude]="pickedLat" [longitude]="pickedLon">
-        <agm-marker *ngFor="let m of locationGobal; let i = index" [latitude]="m.lat" [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable" (dragEnd)="markerDragEnd($event)">
+        <!-- <agm-marker *ngFor="let m of locationGobal; let i = index" [latitude]="m.lat" [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable" (dragEnd)="markerDragEnd($event)">
             <agm-info-window>
                 <strong>InfoWindow content</strong>
             </agm-info-window>
-        </agm-marker>
-        <!-- <agm-marker [latitude]="pickedLat" [longitude]="pickedLon" (dragEnd)="markerDragEnd($event)" [markerDraggable]="true">
+        </agm-marker> -->
+        <agm-marker [latitude]="pickedLat" [longitude]="pickedLon" (dragEnd)="markerDragEnd($event)" [markerDraggable]="true">
             <agm-info-window>
                 <p>Aqui</p>
             </agm-info-window>
-        </agm-marker> -->
+        </agm-marker>
     </agm-map>
     <div class="row" style="
     font-family: TelefonicaLight;
