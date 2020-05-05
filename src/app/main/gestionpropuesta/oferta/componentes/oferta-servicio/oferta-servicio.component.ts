@@ -26,6 +26,7 @@ export class OfertaServicioComponent implements OnInit {
   listAccionISIS: ModelCombo[] = [];
   listTipoSede: ModelCombo[] = [];
 
+  //public seldescrip: string;
 
 
   displayedColumns: string[] = [
@@ -137,16 +138,19 @@ export class OfertaServicioComponent implements OnInit {
   });   
   }
 geoDialog(item: any): void {
+  console.log(item);
   const dialogRef = this.dialog.open(GeodialogComponent, {
     width: '500px',
     // height:"100%",
-    data: {
+    data: item
+    //data: {
+      //direccion: item.direccion
       // message: '¿Esta seguro que desea eliminar este articulo?',
       // buttonText: {
       //   ok: 'Aceptar',
       //   cancel: 'Cancelar'
       // }
-    }
+    //}
   });
   dialogRef.afterClosed().subscribe((confirmed: boolean) => {
     // if (confirmed) {
