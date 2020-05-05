@@ -65,7 +65,7 @@ export class SubirTramaComponent implements OnInit {
       url: responseAzureStorage._response.request.url,
       fecha: new Date().toString(),
       entity: "" //this.lista[this.fromDatosGenerales.value.cboMaestra].descripcion
-      //falta completar esta linea y validar 
+        //falta completar esta linea y validar 
     };
     console.log(entidad);
     await this.subirTramaService.GuardarArchivo(entidad).subscribe(res => {

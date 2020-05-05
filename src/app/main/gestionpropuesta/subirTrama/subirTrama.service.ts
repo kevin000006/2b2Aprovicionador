@@ -12,9 +12,9 @@ export class SubirTramaService {
   GuardarArchivo(data: any): Observable<any> {
     debugger;
     return this.http.post<any>('/IsisEntity/uploadCVS', data);
-   // if (data.tipo == "1") {     
-    //}
-    /* else if (data.tipo == "2") {
+    /* if (data.tipo == "1") {     
+     }
+     else if (data.tipo == "2") {
       return this.http.post<any>('/IsisEquipo/uploadCVS', data);
     } else if (data.tipo == "3") {
       return this.http.post<any>('/IsisTarifa/uploadCVS', data);
