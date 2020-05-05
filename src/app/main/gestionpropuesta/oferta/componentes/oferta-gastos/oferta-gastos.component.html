@@ -38,18 +38,15 @@
                         <ng-container matColumnDef="concepto">
                             <mat-header-cell *matHeaderCellDef mat-sort-header>Concepto</mat-header-cell>
                             <mat-cell *matCellDef="let row">
-                                <mat-form-field style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
-                                    <mat-select>
-                                        <mat-option value="1">Otros</mat-option>
-                                        <mat-option value="2">Valor 1</mat-option>
-                                        <mat-option value="3">Valor 3</mat-option>
+                                <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
+                                    <mat-select [(ngModel)]="row.concepto">
+                                        <mat-option value="">--Seleccione--</mat-option>
+                                        <mat-option [value]="o.id" *ngFor="let o of listaConcepto">{{o.nombre}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
-                                <!-- <mat-form-field appearance="legacy" [style.fontSize.px]="12">
-                                    <mat-label>Fill form field</mat-label>
-                                    <input matInput placeholder="Placeholder">
-                                </mat-form-field> -->
-                                <!-- {{row.concepto}} -->
+                                <mat-form-field color="accent" style="text-align: center; width: 40%;" appearance="legacy" [style.fontSize.px]="12">
+                                    <input matInput [(ngModel)]="row.nroconcepto" type="number">
+                                </mat-form-field>
                             </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="cantidad">
@@ -60,7 +57,6 @@
                                 </mat-form-field>
                             </mat-cell>
                         </ng-container>
-
                         <ng-container matColumnDef="nromeses">
                             <mat-header-cell *matHeaderCellDef> Nro. Meses </mat-header-cell>
                             <mat-cell *matCellDef="let element">
@@ -70,7 +66,6 @@
                                 <!-- {{element.nromeses}} -->
                             </mat-cell>
                         </ng-container>
-
                         <ng-container matColumnDef="factor">
                             <mat-header-cell *matHeaderCellDef> Factor </mat-header-cell>
                             <mat-cell *matCellDef="let element"> {{element.factor}} </mat-cell>
@@ -78,11 +73,12 @@
 
                         <ng-container matColumnDef="moneda">
                             <mat-header-cell *matHeaderCellDef> Moneda </mat-header-cell>
-                            <mat-cell *matCellDef="let element">
-                                <mat-form-field style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
-                                    <mat-select>
-                                        <mat-option value="1">S/</mat-option>
-                                        <mat-option value="2">$</mat-option>
+                            <mat-cell *matCellDef="let row">
+                                <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
+                                    <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
+                                    <mat-select [(ngModel)]="row.moneda">
+                                        <mat-option value="">--Seleccione--</mat-option>
+                                        <mat-option [value]="o.id" *ngFor="let o of listaMoneda">{{o.nombre}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                                 <!-- {{element.moneda}}  -->
@@ -91,9 +87,9 @@
 
                         <ng-container matColumnDef="montounitmenusal">
                             <mat-header-cell *matHeaderCellDef> Monto unitario mensual </mat-header-cell>
-                            <mat-cell *matCellDef="let element">
+                            <mat-cell *matCellDef="let row">
                                 <mat-form-field style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
-                                    <input matInput [(ngModel)]="element.montounitmenusal" type="number">
+                                    <input matInput [(ngModel)]="row.montounitmenusal" type="number">
                                 </mat-form-field>
                                 <!-- {{element.montounitmenusal}}  -->
                             </mat-cell>

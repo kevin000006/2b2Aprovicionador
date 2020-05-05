@@ -17,6 +17,7 @@ import { AlertConfirmComponent } from '../alertConfirm/alertConfirm.component';
 import { GeodialogComponent } from '../geoDialog/geoDialog.component';
 import { AgmCoreModule } from '@agm/core';
 import { MatButtonModule } from '@angular/material/button';
+import { GeocodeService } from '../geoDialog/geocode.service';
 @NgModule({
     declarations: [
         OfertaServicioComponent,
@@ -35,13 +36,14 @@ import { MatButtonModule } from '@angular/material/button';
         MatInputModule,
         MatSelectModule,
         MatDialogModule,
-        MatButtonModule,
+        MatButtonModule,        
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyCkQSOz3XXowm3bOQlnCEUChPTgCmT0AXc'
         })
     ],
     providers: [
-        { provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() }
+        { provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() },
+        GeocodeService
     ],
     exports: [
         OfertaServicioComponent
