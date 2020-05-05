@@ -198,7 +198,6 @@ export interface ServicioElement {
   nroplata: string;
   bronce: string;
   nrobronce: string;
-
   equipoterminal: string;
   router: string;
   //otro: string;
