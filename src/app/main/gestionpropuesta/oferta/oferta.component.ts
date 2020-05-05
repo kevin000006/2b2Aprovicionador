@@ -36,7 +36,7 @@ export class OfertaComponent implements OnInit {
   }
 
   obtenerUrl():void{
-    let codigo = "";//Guid.create().toString();
+    let codigo = "" ;//Guid.create().toString();
 
     this.urlShared = "procesando....";
     codigo = codigo.split('-').join('');

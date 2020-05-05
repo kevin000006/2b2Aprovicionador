@@ -42,10 +42,10 @@ export class SubirTramaComponent implements OnInit {
       File: this.FileCtrl
     });
 
-    this.lista.push(new ModelMaestras("1", "Maestra Acceso", "ciudad al lado del mar"));
-    this.lista.push(new ModelMaestras("2", "Maestra Equipo", "ciudad gastronomica"));
-    this.lista.push(new ModelMaestras("3", "Maestra Tarifa", "ciudad cultural"));
-    this.lista.push(new ModelMaestras("4", "Maestra Cliente", "ciudad cultural"));
+    this.lista.push(new ModelMaestras("1", "Maestra Acceso", "acceso"));
+    this.lista.push(new ModelMaestras("2", "Maestra Equipo", "equipo"));
+    this.lista.push(new ModelMaestras("3", "Maestra Tarifa", "tarifa"));
+    this.lista.push(new ModelMaestras("4", "Maestra Cliente", "cliente"));
     this.state$ = window.history.state;
   }
   fileProgress(fileInput: any): void {
@@ -63,7 +63,9 @@ export class SubirTramaComponent implements OnInit {
       usuario: Object(this.usuario)["id"].toString(),
       tipo: this.fromDatosGenerales.value.cboMaestra,
       url: responseAzureStorage._response.request.url,
-      fecha: new Date().toString()
+      fecha: new Date().toString(),
+      entity: "" //this.lista[this.fromDatosGenerales.value.cboMaestra].descripcion
+        //falta completar esta linea y validar 
     };
     console.log(entidad);
     await this.subirTramaService.GuardarArchivo(entidad).subscribe(res => {

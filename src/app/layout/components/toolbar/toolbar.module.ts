@@ -11,10 +11,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { CambiarContraseniaComponent } from '../cambiocontrasenia/cambiocontrasenia.component';
+import { AlertConfirmCambioContraseniaComponent } from '../alertConfirmCambioContrasenia/alertConfirmCambioContrasenia.component';
 @NgModule({
     declarations: [
         ToolbarComponent,
-        CambiarContraseniaComponent
+        CambiarContraseniaComponent,
+        AlertConfirmCambioContraseniaComponent
     ],
     imports     : [
         RouterModule,
@@ -24,7 +26,6 @@ import { CambiarContraseniaComponent } from '../cambiocontrasenia/cambiocontrase
         MatIconModule,
         MatMenuModule,
         MatToolbarModule,
-
         FuseSharedModule,
         FuseSearchBarModule,
         FuseShortcutsModule,

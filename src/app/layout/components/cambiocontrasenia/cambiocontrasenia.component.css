@@ -6,7 +6,7 @@
 
 @media screen and (min-width:580px) {
     .container-padding {
-        padding: 8rem;
+        padding: 10px 30px 0px 30px;
     }
 }
 
@@ -17,3 +17,18 @@
     border-radius: 4px;
     color: #fff !important;
 }
+
+
+/* .modal-cambioContrasenia .mat-dialog-container {
+    border-radius: 0px !important;
+} */
+
+
+/* .modal-cambioContrasenia .mat-dialog-container {
+    padding: 0;
+} */
+
+
+/* .modal-cambioContrasenia>mat-dialog-container {
+    border-radius: 0px !important;
+} */

@@ -11,16 +11,16 @@ export class SubirTramaService {
 
   GuardarArchivo(data: any): Observable<any> {
     debugger;
-
-    if (data.tipo == "1") {
-      return this.http.post<any>('/IsisAcceso/uploadCVS', data);
-    } else if (data.tipo == "2") {
+    return this.http.post<any>('/IsisEntity/uploadCVS', data);
+    /* if (data.tipo == "1") {     
+     }
+     else if (data.tipo == "2") {
       return this.http.post<any>('/IsisEquipo/uploadCVS', data);
     } else if (data.tipo == "3") {
       return this.http.post<any>('/IsisTarifa/uploadCVS', data);
     } else if (data.tipo == "4") {
       return this.http.post<any>('/IsisCliente/uploadCVS', data);
-    }
+    }*/
   }
 
   getConnectionURL(resourceName: any): string {

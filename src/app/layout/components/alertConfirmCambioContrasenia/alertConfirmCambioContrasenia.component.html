@@ -1,0 +1,26 @@
+<button mat-icon-button class="close-ico" [mat-dialog-close]="true" style="float: right;">
+    <mat-icon>close</mat-icon>
+</button>
+<mat-dialog-content>
+    <div class="container" style="margin-top: 26px;">
+        <br>
+        <br>
+        <div class="row text-center">
+            <p>
+                {{message}}
+            </p>
+        </div>
+        <br>
+        <div class="row" style="margin-bottom: 24px;">
+            <div class="col-sm-6">
+                <button class="btn btn-md btn-cancelar btn-block" mat-dialog-close tabindex="-1">{{cancelButtonText}}</button>
+            </div>
+            <div class="col-sm-6">
+                <button class="btn btn-md btn-aceptar btn-block" (click)="onConfirmClick()" tabindex="1">{{confirmButtonText}}</button>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<!-- <mat-dialog-actions align="center">
+    
+</mat-dialog-actions> -->

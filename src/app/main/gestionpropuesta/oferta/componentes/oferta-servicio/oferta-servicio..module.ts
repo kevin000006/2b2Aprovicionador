@@ -37,7 +37,7 @@ import { MatButtonModule } from '@angular/material/button';
         MatDialogModule,
         MatButtonModule,
         AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyAXad7GnKMu4Dus2bKXRiKGFnsCmivbLj8'
+            apiKey: 'AIzaSyCkQSOz3XXowm3bOQlnCEUChPTgCmT0AXc'
         })
     ],
     providers: [

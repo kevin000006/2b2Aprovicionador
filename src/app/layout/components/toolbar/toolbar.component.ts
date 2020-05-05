@@ -103,7 +103,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
                 'top': '0',
                 'right': '0'
             },
-            panelClass: 'full-screen-modal',
+            //panelClass: ['modal-cambioContrasenia'],
             data: { name: this.name, animal: this.animal }
         });
 

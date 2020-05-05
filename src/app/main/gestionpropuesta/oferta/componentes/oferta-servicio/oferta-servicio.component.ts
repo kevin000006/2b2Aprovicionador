@@ -110,32 +110,25 @@ export class OfertaServicioComponent implements OnInit {
   }
   deleteRow(item: any): void {
     const dialogRef = this.dialog.open(AlertConfirmComponent, {
-      width: '100%',    
-      // maxWidth: '100vw',
-      // maxHeight: '100vh',
-      //panelClass:"fullscreen-dialog",
-      //panelClass: 'full-screen-dialog',
-      // width: '100vw',
-      // height: '100vh',
-      // panelClass:['classmike'],
+      width: '450px',
       data: {
-      message: '¿Esta seguro que desea eliminar este articulo?',
-      buttonText: {
-        ok: 'Aceptar',
-        cancel: 'Cancelar'
+        message: '¿Esta seguro que desea eliminar este articulo?',
+        buttonText: {
+          ok: 'Aceptar',
+          cancel: 'Cancelar'
+        }
       }
-    }
     });
 
-  dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-    if (confirmed) {
-      const a = document.createElement('a');
-      a.click();
-      a.remove();
-      this.dataSource.data.splice(this.dataSource.data.indexOf(item.id), 1);
-      this.dataSource = new MatTableDataSource<ServicioElement>(dataSourceList);
-    }
-  });   
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        const a = document.createElement('a');
+        a.click();
+        a.remove();
+        this.dataSource.data.splice(this.dataSource.data.indexOf(item.id), 1);
+        this.dataSource = new MatTableDataSource<ServicioElement>(dataSourceList);
+      }
+    });
   }
 geoDialog(item: any): void {
   console.log(item);
