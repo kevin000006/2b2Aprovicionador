@@ -56,6 +56,9 @@ export class CambiarContraseniaComponent implements OnInit {
     const dialogRef = this.dialog.open(AlertConfirmCambioContraseniaComponent, {
       width: '760px',
       height: '280px',
+      position: {
+        'top': '150px'
+      },
       panelClass: 'custom-modalbox',
       data: {
         message: '¿Maria Ramos, estás segúro(a) de cambiar tu contraseña?',
