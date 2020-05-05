@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { OfertaService } from './oferta.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
-//import { Guid } from "guid-typescript";
+import { Guid } from "guid-typescript";
 
 
 @Component({
@@ -36,7 +36,7 @@ export class OfertaComponent implements OnInit {
   }
 
   obtenerUrl():void{
-    let codigo = "" ;//Guid.create().toString();
+    let codigo = Guid.create().toString();
 
     this.urlShared = "procesando....";
     codigo = codigo.split('-').join('');
