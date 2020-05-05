@@ -3,7 +3,7 @@
 <button mat-icon-button class="close-ico" [mat-dialog-close]="true">
     <mat-icon>close</mat-icon>
 </button>
-<div mat-dialog-content>
+<div mat-dialog-content style="overflow: hidden !important;">
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div class="container container-padding" style="    font-family: TelefonicaLight;" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
             <h1>
@@ -11,7 +11,7 @@
             </h1>
             <p>*Por tu seguridad por favor ingresa tu contraseña actual</p>
             <!-- -->
-            <mat-form-field appearance="standard">
+            <mat-form-field color="accent" appearance="standard">
                 <mat-label>Contraseña</mat-label>
                 <input formControlName="passwordActual" matInput [type]="hidePasswordActual ? 'password' : 'text'">
                 <mat-error *ngIf="submitted && f.passwordActual.errors">
@@ -24,7 +24,7 @@
 
             <p>Ingresar una contraseña de 6 caracteres alFanúmericos.</p>
             <p>Debe contener como minimo 1 caracter especial (Ejemplo *,$,#, etc).</p>
-            <mat-form-field appearance="standard">
+            <mat-form-field color="accent" appearance="standard">
                 <mat-label>Nueva Contraseña (6 caracteres)</mat-label>
                 <input formControlName="password" matInput [type]="hidePassword ? 'password' : 'text'">
                 <mat-error *ngIf="submitted && f.password.errors">
@@ -37,7 +37,7 @@
                 </button>
             </mat-form-field>
 
-            <mat-form-field appearance="standard">
+            <mat-form-field color="accent" appearance="standard">
                 <mat-label>Confirmación de nueva contraseña</mat-label>
                 <input formControlName="confirmPassword" matInput [type]="hideConfirmPassword ? 'password' : 'text'">
                 <mat-error *ngIf="submitted && f.confirmPassword.errors">
@@ -49,33 +49,8 @@
                     <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
             </mat-form-field>
-            <br>
             <button mat-raised-button class="submit-cambiocontrasenia" cdkFocusInitial>Cambiar Contraseñas</button>
 
-            <!-- <div fxFlex="20%">            
-            <mat-form-field color="accent">
-                <input autocomplete="off" matInput #codigo class="form-control" placeholder="Cód. Salesforce" name="nrocomtrato">
-                <span style="color: #2EA5B8;" matSuffix># &nbsp;</span>
-            </mat-form-field>
-        </div>
-        <div fxFlex="20%">            
-            <mat-form-field color="accent">
-                <input autocomplete="off" matInput #codigo class="form-control" placeholder="Cód. Salesforce" name="nrocomtrato">
-                <span style="color: #2EA5B8;" matSuffix># &nbsp;</span>
-            </mat-form-field>
-        </div>
-        <div fxFlex="20%">            
-            <mat-form-field color="accent">
-                <input autocomplete="off" matInput #codigo class="form-control" placeholder="Cód. Salesforce" name="nrocomtrato">
-                <span style="color: #2EA5B8;" matSuffix># &nbsp;</span>
-            </mat-form-field>
-        </div>
-        <div fxFlex="20%">            
-            <mat-form-field color="accent">
-                <input autocomplete="off" matInput #codigo class="form-control" placeholder="Cód. Salesforce" name="nrocomtrato">
-                <span style="color: #2EA5B8;" matSuffix># &nbsp;</span>
-            </mat-form-field>
-        </div> -->
         </div>
     </form>
 </div>

@@ -41,13 +41,13 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-3 padding-l-none">
                                 <mat-form-field>
-                                    <input autocomplete="off" matInput [(ngModel)]="_filtro.oportunidad" class="form-control" placeholder="Cód. Oportunidad" name="salesforce">
+                                    <input autocomplete="off" matInput [(ngModel)]="_filtro.codoportunidad" class="form-control" placeholder="Cód. Oportunidad" name="salesforce">
                                     <span class="icon" matSuffix># &nbsp;</span>
                                 </mat-form-field>
                             </div>
                             <div class="col-xs-12 col-sm-3">
                                 <mat-form-field>
-                                    <input autocomplete="off" [(ngModel)]="_filtroCliente" matInput #cliente class="form-control" placeholder="Cliente" name="cliente">
+                                    <input autocomplete="off" [(ngModel)]="_filtro.cliente" matInput  class="form-control" placeholder="Cliente" name="cliente">
                                     <mat-icon class="icon" matSuffix>person_outlin &nbsp;</mat-icon>
                                 </mat-form-field>
                             </div>
@@ -62,7 +62,8 @@
                             <div class="col-xs-12 col-sm-3 padding-l-none">
                                 <mat-form-field>
                                     <mat-label class="font-normal">Complejidad</mat-label>
-                                    <select matNativeControl [(ngModel)]="_filtro.complejidad" name="tipocosto">
+                                    <select matNativeControl [(ngModel)]="_filtro.complejidad" name="tipocosto" class="form-control">
+                                        <option value="" selected>Seleccionar</option>
                                     </select>
                                     <span matSuffix>&nbsp; &nbsp;</span>
                                 </mat-form-field>
@@ -70,8 +71,8 @@
                             <div class="col-xs-12 col-sm-3">
                                 <mat-form-field>
                                     <mat-label class="font-normal">Estado</mat-label>
-                                    <select matNativeControl [(ngModel)]="_filtroEstado" class="form-control" name="tipocompra">
-                                        <option value="0" selected>Seleccionar</option>
+                                    <select matNativeControl [(ngModel)]="_filtro.estado" class="form-control" name="tipocompra">
+                                        <option value="" selected>Seleccionar</option>
                                         <option *ngFor="let cl of lstEstado" [ngValue]="cl.id">{{cl.descripcion}}</option>
                                     </select>
                                     <span matSuffix>&nbsp; &nbsp;</span>
@@ -79,13 +80,13 @@
                             </div>
                             <div class="col-xs-12 col-sm-3">
                                 <mat-form-field>
-                                    <input autocomplete="off" matInput #input class="form-control" placeholder="Desde" name="desde">
+                                    <input autocomplete="off" [(ngModel)]="_filtro.desde" matInput #input class="form-control" placeholder="Desde" name="desde">
                                     <mat-icon class="icon" matSuffix>calendar_today &nbsp;</mat-icon>
                                 </mat-form-field>
                             </div>
                             <div class="col-xs-12 col-sm-3 padding-r-none">
                                 <mat-form-field>
-                                    <input autocomplete="off" matInput #input class="form-control" placeholder="Desde" name="desde">
+                                    <input autocomplete="off" [(ngModel)]="_filtro.hasta" matInput #input class="form-control" placeholder="Hasta" name="hasta">
                                     <mat-icon class="icon" matSuffix>calendar_today &nbsp;</mat-icon>
                                 </mat-form-field>
                             </div>
@@ -98,10 +99,14 @@
                         </div>
                         <div class="row">
 
-                            <div class="col-xs-9">
+                            <div class="col-xs-7">
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                             </div>
-                            <div class="col-xs-12 col-sm-3 padding-r-none text-right">
+                            <div class="col-xs-12 col-sm-5 padding-r-none text-right">
+                                
+                                <button (click)="limpiar()" class="btn-telefonica-gree-2">
+                                    Limpiar
+                                </button> &nbsp;&nbsp;
                                 <button (click)="filtrarData()" class="btn-telefonica-gree">
                                     Buscar
                                 </button>
@@ -213,7 +218,7 @@
                     <div class="pag text-pag">Página</div>
                     <div class="pag btn-pagination text-pag">{{pageIndex+1}}</div>
                     <div class="pag text-pag">de {{dataSource.totalPages}}</div>
-                    <div class="pag btn-pagination pointer" (click)="paginar(1)">
+                    <div class="pag btn-pagination pointer" (click)="paginar(01)">
                         <mat-icon class="icon" >keyboard_arrow_right</mat-icon>
                     </div>
                 </div>

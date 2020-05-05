@@ -4,19 +4,20 @@
             <p>Bienvenido a nuestra</p>
             <p>plataforma digital</p>
         </div>
-        <div [@animate]="{value:'*',params:{scale:'0.2'}}">
+        <div [@animate]="{value:'*',params:{scale:'0.2'}}" style="position: absolute;
+        top: 5.25rem;
+        left: 6rem;">
             <img src="assets/images/backgrounds/logo.svg" class="logoPrincipalLogin">
         </div>
     </div>
     <div id="login-form-wrapper" fxLayout="row" fxLayoutAlign="end center" fusePerfectScrollbar [@animate]="{value:'*',params:{delay:'300ms',x:'100%'}}">
-
         <div id="login-form">
             <div class="logo" fxHide.gt-xs>
                 <img src="assets/images/logos/fuse.svg">
             </div>
             <h1 class="title">Iniciar sesión</h1>
             <form name="loginForm" [formGroup]="loginForm" novalidate>
-                <mat-form-field appearance="legacy">
+                <mat-form-field color="accent" appearance="legacy">
                     <mat-label>Usuario</mat-label>
                     <input matInput formControlName="usuario">
                     <mat-icon matSuffix class="secondary-text">perm_identity</mat-icon>
@@ -26,7 +27,7 @@
                 </mat-form-field>
                 <br>
                 <br>
-                <mat-form-field appearance="legacy">
+                <mat-form-field color="accent" appearance="legacy">
                     <mat-label>Contraseña</mat-label>
                     <input matInput type="password" formControlName="password">
                     <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>
@@ -37,7 +38,7 @@
                 <br>
                 <br>
                 <div class="remember-forgot-password" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
-                    <mat-checkbox class="remember-me" style="font-family: TelefonicaRegular;
+                    <mat-checkbox color="accent" class="remember-me" style="font-family: TelefonicaLight;
                     font-size: 12px;
                     color: #50535A;" aria-label="Remember Me">
                         Recordar datos
@@ -47,8 +48,6 @@
                         Recuperar contraseña?
                     </a> -->
                 </div>
-                <br>
-                <br>
                 <br>
                 <button mat-raised-button color="accent" class="submit-button2" aria-label="LOGIN" [disabled]="loginForm.invalid" (click)="login()">
                     Ingresar
