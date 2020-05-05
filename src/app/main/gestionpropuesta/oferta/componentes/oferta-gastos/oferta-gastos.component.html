@@ -2,13 +2,17 @@
     <div class="col-xs-12 col-sm-2 col-lg-12">
         <div class="form-horizontal">
             <div class="form-group">
-                <div class="col-xs-6">
-                    <button class="btn-primary-telefonica-2" (click)="addRow()">
+                <div class="col-xs-12 col-md-1">
+                    <!-- <button class="btn-primary-telefonica-2" (click)="addRow()">
+                            <mat-icon>add</mat-icon>
+                    </button> -->
+                    <a mat-mini-fab (click)="addRow()" mat-icon-button>
                         <mat-icon>add</mat-icon>
-                    </button>
+                    </a>
+
                 </div>
-                <div class="col-sm-offset-4 col-xs-2 text-right">
-                    <mat-form-field appearance="legacy" [style.fontSize.px]="12">
+                <div class="col-xs-12 col-md-2">
+                    <mat-form-field color="accent" appearance="legacy">
                         <mat-label>Selecciona número por Pagina</mat-label>
                         <mat-select>
                             <mat-option value="1">5 por pagina</mat-option>
