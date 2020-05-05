@@ -51,7 +51,7 @@
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Dirección </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput [(ngModel)]="row.direccion" type="text" maxlength="100">
+                                        <input matInput [(ngModel)]="seldirec" type="text" maxlength="100">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
@@ -62,7 +62,7 @@
                             <ng-container matColumnDef="geo">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Geo </mat-header-cell>
                                 <mat-cell *matCellDef="let element">
-                                    <a style="cursor:pointer;color: #2493B4;" (click)="geoDialog(row)" mat-icon-button>
+                                    <a style="cursor:pointer;color: #2493B4;" (click)="geoDialog(element)" mat-icon-button>
                                         <mat-icon>location_on</mat-icon>
                                     </a>
                                 </mat-cell>

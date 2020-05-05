@@ -1,5 +1,9 @@
 <mat-dialog-content>
-    <agm-map [latitude]="lat" [longitude]="lng" style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; "></agm-map>
+    <agm-map [latitude]="pickedLat" [longitude]="pickedLon" (mapClick)="onMapClick($event)">
+        <agm-marker [latitude]="pickedLat" [longitude]="pickedLon">
+            <agm-info-window><p>Aqui</p></agm-info-window>
+        </agm-marker>
+    </agm-map>
     <div class="row" style="
     font-family: TelefonicaLight;
     position: absolute;
@@ -22,7 +26,7 @@
                     <div class="col-md-12">
                         <mat-form-field appearance="legacy">
                             <mat-label>Dirección</mat-label>
-                            <input matInput placeholder="Dirección">
+                            <input matInput placeholder="Dirección" [(ngModel)]="data.direccion">
                         </mat-form-field>
                     </div>
                 </div>
@@ -30,7 +34,7 @@
                     <div class="col-md-12">
                         <mat-form-field appearance="legacy">
                             <mat-label>Latitud</mat-label>
-                            <input matInput placeholder="Latitud">
+                            <input matInput placeholder="Latitud" [(ngModel)]="pickedLat">
                         </mat-form-field>
                     </div>
                 </div>
@@ -38,7 +42,7 @@
                     <div class="col-md-12">
                         <mat-form-field appearance="legacy">
                             <mat-label>Longitud</mat-label>
-                            <input matInput placeholder="Longitud">
+                            <input matInput placeholder="Longitud" [(ngModel)]="pickedLon">
                         </mat-form-field>
                     </div>
                 </div>
