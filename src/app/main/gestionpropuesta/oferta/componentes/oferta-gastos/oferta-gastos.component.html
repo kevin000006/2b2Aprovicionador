@@ -3,7 +3,7 @@
         <div class="form-horizontal">
             <div class="form-group">
                 <div class="col-xs-6">
-                    <button class="btn-primary-telefonica-2">
+                    <button class="btn-primary-telefonica-2" (click)="addRow()">
                         <mat-icon>add</mat-icon>
                     </button>
                 </div>
@@ -25,15 +25,16 @@
                     <mat-table #table mat-table [dataSource]="dataSource" class="tb-oferta-gastos">
                         <ng-container matColumnDef="accion">
                             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-                            <mat-cell *matCellDef="let element">
+                            <mat-cell *matCellDef="let row">
                                 <mat-menu #appMenu="matMenu">
                                     <button style="font-size: 12px;" mat-menu-item> Editar </button>
-                                    <button style="font-size: 12px;" mat-menu-item> Eliminar</button>
+                                    <button style="font-size: 12px;" mat-menu-item (click)="deleteRow(row)"> Eliminar</button>
                                 </mat-menu>
                                 <a style="cursor:pointer;color: #2493B4;" mat-icon-button [matMenuTriggerFor]="appMenu">
                                     <mat-icon>more_vert</mat-icon>
                                 </a>
                             </mat-cell>
+                            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
                         </ng-container>
                         <ng-container matColumnDef="concepto">
                             <mat-header-cell *matHeaderCellDef mat-sort-header>Concepto</mat-header-cell>
@@ -48,6 +49,7 @@
                                     <input matInput [(ngModel)]="row.nroconcepto" type="number">
                                 </mat-form-field>
                             </mat-cell>
+                            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
                         </ng-container>
                         <ng-container matColumnDef="cantidad">
                             <mat-header-cell *matHeaderCellDef> Camtidad </mat-header-cell>
@@ -56,6 +58,7 @@
                                     <input matInput [(ngModel)]="element.cantidad" type="number">
                                 </mat-form-field>
                             </mat-cell>
+                            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
                         </ng-container>
                         <ng-container matColumnDef="nromeses">
                             <mat-header-cell *matHeaderCellDef> Nro. Meses </mat-header-cell>
@@ -63,26 +66,26 @@
                                 <mat-form-field style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                     <input matInput [(ngModel)]="element.nromeses" type="number">
                                 </mat-form-field>
-                                <!-- {{element.nromeses}} -->
                             </mat-cell>
+                            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
                         </ng-container>
                         <ng-container matColumnDef="factor">
                             <mat-header-cell *matHeaderCellDef> Factor </mat-header-cell>
                             <mat-cell *matCellDef="let element"> {{element.factor}} </mat-cell>
+                            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="moneda">
                             <mat-header-cell *matHeaderCellDef> Moneda </mat-header-cell>
                             <mat-cell *matCellDef="let row">
                                 <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
-                                    <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
                                     <mat-select [(ngModel)]="row.moneda">
                                         <mat-option value="">--Seleccione--</mat-option>
                                         <mat-option [value]="o.id" *ngFor="let o of listaMoneda">{{o.nombre}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
-                                <!-- {{element.moneda}}  -->
                             </mat-cell>
+                            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="montounitmenusal">
@@ -91,17 +94,20 @@
                                 <mat-form-field style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                     <input matInput [(ngModel)]="row.montounitmenusal" type="number">
                                 </mat-form-field>
-                                <!-- {{element.montounitmenusal}}  -->
                             </mat-cell>
+                            <mat-footer-cell *matFooterCellDef> Total S/: {{ calcularMontoUnitarioMensual() }}</mat-footer-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="montototalmensual">
                             <mat-header-cell *matHeaderCellDef> Monto Total mensual</mat-header-cell>
                             <mat-cell *matCellDef="let element"> {{element.montototalmensual}} </mat-cell>
+                            <mat-footer-cell *matFooterCellDef> Total S/: {{ calcularMontoTotalMensual() }}</mat-footer-cell>
                         </ng-container>
 
                         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                        <mat-footer-row class="footerRow" *matFooterRowDef="['accion', 'concepto', 'cantidad', 'nromeses', 'factor', 'moneda', 'montounitmenusal', 'montototalmensual']"></mat-footer-row>
+
                     </mat-table>
                 </div>
             </div>
