@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'AlertSuccess',
-    templateUrl: 'alertSuccess.component.html',
-    styleUrls: ['alertSuccess.component.css'],
+    templateUrl: './alertSuccess.component.html',
+    styleUrls: ['./alertSuccess.component.css'],
 })
 export class AlertSuccessComponent {
     message: string = "Are you sure?"
