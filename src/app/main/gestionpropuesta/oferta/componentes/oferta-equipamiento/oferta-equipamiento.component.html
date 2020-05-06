@@ -1,86 +1,137 @@
 <div class="row oferta-head">
-    <div class="row">
-        <div class="col-xs-6">
-            <button class="btn-primary-telefonica-2">
-                    <mat-icon>add</mat-icon>
-            </button>
-        </div>
-        <div class="col-xs-6 text-right">
-            <button class="btn-primary-telefonica btn-guardar">
-                Guardar
-        </button>
-        </div>
-    </div>
-
-    <br/>
-    <div class="col-sm-12">
-        <mat-table #table mat-table [dataSource]="dataSource"  class="tb-oferta-equipamiento">
-
-            <ng-container matColumnDef="accion">
-                <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-                <mat-cell *matCellDef="let element"> 
-
-                    <mat-menu #appMenu="matMenu">
-                        <button style="font-size: 12px;" mat-menu-item> Editar </button>
-                        <button style="font-size: 12px;" mat-menu-item> Eliminar</button>
-                    </mat-menu>
-                    
-                    <a style="cursor:pointer;color: #2493B4;" mat-icon-button [matMenuTriggerFor]="appMenu">
-                        <mat-icon>more_vert</mat-icon>
+    <div class="col-xs-12 col-sm-2 col-lg-12">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-xs-12 col-md-1">
+                    <a mat-mini-fab (click)="addRow()" mat-icon-button>
+                        <mat-icon>add</mat-icon>
                     </a>
+                </div>
+                <div class="col-xs-12 col-md-2">
+                    <mat-form-field color="accent" appearance="legacy">
+                        <mat-label>Selecciona número por Pagina</mat-label>
+                        <mat-select>
+                            <mat-option value="1">5 por pagina</mat-option>
+                            <mat-option value="2">10 por pagina</mat-option>
+                            <mat-option value="3">25 por pagina</mat-option>
+                            <mat-option value="4">50 por pagina</mat-option>
+                            <mat-option value="5">50 por pagina</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <mat-table #table mat-table [dataSource]="dataSource" class="tb-oferta-equipamiento">
+                        <ng-container matColumnDef="accion">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <mat-menu #appMenu="matMenu">
+                                    <button style="font-size: 12px;" mat-menu-item> Editar </button>
+                                    <button style="font-size: 12px;" mat-menu-item (click)="deleteRow(row)"> Eliminar</button>
+                                </mat-menu>
+                                <a style="cursor:pointer;color: #2493B4;" mat-icon-button [matMenuTriggerFor]="appMenu">
+                                    <mat-icon>more_vert</mat-icon>
+                                </a>
+                            </mat-cell>
+                            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="tipo">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                <mat-form-field color="accent" style="text-align: center; width: 80%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
+                                    <mat-select [(ngModel)]="row.tipo">
+                                        <mat-option value="">--Seleccione--</mat-option>
+                                        <mat-option [value]="o.id" *ngFor="let o of listaTipos">{{o.nombre}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </mat-cell>
+                            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="condicion">
+                            <mat-header-cell *matHeaderCellDef> Condición </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                <mat-form-field color="accent" style="text-align: center; width: 80%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
+                                    <mat-select [(ngModel)]="row.condicion">
+                                        <mat-option value="">--Seleccione--</mat-option>
+                                        <mat-option [value]="o.id" *ngFor="let o of listaCondicion">{{o.nombre}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </mat-cell>
+                            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                        </ng-container>
 
-                </mat-cell>
-              </ng-container>
+                        <ng-container matColumnDef="antigueadad">
+                            <mat-header-cell *matHeaderCellDef> Antiguedad </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.antigueadad}} </mat-cell>
+                            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                        </ng-container>
 
-              <ng-container matColumnDef="tipo">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.tipo}}</mat-cell>
-              </ng-container> 
+                        <ng-container matColumnDef="marca">
+                            <mat-header-cell *matHeaderCellDef> Marca </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                <mat-form-field style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                    <input matInput [(ngModel)]="row.marca" type="text">
+                                </mat-form-field>
+                            </mat-cell>
+                            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                        </ng-container>
 
-          
-            <ng-container matColumnDef="condicion">
-              <mat-header-cell *matHeaderCellDef> Condición </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.condicion}} </mat-cell>
-            </ng-container>
-          
-            <ng-container matColumnDef="antigueadad">
-              <mat-header-cell *matHeaderCellDef> Antiguedad </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.antigueadad}} </mat-cell>
-            </ng-container>
-          
-            <ng-container matColumnDef="marca">
-              <mat-header-cell *matHeaderCellDef> Marca </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.marca}} </mat-cell>
-            </ng-container>
+                        <ng-container matColumnDef="modelo">
+                            <mat-header-cell *matHeaderCellDef> Modelo </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                <mat-form-field style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                    <input matInput [(ngModel)]="row.modelo" type="text">
+                                </mat-form-field>
+                            </mat-cell>
+                            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                        </ng-container>
 
-            <ng-container matColumnDef="modelo">
-                <mat-header-cell *matHeaderCellDef> Modelo </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.modelo}} </mat-cell>
-              </ng-container>
+                        <ng-container matColumnDef="cantidad">
+                            <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                <mat-form-field style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                    <input matInput [(ngModel)]="row.cantidad" type="number">
+                                </mat-form-field>
+                            </mat-cell>
+                            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                        </ng-container>
 
-              <ng-container matColumnDef="cantidad">
-                <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.cantidad}} </mat-cell>
-              </ng-container>
-          
-              <ng-container matColumnDef="moneda">
-                <mat-header-cell *matHeaderCellDef> Moneda </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.moneda}} </mat-cell>
-              </ng-container>
+                        <ng-container matColumnDef="moneda">
+                            <mat-header-cell *matHeaderCellDef> Moneda </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                <mat-form-field color="accent" style="text-align: center; width: 80%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
+                                    <mat-select [(ngModel)]="row.moneda">
+                                        <mat-option value="">--Seleccione--</mat-option>
+                                        <mat-option [value]="o.id" *ngFor="let o of listaMoneda">{{o.nombre}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </mat-cell>
+                            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                        </ng-container>
 
-              <ng-container matColumnDef="costo">
-                <mat-header-cell *matHeaderCellDef> Costo </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.costo}} </mat-cell>
-              </ng-container>
+                        <ng-container matColumnDef="costo">
+                            <mat-header-cell *matHeaderCellDef> Costo </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                <mat-form-field style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                    <input matInput [(ngModel)]="row.costo" type="number">
+                                </mat-form-field>
+                            </mat-cell>
+                            <mat-footer-cell *matFooterCellDef> Total S/: {{ calcularcosto() }}</mat-footer-cell>
+                        </ng-container>
 
-              <ng-container matColumnDef="costototal">
-                <mat-header-cell *matHeaderCellDef> Costo Total </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.costototal}} </mat-cell>
-              </ng-container>
+                        <ng-container matColumnDef="costototal">
+                            <mat-header-cell *matHeaderCellDef> Costo Total </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.costototal}} </mat-cell>
+                            <mat-footer-cell *matFooterCellDef> Total S/: {{ calcularcostoTotal() }}</mat-footer-cell>
+                        </ng-container>
 
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </mat-table>
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                        <mat-footer-row class="footerRow" *matFooterRowDef="['accion', 'tipo', 'condicion', 'antigueadad', 'marca', 'modelo', 'cantidad', 'moneda', 'costo', 'costototal']"></mat-footer-row>
+                    </mat-table>
+                </div>
+            </div>
+        </div>
     </div>
-
 </div>

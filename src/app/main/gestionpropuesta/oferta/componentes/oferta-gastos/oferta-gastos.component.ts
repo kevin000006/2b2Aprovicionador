@@ -57,7 +57,7 @@ export class OfertaGastosComponent implements OnInit {
     const dialogRef = this.dialog.open(AlertConfirmComponent, {
       width: '450px',
       data: {
-        message: '¿Esta seguro que desea eliminar este articulo?',
+        message: '¿Esta seguro que desea eliminar esta fila?',
         buttonText: {
           ok: 'Aceptar',
           cancel: 'Cancelar'
