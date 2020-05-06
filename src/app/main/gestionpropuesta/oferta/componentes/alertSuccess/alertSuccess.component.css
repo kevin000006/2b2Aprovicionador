@@ -4,9 +4,9 @@
     border: 1px solid #62CE0E;
     box-sizing: border-box;
     border-radius: 4px;
-    color: white;
+    color: white !important;
     font-family: TelefonicaLight;
-    background: #5BC500;
+    background: #5BC500 !important;
 }
 
 .mensajeConfirmacion {

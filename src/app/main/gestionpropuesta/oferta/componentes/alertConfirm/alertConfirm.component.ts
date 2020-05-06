@@ -27,5 +27,8 @@ export class AlertConfirmComponent {
     onConfirmClick(): void {
         this.dialogRef.close(true);
     }
+    onCancelcick(): void {
+        this.dialogRef.close();
+    }    
 }
 
