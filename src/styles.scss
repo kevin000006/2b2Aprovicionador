@@ -365,7 +365,9 @@ login-2 #login #login-form-wrapper #login-form {
 
 body.theme-default .mat-tab-group.mat-primary .mat-ink-bar,
 body.theme-default .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-    background-color: #2593B5 !important;
+    background-color: #954B97 !important;
+    border-radius: 10px;
+    height: 5px !important;
 }
 
 .mat-ink-bar {
@@ -373,7 +375,7 @@ body.theme-default .mat-tab-nav-bar.mat-primary .mat-ink-bar {
 }
 
 .mat-tab-label .mat-tab-label-content {
-    font-size: 20px;
+    font-size: 16px !important;
     color: rgba(0, 50, 69, 0.6) !important;
 }
 
@@ -435,8 +437,9 @@ a.btn-primary-telefonica {
     background: #62CE0E;
     border-radius: 4px;
     color: #fff;
+    outline: none !important;
     min-width: 110px;
-    font-size: 12px;
+    font-size: 12px !important;
     border: 0;
     min-height: 26px;
 }
@@ -444,8 +447,9 @@ a.btn-primary-telefonica {
 .btn-telefonica-gree-2 {
     background: transparent;
     border-radius: 4px;
-    color: #62CE0E;
+    color: #62CE0E !important;
     min-width: 110px;
+    outline: none !important;
     font-size: 12px;
     border: 1px solid #62CE0E;
     min-height: 26px;

@@ -14,7 +14,7 @@
                     <label class="label-title">Versión</label>
                 </div>
                 <div class="text-center">
-                    <span class="font-body-oferta">{{ofertaBase.version}}</span>
+                    <span class="font-body-oferta" style="font-family: TelefonicaBold;">{{ofertaBase.version}}</span>
                 </div>
             </div>
         </div>
@@ -22,7 +22,7 @@
             <div class=" content-title-oferta">
                 <span class="label-title">Código SalesForce:</span>
             </div>
-            <div class=" ">
+            <div class="content-control-oferta">
                 <mat-form-field color="accent">
                     <span style="font-size: 10px;" class="prefix font-body-oferta" matPrefix>PER- &nbsp;</span>
                     <input autocomplete="off" matInput class="form-control font-body-oferta" placeholder="" name="salesforce">
@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="space-bottom-oferta">
+            <div class="content-control-oferta">
                 <div class="">
                     <label class="label-title">Ingeniero Preventa:</label>
                 </div>
@@ -58,7 +58,7 @@
                     <span class="font-body-oferta">Maria Rosa Ramos</span>
                 </div>
             </div>
-            <div class="space-bottom-oferta">
+            <div class="content-control-oferta">
                 <div class="">
                     <label class="label-title">Gerente de cuentas:</label>
                 </div>
@@ -66,7 +66,7 @@
                     <span class="font-body-oferta">Rony Tapia Hechevarria</span>
                 </div>
             </div>
-            <div class="space-bottom-oferta">
+            <div class="content-control-oferta">
                 <div class="">
                     <label class="label-title">Analista Financiero:</label>
                 </div>
@@ -77,7 +77,7 @@
         </div>
         <div class="row">
             <div class="content-btn-ganada">
-                <button class="btn btn-md btn-ganada">Ganado</button>
+                <button class="btn btn-md btn-telefonica-gree-2">Ganado</button>
             </div>
         </div>
     </div>
@@ -92,13 +92,14 @@
                 </mat-form-field>
             </div>
             <div class="col-sm-7 padding-l-none">
-                <label class="font-body-oferta cliente-nombre">20302241598 / KOMATSU-MITSUI MAQUINARIAS PERU S.A.</label>
+               <!-- <label class="font-body-oferta cliente-nombre">20302241598 / KOMATSU-MITSUI MAQUINARIAS PERU S.A.</label>-->
+               <label class="font-body-oferta cliente-nombre">20302241598 / {{ofertaBase.cliente}}</label>
             </div>
             <!-- <div class="col-sm-3 content-btn-guardar">
                 <button class="btn-primary-telefonica btn-guardar-oferta">Guardar</button>
             </div> -->
         </div>
-        <div class="row">
+        <div class="row content-control-oferta">
             <div class="col-sm-4 padding-l-none">
                 <div class="content-title-oferta">
                     <span class="label-title">Contacto cliente:*</span>
@@ -144,7 +145,7 @@
                     </div>
                     <div class=" content-control-oferta">
                         <mat-form-field color="accent">
-                            <input autocomplete="off" matInput class="form-control font-body-oferta" placeholder="">
+                            <input autocomplete="off" matInput class="form-control font-body-oferta" value="{{ofertaBase.descripcion}}" placeholder="">
                             <mat-icon class="icon" matSuffix>description &nbsp;</mat-icon>
                         </mat-form-field>
                     </div>
@@ -309,7 +310,7 @@
                     </div>
                     <div class="row ">
 
-                        <div><label class="label-title">Aprobador</label></div>
+                        <div><label class="label-title" style="font-family: TelefonicaBold;">Aprobador</label></div>
                         <div class="bg-info">
                             <mat-icon class="icon icon-flotante" matSuffix>person_outlin &nbsp;</mat-icon>
                             <label class="font-body-oferta desc-icon-flotante">Gerente de cuenta</label>
@@ -322,10 +323,11 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-offset-9 col-sm-3 content-btn-guardar">
-            <button class="btn-primary-telefonica btn-guardar-oferta">Guardar</button>
+        <div class="row">
+            <div class=" content-btn-guardar">
+                <button class="btn-telefonica-gree btn-guardar-oferta">Guardar</button>
+            </div>
         </div>
     </div>
+    
 </div>

@@ -1,8 +1,5 @@
 .oferta-head {
     margin: 0;
-    background: #FFFFFF;
-    border-radius: 4px;
-    padding: 30px 20px;
 }
 
 .label-title {
@@ -22,7 +19,7 @@
 }
 
 .content-control-oferta {
-    height: 65.5px;
+    height: 69px;
 }
 
 .padding-none {
@@ -75,6 +72,8 @@
 
 .icon {
     font-size: 15px;
+    height: auto !important;
+    min-height: 0 !important;
 }
 
 .space-bottom-oferta {

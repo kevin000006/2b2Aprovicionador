@@ -9,9 +9,7 @@
     font-size: 11px;
 }
 
-.mat-form-field-appearance-legacy .mat-form-field-infix {
-    padding: 2px !important;
-}
+
 
 .font-body-oferta {
     font-size: 11px;
@@ -127,16 +125,16 @@
     position: relative;
     display: inline-block;
     width: auto;
-    color: #2493B4;
+    color: #00A9E0;
     cursor: pointer;
     font-weight: bold;
 }
 
 .opcion-oferta .icon {
+    line-height: 55px;
     font-size: 15px;
     position: absolute;
-    top: 2px;
-    color: #2493B4;
+    color: #00A9E0 !important;
 }
 
 .opcion-oferta span {
@@ -196,3 +194,18 @@
     color: #6d6666;
     padding: 0 10px;
 }
+
+.mytab-oferta{
+    background: #fff;
+    padding: 15px 20px;
+    border-radius: 10px;
+}
+
+.opciones-oferta{
+    background: #fff;
+    margin-bottom: 15px;
+    height: 55px;
+    line-height: 55px;
+    border-radius: 5px;
+}
+
