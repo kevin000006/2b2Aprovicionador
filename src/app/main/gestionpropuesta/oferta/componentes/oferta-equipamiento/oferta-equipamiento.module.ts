@@ -9,13 +9,17 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-
+import { MatDialogModule } from '@angular/material/dialog';
+// import { AlertConfirmComponent } from '../alertConfirm/alertConfirm.component';
+import { AlertSuccessComponent } from '../alertSuccess/alertSuccess.component';
 
 @NgModule({
     declarations: [
-        OfertaEquipamientoComponent
+        OfertaEquipamientoComponent,
+        //AlertConfirmComponent,
+        AlertSuccessComponent
     ],
-    imports     : [
+    imports: [
         FormsModule,
         CommonModule,
         MatButtonModule,
@@ -24,10 +28,11 @@ import { MatSelectModule } from '@angular/material/select';
         MatTableModule,
         MatInputModule,
         MatSelectModule,
-        MatMenuModule
+        MatMenuModule,
+        MatDialogModule
     ],
-    exports:[
+    exports: [
         OfertaEquipamientoComponent
     ]
 })
-export class OfertaEquipamientoModule{}
+export class OfertaEquipamientoModule { }
