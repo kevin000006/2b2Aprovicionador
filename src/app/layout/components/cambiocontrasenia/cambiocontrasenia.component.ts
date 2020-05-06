@@ -84,8 +84,7 @@ export class CambiarContraseniaComponent implements OnInit {
             this.authError = true;
             this.dialogRef.close(res);
             let snack = this._snack.open(res.mensaje, 'Ok');
-            snack.afterDismissed().subscribe(() => {
-              debugger;
+            snack.afterDismissed().subscribe(() => {              
               localStorage.clear();
               this._router.navigate(['login-2']);
             });
