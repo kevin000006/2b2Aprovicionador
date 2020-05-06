@@ -9,8 +9,7 @@ export class SubirTramaService {
 
   constructor(private http: HttpClient) { }
 
-  GuardarArchivo(data: any): Observable<any> {
-    debugger;
+  GuardarArchivo(data: any): Observable<any> {    
     return this.http.post<any>('/IsisEntity/uploadCVS', data);
     /* if (data.tipo == "1") {     
      }
