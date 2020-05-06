@@ -8,6 +8,14 @@
     color: white !important;
     font-family: TelefonicaLight;
     background: #5BC500 !important;
+    height: 48px;
+}
+
+.mensaje {
+    font-family: TelefonicaLight;
+    color: #50535A;
+    font-size: 16px;
+    margin-bottom: 24px;
 }
 
 .mensajeConfirmacion {

@@ -1,4 +1,4 @@
-<button mat-icon-button class="close-ico" (click)="onCancelcick()" style="float: right;">
+<button mat-icon-button class="close-ico" (click)="onCancelcick()">
     <mat-icon>close</mat-icon>
 </button>
 <mat-dialog-content>
@@ -9,15 +9,14 @@
         <p class="mensajeConfirmacion" class="mensajeConfirmacion">!Excelente!</p>
     </div>
     <div class="row text-center">
-        <p>
+        <p class="mensaje">
             {{message}}
         </p>
     </div>
-</mat-dialog-content>
-<mat-dialog-actions align="center">
+
     <div class="row" style="margin-bottom: 24px;">
-        <div class="col-md-offset-4 col-md-4 col-sm-12 text-center">
+        <div class="col-md-offset-3 col-md-6 col-sm-12 text-center">
             <button mat-flat-button class="btn btn-md btn-aceptar" (click)="onConfirmClick()" tabindex="1">{{confirmButtonText}}</button>
         </div>
     </div>
-</mat-dialog-actions>
+</mat-dialog-content>

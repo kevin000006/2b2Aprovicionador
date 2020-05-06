@@ -8,6 +8,7 @@
     border-radius: 4px;
     color: #62CE0E;
     font-family: TelefonicaLight;
+    height: 48px;
 }
 
 .btn-aceptar {
@@ -20,6 +21,13 @@
     color: white;
     font-family: TelefonicaLight;
     background: #5BC500;
+    height: 48px;
+}
+
+.mensaje {
+    font-family: TelefonicaLight;
+    color: #50535A;
+    font-size: 18px;
 }
 
 .mensajeConfirmacion {
