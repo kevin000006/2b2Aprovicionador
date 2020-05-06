@@ -3,20 +3,6 @@ export class UsuarioModel{
   apellidos: String;
 }
 
-export class EstadoModel{
-  id : number;
-  codigo_agrupado : string;
-  codigo_estado : string;
-  descripcion : string;
-  idSet : boolean
-}
-
-
-export class ClienteModel{
-  id : number;
-  descripcion : string;
-}
-
 export class BandejaModel {
     id: number;
     codigo: string = "";
@@ -26,4 +12,5 @@ export class BandejaModel {
     tipoproyecto:string;
     oportunidad:string;
     descripcion:string;
+    url:string;
   }

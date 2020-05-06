@@ -1,8 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {DatePipe } from '@angular/common' 
+import { HttpClient, HttpErrorResponse, } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { BandejaService } from './bandeja.service';
-import { BandejaModel, ClienteModel, EstadoModel, UsuarioModel } from '../models/oferta';
+import { CommonService } from '../../../common.service';
+import { BandejaModel } from '../models/oferta';
+import { ComplejidadModel,EstadoModel } from '../../../model/Common';
 import { DataSource } from '@angular/cdk/collections';
 import { fuseAnimations } from '@fuse/animations';
 import { MatPaginator } from '@angular/material/paginator';
@@ -11,33 +14,56 @@ import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as XLSX from 'xlsx';
 import { ActivatedRoute, Router } from '@angular/router';
+import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import * as Cookies from 'js-cookie';
 
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'YYYY',
+  },
+};
 
 @Component({
   selector: 'app-bandeja',
   templateUrl: './bandeja.component.html',
   animations: fuseAnimations,
-  styleUrls: ['./bandeja.component.scss']
+  styleUrls: ['./bandeja.component.scss'],
+  providers:[
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+    DatePipe
+  ]
 })
 
 export class BandejaComponent implements OnInit {
 
-  _filtro: any = { codoportunidad: '', cliente: '', descripcion: '', complejidad:'', estado:'', desde: '', hasta:'' };
+  _filtro: any = { 
+    odoportunidad: '', 
+    cliente: '', 
+    descripcion: '', 
+    complejidad:'', 
+    estado:'', 
+    desde: '', 
+    hasta:''
+   };
   pageIndex:number=0;
-
-
   fileName = 'bandeja_oferta.xlsx';
 
   lstBandeja = new Array<BandejaModel>();
-  lstCliente = new Array<ClienteModel>();
+  lstComplejidad = new Array<ComplejidadModel>();
   lstEstado = new Array<EstadoModel>();
   checked = false;
-  _visible = true;
   visible_filtro = false;
   self = null;
 
-  displayedColumns: string[] = ['menu', 'codigo', 'version', 'oportunidad', 'cliente', 'descripcion', 'estado'];
+  displayedColumns: string[] = ['codigo', 'version', 'oportunidad', 'cliente', 'descripcion', 'estado','menu'];
   exampleDatabase: BandejaService | null;
   dataSource: EjemploDataSource | null;
   index: number;
@@ -45,17 +71,16 @@ export class BandejaComponent implements OnInit {
   currentUser: any = { nombres: '', apellidos: '', nombrecorto: '' };;
 
   constructor(public httpClient: HttpClient,
-    public bandejaService: BandejaService,
+    private bandejaService: BandejaService,
+    private commonService: CommonService,
     public dialog: MatDialog,
-    private _router: Router) {
-      this.self = this;
-    this.bandejaService.getClienteAll()
-      .subscribe(data => this.lstCliente = data);
+    private _router: Router,
+    public datepipe: DatePipe) {
+    this.commonService.getComplejidadAll()
+      .subscribe(data => this.lstComplejidad = data);
 
-    this.bandejaService.getEstadoAll()
+    this.commonService.getEstadoAll()
       .subscribe(data => this.lstEstado = data);
-
-    //this.getofertasAll();
 
   }
 
@@ -65,11 +90,6 @@ export class BandejaComponent implements OnInit {
   @ViewChild('pagesize', { static: true }) pagesize: ElementRef;
 
   ngOnInit(): void {
-
-    setTimeout(() => {
-      this._visible = false;
-    }, 2500);
-
 
     if (Cookies.get('currentUser') === undefined) {
       this._router.navigate(['pages/auth/login-2'], { state: {} });
@@ -113,31 +133,26 @@ export class BandejaComponent implements OnInit {
 
   public filtrarData() {
 
+    let _desde = '', _hasta = '';
+    if(this._filtro.desde != null && this._filtro.desde !== undefined)
+      _desde = this.datepipe.transform(this._filtro.desde,'yyyy/MM/dd');
+    
+
+    if(this._filtro.hasta != null && this._filtro.hasta !== undefined)
+      _hasta = this.datepipe.transform(this._filtro.hasta,'yyyy/MM/dd');
+   
+
     var obj = {
       codoportunidad: this._filtro.codoportunidad,
       cliente: this._filtro.cliente,
       descripcion: this._filtro.descripcion,
       complejidad:this._filtro.complejidad,
       estado: this._filtro.estado,
-      desde:this._filtro.desde,
-      hasta:this._filtro.hasta,
+      desde: _desde,
+      hasta: _hasta,
       page:this.pageIndex,
       size:this.pagesize.nativeElement.value
     }
-
-    //if (this._filtro.oportunidad != null && this._filtro.oportunidad != "" && this._filtro.oportunidad !== undefined)
-     // obj.codoportunidad = this._filtro.oportunidad;
-
-   // if (this._filtro.descripcion != null && this._filtro.descripcion != "" && this._filtro.descripcion !== undefined)
-    //  obj.descripcion = this._filtro.descripcion;
-
-   // if (this._filtro.cliente != null && this._filtro.cliente != "" && this._filtro.cliente !== undefined)
-    //  obj.cliente = this._filtro.cliente;
-
-    //if (this._filtro.estado != null && this._filtro.estado != 0 && this._filtro.estado !== undefined)
-     // obj.estado = this._filtro.estado;
-
-
 
     this.dataSource.filtrar(obj,this.pagesize.nativeElement.value);
   }
@@ -186,6 +201,7 @@ export class EjemploDataSource extends DataSource<BandejaModel>{
     this.pageSize = size || 5;
   }
   totalPages:number=0;
+  totalRegistros:number=0;
   filteredData: BandejaModel[] = [];
   renderedData: BandejaModel[] = [];
 
@@ -225,9 +241,9 @@ export class EjemploDataSource extends DataSource<BandejaModel>{
      // this.renderedData = sortedData.splice(startIndex, this._paginator.pageSize);
      this.renderedData = sortedData.splice(0, 100);
      
-     let _totalrows = this._exampleDatabase.data['rows'] || 0;
+      this.totalRegistros = this._exampleDatabase.data['rows'] || 0;
 
-     this.totalPages = Math.ceil((_totalrows / this.pageSize));
+     this.totalPages = Math.ceil((this.totalRegistros / this.pageSize));
 
       return this.renderedData;
     }

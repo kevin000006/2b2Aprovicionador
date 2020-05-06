@@ -24,10 +24,8 @@ export class OfertaComponent implements OnInit {
 
   ngOnInit(): void {
     
-    
     console.log(window.history.state);
     
-
   }
 
   openShared():void{

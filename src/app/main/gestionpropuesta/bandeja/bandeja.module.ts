@@ -14,6 +14,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import { BandejaService } from './bandeja.service';
 import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -48,6 +49,7 @@ const routes: Routes = [
         MatCheckboxModule,
         MatPaginatorModule,
         MatSortModule,
+        MatDatepickerModule,
         FormsModule,
         MatCardModule
     ],

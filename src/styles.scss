@@ -4,6 +4,10 @@
 @import "app/app.theme";
 @import "assets/css/bootstrap.css";
 @import "assets/css/fonts-telefonica.css";
+
+*{
+    font-family: TelefonicaLight;;
+}
 #container-1 fuse-sidebar {
     box-shadow: 0 9px 8px 0 rgba(0, 0, 0, 0.35) !important;
 }

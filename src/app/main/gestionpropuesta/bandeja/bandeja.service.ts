@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, BehaviorSubject, empty } from 'rxjs';
-import { BandejaModel, ClienteModel, EstadoModel } from '../models/oferta';
+import { BandejaModel } from '../models/oferta';
+import { Guid } from "guid-typescript";
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,29 @@ export class BandejaService {
     this.http.get<BandejaModel[]>('/oferta/obtenerofertas', { params: params }).subscribe(data => {
 
       let _data = new BandejaModel();
+      _data.codigo = '001';
+      _data.id = 1;
+      _data.oportunidad = 'PP0005';
+
+      data['data'].push(_data);
+      _data.id = 2;
+      data['data'].push(_data);
+      _data.id = 3;
+      data['data'].push(_data);
+
+      let urls = [];
+      for(let rb of data['data']){
+        let _codigo = Guid.create().toString().split('-').join('');;
+        urls.push({
+          codigo: _codigo,
+          url:'gestion-propuesta/oferta',
+          model: rb
+        });
+
+        rb.url =  'bandeja-redirect/' + _codigo;
+      }
+
+      window.sessionStorage.setItem('bandeja',JSON.stringify(urls));
      
 
       this.dataChange.next(data);
@@ -44,21 +68,7 @@ export class BandejaService {
       });
   }
 
-  newOferta(data: BandejaModel): Observable<any> {
-    return this.http.post<BandejaModel>('/oferta/saveOferta', data);
-  }
-
-  deleteOferta(data: BandejaModel): Observable<any> {
-    return this.http.delete("/oferta/deleteOferta/" + data.id);
-  }
-
-  getClienteAll(): Observable<ClienteModel[]> {
-    return this.http.post<ClienteModel[]>('/clientes/findAll', null);
-  }
-
-  getEstadoAll(): Observable<EstadoModel[]> {
-    return this.http.post<EstadoModel[]>('/estadoRest/findAll', null);
-  }
+ 
 
 
 }
