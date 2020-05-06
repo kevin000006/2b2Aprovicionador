@@ -1,9 +1,11 @@
 import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { OfertaService } from './oferta.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import {BandejaModel} from '../models/oferta';
+import { ShareDialogComponent } from './componentes/share-dialog/share-dialog.component';
 import { map } from 'rxjs/operators';
 import { Guid } from "guid-typescript";
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -18,19 +20,36 @@ export class OfertaComponent implements OnInit {
   urlShared:string = "";
   hideSharedBtn = false;
   showShared = false;
-
-  constructor(private ofertaService:OfertaService) { }
+  ofertaBase = {};
+  constructor(
+    private ofertaService:OfertaService,
+    public dialog: MatDialog){ }
   
 
   ngOnInit(): void {
     
-    console.log(window.history.state);
-    
+    if(window.sessionStorage.getItem('oferta') != null){
+      this.ofertaBase = JSON.parse(window.sessionStorage.getItem('oferta'));
+    }
+    else{
+      if(window.history.state.id == 0 || window.history.state.id === undefined)
+      {
+        this.ofertaBase = new BandejaModel();
+      }else{
+        this.ofertaBase = window.history.state;
+        window.sessionStorage.setItem('oferta',JSON.stringify(window.history.state));
+      }
+
+        
+    }
+
   }
 
   openShared():void{
-    this.showShared = true;
-    this.hideSharedBtn = false;
+    const dialogRef = this.dialog.open(ShareDialogComponent, {
+      width: '500px',    
+      data: {}    
+    });
   }
 
   obtenerUrl():void{

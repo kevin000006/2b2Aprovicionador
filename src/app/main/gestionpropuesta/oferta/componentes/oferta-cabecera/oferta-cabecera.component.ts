@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'oferta-cabecera',
@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class OfertaCabeceraComponent implements OnInit {
 
   constructor() { }
+  @Input() ofertaBase:any={};
 
   ngOnInit(): void {
   }

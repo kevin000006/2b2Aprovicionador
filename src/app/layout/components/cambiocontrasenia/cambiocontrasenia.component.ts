@@ -50,11 +50,16 @@ export class CambiarContraseniaComponent implements OnInit {
     this.dialogRef.close();
   }
   onSubmit() {
-    this.submitted = true;
-    if (!this.registerForm.valid)
-        return;
+    // this.submitted = true;
+    // if (!this.registerForm.valid)
+    //     return;
     const dialogRef = this.dialog.open(AlertConfirmCambioContraseniaComponent, {
-      width: '450px',
+      width: '760px',
+      height: '280px',
+      position: {
+        'top': '150px'
+      },
+      panelClass: 'custom-modalbox',
       data: {
         message: '¿Maria Ramos, estás segúro(a) de cambiar tu contraseña?',
         buttonText: {

@@ -39,7 +39,11 @@ import { HttpConfigInterceptor } from 'app/interceptor/HttpConfig';
 const appRoutes: Routes = [
     {
         path: 'shared/:id',
-        loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule)
+        loadChildren: () => import('./share/shared.module').then(m => m.SharedModule)
+    },
+    {
+        path: 'bandeja-redirect/:id',
+        loadChildren: () => import('./share/redirect-bandeja.module').then(m => m.RedirectBandejaModule)
     },
     {
         path: 'gestion-propuesta',

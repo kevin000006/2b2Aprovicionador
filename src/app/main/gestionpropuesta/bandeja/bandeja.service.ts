@@ -19,7 +19,7 @@ export class BandejaService {
 
   getBandejaAll(param: any): void {
 
-    let formatoFecha = "yyyy/MM/dd";
+    //let formatoFecha = "yyyy/MM/dd";
 
     let params = new HttpParams();
     params = params.append('codoportunidad', param.codoportunidad || '');
@@ -34,16 +34,11 @@ export class BandejaService {
 
     this.http.get<BandejaModel[]>('/oferta/obtenerofertas', { params: params }).subscribe(data => {
 
-      let _data = new BandejaModel();
-      _data.codigo = '001';
-      _data.id = 1;
-      _data.oportunidad = 'PP0005';
-
-      data['data'].push(_data);
-      _data.id = 2;
-      data['data'].push(_data);
-      _data.id = 3;
-      data['data'].push(_data);
+     
+      let _data1 = new BandejaModel();
+      _data1.codigo = '001';
+      _data1.id = 1;
+      _data1.oportunidad = 'PP0005';
 
       let urls = [];
       for(let rb of data['data']){
@@ -57,7 +52,7 @@ export class BandejaService {
         rb.url =  'bandeja-redirect/' + _codigo;
       }
 
-      window.sessionStorage.setItem('bandeja',JSON.stringify(urls));
+      window.localStorage.setItem('bandeja',JSON.stringify(urls));
      
 
       this.dataChange.next(data);
@@ -65,7 +60,9 @@ export class BandejaService {
     },
       (error: HttpErrorResponse) => {
         console.log(error.name + ' ' + error.message);
+        
       });
+
   }
 
  

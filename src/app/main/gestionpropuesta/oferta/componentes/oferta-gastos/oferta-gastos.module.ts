@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { OfertaGastosComponent } from './oferta-gastos.component'
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -11,12 +14,15 @@ import { MatSelectModule } from '@angular/material/select';
         OfertaGastosComponent
     ],
     imports: [
+        FormsModule,
+        CommonModule,
+        MatButtonModule,
         MatIconModule,
         MatTableModule,
         MatMenuModule,
         MatFormFieldModule,
         MatInputModule,
-        MatSelectModule
+        MatSelectModule        
     ],
     exports: [
         OfertaGastosComponent

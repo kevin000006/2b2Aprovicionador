@@ -1,5 +1,16 @@
 <mat-dialog-content>
-    <agm-map [latitude]="lat" [longitude]="lng" style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; "></agm-map>
+    <agm-map [zoom]="zoom" [latitude]="pickedLat" [longitude]="pickedLon">
+        <!-- <agm-marker *ngFor="let m of locationGobal; let i = index" [latitude]="m.lat" [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable" (dragEnd)="markerDragEnd($event)">
+            <agm-info-window>
+                <strong>InfoWindow content</strong>
+            </agm-info-window>
+        </agm-marker> -->
+        <agm-marker [latitude]="pickedLat" [longitude]="pickedLon" (dragEnd)="markerDragEnd($event)" [markerDraggable]="true">
+            <agm-info-window>
+                <p>Aqui</p>
+            </agm-info-window>
+        </agm-marker>
+    </agm-map>
     <div class="row" style="
     font-family: TelefonicaLight;
     position: absolute;
@@ -8,7 +19,11 @@
     top: 0;
     height: 100%;
     width: 25%;
-    padding: 48px;">
+    padding: 48px;
+    -webkit-box-shadow: -7px 0px 24px 0px rgba(0,0,0,0.76);
+    -moz-box-shadow: -7px 0px 24px 0px rgba(0,0,0,0.76);
+    box-shadow: -7px 0px 24px 0px rgba(0,0,0,0.76);
+    ">
         <div class="col-md-12 col-xs-12 col-sm-12">
 
             <button mat-icon-button class="close-ico" [mat-dialog-close]="true">
@@ -22,7 +37,7 @@
                     <div class="col-md-12">
                         <mat-form-field appearance="legacy">
                             <mat-label>Dirección</mat-label>
-                            <input matInput placeholder="Dirección">
+                            <input matInput placeholder="Dirección" readonly="readonly" [(ngModel)]="data.direccion">
                         </mat-form-field>
                     </div>
                 </div>
@@ -30,7 +45,7 @@
                     <div class="col-md-12">
                         <mat-form-field appearance="legacy">
                             <mat-label>Latitud</mat-label>
-                            <input matInput placeholder="Latitud">
+                            <input matInput placeholder="Latitud" readonly="readonly" [(ngModel)]="pickedLat">
                         </mat-form-field>
                     </div>
                 </div>
@@ -38,7 +53,7 @@
                     <div class="col-md-12">
                         <mat-form-field appearance="legacy">
                             <mat-label>Longitud</mat-label>
-                            <input matInput placeholder="Longitud">
+                            <input matInput placeholder="Longitud" readonly="readonly" [(ngModel)]="pickedLon">
                         </mat-form-field>
                     </div>
                 </div>

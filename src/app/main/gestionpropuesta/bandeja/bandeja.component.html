@@ -145,7 +145,7 @@
                         <ng-container matColumnDef="codigo">
                             <mat-header-cell *matHeaderCellDef mat-sort-header>Código PP</mat-header-cell>
                             <mat-cell *matCellDef="let row">
-                                <a target="_blank" [routerLink]="['/gestion-propuesta/oferta']" [state]="{data: row.id}">
+                                <a target="_blank" href="{{row.url}}">
                                     {{row.codigo}}
                                   </a>                                 
                             </mat-cell>

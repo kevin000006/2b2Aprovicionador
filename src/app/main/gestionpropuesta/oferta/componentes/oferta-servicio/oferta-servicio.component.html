@@ -3,9 +3,13 @@
         <div class="form-horizontal">
             <div class="form-group">
                 <div class="col-xs-12 col-md-1">
-                    <button class="btn-primary-telefonica-2" (click)="addRow()">
+                    <!-- <button class="btn-primary-telefonica-2" (click)="addRow()">
                             <mat-icon>add</mat-icon>
-                    </button>
+                    </button> -->
+                    <a mat-mini-fab (click)="addRow()" mat-icon-button>
+                        <mat-icon>add</mat-icon>
+                    </a>
+
                 </div>
                 <div class="col-xs-12 col-md-2">
                     <mat-form-field color="accent" appearance="legacy">
@@ -62,7 +66,7 @@
                             <ng-container matColumnDef="geo">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Geo </mat-header-cell>
                                 <mat-cell *matCellDef="let element">
-                                    <a style="cursor:pointer;color: #2493B4;" (click)="geoDialog(row)" mat-icon-button>
+                                    <a mat-mini-fab (click)="geoDialog(element)" mat-icon-button>
                                         <mat-icon>location_on</mat-icon>
                                     </a>
                                 </mat-cell>
@@ -257,7 +261,7 @@
                             <ng-container matColumnDef="otro">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Otros </mat-header-cell>
                                 <mat-cell *matCellDef="let element">
-                                    <a style="cursor:pointer;color: #2493B4;" mat-icon-button>
+                                    <a mat-mini-fab mat-icon-button>
                                         <mat-icon>store</mat-icon>
                                     </a>
                                 </mat-cell>

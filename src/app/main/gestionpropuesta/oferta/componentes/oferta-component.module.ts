@@ -7,11 +7,12 @@ import { OfertaCabeceraModule } from './oferta-cabecera/oferta-cabecera.module';
 import { OfertaEquipamientoModule } from './oferta-equipamiento/oferta-equipamiento.module';
 import { OfertaGastosModule } from './oferta-gastos/oferta-gastos.module';
 import { OfertaServicioModule } from './oferta-servicio/oferta-servicio..module';
+import { ShareDialogComponent } from './share-dialog/share-dialog.component';
 
 @NgModule({
 
     declarations: [
-    ],
+    ShareDialogComponent],
     imports: [
         OfertaCabeceraModule,
         OfertaEquipamientoModule,

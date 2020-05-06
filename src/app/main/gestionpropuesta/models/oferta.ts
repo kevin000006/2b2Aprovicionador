@@ -4,8 +4,8 @@ export class UsuarioModel{
 }
 
 export class BandejaModel {
-    id: number;
-    codigo: string = "";
+    id: number = 0;
+    codigo: string = "---";
     version: number = 1;
     estado: string;   
     cliente: string;

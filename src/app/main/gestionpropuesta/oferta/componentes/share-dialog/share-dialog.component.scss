@@ -1,0 +1,41 @@
+.content-share{
+     font-weight: normal;
+}
+
+.content-share .close span{
+    color: #3c3c3c;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.content-share .title h3{
+    color: #3c3c3c;
+    font-size: 19px;
+    margin: 8px 0;
+}
+
+.content-share .controlk{
+    margin: 15px 0;
+}
+
+.content-share .controlk input {
+    color: #3c3c3c;
+    border: 1px solid #bfbaba;
+    min-height: 30px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: 72%;
+    float: left;
+}
+
+.content-share .controlk button {
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    min-height: 30px;
+    width: 28%;
+}
+
+.content-share .footer button{
+    min-height: 30px;
+    min-width: 140px;
+}
