@@ -3,9 +3,9 @@
         <div class="form-horizontal">
             <div class="form-group">
                 <div class="col-xs-12 col-md-1">
-                    <a mat-mini-fab (click)="addRow()" mat-icon-button>
+                    <button mat-mini-fab (click)="addRow()">
                         <mat-icon>add</mat-icon>
-                    </a>
+                    </button>
                 </div>
                 <div class="col-xs-12 col-md-2">
                     <mat-form-field color="accent" appearance="legacy">
@@ -18,6 +18,11 @@
                             <mat-option value="5">50 por pagina</mat-option>
                         </mat-select>
                     </mat-form-field>
+                </div>
+                <div class="col-xs-12 col-md-2">
+                    <button (click)="Guardar()" mat-flat-button color="primary" mat-flat-button>
+                        Guardar
+                    </button>
                 </div>
             </div>
             <div class="form-group">

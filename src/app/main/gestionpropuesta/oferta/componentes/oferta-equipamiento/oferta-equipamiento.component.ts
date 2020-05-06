@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { AlertConfirmComponent } from '../alertConfirm/alertConfirm.component';
+import { AlertSuccessComponent } from '../alertSuccess/alertSuccess.component';
 import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'oferta-equipamiento',
@@ -48,6 +49,22 @@ export class OfertaEquipamientoComponent implements OnInit {
   addRow(): void {
     this.dataSource.data.push(this.crearNuevoGastos(this.dataSource.data.length + 1));
     this.dataSource.filter = "";
+  }
+  Guardar(): void {
+    const dialogRef = this.dialog.open(AlertSuccessComponent, {
+      width: '500px',
+      data: {
+        message: 'Se registro correctamente los datos del proyecto.',
+        buttonText: {ok: 'Aceptar'}
+      }
+    });
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        const a = document.createElement('a');
+        a.click();
+        a.remove();        
+      }
+    });
   }
   deleteRow(item: any): void {
     const dialogRef = this.dialog.open(AlertConfirmComponent, {
