@@ -1,13 +1,47 @@
-<div id="orders" class="page-layout carded fullwidth ">
+<div id="oferta" class="page-layout carded fullwidth ">
     <div class="center">
         <div class="row">
             <br/>
+            <div class="row opciones-oferta">
+                <div class="col-sm-7">
+                    <div class="opcion-oferta">
+                        <mat-icon class="icon" matSuffix>cloud_upload &nbsp;</mat-icon>
+                        <span>Adjuntar</span>
+                    </div>
+                    <div class="opcion-oferta">
+                        <mat-icon class="icon" matSuffix>book &nbsp;</mat-icon>
+                        <span>Bitácora</span>
+                    </div>
+                    <div class="opcion-oferta">
+                        <mat-icon class="icon" matSuffix>bar_chart &nbsp;</mat-icon>
+                        <span>F. Financiero</span>
+                    </div>
+                    <div class="opcion-oferta" (click)="openShared()">
+                        <mat-icon class="icon" matSuffix>link &nbsp;</mat-icon>
+                        <span>Compartir</span>
+                    </div>
+                </div>
+                <div class="col-sm-5 text-right">
+                    <mat-menu #appMenu="matMenu">
+                        <button mat-menu-item> Caratula </button>
+                        <button mat-menu-item>FET </button>
+                        <button mat-menu-item> FCA </button>
+                        <button mat-menu-item> P Implantación </button>
+                    </mat-menu>
+                    <button mat-button [matMenuTriggerFor]="appMenu" class="btn btn-md btn-telefonica-gree-2"> Descargar
+                         <mat-icon style="color: #4df109;height: 0;min-height: 0;line-height: 17px;position: absolute;" class="icon">keyboard_arrow_down</mat-icon>
+                    </button>
+                   
+                </div>
+            </div>
+
+            
             <mat-tab-group class="mytab-oferta">
                 <mat-tab label="Datos de proyecto">
-                    <br/>
+                    
                     <oferta-cabecera
                     [ofertaBase]="ofertaBase"></oferta-cabecera>
-                    <br/>
+                   
                 </mat-tab>
                 <mat-tab label="Servicios">
                     <br/>
@@ -27,68 +61,5 @@
                 </mat-tab>
             </mat-tab-group>
         </div>
-        <div class="row">
-            <div class="col-sm-7">
-                <div class="opcion-oferta">
-                    <mat-icon class="icon" matSuffix>cloud_upload &nbsp;</mat-icon>
-                    <span>Adjuntar</span>
-                </div>
-                <div class="opcion-oferta">
-                    <mat-icon class="icon" matSuffix>book &nbsp;</mat-icon>
-                    <span>Bitácora</span>
-                </div>
-                <div class="opcion-oferta">
-                    <mat-icon class="icon" matSuffix>bar_chart &nbsp;</mat-icon>
-                    <span>F. Financiero</span>
-                </div>
-                <div class="opcion-oferta" (click)="openShared()">
-                    <mat-icon class="icon" matSuffix>file_copy &nbsp;</mat-icon>
-                    <span>Compartir</span>
-                </div>
-            </div>
-            <div class="col-sm-5 text-right">
-                <mat-menu #appMenu="matMenu">
-                    <button mat-menu-item> Caratula </button>
-                    <button mat-menu-item>FET </button>
-                    <button mat-menu-item> FCA </button>
-                    <button mat-menu-item> P Implantación </button>
-                </mat-menu>
-                <!-- <a class="btn btn-md btn-green-telefonica" mat-icon-button [matMenuTriggerFor]="appMenu">                    
-                    Descargar xls
-                    <mat-icon style="color:#fff" class="icon">keyboard_arrow_down</mat-icon>
-                </a> -->
-
-
-                <button mat-button [matMenuTriggerFor]="appMenu" class="btn btn-md btn-green-telefonica"> Descargar xls
-                     <mat-icon style="color:#fff" class="icon">keyboard_arrow_down</mat-icon>
-                </button>
-                <!-- <mat-menu #menu="matMenu">
-                    <a href="http://www.google.com" mat-menu-item>Item 1</a>
-                    <button mat-menu-item>Item 2</button>
-                </mat-menu> -->
-
-            </div>
-        </div>
-     
-        <div class="row" *ngIf="showShared">
-            <div class="col-xs-7 contetnt-shared">
-                <div class="col-xs-12">
-                    <h1>Obtener Enlace</h1>
-                </div>
-                <div class="col-xs-12 col-sm-10">
-                    <div class="url">{{urlShared}}</div>
-                </div>
-                <div class="col-xs-12 col-sm-2 padding-none">
-                    <button class="btn btn-sm btn-primary" (click)="obtenerUrl()" *ngIf="!hideSharedBtn">Obtener Url</button>
-                    <button class="btn btn-sm btn-info" *ngIf="hideSharedBtn">Copiar url</button>
-                </div>
-                <div class="col-xs-12">
-                    <button class="btn btn-sm btn-danger" (click)="closeShared()">Cancelar</button>
-                </div>
-            </div>
-           
-        </div>
-       
-        <br/>
     </div>
 </div>
