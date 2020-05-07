@@ -1,7 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { UsuarioModel } from 'app/model/Usuario';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'AlertSuccess',
@@ -26,5 +24,8 @@ export class AlertSuccessComponent {
     onConfirmClick(): void {
         this.dialogRef.close(true);
     }
+    onCancelcick(): void {
+        this.dialogRef.close();
+    }    
 }
 

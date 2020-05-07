@@ -18,7 +18,7 @@ export class OfertaGastosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    debugger;
+    
     //Lenar combo Comcepto
     this.listaConcepto.push(new ModelCombo("1", "Otros"));
     this.listaConcepto.push(new ModelCombo("2", "Valor 2"));

@@ -1,12 +1,21 @@
 .btn-aceptar {
     font-size: 14px;
-    min-width: 100px;
+    min-width: 100%;
+    margin-bottom: 4px;
     border: 1px solid #62CE0E;
     box-sizing: border-box;
     border-radius: 4px;
-    color: white;
+    color: white !important;
     font-family: TelefonicaLight;
-    background: #5BC500;
+    background: #5BC500 !important;
+    height: 48px;
+}
+
+.mensaje {
+    font-family: TelefonicaLight;
+    color: #50535A;
+    font-size: 16px;
+    margin-bottom: 24px;
 }
 
 .mensajeConfirmacion {
@@ -22,5 +31,5 @@
 
 .imagenConfirmacion {
     margin-bottom: 24px;
-    margin-top: 30px;
+    margin-top: 20px;
 }

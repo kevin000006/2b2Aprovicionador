@@ -19,11 +19,6 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
-                <div class="col-xs-12 col-md-2">
-                    <button (click)="Guardar()" mat-flat-button color="primary" mat-flat-button>
-                        Guardar
-                    </button>
-                </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-12">
@@ -136,6 +131,16 @@
                         <mat-footer-row class="footerRow" *matFooterRowDef="['accion', 'tipo', 'condicion', 'antigueadad', 'marca', 'modelo', 'cantidad', 'moneda', 'costo', 'costototal']"></mat-footer-row>
                     </mat-table>
                 </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-10 col-xs-2 text-right">
+                    <button class="btn btn-md btn-guardar" (click)="Guardar()">Guardar</button>
+                </div>
+                <!-- <div class="col-xs-12 col-md-2">
+                    <button  mat-flat-button color="primary" mat-flat-button>
+                        Guardar
+                    </button>
+                </div> -->
             </div>
         </div>
     </div>

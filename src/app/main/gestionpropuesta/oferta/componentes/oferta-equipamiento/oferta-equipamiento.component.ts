@@ -52,7 +52,7 @@ export class OfertaEquipamientoComponent implements OnInit {
   }
   Guardar(): void {
     const dialogRef = this.dialog.open(AlertSuccessComponent, {
-      width: '500px',
+      width: '700px',
       data: {
         message: 'Se registro correctamente los datos del proyecto.',
         buttonText: {ok: 'Aceptar'}
@@ -68,12 +68,12 @@ export class OfertaEquipamientoComponent implements OnInit {
   }
   deleteRow(item: any): void {
     const dialogRef = this.dialog.open(AlertConfirmComponent, {
-      width: '450px',
+      width: '650px',
       data: {
         message: '¿Esta seguro que desea eliminar esta fila?',
         buttonText: {
-          ok: 'Aceptar',
-          cancel: 'Cancelar'
+          ok: 'Si',
+          cancel: 'No'
         }
       }
     });
