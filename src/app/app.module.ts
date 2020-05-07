@@ -37,13 +37,12 @@ import { LoginService } from 'app/main/pages/authentication/login-2/login-2.serv
 import { HttpConfigInterceptor } from 'app/interceptor/HttpConfig';
 
 const appRoutes: Routes = [
-    {
-        path: 'shared/:id',
-        loadChildren: () => import('./share/shared.module').then(m => m.SharedModule)
-    },
+   
+   
+    
     {
         path: 'bandeja-redirect/:id',
-        loadChildren: () => import('./share/redirect-bandeja.module').then(m => m.RedirectBandejaModule)
+        loadChildren: () => import('./main/pages/share/redirect.module').then(m => m.RedirectBandejaModule)
     },
     {
         path: 'gestion-propuesta',
@@ -66,9 +65,15 @@ const appRoutes: Routes = [
         loadChildren: () => import('./main/documentation/documentation.module').then(m => m.DocumentationModule)
     },
     {
+        path: 'shared/:id',
+        redirectTo: 'pages/shared/:id',
+        pathMatch : 'full'
+    },
+    {
         path: '**',
         redirectTo: 'pages/auth/login-2'
     }
+    
 ];
 
 @NgModule({
@@ -80,6 +85,7 @@ const appRoutes: Routes = [
         BrowserModule, 
         BrowserAnimationsModule,
         HttpClientModule,
+       
         RouterModule.forRoot(appRoutes),
 
         TranslateModule.forRoot(),
@@ -111,7 +117,7 @@ const appRoutes: Routes = [
         FuseSharedModule,
         FuseSidebarModule,
         FuseThemeOptionsModule,
-
+        
         //
         FormsModule,
         ReactiveFormsModule,

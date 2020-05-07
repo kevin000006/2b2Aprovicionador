@@ -1,15 +1,15 @@
 <div class="row content-share">
     <div class="col-xs-12 text-right close">
-        <span>X</span>
+        <span  (click)="closeDialog()">X</span>
     </div>
     <div class="col-xs-12 title">
         <h3>Compartir</h3>
     </div>
     <div class="col-xs-12 controlk">
-        <input  class="form-control" placeholder="url" readonly>
-        <button class="btn-telefonica-gree">Obtener enlace</button>
+        <input #input  name="urlShared" value="{{urlShared}}" class="form-control" placeholder="url" readonly >
+        <button class="btn-telefonica-gree" (click)="obtenerUrl()">Obtener enlace</button>
     </div>
     <div class="col-xs-12 text-right footer">
-        <button class="btn-telefonica-gree-2">Listo</button>
+        <button class="btn-telefonica-gree-2"  (click)="closeDialog()">Listo</button>
     </div>
 </div>

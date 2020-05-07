@@ -6,7 +6,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { ShareDialogComponent } from './componentes/share-dialog/share-dialog.component';
 import { OfertaComponentModule } from './componentes/oferta-component.module';
+import {FormsModule} from '@angular/forms';
+
 const routes: Routes = [
     {
         path: '**',
@@ -28,7 +31,11 @@ const routes: Routes = [
         MatMenuModule,
         MatIconModule,
         MatTabsModule,
-        MatTableModule
+        MatTableModule,
+        FormsModule
+    ],
+    entryComponents:[
+        
     ],
     providers: [
 

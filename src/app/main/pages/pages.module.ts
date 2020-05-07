@@ -22,6 +22,7 @@ import { SearchClassicModule } from 'app/main/pages/search/classic/search-classi
 import { SearchModernModule } from 'app/main/pages/search/modern/search-modern.module';
 import { FaqModule } from 'app/main/pages/faq/faq.module';
 import { KnowledgeBaseModule } from 'app/main/pages/knowledge-base/knowledge-base.module';
+import { ShareModule } from 'app/main//pages/share/share.module';
 
 @NgModule({
     imports: [
@@ -34,6 +35,7 @@ import { KnowledgeBaseModule } from 'app/main/pages/knowledge-base/knowledge-bas
         ForgotPassword2Module,
         ResetPasswordModule,
         ResetPassword2Module,
+        ShareModule,
         LockModule,
         MailConfirmModule,
 
@@ -66,7 +68,8 @@ import { KnowledgeBaseModule } from 'app/main/pages/knowledge-base/knowledge-bas
 
         // Knowledge base
         KnowledgeBaseModule
-    ]
+    ],
+    declarations: []
 })
 export class PagesModule
 {

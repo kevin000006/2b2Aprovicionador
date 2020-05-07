@@ -176,7 +176,7 @@
                             <mat-cell *matCellDef="let row"> <span  [ngStyle]="{'background': row.color}" class="estado-cell" > {{row.estado}}</span> </mat-cell>
                         </ng-container>
 
-                        <ng-container matColumnDef="menu">
+                        <ng-container matColumnDef="menu" stickyEnd>
                             <mat-header-cell *matHeaderCellDef class="mat-column-menu">
 
                             </mat-header-cell>

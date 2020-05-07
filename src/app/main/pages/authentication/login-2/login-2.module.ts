@@ -17,7 +17,7 @@ const routes = [
     }
 ];
 
-@NgModule({
+@NgModule({ 
     declarations: [
         Login2Component
     ],

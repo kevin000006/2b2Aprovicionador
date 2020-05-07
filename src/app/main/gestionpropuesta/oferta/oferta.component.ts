@@ -1,11 +1,10 @@
 import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { OfertaService } from './oferta.service';
 import {BandejaModel} from '../models/oferta';
 import { ShareDialogComponent } from './componentes/share-dialog/share-dialog.component';
 import { map } from 'rxjs/operators';
-import { Guid } from "guid-typescript";
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,16 +15,11 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class OfertaComponent implements OnInit {
 
-  urlBase:string = "http://localhost:4200";
-  urlShared:string = "";
-  hideSharedBtn = false;
-  showShared = false;
   ofertaBase = {};
   constructor(
-    private ofertaService:OfertaService,
+    private _router: Router,
     public dialog: MatDialog){ }
   
-
   ngOnInit(): void {
     
     if(window.sessionStorage.getItem('oferta') != null){
@@ -38,35 +32,27 @@ export class OfertaComponent implements OnInit {
       }else{
         this.ofertaBase = window.history.state;
         window.sessionStorage.setItem('oferta',JSON.stringify(window.history.state));
-      }
-
-        
+      }        
     }
-
   }
 
   openShared():void{
     const dialogRef = this.dialog.open(ShareDialogComponent, {
       width: '500px',    
-      data: {}    
+      data:  {
+        id: this.ofertaBase['id'],
+        codigo: this.ofertaBase['codigo'],
+        version : this.ofertaBase['version']
+      }
     });
   }
 
-  obtenerUrl():void{
-    let codigo = Guid.create().toString();
-
-    this.urlShared = "procesando....";
-    codigo = codigo.split('-').join('');
-    let _urlShare = this.urlBase +'/shared/'+ codigo;
-    this.ofertaService.generarUrl({redirect:'gestion-propuesta/oferta',url:codigo,model:"{}"}).subscribe(data=>{
-      this.urlShared = _urlShare;
-      this.hideSharedBtn = true;
-    });
-   
+  regresar()
+  {
+    window.sessionStorage.removeItem('oferta');
+    this._router.navigate(['gestion-propuesta/bandeja'], { state: {} });
   }
 
-  closeShared():void{
-    this.showShared = false;
-  }
+  
 
 }

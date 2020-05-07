@@ -34,13 +34,8 @@ export class BandejaService {
 
     this.http.get<BandejaModel[]>('/oferta/obtenerofertas', { params: params }).subscribe(data => {
 
-     
-      let _data1 = new BandejaModel();
-      _data1.codigo = '001';
-      _data1.id = 1;
-      _data1.oportunidad = 'PP0005';
 
-      let urls = [];
+      let urls = JSON.parse(window.localStorage.getItem('bandeja') || '[]');
       for(let rb of data['data']){
         let _codigo = Guid.create().toString().split('-').join('');;
         urls.push({

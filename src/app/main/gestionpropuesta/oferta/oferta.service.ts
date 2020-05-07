@@ -11,11 +11,11 @@ export class OfertaService{
     constructor(private http: HttpClient) { }
 
     generarUrl(param):Observable<string>{
-       return this.http.post<string>('http://localhost:3000/api/share/save',param);
+       return this.http.post<string>('/compartirurl/save',param);
     }
 
     getShared(param):Observable<any>{
-        return this.http.post<any>('http://localhost:3000/api/share/find',param);
+        return this.http.post<any>('/compartirurl/findQuery',param);
      }
 
 }
