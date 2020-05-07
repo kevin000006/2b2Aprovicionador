@@ -27,7 +27,7 @@ export class OfertaServicioComponent implements OnInit {
   listTipoSede: ModelCombo[] = [];
 
   //public seldescrip: string;
-
+//https://stackblitz.com/edit/mat-paginator-select-page?embed=1
 
   displayedColumns: string[] = [
     'accion', 'sede', 'direccion', 'ubigeo', 'geo',
