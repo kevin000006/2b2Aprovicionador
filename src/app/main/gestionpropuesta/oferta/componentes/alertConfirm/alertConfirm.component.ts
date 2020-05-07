@@ -1,12 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { UsuarioModel } from 'app/model/Usuario';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'AlertConfirm',
-    templateUrl: 'alertConfirm.component.html',
-    styleUrls: ['alertConfirm.component.css'],
+    templateUrl: './alertConfirm.component.html',
+    styleUrls: ['./alertConfirm.component.css'],
 })
 export class AlertConfirmComponent {
     message: string = "Are you sure?"
