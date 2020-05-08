@@ -77,6 +77,11 @@ export class FileInputComponent implements OnInit {
       }
     });
   }
+  descargar(item: any): void {
+    this.fileInputService.downLoadFileContainers(item.id).subscribe((res: any) => {
+      alert("se descargo")
+    });
+  }  
   onClick() {
     const fileUpload = this.fileUpload.nativeElement; fileUpload.onchange = () => {
       for (let index = 0; index < fileUpload.files.length; index++) {
