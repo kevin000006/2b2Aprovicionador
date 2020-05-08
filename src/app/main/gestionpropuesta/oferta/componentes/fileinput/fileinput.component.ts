@@ -49,6 +49,7 @@ export class FileInputComponent implements OnInit {
     });
   }
   deleteFile(item: any): void {
+    debugger;
     const dialogRef = this.dialog.open(AlertConfirmComponent, {
       width: '450px',
       data: {
@@ -64,14 +65,25 @@ export class FileInputComponent implements OnInit {
         const a = document.createElement('a');
         a.click();
         a.remove();
-        debugger;
         if (item.archivoId.trim() == "") {//Eliminanos el objecto que esta en memoria
           var ObjectIndex = this.listArchivo.findIndex(function (obj) { return obj.id === item.id; });//Obtenemos el Index del List del Objeto     
           this.listArchivo.splice(ObjectIndex, 1);
         } else {//Eliminamos el objecto que esta registrado en el sistema
-          this.fileInputService.deleteFileContainers(item.id).subscribe((res: any) => {
+
+          this.fileInputService.deleteFileContainers(item.archivoId).subscribe((res: any) => {
             var ObjectIndex = this.listArchivo.findIndex(function (obj) { return obj.id === item.id; });//Obtenemos el Index del List del Objeto     
             this.listArchivo.splice(ObjectIndex, 1);
+
+            this.dialog.open(AlertConfirmComponent, {
+              width: '450px',
+              data: {
+                message: 'Se elimino correctamente!',
+                buttonText: {
+                  ok: 'Aceptar'
+                }
+              }
+            });
+
           });
         }
       }
@@ -81,7 +93,7 @@ export class FileInputComponent implements OnInit {
     this.fileInputService.downLoadFileContainers(item.id).subscribe((res: any) => {
       alert("se descargo")
     });
-  }  
+  }
   onClick() {
     const fileUpload = this.fileUpload.nativeElement; fileUpload.onchange = () => {
       for (let index = 0; index < fileUpload.files.length; index++) {
@@ -95,9 +107,8 @@ export class FileInputComponent implements OnInit {
           tx_tamanioArchivo: this.bytesToSize(file.size),
           file: file,
           inProgress: false, //Si esta el false el progreebar estara ocultado si es true el progressbar se mostrara
-          progress: 0//  esta propiedad servira para el conteo del progressbar
+          progress: 0
         });
-        this.listArchivo.sort(this.compareValues('id','desc'));
       }
     };
     fileUpload.click();
@@ -133,8 +144,8 @@ export class FileInputComponent implements OnInit {
             setTimeout(() => { this.dialogRef.close(true); }, 2000);// el modal se ocultara en 2 segundos           
           }
         }
-      });      
-    });    
+      });
+    });
   }
   private bytesToSize(bytes): String {
     var sizes = ['n/a', 'bytes', 'Kb', 'Mb', 'Gb', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
@@ -142,17 +153,17 @@ export class FileInputComponent implements OnInit {
     return (bytes / Math.pow(1024, i)).toFixed(i ? 1 : 0) + ' ' + sizes[isNaN(bytes) ? 0 : i + 1];
   }
 
-  private compareValues(key, order = 'asc'){
+  private compareValues(key, order = 'asc') {
     return function innerSort(a, b) {
       if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
         // property doesn't exist on either object
         return 0;
-      }  
+      }
       const varA = (typeof a[key] === 'string')
         ? a[key].toUpperCase() : a[key];
       const varB = (typeof b[key] === 'string')
         ? b[key].toUpperCase() : b[key];
-  
+
       let comparison = 0;
       if (varA > varB) {
         comparison = 1;
