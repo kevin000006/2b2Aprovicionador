@@ -1,0 +1,21 @@
+<div class="question-dialog">
+    <div class="closek close">
+        <mat-icon (click)="cancelar()">clear</mat-icon>
+    </div>
+    <div class="img"></div>
+    <div class="title">
+        <h1></h1>
+    </div>
+    <div class="question">
+        {{data.message}}
+    </div>
+    <div class="row content-botones">
+        <div class="col-xs-5 bottom padding-none">
+            <button mat-raised-button class="btn-telefonica-gree-2" [mat-dialog-close]="0" >NO</button>
+        </div>
+        <div class="col-xs-2"></div>
+        <div class="col-xs-5 bottom padding-none">
+            <button (click)="confirmar()" class="btn-telefonica-gree"[mat-dialog-close]="1" >SI</button>
+        </div>
+    </div>
+</div>

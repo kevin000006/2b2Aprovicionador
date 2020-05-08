@@ -6,7 +6,8 @@ import { BandejaService } from './bandeja.service';
 import { CommonService } from '../../../common.service';
 import { BandejaModel } from '../models/oferta';
 import { ComplejidadModel,EstadoModel } from '../../../model/Common';
-import { DataSource } from '@angular/cdk/collections';
+import { QuestionDialogsComponent } from './dialogs/question-dialogs/question-dialogs.component';
+import { DataSource } from   '@angular/cdk/collections';
 import { fuseAnimations } from '@fuse/animations';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -63,7 +64,10 @@ export class BandejaComponent implements OnInit {
   visible_filtro = false;
   self = null;
 
-  displayedColumns: string[] = ['codigo', 'version', 'oportunidad', 'cliente', 'descripcion', 'estado','menu'];
+  displayedColumns: string[] = 
+  ['codigo', 'version', 'oportunidad', 'cliente', 'descripcion',
+   'estado', 'tipoproyecto', 'observaciones','complejidad',
+  'preventa', 'analistafinanciero','creado', 'modificado','menu'];
   exampleDatabase: BandejaService | null;
   dataSource: EjemploDataSource | null;
   index: number;
@@ -180,6 +184,82 @@ export class BandejaComponent implements OnInit {
 
   }
 
+  public openDialogNuevaVersion(oferta)
+  {
+    const dialogRef = this.dialog.open(QuestionDialogsComponent, {
+      width: '500px',    
+      data:  {
+        message: '¿Esta seguro que desea crear una nueva versión de la plantilla?',
+        accion: '/oferta/versionaroferta',
+        data:{
+          ofertaId: oferta.id,
+          usuario: this.currentUser.usuario,
+          usuarioId: this.currentUser.id
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    
+      if(result != 0)
+      {        
+        this.filtrarData();
+      }
+    });
+
+  }
+
+  public openDialogDuplicar(oferta)
+  {
+    const dialogRef = this.dialog.open(QuestionDialogsComponent, {
+      width: '500px',    
+      data:  {
+        message: '¿Esta seguro que desea duplicar la plantilla?',
+        accion: '/oferta/copiaroferta',
+        data:{
+          ofertaId: oferta.id,
+          usuario: this.currentUser.usuario,
+          usuarioId: this.currentUser.id
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    
+      if(result != 0)
+      {        
+        this.filtrarData();
+      }
+    });
+
+
+  }
+
+  public openDialogAnular(oferta)
+  {
+    const dialogRef = this.dialog.open(QuestionDialogsComponent, {
+      width: '500px',    
+      data:  {
+        message: '¿Esta seguro que desea anular la oferta?',
+        accion: '/oferta/anularoferta',
+        data:{
+          ofertaId:9,
+          usuario: this.currentUser.usuario,
+          usuarioId: this.currentUser.id
+        }
+      }
+    });
+
+
+    dialogRef.afterClosed().subscribe(result => {
+    
+      if(result != 0)
+      {        
+        this.filtrarData();
+      }
+    });
+
+  }
     
 
 }

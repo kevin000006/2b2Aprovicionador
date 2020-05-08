@@ -60,6 +60,9 @@ export class BandejaService {
 
   }
 
+  accionOferta(url:string,param:any):Observable<any>{
+    return this.http.post(url+'?ofertaId=' + param.ofertaId + '&usuario=' + param.usuario + '&usuarioId=' + param.usuarioId  , param);
+  }
  
 
 

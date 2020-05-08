@@ -18,6 +18,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { BandejaService } from './bandeja.service';
 import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { QuestionDialogsComponent } from './dialogs/question-dialogs/question-dialogs.component';
 
 const routes: Routes = [
     {
@@ -32,7 +33,8 @@ const routes: Routes = [
 
 @NgModule({
     declarations: [
-        BandejaComponent
+        BandejaComponent,
+        QuestionDialogsComponent
     ],
     imports: [
         CommonModule,
