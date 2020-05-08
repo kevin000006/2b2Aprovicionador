@@ -69,8 +69,8 @@ export class FileInputComponent implements OnInit {
           var ObjectIndex = this.listArchivo.findIndex(function (obj) { return obj.id === item.id; });//Obtenemos el Index del List del Objeto     
           this.listArchivo.splice(ObjectIndex, 1);
         } else {//Eliminamos el objecto que esta registrado en el sistema
+
           this.fileInputService.deleteFileContainers(item.archivoId).subscribe((res: any) => {
-            debugger;
             var ObjectIndex = this.listArchivo.findIndex(function (obj) { return obj.id === item.id; });//Obtenemos el Index del List del Objeto     
             this.listArchivo.splice(ObjectIndex, 1);
 
@@ -89,17 +89,21 @@ export class FileInputComponent implements OnInit {
       }
     });
   }
+  descargar(item: any): void {
+    this.fileInputService.downLoadFileContainers(item.id).subscribe((res: any) => {
+      alert("se descargo")
+    });
+  }
   onClick() {
     const fileUpload = this.fileUpload.nativeElement; fileUpload.onchange = () => {
       for (let index = 0; index < fileUpload.files.length; index++) {
         const file = fileUpload.files[index];
-        var tamanoarchivo = Math.round((file.size / 1024));
         this.listArchivo.push({
           id: this.listArchivo.length + 1,
           archivoId: "",
           archivoNombre: file.name,
           createdDate: this.datePipe.transform(new Date(), 'dd/MM/yyyy hh:mm:ss a'),
-          adjuntoUsuario: this.usuario,
+          adjuntoUsuario: this.usuario.nombres + " " + this.usuario.apellidos,
           tx_tamanioArchivo: this.bytesToSize(file.size),
           file: file,
           inProgress: false, //Si esta el false el progreebar estara ocultado si es true el progressbar se mostrara
@@ -113,7 +117,8 @@ export class FileInputComponent implements OnInit {
     this.dialogRef.close();
   }
   btnGuardarArchivo() {
-    this.listArchivo.forEach(obj => {
+    var listArchivosAGuardar = this.listArchivo.filter(function (el) { return el.archivoId == ""; });//obtenemos los elementos que guardaremos en la base de datos
+    listArchivosAGuardar.forEach(obj => {
       obj.inProgress = true;
       const formData = new FormData();
       formData.append('file', obj.file);
@@ -131,19 +136,16 @@ export class FileInputComponent implements OnInit {
           obj.inProgress = false;
           return of(`${obj.name} fallo la cargar.`);
         })
-
       ).subscribe((event: any) => {
         debugger;
         if (typeof (event) === 'object') {
           this.listRespnse.push(event.body);
-          if (this.listRespnse.length == this.listArchivo.length) {
-            console.log("carga satifactoriao");
+          if (this.listRespnse.length == listArchivosAGuardar.length) {//si la carga ha sido satisfactorio
+            setTimeout(() => { this.dialogRef.close(true); }, 2000);// el modal se ocultara en 2 segundos           
           }
         }
       });
-      // this.uploadFile(file);  
     });
-    //this.dialogRef.close(true);
   }
   private bytesToSize(bytes): String {
     var sizes = ['n/a', 'bytes', 'Kb', 'Mb', 'Gb', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
@@ -151,5 +153,26 @@ export class FileInputComponent implements OnInit {
     return (bytes / Math.pow(1024, i)).toFixed(i ? 1 : 0) + ' ' + sizes[isNaN(bytes) ? 0 : i + 1];
   }
 
-}
+  private compareValues(key, order = 'asc') {
+    return function innerSort(a, b) {
+      if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+        // property doesn't exist on either object
+        return 0;
+      }
+      const varA = (typeof a[key] === 'string')
+        ? a[key].toUpperCase() : a[key];
+      const varB = (typeof b[key] === 'string')
+        ? b[key].toUpperCase() : b[key];
 
+      let comparison = 0;
+      if (varA > varB) {
+        comparison = 1;
+      } else if (varA < varB) {
+        comparison = -1;
+      }
+      return (
+        (order === 'desc') ? (comparison * -1) : comparison
+      );
+    };
+  }
+}
