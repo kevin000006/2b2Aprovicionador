@@ -28,8 +28,10 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         if (token) {
             request = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + token) });
         }
-
-        if (!request.headers.has('Content-Type')) {
+        if (request.body instanceof FormData) {
+            //request = request.clone({ headers: request.headers.set('Content-Type', 'multipart/form-data') });            
+        }
+        else {
             request = request.clone({ headers: request.headers.set('Content-Type', 'application/json') });
         }
         request = request.clone({ url: `${this.urlBase}${request.url}`, headers: request.headers.set('Accept', 'application/json') });

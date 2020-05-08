@@ -3,6 +3,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AlertConfirmComponent } from '../alertConfirm/alertConfirm.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
+import { FileInputService } from '../fileinput/fileinput.service';
+import { catchError, map } from 'rxjs/operators';
+import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
+import { ThemePalette } from '@angular/material/core';
+import { of } from 'rxjs';
 @Component({
   selector: 'FileInput',
   templateUrl: './fileinput.component.html',
@@ -10,18 +15,23 @@ import { DatePipe } from '@angular/common';
 })
 //https://www.ahmedbouchefra.com/angular/angular-9-8-tutorial-example-upload-files-with-formdata-httpclient-rxjs-and-material-progressbar/
 export class FileInputComponent implements OnInit {
+  showSpinner: boolean;
+  color: ThemePalette = 'warn';
   message: string = "Are you sure?"
   confirmButtonText = "Yes"
   cancelButtonText = "Cancel"
-  usuario: {nombres:'',apellidos:''};
+  usuario: { nombres: '', apellidos: '' };
   public listArchivo: any = [];
-  @ViewChild("fileUpload", { static: false }) fileUpload: ElementRef;  
+  public listRespnse: any = [];
+  @ViewChild("fileUpload", { static: false }) fileUpload: ElementRef;
 
   constructor(
+    private fileInputService: FileInputService,
     private datePipe: DatePipe,
     public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) private data: any,
-    private dialogRef: MatDialogRef<FileInputComponent>) {
+    private dialogRef: MatDialogRef<FileInputComponent>
+  ) {
     if (data) {
       this.message = data.message || this.message;
       if (data.buttonText) {
@@ -31,9 +41,14 @@ export class FileInputComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    this.usuario = JSON.parse(localStorage.getItem('u'));
+    this.usuario = JSON.parse(localStorage.getItem('u'));    
+    this.showSpinner = true;
+    this.fileInputService.listFilesContainers().subscribe((res: any) => {
+      this.listArchivo = res;
+      this.showSpinner = false;
+    });
   }
-  deleteFile(id: number): void {
+  deleteFile(item: any): void {
     const dialogRef = this.dialog.open(AlertConfirmComponent, {
       width: '450px',
       data: {
@@ -44,14 +59,21 @@ export class FileInputComponent implements OnInit {
         }
       }
     });
-
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         const a = document.createElement('a');
         a.click();
         a.remove();
-        var ObjectIndex = this.listArchivo.findIndex(function (obj) { return obj.id === id; });//Obtenemos el Index del List del Objeto     
-        this.listArchivo.splice(ObjectIndex, 1);
+        debugger;
+        if (item.archivoId.trim() == "") {//Eliminanos el objecto que esta en memoria
+          var ObjectIndex = this.listArchivo.findIndex(function (obj) { return obj.id === item.id; });//Obtenemos el Index del List del Objeto     
+          this.listArchivo.splice(ObjectIndex, 1);
+        } else {//Eliminamos el objecto que esta registrado en el sistema
+          this.fileInputService.deleteFileContainers(item.id).subscribe((res: any) => {            
+            var ObjectIndex = this.listArchivo.findIndex(function (obj) { return obj.id === item.id; });//Obtenemos el Index del List del Objeto     
+            this.listArchivo.splice(ObjectIndex, 1);
+          });
+        }
       }
     });
   }
@@ -59,55 +81,63 @@ export class FileInputComponent implements OnInit {
     const fileUpload = this.fileUpload.nativeElement; fileUpload.onchange = () => {
       for (let index = 0; index < fileUpload.files.length; index++) {
         const file = fileUpload.files[index];
-        //this.files.push({ data: file, inProgress: false, progress: 0 });
-        var tamanoarchivo = Math.round((file.size / 1024));        
+        var tamanoarchivo = Math.round((file.size / 1024));
         this.listArchivo.push({
           id: this.listArchivo.length + 1,
-          tx_nombre_archivo: file.name,
-          tx_extension_archivo: file.type.split(".")[1],//obtenemos la extension del archivo
-          tx_fechacrea: this.datePipe.transform(new Date(), 'dd/MM/yyyy'),
-          tx_horacrea: this.datePipe.transform(new Date(), 'hh:mm:ss a'),
-          usuario: this.usuario,
+          archivoId: "",
+          archivoNombre: file.name,
+          createdDate: this.datePipe.transform(new Date(), 'dd/MM/yyyy hh:mm:ss a'),
+          adjuntoUsuario: this.usuario,
           tx_tamanioArchivo: this.bytesToSize(file.size),
-          // inProgress: false, 
-          // progress: 0
-        });
-      }      
+          file: file,
+          inProgress: false, //Si esta el false el progreebar estara ocultado si es true el progressbar se mostrara
+          progress: 0
+        });        
+      }
     };
     fileUpload.click();
   }
   onCancelcick(): void {
     this.dialogRef.close();
   }
-  btnGuardarARchivo(): void {
-    // const formData = new FormData();
-    // formData.append('file', file.data);
-    // file.inProgress = true;
-    // this.uploadService.upload(formData).pipe(  
-    //   map(event => {  
-    //     switch (event.type) {  
-    //       case HttpEventType.UploadProgress:  
-    //         file.progress = Math.round(event.loaded * 100 / event.total);  
-    //         break;  
-    //       case HttpEventType.Response:  
-    //         return event;  
-    //     }  
-    //   }),  
-    //   catchError((error: HttpErrorResponse) => {  
-    //     file.inProgress = false;  
-    //     return of(`${file.data.name} upload failed.`);  
-    //   })).subscribe((event: any) => {  
-    //     if (typeof (event) === 'object') {  
-    //       console.log(event.body);  
-    //     }  
-    //   });  
-    this.dialogRef.close(true);
+  btnGuardarArchivo() {
+    this.listArchivo.forEach(obj => {
+      obj.inProgress = true;
+      const formData = new FormData();
+      formData.append('file', obj.file);
+      this.fileInputService.uploadToContainers(formData).pipe(
+        map(event => {
+          switch (event.type) {
+            case HttpEventType.UploadProgress:
+              obj.progress = Math.round(event.loaded * 100 / event.total);
+              break;
+            case HttpEventType.Response:
+              return event;
+          }
+        }),
+        catchError((error: HttpErrorResponse) => {
+          obj.inProgress = false;
+          return of(`${obj.name} fallo la cargar.`);
+        })
+
+      ).subscribe((event: any) => {
+        debugger;
+        if (typeof (event) === 'object') {
+          this.listRespnse.push(event.body);
+          if (this.listRespnse.length == this.listArchivo.length) {
+            console.log("carga satifactoriao");
+          }
+        }
+      });
+      // this.uploadFile(file);  
+    });
+    //this.dialogRef.close(true);
   }
   private bytesToSize(bytes): String {
     var sizes = ['n/a', 'bytes', 'Kb', 'Mb', 'Gb', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
     var i = +Math.floor(Math.log(bytes) / Math.log(1024));
     return (bytes / Math.pow(1024, i)).toFixed(i ? 1 : 0) + ' ' + sizes[isNaN(bytes) ? 0 : i + 1];
-  }  
-  
+  }
+
 }
 
