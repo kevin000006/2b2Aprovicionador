@@ -13,7 +13,7 @@ export class FileInputComponent implements OnInit {
   message: string = "Are you sure?"
   confirmButtonText = "Yes"
   cancelButtonText = "Cancel"
-  usuario: Object;
+  usuario: {nombres:'',apellidos:''};
   public listArchivo: any = [];
   @ViewChild("fileUpload", { static: false }) fileUpload: ElementRef;  
 
