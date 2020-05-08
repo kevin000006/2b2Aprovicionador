@@ -15,8 +15,7 @@ export class FileInputComponent implements OnInit {
   cancelButtonText = "Cancel"
   usuario: Object;
   public listArchivo: any = [];
-  @ViewChild("fileUpload", { static: false }) fileUpload: ElementRef;
-  //files = [];
+  @ViewChild("fileUpload", { static: false }) fileUpload: ElementRef;  
 
   constructor(
     private datePipe: DatePipe,
