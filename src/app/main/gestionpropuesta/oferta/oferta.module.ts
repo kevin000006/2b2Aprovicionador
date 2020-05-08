@@ -6,9 +6,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { ShareDialogComponent } from './componentes/share-dialog/share-dialog.component';
 import { OfertaComponentModule } from './componentes/oferta-component.module';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { FileInputModule } from '../oferta/componentes/fileinput/fileinput.module';
+import { MatButtonModule } from '@angular/material/button';
 
 const routes: Routes = [
     {
@@ -27,15 +28,17 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         CommonModule,
+        MatButtonModule,
         OfertaComponentModule,
         MatMenuModule,
         MatIconModule,
         MatTabsModule,
         MatTableModule,
-        FormsModule
+        FormsModule,
+        FileInputModule
     ],
-    entryComponents:[
-        
+    entryComponents: [
+
     ],
     providers: [
 
