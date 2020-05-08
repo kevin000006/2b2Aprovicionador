@@ -1,62 +1,52 @@
 <div id="oferta" class="page-layout carded fullwidth ">
     <div class="center">
-
         <div class="row" style="margin: 15px 0;">
             <div class="col-xs-12 padding-none">
-                <a style="text-decoration: none;" (click)="regresar()" class="opcion-oferta"> <mat-icon class="icon" style="line-height: 20px;" matSuffix>keyboard_backspace &nbsp;</mat-icon> <span>Volver</span> </a>
+                <a style="text-decoration: none;" (click)="regresar()" class="opcion-oferta">
+                    <mat-icon class="icon" style="line-height: 20px;" matSuffix>keyboard_backspace &nbsp;</mat-icon> <span>Volver</span> </a>
             </div>
-
         </div>
-
         <div class="row">
-
             <div class="row opciones-oferta">
-                <div class="col-sm-7">
-                    <div class="opcion-oferta">
-                        <mat-icon class="icon" matSuffix>cloud_upload &nbsp;</mat-icon>
-                        <span>Adjuntar</span>
-                    </div>
-                    <div class="opcion-oferta">
-                        <mat-icon class="icon" matSuffix>book &nbsp;</mat-icon>
-                        <span>Bitácora</span>
-                    </div>
-                    <div class="opcion-oferta">
-                        <mat-icon class="icon" matSuffix>bar_chart &nbsp;</mat-icon>
-                        <span>F. Financiero</span>
-                    </div>
-                    <div class="opcion-oferta" (click)="openShared()">
-                        <mat-icon class="icon" matSuffix>link &nbsp;</mat-icon>
-                        <span>Compartir</span>
-                    </div>
+                <div class="col-md-10">
+                    <button mat-flat-button class="button-personalizado" (click)="btnAdjuntar()">
+                        <mat-icon class="icon icon-personalizado">cloud_upload </mat-icon>Adjuntar
+                    </button>
+
+                    <button mat-flat-button class="button-personalizado">
+                        <mat-icon class="icon icon-personalizado" >book</mat-icon>Bitácora
+                    </button>
+
+                    <button mat-flat-button class="button-personalizado">
+                        <mat-icon class="icon icon-personalizado" >bar_chart </mat-icon>F. Financiero
+                    </button>
+
+                    <button mat-flat-button class="button-personalizado">
+                        <mat-icon class="icon icon-personalizado" >link </mat-icon>Compartir
+                    </button>
                 </div>
-                <div class="col-sm-5 text-right">
+                <div class="col-sm-2 text-right">
                     <mat-menu #appMenu="matMenu">
                         <button mat-menu-item> Caratula </button>
                         <button mat-menu-item>FET </button>
                         <button mat-menu-item> FCA </button>
                         <button mat-menu-item> P Implantación </button>
                     </mat-menu>
-                    <button mat-button [matMenuTriggerFor]="appMenu" class="btn btn-md btn-telefonica-gree-2"> Descargar
-                         <mat-icon style="color: #4df109;height: 0;min-height: 0;line-height: 17px;position: absolute;" class="icon">keyboard_arrow_down</mat-icon>
+                    <button mat-flat-button [matMenuTriggerFor]="appMenu" class="btn-descargar"> Descargar
+                         <mat-icon style="color: #4df109;height: 0;min-height: 0;line-height: 38px;position: absolute;" class="icon">keyboard_arrow_down</mat-icon>
                     </button>
-                   
                 </div>
             </div>
-
-            
             <mat-tab-group class="mytab-oferta">
                 <mat-tab label="Datos de proyecto">
-                    
-                    <oferta-cabecera
-                    [ofertaBase]="ofertaBase"></oferta-cabecera>
-                   
+                    <oferta-cabecera [ofertaBase]="ofertaBase"></oferta-cabecera>
                 </mat-tab>
                 <mat-tab label="Servicios">
                     <br/>
                     <oferta-servicio></oferta-servicio>
                     <br/>
                 </mat-tab>
-               <!-- <mat-tab label="Facilidades técnicas"> Facilidades técnicas </mat-tab>-->
+                <!-- <mat-tab label="Facilidades técnicas"> Facilidades técnicas </mat-tab>-->
                 <mat-tab label="Equipamiento">
                     <br/>
                     <oferta-equipamiento></oferta-equipamiento>

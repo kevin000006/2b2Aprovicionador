@@ -202,7 +202,37 @@
 .opciones-oferta {
     background: #fff;
     margin-bottom: 15px;
-    height: 55px;
+    height: auto;
     line-height: 55px;
     border-radius: 4px;
+}
+
+.icon-personalizado {
+    line-height: 22px;
+    margin-right: 5px;
+    color: #00a9e0 !important;
+}
+
+.button-personalizado {
+    position: relative;
+    display: inline-block;
+    width: auto;
+    color: #00a9e0 !important;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.btn-descargar {
+    background: transparent;
+    border-radius: 4px;
+    color: #62CE0E !important;
+    min-width: 110px;
+    outline: none !important;
+    font-size: 12px;
+    border: 1px solid #62CE0E !important;
+    min-height: 26px;
+}
+
+.full-screen-modal .mat-dialog-container {
+    max-width: none;
 }
