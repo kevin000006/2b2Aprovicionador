@@ -24,7 +24,7 @@
 
 .nombrefileinput {
     position: absolute;
-    width: 14%;
+    width: 18%;
     left: 115px;
     top: 20px;
     line-height: 10px;
@@ -33,7 +33,7 @@
 
 .usuariocreafileinput {
     position: absolute;
-    width: 14%;
+    width: 18%;
     left: 334px;
     top: 20px;
     line-height: 10px;
