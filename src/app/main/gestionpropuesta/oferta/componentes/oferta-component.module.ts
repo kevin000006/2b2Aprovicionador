@@ -8,11 +8,13 @@ import { OfertaEquipamientoModule } from './oferta-equipamiento/oferta-equipamie
 import { OfertaGastosModule } from './oferta-gastos/oferta-gastos.module';
 import { OfertaServicioModule } from './oferta-servicio/oferta-servicio..module';
 import { ShareDialogComponent } from './share-dialog/share-dialog.component';
+import { BitacoraDialogComponent } from './bitacora-dialog/bitacora-dialog.component';
 
 @NgModule({
 
     declarations: [
-    ShareDialogComponent],
+    ShareDialogComponent,
+    BitacoraDialogComponent],
     imports: [
         OfertaCabeceraModule,
         OfertaEquipamientoModule,

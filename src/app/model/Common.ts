@@ -4,7 +4,7 @@ export class ClienteModel{
 }
 
 export class ComplejidadModel{
-    complejidadCodigo : string;
+    id : string;
     complejidadTipologiaDescrip : string;
 }
 
@@ -16,3 +16,8 @@ export class EstadoModel{
     idSet : boolean
 }
   
+export class TipoContratoModel
+{
+    id:number;
+    periodoContrato:string;
+}

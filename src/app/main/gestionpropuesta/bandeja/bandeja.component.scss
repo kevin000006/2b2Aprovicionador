@@ -148,3 +148,16 @@ span.clestado{
   padding: 1px 4px;
   border-radius: 3px;
 }
+
+button.btn-pagination:disabled,
+button.btn-pagination[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: no-drop;
+}
+
+button.btn-pagination:disabled mat-icon,
+button.btn-pagination[disabled] mat-icon{
+  color: #666666;
+}

@@ -248,15 +248,15 @@
                 </mat-paginator> -->
 
                 <div class="text-center m-t-10 pagination">
-                    <div class="pag btn-pagination pointer" (click)="paginar(-1)">
+                    <button [disabled]="(pageIndex+1)==1" class="pag btn-pagination pointer" (click)="paginar(-1)">
                         <mat-icon class="icon" >keyboard_arrow_left</mat-icon>
-                    </div>
+                    </button>
                     <div class="pag text-pag">Página</div>
                     <div class="pag btn-pagination text-pag">{{pageIndex+1}}</div>
                     <div class="pag text-pag">de {{dataSource.totalPages}}</div>
-                    <div class="pag btn-pagination pointer" (click)="paginar(01)">
+                    <button [disabled]="(pageIndex+1)==dataSource.totalPages" class="pag btn-pagination pointer" (click)="paginar(01)">
                         <mat-icon class="icon" >keyboard_arrow_right</mat-icon>
-                    </div>
+                    </button>
                 </div>
 
             </mat-card>

@@ -12,7 +12,7 @@ export class QuestionDialogsComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<QuestionDialogsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private bandejaService: BandejaService) {
-      console.log(data);
+    
   }
 
   ngOnInit(): void {

@@ -21,7 +21,8 @@ export class BandejaModel {
   }
   
   export class PreventaModel{
-    nombre:string
+    nombre:string;
+    createdBy:string;
   }
 
   export class ClienteModel{
@@ -30,17 +31,32 @@ export class BandejaModel {
     descripcion:string;
   }
 
+  export class ComboModel{
+    id:number
+  }
+
 export class OfertaModel
 {
   codigo:string;
   oportunidad:string;
+  oportunidad_pre:string;
+  oportunidad_codigo:string;
   segmentonegocio:SegmentoNegocioModel;
   preventa:PreventaModel;
-  gerente_cuenta:PreventaModel;
+  gerente_cuenta:string;
   analistafinanciero:PreventaModel;
   cliente:ClienteModel;
   contacto:string;
   correo_contacto:string;
   telefono_contacto:string;
   descripcion:string;
+  resultado:string;
+  resultado_color:string = this.resultado == 'GO' ? '#73DE07' : '#FF2C2C';
+  aprobadores:string;
+  aprobadoresArr:Array<string>=[];
+  tiposervicio:string;
+  pago_recurrente:number;
+  tipoproyecto:ComboModel;
+  complejidad:ComboModel;
+  tipocontrato:ComboModel;
 }

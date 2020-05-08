@@ -4,6 +4,7 @@ import { ShareDialogComponent } from './componentes/share-dialog/share-dialog.co
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { FileInputComponent } from '../oferta/componentes/fileinput/fileinput.component';
+import { BitacoraDialogComponent } from './componentes/bitacora-dialog/bitacora-dialog.component';
 @Component({
   selector: 'app-oferta',
   templateUrl: './oferta.component.html',
@@ -64,6 +65,13 @@ export class OfertaComponent implements OnInit {
         id: this.ofertaBase['id'],
         codigo: this.ofertaBase['codigo'],
         version: this.ofertaBase['version']
+      }
+    });
+  }
+
+  openBitacora():void{
+    const dialogRef = this.dialog.open(BitacoraDialogComponent, {
+      data: {
       }
     });
   }

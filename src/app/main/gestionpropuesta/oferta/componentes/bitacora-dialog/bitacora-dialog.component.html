@@ -1,0 +1,56 @@
+<div class="bitacora-dialog">
+    <div class="row head">
+        <div class="col-xs-10 title">
+            Bitácora
+        </div>
+        <div class="col-xs-2 close">
+            <mat-icon (click)="closeDialog()">clear</mat-icon>
+        </div>
+    </div>
+    <div class="row content-controls">
+        <div class="col-xs-6 items">
+            <select matNativeControl #pagesize>
+                <option value="5" selected>5 por pagina</option> 
+                <option value="10" >10 por pagina</option> 
+                <option value="25" >25 por pagina</option> 
+                <option value="50" >50 por pagina</option> 
+                <option value="100" >100 por pagina</option> 
+            </select>
+        </div>
+        <div class="col-xs-6 total text-right">
+            Total: 1
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 content-table" style="margin:10px 0px">
+
+
+            <mat-table class="mat-cell oferta-bandeja" #tbofertabandeja [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}" >
+
+                <ng-container matColumnDef="estado">
+                    <mat-header-cell style="background: #F4F6FB;" *matHeaderCellDef mat-sort-header>Estado</mat-header-cell>
+                    <mat-cell *matCellDef="let row"><span style="background: #00A9E0;color: #fff;border-radius: 4px;padding: 2px 10px;">{{row.estado}}</span> </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="usuario">
+                    <mat-header-cell style="background: #F4F6FB;" *matHeaderCellDef mat-sort-header>Usuario</mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.usuario}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="fecha">
+                    <mat-header-cell style="background: #F4F6FB;" *matHeaderCellDef mat-sort-header>Fecha</mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.fecha}} </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns; let i = index;" [ngClass]=" i % 2 != 0 ? 'row-color-tb' : ''"></mat-row>
+            </mat-table>
+
+        </div>
+    </div>
+    <div class="row content-bottom">
+        <div class="col-xs-12 bottom text-right">
+            <button class="btn-telefonica-gree-2" (click)="closeDialog()">Cerrar</button>
+        </div>
+    </div>
+</div>

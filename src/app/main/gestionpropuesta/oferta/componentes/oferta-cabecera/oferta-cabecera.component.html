@@ -24,8 +24,8 @@
             </div>
             <div class="content-control-oferta">
                 <mat-form-field color="accent">
-                    <span style="font-size: 10px;" class="prefix font-body-oferta" matPrefix>PER- &nbsp;</span>
-                    <input autocomplete="off" matInput class="form-control font-body-oferta" placeholder="" name="salesforce">
+                    <span style="font-size: 11px;" class="prefix font-body-oferta" matPrefix>{{oferta.oportunidad_pre}}- &nbsp;</span>
+                    <input autocomplete="off" matInput class="form-control font-body-oferta" value="{{oferta.oportunidad_codigo}}" placeholder="" name="salesforce">
                 </mat-form-field>
             </div>
         </div>
@@ -39,16 +39,9 @@
                 </mat-form-field>
             </div>
         </div>
-        <div class="row content-control-oferta">
-            <div class="">
-                <div class="">
-                    <label class="label-title">Seguimiento de negocios:</label>
-                </div>
-                <div class="">
-                    <span class="font-body-oferta">{{oferta.segmentonegocio.descripcion}}</span>
-                </div>
-            </div>
-        </div>
+       <!-- <div class="row content-control-oferta">
+          
+        </div>-->
         <div class="row">
             <div class="content-control-oferta">
                 <div class="">
@@ -63,7 +56,7 @@
                     <label class="label-title">Gerente de cuentas:</label>
                 </div>
                 <div class="">
-                    <span class="font-body-oferta">{{oferta.gerente_cuenta.nombre}}</span>
+                    <span class="font-body-oferta">{{oferta.gerente_cuenta}}</span>
                 </div>
             </div>
             <div class="content-control-oferta">
@@ -71,7 +64,7 @@
                     <label class="label-title">Analista Financiero:</label>
                 </div>
                 <div class="">
-                    <span class="font-body-oferta">{{oferta.analistafinanciero.nombre}}</span>
+                    <span class="font-body-oferta">{{oferta.analistafinanciero.createdBy}}</span>
                 </div>
             </div>
         </div>
@@ -91,13 +84,20 @@
                     <input autocomplete="off" matInput class="form-control font-body-oferta" placeholder="" value="{{oferta.cliente.codigo_isis}}" name="cliente">
                 </mat-form-field>
             </div>
-            <div class="col-sm-7 padding-l-none">
+            <div class="col-sm-6 padding-l-none">
                <!-- <label class="font-body-oferta cliente-nombre">20302241598 / KOMATSU-MITSUI MAQUINARIAS PERU S.A.</label>-->
                <label class="font-body-oferta cliente-nombre">{{oferta.cliente.numero_identificador_fiscal}} / {{oferta.cliente.descripcion}}</label>
             </div>
-            <!-- <div class="col-sm-3 content-btn-guardar">
-                <button class="btn-primary-telefonica btn-guardar-oferta">Guardar</button>
-            </div> -->
+             <div class="col-sm-4 content-control-oferta">
+                
+                    <div class="">
+                        <label class="label-title">Segmento:</label>
+                    </div>
+                    <div class="">
+                        <span class="font-body-oferta">{{oferta.segmentonegocio.descripcion}}</span>
+                    </div>
+                
+            </div> 
         </div>
         <div class="row content-control-oferta">
             <div class="col-sm-4 padding-l-none">
@@ -157,8 +157,10 @@
                         </div>
                         <div class="content-control-oferta">
                             <mat-form-field color="accent">
-                                <select matNativeControl class="font-body-oferta">
-                        </select>
+                                <select matNativeControl class="font-body-oferta" [(ngModel)]="oferta.tipoproyecto.id">
+                                    <option value="0">-Seleccionar-</option>
+                                    <option *ngFor="let o of lstTipoProyecto" [ngValue]="o.id">{{o.nombre}}</option>
+                                </select>
                             </mat-form-field>
                         </div>
 
@@ -169,7 +171,9 @@
                         </div>
                         <div class="content-control-oferta">
                             <mat-form-field color="accent">
-                                <select matNativeControl class="font-body-oferta">
+                                <select matNativeControl class="font-body-oferta" [(ngModel)]="oferta.complejidad.id">
+                                    <option value="0">-Seleccionar-</option>
+                                    <option *ngFor="let o of lstComplejidad" [ngValue]="o.id">{{o.complejidadTipologiaDescrip}}</option>
                             </select>
                             </mat-form-field>
                         </div>
@@ -181,7 +185,9 @@
                         </div>
                         <div class="content-control-oferta">
                             <mat-form-field color="accent">
-                                <select matNativeControl class="font-body-oferta">
+                                <select matNativeControl class="font-body-oferta" [(ngModel)]="oferta.tipocontrato.id">
+                                    <option value="0">-Seleccionar-</option>
+                                    <option *ngFor="let o of lstTipoContrato" [ngValue]="o.id">{{o.periodoContrato}}</option>
                                 </select>
                             </mat-form-field>
                         </div>
@@ -195,7 +201,7 @@
                         <div class="content-control-oferta">
                             <mat-form-field color="accent">
                                 <span class="prefix font-body-oferta" matPrefix>Meses &nbsp;</span>
-                                <input autocomplete="off" value="{{oferta.tiempo_implantacion}}" matInput class="form-control font-body-oferta" placeholder="" name="salesforce">
+                                <input autocomplete="off" value="{{oferta.tiempo_implantacion}}" matInput class="form-control font-body-oferta text-center" style="text-align: center;" placeholder="" name="salesforce">
                             </mat-form-field>
                         </div>
 
@@ -206,8 +212,8 @@
                         </div>
                         <div class="content-control-oferta">
                             <mat-form-field color="accent">
-                                <span class="prefix font-body-oferta" value="{{oferta.periodo_contrato}}" matPrefix>Meses &nbsp;</span>
-                                <input autocomplete="off" matInput class="form-control font-body-oferta" placeholder="" name="salesforce">
+                                <span class="prefix font-body-oferta" matPrefix>Meses &nbsp;</span>
+                                <input autocomplete="off" matInput value="{{oferta.periodo_contrato}}"  class="form-control font-body-oferta text-center" style="text-align: center;" placeholder="" name="salesforce">
                             </mat-form-field>
                         </div>
                     </div>
@@ -215,7 +221,7 @@
                 <div class="row">
                     <div class="col-sm-6 padding-l-none">
                         <div class=" content-title-oferta">
-                            <mat-label class="label-title">Precio único</mat-label>
+                            <mat-label class="label-title">Pago único</mat-label>
                         </div>
                         <div class="col-sm-2 padding-none content-control-oferta">
                             <mat-form-field>
@@ -226,13 +232,13 @@
                         </div>
                         <div class="col-sm-10 padding-r-none content-control-oferta">
                             <mat-form-field color="accent">
-                                <input autocomplete="off" value="{{oferta.pago_unico}}" matInput class="form-control font-body-oferta" placeholder="">
+                                <input autocomplete="off" value="{{oferta.pago_unico}}" matInput class="form-control font-body-oferta text-right" placeholder="">
                             </mat-form-field>
                         </div>
                     </div>
                     <div class="col-sm-6 padding-r-none">
                         <div class=" content-title-oferta">
-                            <mat-label class="label-title">Precio recurrente</mat-label>
+                            <mat-label class="label-title">Pago recurrente</mat-label>
                         </div>
                         <div class="col-sm-2 padding-none content-control-oferta">
                             <mat-form-field>
@@ -243,7 +249,7 @@
                         </div>
                         <div class="col-sm-10 padding-r-none content-control-oferta">
                             <mat-form-field color="accent">
-                                <input autocomplete="off" value="{{oferta.pago_recurrente}}" matInput class="form-control font-body-oferta" placeholder="">
+                                <input autocomplete="off" value="{{oferta.pago_recurrente}}" matInput class="form-control font-body-oferta text-right" placeholder="">
                             </mat-form-field>
                         </div>
                     </div>
@@ -252,7 +258,7 @@
                     <div class="col-sm-6"></div>
                     <div class="col-sm-6 padding-r-none">
                         <div class=" content-title-oferta">
-                            <mat-label class="label-title">Fact. recurrente</mat-label>
+                            <mat-label class="label-title">Fact. actual</mat-label>
                         </div>
                         <div class="col-sm-2 padding-none content-control-oferta">
                             <mat-form-field>
@@ -263,7 +269,7 @@
                         </div>
                         <div class="col-sm-10 padding-r-none content-control-oferta">
                             <mat-form-field color="accent">
-                                <input autocomplete="off" value="{{oferta.pago_recurrente_actual}}" matInput class="form-control" placeholder="">
+                                <input autocomplete="off" value="{{oferta.pago_recurrente_actual}}" matInput class="form-control text-right" placeholder="">
                             </mat-form-field>
                         </div>
                     </div>
@@ -278,46 +284,43 @@
                             <div class="">
                                 <label class="label-title text-center" style="font-weight: normal;">Tipo de servicio:</label>
                             </div>
-                            <div class="font-body-oferta">Recurrente</div>
+                            <div class="font-body-oferta">{{oferta.tiposervicio}}</div>
                         </div>
                         <div class="col-sm-4 padding-none text-center">
-                            <label class="label-title text-center">Estaso</label>
-                            <div class="font-body-oferta"> <span class="estado-go">GO</span></div>
+                            <label class="label-title text-center">Estado</label>
+                            <div class="font-body-oferta"> <span  class="estado-{{oferta.resultado}}">{{oferta.resultado}}</span></div>
                         </div>
                     </div>
                     <div class="row content-control-oferta">
                         <div class="col-sm-4 padding-l-none">
                             <label class="label-title">VAN/VAI:</label>
-                            <div class="font-body-oferta">8%</div>
+                            <div class="font-body-oferta">{{oferta.vanval * 100}}%</div>
                         </div>
                         <div class="col-sm-4">
                             <label class="label-title">Payback:</label>
-                            <div class="font-body-oferta">23</div>
+                            <div class="font-body-oferta">{{oferta.payback}}</div>
                         </div>
                         <div class="col-sm-4 padding-none text-center">
                             <label class="label-title text-center">Dif Ingresos:</label>
-                            <div class="font-body-oferta text-center">2.9%</div>
+                            <div class="font-body-oferta text-center">{{oferta.diferencia_ingresos * 100}}%</div>
                         </div>
                     </div>
                     <div class="row ">
-                        <div class="col-sm-7 padding-l-none"><label class="label-title">Capex a solicitar:</label></div>
-                        <div class="col-sm-5 padding-l-none text-right"><span class="font-body-oferta">S/.35,000.00</span></div>
+                        <div class="col-sm-7 padding-l-none"><label class="label-title">Capex (S/.):</label></div>
+                        <div class="col-sm-5 padding-l-none text-right"><span class="font-body-oferta">{{oferta.capex | currency:' '}}</span></div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-7 padding-l-none "><label class="label-title">Capex no solicitado:</label></div>
-                        <div class="col-sm-5 padding-l-none text-right"><span class="font-body-oferta">S/.2,500.00</span></div>
+                        <div class="col-sm-7 padding-l-none "><label class="label-title">Opex (S/.):</label></div>
+                        <div class="col-sm-5 padding-l-none text-right"><span class="font-body-oferta">{{oferta.opex | currency:' '}}</span></div>
                     </div>
                     <div class="row ">
 
                         <div><label class="label-title" style="font-family: TelefonicaBold;">Aprobador</label></div>
-                        <div class="bg-info">
+                        <div class="bg-info" *ngFor="let a of oferta.aprobadoresArr">
                             <mat-icon class="icon icon-flotante" matSuffix>person_outlin &nbsp;</mat-icon>
-                            <label class="font-body-oferta desc-icon-flotante">Gerente de cuenta</label>
+                            <label class="font-body-oferta desc-icon-flotante">{{a}}</label>
                         </div>
-                        <div class="bg-info">
-                            <mat-icon class="icon icon-flotante" matSuffix>person_outlin &nbsp;</mat-icon>
-                            <label class="font-body-oferta desc-icon-flotante">Analista financiero</label>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

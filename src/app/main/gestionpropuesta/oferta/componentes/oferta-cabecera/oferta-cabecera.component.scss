@@ -19,7 +19,7 @@
 }
 
 .content-control-oferta {
-    height: 69px;
+    height: 70px;
 }
 
 .padding-none {
@@ -120,7 +120,16 @@
     width: 25% !important;
 }
 
-.estado-go {
+.estado-NO.GO{
+    color: #fff;
+    background: #FF2C2C;
+    padding: 4px 3px;
+    border-radius: 15px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.estado-GO {
     color: #fff;
     background: #73DE07;
     padding: 4px 3px;
