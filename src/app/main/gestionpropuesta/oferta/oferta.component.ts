@@ -41,7 +41,7 @@ export class OfertaComponent implements OnInit {
       data: {
         message: '¿Esta seguro que desea eliminar esta fila?',
         buttonText: {
-          ok: 'Aceptar',
+          ok: 'Guardar',
           cancel: 'Cancelar'
         }
       }

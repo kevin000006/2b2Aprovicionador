@@ -13,19 +13,6 @@
     transform: rotate(180deg);
 } */
 
-.btn-cancelar {
-    font-size: 14px;
-    min-width: 100%;
-    margin-bottom: 4px;
-    background: #FFFFFF;
-    border: 1px solid #62CE0E !important;
-    box-sizing: border-box;
-    border-radius: 4px;
-    color: #62CE0E !important;
-    font-family: TelefonicaLight;
-    height: 48px;
-}
-
 .imagen-excel {
     background: url(/assets/images/icon-fileinput/excel.png) no-repeat;
     width: 6%;
@@ -53,10 +40,20 @@
     padding-top: 8px;
 }
 
+.btn-cancelar {
+    font-size: 14px;
+    min-width: 100%;
+    margin-bottom: 4px;
+    background: #FFFFFF;
+    border: 1px solid #62CE0E !important;
+    box-sizing: border-box;
+    border-radius: 4px;
+    color: #62CE0E !important;
+    font-family: TelefonicaLight;
+    height: 48px;
+}
 
-/*C:\PROYECTO_SDIO\2b2Aprovicionador\src\assets\images\icon-fileinput*/
-
-.btn-aceptar {
+.btn-guardar {
     font-size: 14px;
     min-width: 100%;
     margin-bottom: 4px;
@@ -67,6 +64,19 @@
     font-family: TelefonicaLight;
     background: #5BC500 !important;
     height: 48px;
+}
+
+.btn-subir-archivo {
+    font-size: 14px;
+    min-width: 258px;
+    margin-bottom: 4px;
+    border: 1px solid #00A9E0 !important;
+    box-sizing: border-box;
+    border-radius: 4px;
+    color: white !important;
+    font-family: TelefonicaLight;
+    background: #00A9E0 !important;
+    height: 40px;
 }
 
 .list-item-fileinput {
@@ -84,4 +94,12 @@
     float: right;
     top: 25px;
     right: 10px;
+}
+
+.container-fileinput {
+    width: 100%;
+    background: white;
+    padding: 18px;
+    text-align: center;
+    box-shadow: 0px 1px 16px rgba(156, 156, 156, 0.2);
 }
