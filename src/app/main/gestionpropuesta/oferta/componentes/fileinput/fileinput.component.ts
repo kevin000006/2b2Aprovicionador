@@ -41,7 +41,7 @@ export class FileInputComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    this.usuario = JSON.parse(localStorage.getItem('u'));    
+    this.usuario = JSON.parse(localStorage.getItem('u'));
     this.showSpinner = true;
     this.fileInputService.listFilesContainers().subscribe((res: any) => {
       this.listArchivo = res;
@@ -49,6 +49,7 @@ export class FileInputComponent implements OnInit {
     });
   }
   deleteFile(item: any): void {
+    debugger;
     const dialogRef = this.dialog.open(AlertConfirmComponent, {
       width: '450px',
       data: {
@@ -64,14 +65,25 @@ export class FileInputComponent implements OnInit {
         const a = document.createElement('a');
         a.click();
         a.remove();
-        debugger;
         if (item.archivoId.trim() == "") {//Eliminanos el objecto que esta en memoria
           var ObjectIndex = this.listArchivo.findIndex(function (obj) { return obj.id === item.id; });//Obtenemos el Index del List del Objeto     
           this.listArchivo.splice(ObjectIndex, 1);
         } else {//Eliminamos el objecto que esta registrado en el sistema
-          this.fileInputService.deleteFileContainers(item.id).subscribe((res: any) => {            
+          this.fileInputService.deleteFileContainers(item.archivoId).subscribe((res: any) => {
+            debugger;
             var ObjectIndex = this.listArchivo.findIndex(function (obj) { return obj.id === item.id; });//Obtenemos el Index del List del Objeto     
             this.listArchivo.splice(ObjectIndex, 1);
+
+            this.dialog.open(AlertConfirmComponent, {
+              width: '450px',
+              data: {
+                message: 'Se elimino correctamente!',
+                buttonText: {
+                  ok: 'Aceptar'
+                }
+              }
+            });
+
           });
         }
       }
@@ -92,7 +104,7 @@ export class FileInputComponent implements OnInit {
           file: file,
           inProgress: false, //Si esta el false el progreebar estara ocultado si es true el progressbar se mostrara
           progress: 0
-        });        
+        });
       }
     };
     fileUpload.click();
