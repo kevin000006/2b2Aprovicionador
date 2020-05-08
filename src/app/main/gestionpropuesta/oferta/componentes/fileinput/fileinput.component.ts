@@ -81,7 +81,6 @@ export class FileInputComponent implements OnInit {
     const fileUpload = this.fileUpload.nativeElement; fileUpload.onchange = () => {
       for (let index = 0; index < fileUpload.files.length; index++) {
         const file = fileUpload.files[index];
-        var tamanoarchivo = Math.round((file.size / 1024));
         this.listArchivo.push({
           id: this.listArchivo.length + 1,
           archivoId: "",
@@ -91,7 +90,7 @@ export class FileInputComponent implements OnInit {
           tx_tamanioArchivo: this.bytesToSize(file.size),
           file: file,
           inProgress: false, //Si esta el false el progreebar estara ocultado si es true el progressbar se mostrara
-          progress: 0
+          progress: 0//  esta propiedad servira para el conteo del progressbar
         });
         this.listArchivo.sort(this.compareValues('id','desc'));
       }
@@ -121,7 +120,6 @@ export class FileInputComponent implements OnInit {
           obj.inProgress = false;
           return of(`${obj.name} fallo la cargar.`);
         })
-
       ).subscribe((event: any) => {
         debugger;
         if (typeof (event) === 'object') {
@@ -139,13 +137,12 @@ export class FileInputComponent implements OnInit {
     return (bytes / Math.pow(1024, i)).toFixed(i ? 1 : 0) + ' ' + sizes[isNaN(bytes) ? 0 : i + 1];
   }
 
-   compareValues(key, order = 'asc'){
+  private compareValues(key, order = 'asc'){
     return function innerSort(a, b) {
       if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
         // property doesn't exist on either object
         return 0;
-      }
-  
+      }  
       const varA = (typeof a[key] === 'string')
         ? a[key].toUpperCase() : a[key];
       const varB = (typeof b[key] === 'string')
@@ -162,5 +159,4 @@ export class FileInputComponent implements OnInit {
       );
     };
   }
-
 }
