@@ -12,7 +12,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AlertConfirmModule } from '../alertConfirm/alertConfirm.module';
 import { AlertSuccessModule } from '../alertSuccess/alertSuccess.module';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
     declarations: [
         OfertaEquipamientoComponent,
@@ -29,6 +29,7 @@ import { AlertSuccessModule } from '../alertSuccess/alertSuccess.module';
         MatMenuModule,
         MatDialogModule,
         AlertConfirmModule,
+        MatTooltipModule,
         AlertSuccessModule
     ],
     exports: [

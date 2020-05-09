@@ -11,12 +11,16 @@ import { ShareDialogComponent } from './share-dialog/share-dialog.component';
 import { BitacoraDialogComponent } from './bitacora-dialog/bitacora-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 @NgModule({
 
     declarations: [
     ShareDialogComponent,
     BitacoraDialogComponent],
     imports: [
+        MatFormFieldModule,
+        MatSelectModule,
         OfertaCabeceraModule,
         OfertaEquipamientoModule,
         OfertaGastosModule,
