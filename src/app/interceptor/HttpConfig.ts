@@ -16,9 +16,9 @@ import { map, catchError } from 'rxjs/operators';
 export class HttpConfigInterceptor implements HttpInterceptor {
 
     //private readonly urlBase: string = "http://localhost:8084/api";
-    private readonly urlBase: string = "http://localhost:8080/api";
+    //private readonly urlBase: string = "http://localhost:8080/api";
     // private readonly urlBase: string = "";
-    //private readonly urlBase: string = "https://webapp-b2b-qa.azurewebsites.net/api";
+    private readonly urlBase: string = "https://webapp-b2b-qa.azurewebsites.net/api";
 
     constructor(public errorDialogService: ErrorDialogService) { }
 

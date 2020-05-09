@@ -1,35 +1,41 @@
-.bitacora-dialog{
+.close-button {
+    float: right;
+    top: -11px;
+    right: -7px;
+}
+
+.bitacora-dialog {
     width: 500px;
 }
 
-.bitacora-dialog .head .title{
+.bitacora-dialog .head .title {
     color: #50535A;
     font-size: 18px;
     text-align: center;
 }
 
-.bitacora-dialog .head .close{
+.bitacora-dialog .head .close {
     text-align: right;
 }
 
-.bitacora-dialog .head{
+.bitacora-dialog .head {
     margin-bottom: 15px;
 }
 
-.bitacora-dialog .content-controls .items select{
- max-width: 120px;
+.bitacora-dialog .content-controls .items select {
+    max-width: 120px;
 }
 
-.bitacora-dialog .content-controls .total{
+.bitacora-dialog .content-controls .total {
     color: #50535A;
     font-size: 12px;
 }
 
-.bitacora-dialog .content-bottom{
+.bitacora-dialog .content-bottom {
     margin-top: 15px;
 }
 
-.bitacora-dialog .content-bottom .bottom button{
+.bitacora-dialog .content-bottom .bottom button {
     height: 36px;
     min-width: 140px;
     font-size: 15px;

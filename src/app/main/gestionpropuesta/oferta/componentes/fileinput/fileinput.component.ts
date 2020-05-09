@@ -43,13 +43,13 @@ export class FileInputComponent implements OnInit {
   ngOnInit(): void {
     this.usuario = JSON.parse(localStorage.getItem('u'));
     this.showSpinner = true;
-    this.fileInputService.listFilesContainers().subscribe((res: any) => {
-      this.listArchivo = res;
+    this.fileInputService.listFilesContainers().subscribe((res: any) => {      
+      if (res != null)
+        this.listArchivo = res;
       this.showSpinner = false;
     });
   }
   deleteFile(item: any): void {
-    debugger;
     const dialogRef = this.dialog.open(AlertConfirmComponent, {
       width: '450px',
       data: {
@@ -69,11 +69,9 @@ export class FileInputComponent implements OnInit {
           var ObjectIndex = this.listArchivo.findIndex(function (obj) { return obj.id === item.id; });//Obtenemos el Index del List del Objeto     
           this.listArchivo.splice(ObjectIndex, 1);
         } else {//Eliminamos el objecto que esta registrado en el sistema
-
           this.fileInputService.deleteFileContainers(item.archivoId).subscribe((res: any) => {
             var ObjectIndex = this.listArchivo.findIndex(function (obj) { return obj.id === item.id; });//Obtenemos el Index del List del Objeto     
             this.listArchivo.splice(ObjectIndex, 1);
-
             this.dialog.open(AlertConfirmComponent, {
               width: '450px',
               data: {
@@ -99,7 +97,7 @@ export class FileInputComponent implements OnInit {
       for (let index = 0; index < fileUpload.files.length; index++) {
         const file = fileUpload.files[index];
         this.listArchivo.push({
-          id: this.listArchivo.length + 1,
+          id: this.listArchivo.length > 0 ? this.listArchivo[0].id + 1 : this.listArchivo.length + 1, // por revisar el ordenamiento 
           archivoId: "",
           archivoNombre: file.name,
           createdDate: this.datePipe.transform(new Date(), 'dd/MM/yyyy hh:mm:ss a'),
@@ -110,6 +108,8 @@ export class FileInputComponent implements OnInit {
           progress: 0
         });
       }
+      this.listArchivo.sort(this.compareValues('id', 'desc'));
+      console.log(this.listArchivo);
     };
     fileUpload.click();
   }

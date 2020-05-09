@@ -9,7 +9,8 @@ import { OfertaGastosModule } from './oferta-gastos/oferta-gastos.module';
 import { OfertaServicioModule } from './oferta-servicio/oferta-servicio..module';
 import { ShareDialogComponent } from './share-dialog/share-dialog.component';
 import { BitacoraDialogComponent } from './bitacora-dialog/bitacora-dialog.component';
-
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 @NgModule({
 
     declarations: [
@@ -23,7 +24,9 @@ import { BitacoraDialogComponent } from './bitacora-dialog/bitacora-dialog.compo
         MatInputModule,
         MatIconModule,
         MatTableModule,
-        MatMenuModule
+        MatMenuModule,
+        MatButtonModule,
+        MatDividerModule
     ],
     exports: [
         OfertaCabeceraModule,
