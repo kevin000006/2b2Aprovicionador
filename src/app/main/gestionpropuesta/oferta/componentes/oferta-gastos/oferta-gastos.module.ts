@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { OfertaGastosService } from './oferta-gastos.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
     declarations: [
@@ -24,7 +25,8 @@ import { OfertaGastosService } from './oferta-gastos.service';
         MatMenuModule,
         MatFormFieldModule,
         MatInputModule,
-        MatSelectModule  
+        MatSelectModule,
+        MatTooltipModule
     ],
     exports: [
         OfertaGastosComponent

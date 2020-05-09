@@ -1,15 +1,34 @@
-<div class="row content-share">
-    <div class="col-xs-12 text-right close">
-        <span  (click)="closeDialog()">X</span>
+<button mat-icon-button class="close-button" (click)="closeDialog()">
+    <mat-icon class="close-icon">close</mat-icon>
+</button>
+<h1 mat-dialog-title style="text-align: center;font-size: 18px;line-height: 100%;">Compartir</h1>
+<mat-divider></mat-divider>
+<mat-dialog-content style="max-height: 100vh;overflow: hidden;">
+    <br>
+    <br>
+    <br>
+    <div class="row" style="padding: 18px;">
+        <div class="col-xs-12 col-sm-2 col-lg-12">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <input type="text" #input name="urlShared" value="{{urlShared}}" class="form-control" placeholder="url" readonly class="form-control">
+                            <div class="input-group-addon" style=" background: #62CE0E;">
+                                <button mat-flat-button style="line-height: normal;background: #62CE0E;color: white;font-size: 18px;" (click)="obtenerUrl()">
+                                    Obtener enlace
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group ">
+                    <div class="col-md-offset-8 col-md-4">
+                        <button mat-flat-button class="btn-cancelar" (click)="closeDialog()">Listo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-xs-12 title">
-        <h3>Compartir</h3>
-    </div>
-    <div class="col-xs-12 controlk">
-        <input #input  name="urlShared" value="{{urlShared}}" class="form-control" placeholder="url" readonly >
-        <button class="btn-telefonica-gree" (click)="obtenerUrl()">Obtener enlace</button>
-    </div>
-    <div class="col-xs-12 text-right footer">
-        <button class="btn-telefonica-gree-2"  (click)="closeDialog()">Listo</button>
-    </div>
-</div>
+</mat-dialog-content>

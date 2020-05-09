@@ -7,44 +7,69 @@
     <div class="row oferta-head">
         <div class="col-xs-12 col-sm-2 col-lg-12">
             <div class="form-horizontal">
-                <div class="form-group">
+                <div class="form-group container-fileinput">
                     <div class="col-xs-12 col-md-12">
-                        <div class="container-fileinput">
-                            <h1 style="font-size: 22px;font-family: TelefonicaBold;text-transform: capitalize !important;">!{{usuario.nombres}}, {{usuario.apellidos}}</h1>
-                            <p style="font-size: 16px;">Recuerda subir tu archivo en <strong>Formato excel (XLS)</strong></p>
-                            <br>
-                            <br>
-                            <button mat-flat-button class="btn-subir-archivo" (click)="onClick()">  
+                        <h1 style="font-size: 22px;font-family: TelefonicaBold;text-transform: capitalize !important;">!{{usuario.nombres}}, {{usuario.apellidos}}</h1>
+                        <p style="font-size: 16px;">Recuerda subir tu archivo en <strong>Formato excel (XLS)</strong></p>
+                        <br>
+                        <br>
+                        <button mat-flat-button class="btn-subir-archivo" (click)="onClick()">  
                                 <mat-icon>cloud_upload</mat-icon>   Subir Archivo   
-                            </button>
-                            <input type="file" #fileUpload id="fileUpload" name="fileUpload" multiple="multiple" style="display:none;" />
+                        </button>
+                        <input type="file" #fileUpload id="fileUpload" name="fileUpload" multiple="multiple" style="display:none;" />
+                    </div>
+                </div>
+                <div class="form-group" style="height: 550px;overflow-x: hidden;overflow-y: auto;    padding: 10px;">
+                    <div class="col-xs-12 col-sm-12 col-lg-12">
+                        <div class="form-horizontal">
+                            <mat-spinner style="margin: 0 auto;" [diameter]="20" *ngIf="showSpinner">cargando</mat-spinner>
+                            <!-- <mat-spinner [diameter]="20" *ngIf="showSpinner">cargando</mat-spinner> -->
+                            <div class="form-group list-item-fileinput" *ngFor="let item of listArchivo; let i = index">
+
+                                <mat-progress-bar [color]="color" [ngStyle]="{'visibility':item.inProgress==true ? 'visible' : 'hidden'}" [value]="item.progress"></mat-progress-bar>
+                                <div class="col-xs-12 col-md-12">
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <div class="col-xs-offset-4 col-xs-3 col-sm-12 col-md-offset-0 col-md-1">
+                                                <div class="imagen-excel"></div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-2 text-xs-center">
+                                                <div class="nombrefileinput">
+                                                    <p style="font-family: TelefonicaBold !important;">{{item.archivoNombre}}</p>
+                                                    <p>{{item.tx_tamanioArchivo}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-2 text-xs-center">
+                                                <div class="usuariocreafileinput">
+                                                    <p style="font-family: TelefonicaBold !important;text-transform: capitalize !important;">
+                                                        {{item.adjuntoUsuario}}
+                                                        <!-- {{item.usuario.nombres}} {{item.usuario.apellidos}} -->
+                                                    </p>
+                                                    <p>{{item.createdDate}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-offset-6 col-md-1">
+                                                <button mat-icon-button class="close-trash" (click)="deleteFile(item)">
+                                                    <mat-icon class=" close-icon " style="color: #00A9E0 !important; " >restore_from_trash</mat-icon>
+                                                </button>
+                                                <button mat-icon-button [ngStyle]="{'visibility':item.archivoId !=='' ? 'visible' : 'hidden'}" class="close-trash" (click)="descargar(item)">
+                                                    <mat-icon class=" close-icon " style="color: #00A9E0 !important; " >cloud_download</mat-icon>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-xs-12 col-md-12">
-                        <div class="list-item-fileinput" *ngFor="let item of listArchivo; let i = index">
-                            <div class="imagen-excel"></div>
-                            <div class="nombrefileinput">
-                                <p style="font-family: TelefonicaBold !important;">{{item.tx_nombre_archivo}}</p>
-                                <p>{{item.tx_tamanioArchivo}}</p>
-                            </div>
-                            <div class="usuariocreafileinput">
-                                <p style="font-family: TelefonicaBold !important;text-transform: capitalize !important;">{{item.usuario.nombres}} {{item.usuario.apellidos}}</p>
-                                <p>{{item.tx_fechacrea}} | {{item.tx_horacrea}}</p>
-                            </div>
-                            <button mat-icon-button class="close-trash" (click)="deleteFile()">
-                                <mat-icon class="close-icon" style="color: #00A9E0 !important;" >restore_from_trash</mat-icon>
-                            </button>
-                        </div>
+
+                <div class="form-group ">
+                    <div class="col-md-offset-8 col-md-2 ">
+                        <button mat-flat-button class="btn-cancelar " (click)="onCancelcick() ">{{cancelButtonText}}</button>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-8 col-md-2">
-                        <button mat-flat-button class="btn-cancelar" (click)="onCancelcick()">{{cancelButtonText}}</button>
-                    </div>
-                    <div class="col-md-2">
-                        <button mat-flat-button class="btn-guardar" (click)="btnGuardarARchivo()" tabindex="1">{{confirmButtonText}}</button>
+                    <div class="col-md-2 ">
+                        <button mat-flat-button class="btn-guardar " (click)="btnGuardarArchivo() " tabindex="1 ">{{confirmButtonText}}</button>
                     </div>
                 </div>
             </div>
