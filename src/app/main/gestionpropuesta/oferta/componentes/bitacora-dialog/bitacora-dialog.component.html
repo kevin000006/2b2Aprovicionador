@@ -8,9 +8,9 @@
         <div class="col-xs-12 col-sm-2 col-lg-12">
             <div class="form-horizontal">
                 <div class="form-group">
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <mat-form-field color="accent" appearance="legacy" [style.fontSize.px]="12">
-                            <mat-select>
+                            <mat-select [(ngModel)]="selected">
                                 <mat-option value="1">5 por pagina</mat-option>
                                 <mat-option value="2">10 por pagina</mat-option>
                                 <mat-option value="3">25 por pagina</mat-option>
@@ -26,7 +26,7 @@
                             <option value="100" >100 por pagina</option> 
                         </select> -->
                     </div>
-                    <div class="col-sm-offset-8 col-md-2">
+                    <div class="col-sm-offset-7 col-md-2">
                         <p> Total: 1</p>
                     </div>
                 </div>

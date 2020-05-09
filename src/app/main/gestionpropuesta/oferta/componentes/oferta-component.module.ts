@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 @NgModule({
 
     declarations: [
@@ -30,7 +31,8 @@ import { MatSelectModule } from '@angular/material/select';
         MatTableModule,
         MatMenuModule,
         MatButtonModule,
-        MatDividerModule
+        MatDividerModule,
+        FormsModule
     ],
     exports: [
         OfertaCabeceraModule,
