@@ -9,6 +9,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { OfertaGastosService } from './oferta-gastos.service';
+
 @NgModule({
     declarations: [
         OfertaGastosComponent
@@ -22,10 +24,13 @@ import { MatSelectModule } from '@angular/material/select';
         MatMenuModule,
         MatFormFieldModule,
         MatInputModule,
-        MatSelectModule        
+        MatSelectModule  
     ],
     exports: [
         OfertaGastosComponent
+    ],
+    providers:[
+        OfertaGastosService
     ]
 })
 export class OfertaGastosModule { }

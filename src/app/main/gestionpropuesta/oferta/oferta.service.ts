@@ -17,7 +17,6 @@ export class OfertaService{
     getShared(param):Observable<any>{
         return this.http.post<any>('/compartirurl/findQuery',param);
      }
-
 }
 
 

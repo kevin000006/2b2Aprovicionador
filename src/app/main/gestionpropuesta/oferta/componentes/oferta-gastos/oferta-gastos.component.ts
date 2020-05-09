@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AlertConfirmComponent } from '../alertConfirm/alertConfirm.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
+import { OfertaGastosService } from './oferta-gastos.service';
+
 @Component({
   selector: 'oferta-gastos',
   templateUrl: './oferta-gastos.component.html',
@@ -11,10 +13,12 @@ export class OfertaGastosComponent implements OnInit {
   listaConcepto: ModelCombo[] = [];
   listaMoneda: ModelCombo[] = [];
   dataSource = new MatTableDataSource<GastoElement>(dataSourceList);
+  //dataSource = new MatTableDataSource;
   displayedColumns: string[] = ['accion', 'concepto', 'cantidad', 'nromeses', 'factor', 'moneda', 'montounitmenusal', 'montototalmensual']; 
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private http: OfertaGastosService
   ) { }
 
   ngOnInit(): void {
@@ -27,6 +31,12 @@ export class OfertaGastosComponent implements OnInit {
     //Lenar combo Moneda
     this.listaMoneda.push(new ModelCombo("1", "S/."));
     this.listaMoneda.push(new ModelCombo("2", "$"));    
+
+    this.http.getAllOfertaOpex().subscribe(data =>{
+      //this.dataSource.data =data;    
+      console.log("ofertaopex:");
+      console.log(data);
+    });
   }
 
   public calcularMontoTotalMensual() {    
