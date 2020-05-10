@@ -137,3 +137,25 @@
 @media (min-width: 1200px) {
     /* lg */
 }
+
+@media ( max-height: 1200px) {
+    .listArchivo {
+        height: 550px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding: 10px;
+    }
+}
+
+@media ( max-height: 657px) {
+    .listArchivo {
+        height: 250px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding: 10px;
+    }
+}
+
+::ng-deep .mat-dialog-container {
+    overflow-y: hidden !important;
+}
