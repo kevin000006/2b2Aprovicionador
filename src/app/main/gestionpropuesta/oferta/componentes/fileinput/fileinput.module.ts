@@ -10,6 +10,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { AlertConfirmModule } from '../alertConfirm/alertConfirm.module';
 import { DatePipe } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AlertSuccessModule } from '../alertSuccess/alertSuccess.module';
 @NgModule({
     imports: [
         CommonModule,
@@ -19,7 +20,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         MatDividerModule,
         AlertConfirmModule,
         MatProgressBarModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        AlertSuccessModule
     ],
     declarations: [FileInputComponent],
     providers: [DatePipe, FileInputService],

@@ -7,6 +7,7 @@ import { FileInputService } from '../fileinput/fileinput.service';
 import { catchError, map } from 'rxjs/operators';
 import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { ThemePalette } from '@angular/material/core';
+import { AlertSuccessComponent } from '../alertSuccess/alertSuccess.component';
 import { of } from 'rxjs';
 @Component({
   selector: 'FileInput',
@@ -43,7 +44,7 @@ export class FileInputComponent implements OnInit {
   ngOnInit(): void {
     this.usuario = JSON.parse(localStorage.getItem('u'));
     this.showSpinner = true;
-    this.fileInputService.listFilesContainers().subscribe((res: any) => {      
+    this.fileInputService.listFilesContainers().subscribe((res: any) => {
       if (res != null)
         this.listArchivo = res;
       this.showSpinner = false;
@@ -72,16 +73,13 @@ export class FileInputComponent implements OnInit {
           this.fileInputService.deleteFileContainers(item.archivoId).subscribe((res: any) => {
             var ObjectIndex = this.listArchivo.findIndex(function (obj) { return obj.id === item.id; });//Obtenemos el Index del List del Objeto     
             this.listArchivo.splice(ObjectIndex, 1);
-            this.dialog.open(AlertConfirmComponent, {
-              width: '450px',
+            this.dialog.open(AlertSuccessComponent, {
+              width: '700px',
               data: {
                 message: 'Se elimino correctamente!',
-                buttonText: {
-                  ok: 'Aceptar'
-                }
+                buttonText: {ok: 'Aceptar'}
               }
             });
-
           });
         }
       }
