@@ -3,6 +3,7 @@ export class ClienteModel{
     descripcion : string;
     numero_identificador_fiscal:string;
     codigo_isis:string;
+    gerente_cuenta:string;
 }
 
 export class ComplejidadModel{
