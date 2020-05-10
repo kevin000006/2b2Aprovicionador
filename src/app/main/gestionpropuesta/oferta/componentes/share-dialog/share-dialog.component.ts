@@ -1,6 +1,6 @@
-import {Globals} from '../../../../../globals'
+import { Globals } from '../../../../../globals'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Component, OnInit,Inject  } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { OfertaService } from '../../oferta.service';
 import { Guid } from "guid-typescript";
 
@@ -12,30 +12,30 @@ import { Guid } from "guid-typescript";
 })
 export class ShareDialogComponent implements OnInit {
 
-  urlShared:string ='';
+  urlShared: string = '';
 
   constructor(public dialogRef: MatDialogRef<ShareDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private ofertaService:OfertaService) { }
+    private ofertaService: OfertaService) { }
 
   ngOnInit(): void {
   }
 
 
-  obtenerUrl():void{
+  obtenerUrl(): void {
     let codigo = Guid.create().toString();
 
     this.urlShared = "procesando....";
     codigo = codigo.split('-').join('');
-    let _urlShare = Globals.webURL + '/shared/'+ codigo;
+    let _urlShare = Globals.webURL + '/shared/' + codigo;
 
-    let param={
-      codigo : codigo,
-      url : '/gestion-propuesta/oferta',
+    let param = {
+      codigo: codigo,
+      url: '/gestion-propuesta/oferta',
       data: JSON.stringify(this.data)
     };
 
-    this.ofertaService.generarUrl(param).subscribe(data=>{
+    this.ofertaService.generarUrl(param).subscribe(data => {
 
       const selBox = document.createElement('textarea');
       selBox.style.position = 'fixed';
@@ -50,11 +50,11 @@ export class ShareDialogComponent implements OnInit {
       document.body.removeChild(selBox);
 
       this.urlShared = _urlShare;
-    }); 
+    });
 
   }
 
-  closeDialog():void{
+  closeDialog(): void {
     this.dialogRef.close();
   }
 

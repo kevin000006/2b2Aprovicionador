@@ -14,11 +14,12 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
 
     declarations: [
-    ShareDialogComponent,
-    BitacoraDialogComponent],
+        ShareDialogComponent,
+        BitacoraDialogComponent],
     imports: [
         MatFormFieldModule,
         MatSelectModule,
@@ -32,7 +33,8 @@ import { FormsModule } from '@angular/forms';
         MatMenuModule,
         MatButtonModule,
         MatDividerModule,
-        FormsModule
+        FormsModule,
+        MatDialogModule
     ],
     exports: [
         OfertaCabeceraModule,
