@@ -14,15 +14,14 @@ import { getSpanishPaginatorIntl } from './spanish-paginator-intl';
 import { MatPaginatorIntl } from '@angular/material/paginator/';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AlertConfirmModule } from '../alertConfirm/alertConfirm.module';
-// import { AlertConfirmComponent } from '../alertConfirm/alertConfirm.component';
-
 import { GeodialogComponent } from '../geoDialog/geoDialog.component';
 import { AgmCoreModule } from '@agm/core';
 import { MatButtonModule } from '@angular/material/button';
 import { GeocodeService } from '../geoDialog/geocode.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
     declarations: [
-        OfertaServicioComponent,       
+        OfertaServicioComponent,
         GeodialogComponent
     ],
     imports: [
@@ -38,7 +37,8 @@ import { GeocodeService } from '../geoDialog/geocode.service';
         MatSelectModule,
         MatDialogModule,
         AlertConfirmModule,
-        MatButtonModule,        
+        MatButtonModule,
+        MatTooltipModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyCkQSOz3XXowm3bOQlnCEUChPTgCmT0AXc'
         })

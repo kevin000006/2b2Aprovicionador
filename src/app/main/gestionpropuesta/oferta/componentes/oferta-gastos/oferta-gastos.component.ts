@@ -2,38 +2,109 @@ import { Component, OnInit } from '@angular/core';
 import { AlertConfirmComponent } from '../alertConfirm/alertConfirm.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
+import { OfertaGastosService } from './oferta-gastos.service';
+
 @Component({
   selector: 'oferta-gastos',
   templateUrl: './oferta-gastos.component.html',
   styleUrls: ['./oferta-gastos.component.scss']
 })
 export class OfertaGastosComponent implements OnInit {
+  tipoCambio: number = 3.5;
   listaConcepto: ModelCombo[] = [];
   listaMoneda: ModelCombo[] = [];
   dataSource = new MatTableDataSource<GastoElement>(dataSourceList);
-  displayedColumns: string[] = ['accion', 'concepto', 'cantidad', 'nromeses', 'factor', 'moneda', 'montounitmenusal', 'montototalmensual']; 
+  //dataSource = new MatTableDataSource;
+  displayedColumns: string[] = ['accion', 'concepto', 'cantidad', 'nromeses', 'factor', 'moneda', 'montounitmenusal', 'montototalmensual'];
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private http: OfertaGastosService
   ) { }
 
   ngOnInit(): void {
-    
     //Lenar combo Comcepto
-    this.listaConcepto.push(new ModelCombo("1", "Otros"));
-    this.listaConcepto.push(new ModelCombo("2", "Valor 2"));
-    this.listaConcepto.push(new ModelCombo("3", "Valor 3"));
-    this.listaConcepto.push(new ModelCombo("4", "Valor 4"));
+    this.listaConcepto.push(new ModelCombo("1", "Gestión del Proyecto", 0, 'F'));
+    this.listaConcepto.push(new ModelCombo("2", "Ingeniero Residente", 0, 'F'));
+    this.listaConcepto.push(new ModelCombo("3", "Asistente de Proyecto", 0, 'F'));
+    this.listaConcepto.push(new ModelCombo("4", "Solarwind", 0, 'F'));
+    this.listaConcepto.push(new ModelCombo("5", "Smart VPN", 0, 'F'));
+    this.listaConcepto.push(new ModelCombo("6", "Capacitación", 0, 'F'));
+    this.listaConcepto.push(new ModelCombo("7", "Dirección IP", 0, 'F'));
+    this.listaConcepto.push(new ModelCombo("8", "Servicios Móviles", 0, 'F'));
+    this.listaConcepto.push(new ModelCombo("9", "Costo de Venta de Hardware", 0, 'F'));
+    this.listaConcepto.push(new ModelCombo("10", "Tráfico seguro por mega", 0, 'F'));
+    this.listaConcepto.push(new ModelCombo("11", "Costo Internacional Recurrente", 0, 'F'));
+    this.listaConcepto.push(new ModelCombo("12", "Gestión Soc", 0, 'F'));
+    this.listaConcepto.push(new ModelCombo("13", "Costo de Traslado", 0, 'F'));
+    this.listaConcepto.push(new ModelCombo("14", "Venta de BGAN Explorer 510", 0, 'F'));
+    this.listaConcepto.push(new ModelCombo("15", "Venta de Isatphone", 0, 'F'));
+    this.listaConcepto.push(new ModelCombo("16", "Penalidad", 0, 'F'));
+    this.listaConcepto.push(new ModelCombo("17", "Costo Internacional Único", 0, 'F'));
+    this.listaConcepto.push(new ModelCombo("18", "Venta de BGAN HNS9202", 0, 'F'));
+    this.listaConcepto.push(new ModelCombo("19", "Costo de Venta Seguridad", 0, 'F'));
+    this.listaConcepto.push(new ModelCombo("20", "Traslado VSAT", 0, 'F'));
+    this.listaConcepto.push(new ModelCombo("21", "Traslado CCHH+SPCR+SPAT", 0, 'F'));
+    this.listaConcepto.push(new ModelCombo("22", "Otros", 0, '0'));
+    this.listaConcepto.push(new ModelCombo("23", "Otros2", 0, '0'));
+    this.listaConcepto.push(new ModelCombo("24", "Otros3", 0, '0'));
+    this.listaConcepto.push(new ModelCombo("25", "Renting Equipos", 0.45, 'R'));
     //Lenar combo Moneda
     this.listaMoneda.push(new ModelCombo("1", "S/."));
-    this.listaMoneda.push(new ModelCombo("2", "$"));    
+    this.listaMoneda.push(new ModelCombo("2", "$"));
+
+    this.http.getAllOfertaOpex().subscribe(data => {
+      debugger;
+      console.log("ofertaopex:");
+      console.log(data);
+    });
+  }
+  changeConcepto(event, row) {
+    if (event.isUserInput) {
+      console.log(event.source.value, event.source.selected);
+      var objetoConcepto = this.listaConcepto.find(function (element) { return element.id == event.source.value; });
+      if (objetoConcepto.factor == 0) //Si el factor es cero no se mostrara ninguna informacion en la bandeja
+        row.factor = '';
+      else
+        row.factor = objetoConcepto.factor;
+    }
+  }
+  changeMoneda(event, row) {
+    if (event.isUserInput) {
+      if (event.source.value == "2")//Cual el tipo de cambio es dolares 
+        row.montototalmensual = row.cantidad * row.nromeses * (row.montounitmenusal * this.tipoCambio);
+      else// cuando selecciona la moneda de soles
+        row.montototalmensual = row.cantidad * row.nromeses * row.montounitmenusal;
+    }
+  }
+  inputChangeCantidad(input: string, row: any): void {
+    if (input === "")
+      row.cantidad = 0;
+    else
+      row.cantidad = parseInt(input);
+    row.montototalmensual = row.cantidad * row.nromeses * row.montounitmenusal;
+  }
+  inputChangeNumeroMeses(input: string, row: any): void {
+    if (input === "")
+      row.nromeses = 0;
+    else
+      row.nromeses = parseInt(input);
+    row.montototalmensual = row.cantidad * row.nromeses * row.montounitmenusal;
+  }
+  inputChangeMontoUnitarioMensual(input: string, row: any): void {
+    if (input === "")
+      row.montounitmenusal = 0;
+    else
+      row.montounitmenusal = parseInt(input);
+    row.montototalmensual = row.cantidad * row.nromeses * row.montounitmenusal;
   }
 
-  public calcularMontoTotalMensual() {    
+
+  public calcularTotalSoles() {
     return this.dataSource.data.reduce((accum, curr) => accum + curr.montototalmensual, 0);
   }
-  public calcularMontoUnitarioMensual() {    
-    return this.dataSource.data.reduce((accum, curr) => accum + curr.montounitmenusal, 0);
+  public calcularTotalDolares() {
+    return this.dataSource.data.reduce((accum, curr) => accum + (curr.montounitmenusal / this.tipoCambio), 0);
   }
   crearNuevoGastos(id: number): GastoElement {
     return {
@@ -41,10 +112,10 @@ export class OfertaGastosComponent implements OnInit {
       concepto: '',
       nroconcepto: 0,
       conceptootro: '',
-      cantidad: '',
-      nromeses: '',
+      cantidad: 0,
+      nromeses: 0,
       factor: '',
-      moneda: '',
+      moneda: '1',
       montounitmenusal: 0,
       montototalmensual: 0
     };
@@ -77,9 +148,9 @@ export class OfertaGastosComponent implements OnInit {
   }
 }
 const dataSourceList: GastoElement[] = [
-  { id:1,concepto: '', nroconcepto: 1, conceptootro: '', cantidad: '1', nromeses: '6', factor: '-', moneda: '1', montounitmenusal: 5000, montototalmensual: 1 },
-  { id:2,concepto: '', nroconcepto: 1, conceptootro: '', cantidad: '1', nromeses: '6', factor: '-', moneda: '2', montounitmenusal: 5, montototalmensual: 0 },
-  { id:3,concepto: '', nroconcepto: 1, conceptootro: '', cantidad: '1', nromeses: '6', factor: '-', moneda: '', montounitmenusal: 5, montototalmensual: 500 }
+  { id: 1, concepto: '', nroconcepto: 1, conceptootro: '', cantidad: 0, nromeses: 0, factor: '-', moneda: '1', montounitmenusal: 0, montototalmensual: 0 },
+  { id: 2, concepto: '', nroconcepto: 1, conceptootro: '', cantidad: 0, nromeses: 0, factor: '-', moneda: '1', montounitmenusal: 0, montototalmensual: 0 },
+  { id: 3, concepto: '', nroconcepto: 1, conceptootro: '', cantidad: 0, nromeses: 0, factor: '-', moneda: '1', montounitmenusal: 0, montototalmensual: 0 }
 
 ];
 export interface GastoElement {
@@ -87,14 +158,14 @@ export interface GastoElement {
   concepto: string;
   nroconcepto: number;
   conceptootro: string;
-  cantidad: string;
-  nromeses: string;
+  cantidad: number;
+  nromeses: number;
   factor: string;
   moneda: string;
   montounitmenusal: number;
   montototalmensual: number;
 }
 export class ModelCombo {
-  constructor(public id?: string, public nombre?: string) {
+  constructor(public id?: string, public nombre?: string, public factor?: number, public tipo?: string) {
   }
 }

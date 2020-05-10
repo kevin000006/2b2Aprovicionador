@@ -16,8 +16,8 @@ import { map, catchError } from 'rxjs/operators';
 export class HttpConfigInterceptor implements HttpInterceptor {
 
     //private readonly urlBase: string = "http://localhost:8084/api";
-
-   // private readonly urlBase: string = "";
+    //private readonly urlBase: string = "http://localhost:8080/api";
+    //private readonly urlBase: string = "";
     private readonly urlBase: string = "https://webapp-b2b-qa.azurewebsites.net/api";
 
     constructor(public errorDialogService: ErrorDialogService) { }
@@ -28,8 +28,10 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         if (token) {
             request = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + token) });
         }
-
-        if (!request.headers.has('Content-Type')) {
+        if (request.body instanceof FormData) {
+            //request = request.clone({ headers: request.headers.set('Content-Type', 'multipart/form-data') });            
+        }
+        else {
             request = request.clone({ headers: request.headers.set('Content-Type', 'application/json') });
         }
         request = request.clone({ url: `${this.urlBase}${request.url}`, headers: request.headers.set('Accept', 'application/json') });
@@ -37,7 +39,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
-                   // console.log('event--->>>', event);
+                    // console.log('event--->>>', event);
                     // this.errorDialogService.openDialog(event);
                 }
                 return event;
