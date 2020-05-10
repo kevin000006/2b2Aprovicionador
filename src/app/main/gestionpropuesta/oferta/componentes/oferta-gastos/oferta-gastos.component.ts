@@ -61,20 +61,33 @@ export class OfertaGastosComponent implements OnInit {
   }
   changeConcepto(event, row) {
     if (event.isUserInput) {
+      debugger;
       console.log(event.source.value, event.source.selected);
       var objetoConcepto = this.listaConcepto.find(function (element) { return element.id == event.source.value; });
-      if (objetoConcepto.factor == 0) //Si el factor es cero no se mostrara ninguna informacion en la bandeja
-        row.factor = '';
-      else
+      if (objetoConcepto.factor == 0) {//Si el factor es cero no se mostrara ninguna informacion en la bandeja
+        row.factor = 0;
+        row.montototalmensual = this.calcularMontoMensual(row);
+      }        
+      else {
         row.factor = objetoConcepto.factor;
+        row.montototalmensual = this.calcularMontoMensual(row);
+        // if(event.source.value == "R"){
+
+        // }else{
+        //   row.factor = objetoConcepto.factor;
+        // }
+      }
     }
   }
   changeMoneda(event, row) {
     if (event.isUserInput) {
-      if (event.source.value == "2")//Cual el tipo de cambio es dolares 
-        row.montototalmensual = row.cantidad * row.nromeses * (row.montounitmenusal * this.tipoCambio);
+      debugger;
+      if (event.source.value == "2"){//Cual el tipo de cambio es dolares 
+        row.montounitmenusal=row.montounitmenusal * this.tipoCambio;
+        row.montototalmensual = this.calcularMontoMensual(row);
+      }        
       else// cuando selecciona la moneda de soles
-        row.montototalmensual = row.cantidad * row.nromeses * row.montounitmenusal;
+        row.montototalmensual = this.calcularMontoMensual(row);;//.toFixed(2);
     }
   }
   inputChangeCantidad(input: string, row: any): void {
@@ -82,29 +95,38 @@ export class OfertaGastosComponent implements OnInit {
       row.cantidad = 0;
     else
       row.cantidad = parseInt(input);
-    row.montototalmensual = row.cantidad * row.nromeses * row.montounitmenusal;
+    row.montototalmensual = this.calcularMontoMensual(row);
+
   }
   inputChangeNumeroMeses(input: string, row: any): void {
     if (input === "")
       row.nromeses = 0;
     else
       row.nromeses = parseInt(input);
-    row.montototalmensual = row.cantidad * row.nromeses * row.montounitmenusal;
+    row.montototalmensual = this.calcularMontoMensual(row);
   }
+
   inputChangeMontoUnitarioMensual(input: string, row: any): void {
     if (input === "")
       row.montounitmenusal = 0;
     else
       row.montounitmenusal = parseInt(input);
-    row.montototalmensual = row.cantidad * row.nromeses * row.montounitmenusal;
+    row.montototalmensual = this.calcularMontoMensual(row);
   }
-
-
+  calcularMontoMensual(row: any): number {
+    var montoCalculado: number = 0;
+    if (row.factor > 0)
+      montoCalculado = row.cantidad * row.nromeses * (row.montounitmenusal * (row.factor + 1));
+    else
+      montoCalculado = row.cantidad * row.nromeses * row.montounitmenusal;
+    return montoCalculado;
+  }
+  //summaryIncome: item.incomes.reduce((acc, income) => acc + income.value, 0).toFixed(2)
   public calcularTotalSoles() {
-    return this.dataSource.data.reduce((accum, curr) => accum + curr.montototalmensual, 0);
+    return this.dataSource.data.reduce((accum, curr) => accum + curr.montototalmensual, 0).toFixed(2);
   }
   public calcularTotalDolares() {
-    return this.dataSource.data.reduce((accum, curr) => accum + (curr.montounitmenusal / this.tipoCambio), 0);
+    return this.dataSource.data.reduce((accum, curr) => accum + (curr.montototalmensual / this.tipoCambio), 0).toFixed(2);
   }
   crearNuevoGastos(id: number): GastoElement {
     return {
@@ -114,7 +136,7 @@ export class OfertaGastosComponent implements OnInit {
       conceptootro: '',
       cantidad: 0,
       nromeses: 0,
-      factor: '',
+      factor: 0,
       moneda: '1',
       montounitmenusal: 0,
       montototalmensual: 0
@@ -148,9 +170,9 @@ export class OfertaGastosComponent implements OnInit {
   }
 }
 const dataSourceList: GastoElement[] = [
-  { id: 1, concepto: '', nroconcepto: 1, conceptootro: '', cantidad: 0, nromeses: 0, factor: '-', moneda: '1', montounitmenusal: 0, montototalmensual: 0 },
-  { id: 2, concepto: '', nroconcepto: 1, conceptootro: '', cantidad: 0, nromeses: 0, factor: '-', moneda: '1', montounitmenusal: 0, montototalmensual: 0 },
-  { id: 3, concepto: '', nroconcepto: 1, conceptootro: '', cantidad: 0, nromeses: 0, factor: '-', moneda: '1', montounitmenusal: 0, montototalmensual: 0 }
+  { id: 1, concepto: '', nroconcepto: 1, conceptootro: '', cantidad: 0, nromeses: 0, factor: 0, moneda: '1', montounitmenusal: 0, montototalmensual: 0 },
+  { id: 2, concepto: '', nroconcepto: 1, conceptootro: '', cantidad: 0, nromeses: 0, factor: 0, moneda: '1', montounitmenusal: 0, montototalmensual: 0 },
+  { id: 3, concepto: '', nroconcepto: 1, conceptootro: '', cantidad: 0, nromeses: 0, factor: 0, moneda: '1', montounitmenusal: 0, montototalmensual: 0 }
 
 ];
 export interface GastoElement {
@@ -160,7 +182,7 @@ export interface GastoElement {
   conceptootro: string;
   cantidad: number;
   nromeses: number;
-  factor: string;
+  factor: number;
   moneda: string;
   montounitmenusal: number;
   montototalmensual: number;
