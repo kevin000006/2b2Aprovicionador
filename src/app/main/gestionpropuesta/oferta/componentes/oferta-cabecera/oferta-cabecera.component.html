@@ -24,8 +24,7 @@
             </div>
             <div class="content-control-oferta">
                 <mat-form-field color="accent">
-                    <span style="font-size: 11px;" class="prefix font-body-oferta" matPrefix>{{oferta.oportunidad_pre}}- &nbsp;</span>
-                    <input autocomplete="off" matInput class="form-control font-body-oferta" value="{{oferta.oportunidad_codigo}}" placeholder="" name="salesforce">
+                    <input autocomplete="off" matInput class="form-control font-body-oferta" value="{{oferta.oportunidad}}" placeholder="" name="salesforce">
                 </mat-form-field>
             </div>
         </div>
@@ -70,7 +69,7 @@
         </div>
         <div class="row">
             <div class="content-btn-ganada">
-                <button class="btn btn-md btn-telefonica-gree-2">Ganado</button>
+                <button class="btn btn-md btn-telefonica-gree-2" (click)="ganarOferta()">Ganado</button>
             </div>
         </div>
     </div>
@@ -80,12 +79,19 @@
         </div>
         <div class="row content-control-oferta">
             <div class="col-sm-2 padding-l-none">
-                <mat-form-field color="accent">
-                    <input autocomplete="off" matInput class="form-control font-body-oferta" placeholder="" value="{{oferta.cliente.codigo_isis}}" name="cliente">
-                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <input type="text" [(ngModel)]="oferta.cliente" class="form-control font-body-oferta"  placeholder="" aria-label="Number" matInput  #myControl
+                           [matAutocomplete]="auto">
+                    <mat-autocomplete class="autocompletecliente"  #auto="matAutocomplete" [displayWith]="displayFn">
+                      <mat-option *ngFor="let option of dataSourceCliente" [value]="option" class="item-auto-clinet">
+                        {{option.numero_identificador_fiscal}} | {{option.descripcion}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+
             </div>
             <div class="col-sm-6 padding-l-none">
-               <!-- <label class="font-body-oferta cliente-nombre">20302241598 / KOMATSU-MITSUI MAQUINARIAS PERU S.A.</label>-->
                <label class="font-body-oferta cliente-nombre">{{oferta.cliente.numero_identificador_fiscal}} / {{oferta.cliente.descripcion}}</label>
             </div>
              <div class="col-sm-4 content-control-oferta">
@@ -145,7 +151,7 @@
                     </div>
                     <div class=" content-control-oferta">
                         <mat-form-field color="accent">
-                            <input autocomplete="off" matInput class="form-control font-body-oferta" value="{{oferta.descripcion}}" placeholder="">
+                            <input autocomplete="off" matInput class="form-control font-body-oferta" [(ngModel)]="oferta.descripcion" placeholder="">
                             <mat-icon class="icon" matSuffix>description &nbsp;</mat-icon>
                         </mat-form-field>
                     </div>
@@ -327,7 +333,7 @@
         </div>
         <div class="row">
             <div class=" content-btn-guardar">
-                <button class="btn-telefonica-gree btn-guardar-oferta">Guardar</button>
+                <button class="btn-telefonica-gree btn-guardar-oferta" (click)="guardarOferta()">Guardar</button>
             </div>
         </div>
     </div>

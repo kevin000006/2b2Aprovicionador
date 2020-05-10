@@ -19,6 +19,7 @@ import { BandejaService } from './bandeja.service';
 import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuestionDialogsComponent } from './dialogs/question-dialogs/question-dialogs.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 const routes: Routes = [
     {
@@ -53,7 +54,8 @@ const routes: Routes = [
         MatSortModule,
         MatDatepickerModule,
         FormsModule,
-        MatCardModule
+        MatCardModule,
+        MatProgressSpinnerModule
     ],
     entryComponents: [],
     providers: [

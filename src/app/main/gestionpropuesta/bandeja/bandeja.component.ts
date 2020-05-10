@@ -62,10 +62,10 @@ export class BandejaComponent implements OnInit {
   lstEstado = new Array<EstadoModel>();
   checked = false;
   visible_filtro = false;
-  self = null;
+  cargandoBandeja = false;
 
   displayedColumns: string[] = 
-  ['codigo', 'version', 'oportunidad', 'cliente', 'descripcion',
+  ['codigo', 'oportunidad','faseproyecto', 'cliente', 'descripcion',
    'estado', 'tipoproyecto', 'observaciones','complejidad',
   'preventa', 'analistafinanciero','creado', 'modificado','menu'];
   exampleDatabase: BandejaService | null;
@@ -133,6 +133,8 @@ export class BandejaComponent implements OnInit {
     this._filtro.desde='';
     this._filtro.hasta='';
 
+    this.filtrarData();
+
   }
 
   public filtrarData() {
@@ -161,10 +163,11 @@ export class BandejaComponent implements OnInit {
     this.dataSource.filtrar(obj,this.pagesize.nativeElement.value);
   }
 
+
+
   public loadData() {
     this.exampleDatabase = new BandejaService(this.httpClient);
 
-    //this.dataSource = new EjemploDataSource(this.exampleDatabase, this.paginator, this.sort);
     this.dataSource = new EjemploDataSource(this.exampleDatabase, this.sort);
     fromEvent(this.filter.nativeElement, 'keyup')
       .subscribe(() => {
@@ -243,7 +246,7 @@ export class BandejaComponent implements OnInit {
         message: '¿Esta seguro que desea anular la oferta?',
         accion: '/oferta/anularoferta',
         data:{
-          ofertaId:9,
+          ofertaId:oferta.id,
           usuario: this.currentUser.usuario,
           usuarioId: this.currentUser.id
         }
@@ -266,7 +269,7 @@ export class BandejaComponent implements OnInit {
 
 export class EjemploDataSource extends DataSource<BandejaModel>{
   _filterChange = new BehaviorSubject('');
-  pageSize = 5;
+  
 
   get filter(): string {
     return this._filterChange.value;
@@ -277,9 +280,14 @@ export class EjemploDataSource extends DataSource<BandejaModel>{
   }
 
   filtrar(param, size) {
+    this.loadingSubject.next(true);
+    this._exampleDatabase.dataChange.next([]);
     this._exampleDatabase.getBandejaAll(param);
     this.pageSize = size || 5;
   }
+  pageSize = 5;
+  private loadingSubject = new BehaviorSubject<boolean>(true);
+  public isWait$ = this.loadingSubject.asObservable();
   totalPages:number=0;
   totalRegistros:number=0;
   filteredData: BandejaModel[] = [];
@@ -299,7 +307,6 @@ export class EjemploDataSource extends DataSource<BandejaModel>{
       this._exampleDatabase.dataChange,
       this._sort.sortChange,
       this._filterChange,
-     // this._paginator.page
     ];
 
     this._exampleDatabase.getBandejaAll({});
@@ -309,7 +316,9 @@ export class EjemploDataSource extends DataSource<BandejaModel>{
       let data_ = this._exampleDatabase.data['data'] || [];
       this.filteredData = data_.slice().filter((issue: BandejaModel) => {
         const searchStr = (issue.version + issue.codigo + issue.cliente + issue.oportunidad + issue.descripcion).toLowerCase();
+        this.loadingSubject.next(false);
         return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
+        
       });
 
       // Sort filtered data
@@ -319,12 +328,10 @@ export class EjemploDataSource extends DataSource<BandejaModel>{
       
      // const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
      // this.renderedData = sortedData.splice(startIndex, this._paginator.pageSize);
-     this.renderedData = sortedData.splice(0, 100);
-     
-      this.totalRegistros = this._exampleDatabase.data['rows'] || 0;
-
+     this.renderedData = sortedData.splice(0, 100);     
+     this.totalRegistros = this._exampleDatabase.data['rows'] || 0;
      this.totalPages = Math.ceil((this.totalRegistros / this.pageSize));
-
+     
       return this.renderedData;
     }
     ));
@@ -335,9 +342,11 @@ export class EjemploDataSource extends DataSource<BandejaModel>{
 
   sortData(data: BandejaModel[]): BandejaModel[] {
     if (!this._sort.active || this._sort.direction === '') {
+     
       return data;
-    }
 
+    }
+    
     return data.sort((a, b) => {
       let propertyA: number | string = '';
       let propertyB: number | string = '';
@@ -353,7 +362,7 @@ export class EjemploDataSource extends DataSource<BandejaModel>{
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
       const valueB = isNaN(+propertyB) ? propertyB : +propertyB;
-
+      
       return (valueA < valueB ? -1 : 1) * (this._sort.direction === 'asc' ? 1 : -1);
     });
   }

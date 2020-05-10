@@ -1,6 +1,8 @@
 export class ClienteModel{
     id : number;
     descripcion : string;
+    numero_identificador_fiscal:string;
+    codigo_isis:string;
 }
 
 export class ComplejidadModel{

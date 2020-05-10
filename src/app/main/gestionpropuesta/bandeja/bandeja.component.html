@@ -70,7 +70,7 @@
 
                                 <mat-form-field >
                                     <mat-label>Desde</mat-label>
-                                    <input [(ngModel)]="_filtro.desde"  matInput [matDatepicker]="desde" class="form-control">
+                                    <input [(ngModel)]="_filtro.desde" autocomplete="off"  matInput [matDatepicker]="desde" class="form-control">
                                     <mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
                                     <mat-datepicker #desde></mat-datepicker>
                                   </mat-form-field>
@@ -80,7 +80,7 @@
 
                                 <mat-form-field>
                                     <mat-label>Hasta</mat-label>
-                                    <input [(ngModel)]="_filtro.hasta" matInput [matDatepicker]="hasta" class="form-control">
+                                    <input [(ngModel)]="_filtro.hasta" autocomplete="off" matInput [matDatepicker]="hasta" class="form-control">
                                     <mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
                                     <mat-datepicker #hasta></mat-datepicker>
                                   </mat-form-field>
@@ -133,32 +133,35 @@
                         </mat-form-field>
                     </div>
                     <div class="col-xs-12 col-sm-9 text-right control-bandeja-tabla padding-none">
-                        <button (click)="loadData()" class="btn-telefonica-2" style="min-height: 36px;">
+                        <button (click)="filtrarData()" class="btn-telefonica-2" style="min-height: 36px;">
                         <span> <mat-icon class="icon">refresh</mat-icon> Actualizar </span>
                     </button>
                     <span style="font-size: 12px;margin-left: 10px;">Total: {{dataSource.totalRegistros}}</span>
                     </div>
                 </div>
                 <div class="content-table">
+                    
+                        
                     <mat-table style="width: 2000px;" class="mat-cell oferta-bandeja" #tbofertabandeja [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}" >
 
                         <ng-container matColumnDef="codigo">
                             <mat-header-cell *matHeaderCellDef mat-sort-header>Código PP</mat-header-cell>
                             <mat-cell *matCellDef="let row">
                                 <a target="_blank" href="{{row.url}}">
-                                    {{row.codigo}}
+                                    {{row.codigo}} - ver.{{row.version}}
                                   </a>                                 
                             </mat-cell>
-                        </ng-container>
-
-                        <ng-container matColumnDef="version">
-                            <mat-header-cell *matHeaderCellDef mat-sort-header>Versión</mat-header-cell>
-                            <mat-cell *matCellDef="let row"> {{row.version}}</mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="oportunidad">
                             <mat-header-cell *matHeaderCellDef mat-sort-header>Oportunidad</mat-header-cell>
                             <mat-cell *matCellDef="let row"> {{row.oportunidad}}</mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="faseproyecto" >
+                            <mat-header-cell *matHeaderCellDef> Fase </mat-header-cell>
+                            <mat-cell *matCellDef="let row; let i=index;">                            
+                            </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="cliente">
@@ -206,15 +209,17 @@
                             </mat-cell>
                         </ng-container>
 
+                       
+
                         <ng-container matColumnDef="creado" >
                             <mat-header-cell *matHeaderCellDef> Creado </mat-header-cell>
-                            <mat-cell *matCellDef="let row; let i=index;">    {{row.fechareg}}                           
+                            <mat-cell *matCellDef="let row; let i=index;">    {{row.fechareg | date: 'dd/MM/yyyy HH:mm'}}                           
                             </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="modificado" >
                             <mat-header-cell *matHeaderCellDef> Modificado </mat-header-cell>
-                            <mat-cell *matCellDef="let row; let i=index;">   {{row.fechamod}}                            
+                            <mat-cell *matCellDef="let row; let i=index;">   {{row.fechamod | date: 'dd/MM/yyyy HH:mm'}}                            
                             </mat-cell>
                         </ng-container>
 
@@ -227,8 +232,8 @@
                                 <mat-menu #appMenu="matMenu">
                                    <!-- <button style="font-size: 12px;" mat-menu-item><mat-icon style="font-size: 15px; margin:5px 0 0 0;">visibility</mat-icon> Ver historial de versiones</button>-->
                                     <button (click)="openDialogNuevaVersion(row)" style="font-size: 12px;" mat-menu-item><mat-icon style="font-size: 15px; margin:5px 0 0 0;">add</mat-icon> Generar nueva version</button>
-                                    <button (click)="openDialogDuplicar(row)" style="font-size: 12px;" mat-menu-item><mat-icon style="font-size: 15px; margin:5px 0 0 0;">file_copy</mat-icon> Duplicar plantilla</button>
-                                    <button (click)="openDialogAnular(row)" style="font-size: 12px;" mat-menu-item><mat-icon style="font-size: 15px; margin:5px 0 0 0;">clear</mat-icon> Anular plantilla de proyecto</button>
+                                    <button (click)="openDialogDuplicar(row)" style="font-size: 12px;" mat-menu-item><mat-icon style="font-size: 15px; margin:5px 0 0 0;">file_copy</mat-icon> Duplicar oferta</button>
+                                    <button (click)="openDialogAnular(row)" style="font-size: 12px;" mat-menu-item><mat-icon style="font-size: 15px; margin:5px 0 0 0;">clear</mat-icon> Anular oferta</button>
                                    <!-- <button style="font-size: 12px;" mat-menu-item><mat-icon style="font-size: 15px; margin:5px 0 0 0;">show_chart</mat-icon> Seguimiento de estado</button>-->
                                 </mat-menu>
 
@@ -238,16 +243,19 @@
                             </mat-cell>
                         </ng-container>
 
-
+                        
                         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                         <mat-row *matRowDef="let row; columns: displayedColumns; let i = index;" [ngClass]=" i % 2 != 0 ? 'row-color-tb' : ''"></mat-row>
+                        
                     </mat-table>
+                    
                 </div>
+                <mat-spinner *ngIf="dataSource.isWait$ | async" style="margin: 0 auto; " diameter="40" color="accent"></mat-spinner>
 
                <!-- <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]">
                 </mat-paginator> -->
 
-                <div class="text-center m-t-10 pagination">
+                <div class="text-center m-t-10 pagination" *ngIf="dataSource.totalRegistros >= 1" >
                     <button [disabled]="(pageIndex+1)==1" class="pag btn-pagination pointer" (click)="paginar(-1)">
                         <mat-icon class="icon" >keyboard_arrow_left</mat-icon>
                     </button>

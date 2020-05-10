@@ -31,6 +31,7 @@ export class OfertaComponent implements OnInit {
         window.sessionStorage.setItem('oferta', JSON.stringify(window.history.state));
       }
     }
+  
   }
   btnAdjuntar(): void {
     const dialogRef = this.dialog.open(FileInputComponent, {

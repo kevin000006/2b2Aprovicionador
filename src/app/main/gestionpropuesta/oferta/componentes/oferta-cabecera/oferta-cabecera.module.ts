@@ -4,6 +4,7 @@ import { OfertaCabeceraComponent} from './oferta-cabecera.component';
 import { MatInputModule } from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 
@@ -16,7 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         CommonModule,
         MatInputModule,
         MatIconModule,
-        FormsModule
+        FormsModule,
+        MatAutocompleteModule
     ],
     exports:[
         OfertaCabeceraComponent

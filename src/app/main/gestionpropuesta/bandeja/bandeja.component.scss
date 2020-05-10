@@ -65,18 +65,30 @@ span.clestado{
     flex: 0 0 50px;
 }
 
+.mat-column-codigo{
+  flex: 0 0 120px;
+}
+
+.mat-column-version{
+  flex: 0 0 120px;
+}
+
+.mat-column-oportunidad{
+  flex: 0 0 120px;
+}
+
+
 .mat-column-cliente{
-  flex: 0 0 210px;
+  flex: 0 0 200px;
 }
 
 
 .mat-column-descripcion{
-  flex: 0 0 280px;
+  flex: 0 0 270px;
 }
 
-.mat-column-oportunidad{
-  flex: 0 0 200px;
-}
+
+
 
 .content-filtro-icon{
   width: auto;
