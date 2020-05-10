@@ -35,8 +35,7 @@ import { FuseConfigService } from '@fuse/services/config.service';
        }
   
     ngOnInit(): void {
-      this.route.paramMap.subscribe(params => {
-        //debugger;
+      this.route.paramMap.subscribe(params => {        
         let dataBase = JSON.parse( window.localStorage.getItem('bandeja') || '[]');
         let _params= params['params'];
         let _id = _params['id'];

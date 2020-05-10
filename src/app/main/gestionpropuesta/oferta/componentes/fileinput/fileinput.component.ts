@@ -134,8 +134,7 @@ export class FileInputComponent implements OnInit {
           obj.inProgress = false;
           return of(`${obj.name} fallo la cargar.`);
         })
-      ).subscribe((event: any) => {
-        debugger;
+      ).subscribe((event: any) => {        
         if (typeof (event) === 'object') {
           this.listRespnse.push(event.body);
           if (this.listRespnse.length == listArchivosAGuardar.length) {//si la carga ha sido satisfactorio
