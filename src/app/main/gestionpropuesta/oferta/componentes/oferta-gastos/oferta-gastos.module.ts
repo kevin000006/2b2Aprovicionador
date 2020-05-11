@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { OfertaGastosComponent } from './oferta-gastos.component'
@@ -11,7 +11,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { OfertaGastosService } from './oferta-gastos.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
+import es from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(es);
+//import localeEs from '@angular/common/locales/es';
 @NgModule({
     declarations: [
         OfertaGastosComponent
@@ -31,8 +34,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     exports: [
         OfertaGastosComponent
     ],
-    providers:[
-        OfertaGastosService
+    providers: [
+        OfertaGastosService,
+        { provide: LOCALE_ID, useValue: 'es' }
     ]
 })
 export class OfertaGastosModule { }

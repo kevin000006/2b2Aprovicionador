@@ -25,7 +25,7 @@ export class FileInputComponent implements OnInit {
   message: string = "Are you sure?"
   confirmButtonText = "Yes"
   cancelButtonText = "Cancel"
-  usuario: { nombres: '', apellidos: '' };
+  usuario: { nombres: '', apellidos: '',id:0 };
   public listArchivo: any = [];
   public listRespnse: any = [];
   @ViewChild("fileUpload", { static: false }) fileUpload: ElementRef;
@@ -96,7 +96,7 @@ export class FileInputComponent implements OnInit {
   onClick() {
     const fileUpload = this.fileUpload.nativeElement; fileUpload.onchange = () => {
       for (let index = 0; index < fileUpload.files.length; index++) {
-        const file = fileUpload.files[index];
+        const file = fileUpload.files[index];        
         this.listArchivo.push({
           id: this.listArchivo.length > 0 ? this.listArchivo[0].id + 1 : this.listArchivo.length + 1, // por revisar el ordenamiento 
           archivoId: "",
@@ -106,7 +106,8 @@ export class FileInputComponent implements OnInit {
           tx_tamanioArchivo: this.bytesToSize(file.size),
           file: file,
           inProgress: false, //Si esta el false el progreebar estara ocultado si es true el progressbar se mostrara
-          progress: 0
+          progress: 0,
+          idUsuario : this.usuario.id.toString()
         });
       }
       this.listArchivo.sort(this.compareValues('id', 'desc'));
@@ -122,7 +123,9 @@ export class FileInputComponent implements OnInit {
     listArchivosAGuardar.forEach(obj => {
       obj.inProgress = true;
       const formData = new FormData();
-      formData.append('file', obj.file);
+      formData.append('file', obj.file);      
+      formData.append('usuario_id', obj.idUsuario);      
+      formData.append('modulo_id', "1");      
       this.fileInputService.uploadToContainers(formData).pipe(
         map(event => {
           switch (event.type) {
@@ -141,7 +144,7 @@ export class FileInputComponent implements OnInit {
         if (typeof (event) === 'object') {
           this.listRespnse.push(event.body);
           if (this.listRespnse.length == listArchivosAGuardar.length) {//si la carga ha sido satisfactorio
-            setTimeout(() => { this.dialogRef.close(true); }, 2000);// el modal se ocultara en 2 segundos           
+            setTimeout(() => { this.dialogRef.close(true); }, 1000);// el modal se ocultara en 2 segundos           
           }
         }
       });

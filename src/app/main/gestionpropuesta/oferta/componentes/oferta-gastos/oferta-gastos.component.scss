@@ -16,6 +16,10 @@
     min-height: 26px;
 }
 
+.tb-oferta-gastos {
+    width: 100%;
+}
+
 .tb-oferta-gastos .mat-header-row {
     background: #F4F6FB;
     border-radius: 5px;
@@ -42,4 +46,17 @@
 
 .footerRow {
     font-weight: 800;
+}
+
+.columnaConcepto {
+    flex: 0 0 30% !important;
+}
+
+.columnaSelecConcepto {
+    text-align: center;
+    right: 8px;
+}
+
+.columnaTextoConcepto {
+    text-align: center;
 }
