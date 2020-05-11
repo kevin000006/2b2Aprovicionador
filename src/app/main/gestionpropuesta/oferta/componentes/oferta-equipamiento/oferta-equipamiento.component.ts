@@ -134,13 +134,11 @@ export class OfertaEquipamientoComponent implements OnInit {
   }
   calcularMontoMensual(row: any): number {
     var montoCalculado: number = 0;
-    debugger;
     if (row.antigueadad > 0) {
-      if (row.moneda == "2") {
-        montoCalculado = (row.cantidad *  row.costo - (row.cantidad * row.costo * row.antigueadad / this.baseDepresiacion))*this.tipoCambio;
-      } else {
-        montoCalculado = row.cantidad *  row.costo - (row.cantidad * row.costo * row.antigueadad / this.baseDepresiacion);
-      }
+      if (row.moneda == "2")
+        montoCalculado = (row.cantidad * row.costo - (row.cantidad * row.costo * row.antigueadad / this.baseDepresiacion)) * this.tipoCambio;
+      else
+        montoCalculado = row.cantidad * row.costo - (row.cantidad * row.costo * row.antigueadad / this.baseDepresiacion);
     }
     else
       montoCalculado = row.cantidad * (row.moneda == "2" ? row.costo * this.tipoCambio : row.costo);
