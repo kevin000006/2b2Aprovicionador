@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { ClienteModel,EstadoModel,ComplejidadModel,TipoContratoModel } from './model/Common';
+import { ClienteModel,EstadoModel,ComplejidadModel,TipoContratoModel, TipoProyectoModel } from './model/Common';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -25,6 +25,10 @@ export class CommonService{
 
     getTipoContratoAll(): Observable<TipoContratoModel[]> {
         return this.http.post<TipoContratoModel[]>('/tipoContrato/findAll', null);
+    }
+
+    getTipoProyectoAll(): Observable<TipoProyectoModel[]> {
+        return this.http.post<TipoProyectoModel[]>('/tipoproyecto/findAll', null);
     }
 
 }

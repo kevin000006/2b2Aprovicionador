@@ -24,7 +24,7 @@
             </div>
             <div class="content-control-oferta">
                 <mat-form-field color="accent">
-                    <input autocomplete="off" matInput class="form-control font-body-oferta" value="{{oferta.oportunidad}}" placeholder="" name="salesforce">
+                    <input autocomplete="off" matInput class="form-control font-body-oferta" value="{{oferta.oportunidadSalesforce}}" placeholder="" name="salesforce">
                 </mat-form-field>
             </div>
         </div>
@@ -34,7 +34,7 @@
             </div>
             <div class="">
                 <mat-form-field color="accent">
-                    <input autocomplete="off" matInput class="form-control font-body-oferta" placeholder="" name="caso">
+                    <input autocomplete="off" [(ngModel)]="oferta.numeroCasoSalesforce" matInput class="form-control font-body-oferta" placeholder="" name="caso">
                 </mat-form-field>
             </div>
         </div>
@@ -63,7 +63,7 @@
                     <label class="label-title">Analista Financiero:</label>
                 </div>
                 <div class="">
-                    <span class="font-body-oferta">{{oferta.analistafinanciero.createdBy}}</span>
+                    <span class="font-body-oferta">{{oferta.analistafinanciero.nombre}}</span>
                 </div>
             </div>
         </div>
@@ -100,7 +100,7 @@
                         <label class="label-title">Segmento:</label>
                     </div>
                     <div class="">
-                        <span class="font-body-oferta">{{oferta.segmentonegocio.descripcion}}</span>
+                        <span class="font-body-oferta">{{oferta.cliente.segmentoNegocio}}</span>
                     </div>
                 
             </div> 
@@ -165,7 +165,7 @@
                             <mat-form-field color="accent">
                                 <select matNativeControl class="font-body-oferta" [(ngModel)]="oferta.tipoproyecto.id">
                                     <option value="0">-Seleccionar-</option>
-                                    <option *ngFor="let o of lstTipoProyecto" [ngValue]="o.id">{{o.nombre}}</option>
+                                    <option *ngFor="let o of lstTipoProyecto" [ngValue]="o.id">{{o.descripcion}}</option>
                                 </select>
                             </mat-form-field>
                         </div>
@@ -179,7 +179,7 @@
                             <mat-form-field color="accent">
                                 <select matNativeControl class="font-body-oferta" [(ngModel)]="oferta.complejidad.id">
                                     <option value="0">-Seleccionar-</option>
-                                    <option *ngFor="let o of lstComplejidad" [ngValue]="o.id">{{o.complejidadTipologiaDescrip}}</option>
+                                    <option *ngFor="let o of lstComplejidad" [ngValue]="o.id">{{o.descripcion}}</option>
                             </select>
                             </mat-form-field>
                         </div>
@@ -193,7 +193,7 @@
                             <mat-form-field color="accent">
                                 <select matNativeControl class="font-body-oferta" [(ngModel)]="oferta.tipocontrato.id">
                                     <option value="0">-Seleccionar-</option>
-                                    <option *ngFor="let o of lstTipoContrato" [ngValue]="o.id">{{o.periodoContrato}}</option>
+                                    <option *ngFor="let o of lstTipoContrato" [ngValue]="o.id">{{o.descripcion}}</option>
                                 </select>
                             </mat-form-field>
                         </div>

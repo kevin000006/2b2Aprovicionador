@@ -4,11 +4,12 @@ export class ClienteModel{
     numero_identificador_fiscal:string;
     codigo_isis:string;
     gerente_cuenta:string;
+    segmentoNegocio:string;
 }
 
 export class ComplejidadModel{
     id : string;
-    complejidadTipologiaDescrip : string;
+    descripcion : string;
 }
 
 export class EstadoModel{
@@ -22,5 +23,11 @@ export class EstadoModel{
 export class TipoContratoModel
 {
     id:number;
-    periodoContrato:string;
+    descripcion:string;
+}
+
+export class TipoProyectoModel
+{
+    id:number;
+    descripcion:string;
 }

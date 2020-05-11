@@ -51,7 +51,7 @@
                                     <mat-label class="font-normal">Complejidad</mat-label>
                                     <select matNativeControl [(ngModel)]="_filtro.complejidad" name="tipocosto" class="form-control">
                                         <option value="" selected>Seleccionar</option>
-                                        <option *ngFor="let c of lstComplejidad" [ngValue]="c.id">{{c.complejidadTipologiaDescrip}}</option>
+                                        <option *ngFor="let c of lstComplejidad" [ngValue]="c.id">{{c.descripcion}}</option>
                                     </select>
                                     <span matSuffix>&nbsp; &nbsp;</span>
                                 </mat-form-field>
@@ -160,7 +160,8 @@
 
                         <ng-container matColumnDef="faseproyecto" >
                             <mat-header-cell *matHeaderCellDef> Fase </mat-header-cell>
-                            <mat-cell *matCellDef="let row; let i=index;">                            
+                            <mat-cell *matCellDef="let row; let i=index;">      
+                                {{row.fase}}                      
                             </mat-cell>
                         </ng-container>
 
