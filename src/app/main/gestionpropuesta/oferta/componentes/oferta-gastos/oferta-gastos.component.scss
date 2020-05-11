@@ -47,3 +47,16 @@
 .footerRow {
     font-weight: 800;
 }
+
+.columnaConcepto {
+    flex: 0 0 30% !important;
+}
+
+.columnaSelecConcepto {
+    text-align: center;
+    right: 8px;
+}
+
+.columnaTextoConcepto {
+    text-align: center;
+}

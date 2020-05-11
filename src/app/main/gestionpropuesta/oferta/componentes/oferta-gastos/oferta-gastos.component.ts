@@ -72,6 +72,8 @@ export class OfertaGastosComponent implements OnInit {
       else
         row.mostrarConcepto = false;
 
+        console.log(row.mostrarConcepto);
+
       if (objetoConcepto.factor == 0) {//Si el factor es cero no se mostrara ninguna informacion en la bandeja
         row.factor = 0;
         row.montototalmensual = this.calcularMontoMensual(row);

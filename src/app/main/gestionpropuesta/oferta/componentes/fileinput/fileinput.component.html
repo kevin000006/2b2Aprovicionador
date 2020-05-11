@@ -23,7 +23,6 @@
                     <div class="col-xs-12 col-sm-12 col-lg-12">
                         <div class="form-horizontal">
                             <mat-spinner style="margin: 0 auto;" [diameter]="20" *ngIf="showSpinner">cargando</mat-spinner>
-                            <!-- <mat-spinner [diameter]="20" *ngIf="showSpinner">cargando</mat-spinner> -->
                             <div class="form-group list-item-fileinput" *ngFor="let item of listArchivo; let i = index">
 
                                 <mat-progress-bar [color]="color" [ngStyle]="{'visibility':item.inProgress==true ? 'visible' : 'hidden'}" [value]="item.progress"></mat-progress-bar>
@@ -36,7 +35,7 @@
                                             <div class="col-xs-12 col-sm-12 col-md-2 text-xs-center">
                                                 <div class="nombrefileinput">
                                                     <p style="font-family: TelefonicaBold !important;">{{item.archivoNombre}}</p>
-                                                    <p>{{item.tx_tamanioArchivo}}</p>
+                                                    <!-- <p>{{item.tx_tamanioArchivo}}</p> -->
                                                 </div>
                                             </div>
                                             <div class="col-xs-12 col-sm-12 col-md-2 text-xs-center">
