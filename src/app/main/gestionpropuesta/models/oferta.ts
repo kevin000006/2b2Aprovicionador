@@ -29,6 +29,8 @@ export class BandejaModel {
     id:number;
     numero_identificador_fiscal:string;
     descripcion:string;
+    codigo_isis:string;
+    segmentoNegocio:string;
   }
 
   export class ComboModel{
@@ -38,9 +40,10 @@ export class BandejaModel {
 export class OfertaModel
 {
   codigo:string;
-  oportunidad:string;
+  oportunidadSalesforce:string;
   oportunidad_pre:string;
   oportunidad_codigo:string;
+  numeroCasoSalesforce:string;
   segmentonegocio:SegmentoNegocioModel;
   preventa:PreventaModel;
   gerente_cuenta:string;

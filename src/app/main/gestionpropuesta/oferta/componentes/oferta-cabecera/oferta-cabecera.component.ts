@@ -16,11 +16,7 @@ export class OfertaCabeceraComponent implements OnInit {
   dataSourceCliente:any[]=[];
   lstComplejidad;
   lstTipoContrato;
-  lstTipoProyecto=[
-    {id:1, nombre: 'Alta Nueva'},
-      {id:2, nombre: 'Renovación'}, 
-         {id:3, nombre: 'Winback'} 
-         ];
+  lstTipoProyecto=[];
   oferta:any={
     preventa:{nombre:''},
     cliente:{codigo_isis:'',numero_identificador_fiscal:'',descripcion:''},
@@ -112,6 +108,10 @@ export class OfertaCabeceraComponent implements OnInit {
 
     this.commonService.getTipoContratoAll().subscribe(data => {
       this.lstTipoContrato = data;
+    });
+
+    this.commonService.getTipoProyectoAll().subscribe(data => {
+      this.lstTipoProyecto = data;
     });
 
     this.commonService.getClienteAll().subscribe(data => {
