@@ -15,8 +15,8 @@ export class FileInputService {
   downLoadFileContainers(data: any): Observable<any> {
     return this.http.get<FormData>('/Containers/downLoadFileContainers/' + data);
   }
-  listFilesContainers(): Observable<any> {
-    return this.http.post<any>('/Containers/listFilesContainers', {});
+  listFilesContainers(request:any): Observable<any> {
+    return this.http.post<any>('/Containers/listFilesContainers'+'?modulo_id=' + request.modulo_id + '&usuario_id=' + request.usuario_id, {});
   }
   uploadToContainers(data: FormData): Observable<any> {
     return this.http.post<FormData>('/Containers/uploadToContainers', data, {
