@@ -63,16 +63,24 @@
 
                         <ng-container matColumnDef="antigueadad">
                             <mat-header-cell *matHeaderCellDef> Antiguedad </mat-header-cell>
-                            <mat-cell *matCellDef="let element"> {{element.antigueadad}} </mat-cell>
+                            <mat-cell *matCellDef="let element">
+                                <mat-form-field style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                    <input matInput [(ngModel)]="element.antigueadad" (input)="inputChangeAntiguedad($event.target.value,element)" type="number">
+                                </mat-form-field>
+                            </mat-cell>
                             <mat-footer-cell *matFooterCellDef></mat-footer-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="marca">
                             <mat-header-cell *matHeaderCellDef> Marca </mat-header-cell>
                             <mat-cell *matCellDef="let row">
-                                <mat-form-field style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
-                                    <input matInput [(ngModel)]="row.marca" type="text">
+                                <mat-form-field color="accent" style="text-align: center; width: 80%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
+                                    <mat-select [(ngModel)]="row.marca">
+                                        <mat-option value="">--Seleccione--</mat-option>
+                                        <mat-option [value]="o.id" *ngFor="let o of listaMarca">{{o.nombre}}</mat-option>
+                                    </mat-select>
                                 </mat-form-field>
+
                             </mat-cell>
                             <mat-footer-cell *matFooterCellDef></mat-footer-cell>
                         </ng-container>
@@ -91,7 +99,7 @@
                             <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
                             <mat-cell *matCellDef="let row">
                                 <mat-form-field style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
-                                    <input matInput [(ngModel)]="row.cantidad" type="number">
+                                    <input matInput [(ngModel)]="row.cantidad" (input)="inputChangeCantidad($event.target.value,row)" type="number">
                                 </mat-form-field>
                             </mat-cell>
                             <mat-footer-cell *matFooterCellDef></mat-footer-cell>
@@ -102,8 +110,7 @@
                             <mat-cell *matCellDef="let row">
                                 <mat-form-field color="accent" style="text-align: center; width: 80%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
                                     <mat-select [(ngModel)]="row.moneda">
-                                        <mat-option value="">--Seleccione--</mat-option>
-                                        <mat-option [value]="o.id" *ngFor="let o of listaMoneda">{{o.nombre}}</mat-option>
+                                        <mat-option (onSelectionChange)="changeMoneda($event,row)" [value]="o.id" *ngFor="let o of listaMoneda">{{o.nombre}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </mat-cell>
@@ -114,16 +121,16 @@
                             <mat-header-cell *matHeaderCellDef> Costo </mat-header-cell>
                             <mat-cell *matCellDef="let row">
                                 <mat-form-field style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
-                                    <input matInput [(ngModel)]="row.costo" type="number">
+                                    <input matInput [(ngModel)]="row.costo" (input)="inputChangeCosto($event.target.value,row)" type="number">
                                 </mat-form-field>
                             </mat-cell>
-                            <mat-footer-cell *matFooterCellDef> Total S/: {{ calcularcosto() }}</mat-footer-cell>
+                            <mat-footer-cell *matFooterCellDef> Total $: {{ calcularTotalDolares()| number:'2.2-5' }}</mat-footer-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="costototal">
                             <mat-header-cell *matHeaderCellDef> Costo Total </mat-header-cell>
-                            <mat-cell *matCellDef="let element"> {{element.costototal}} </mat-cell>
-                            <mat-footer-cell *matFooterCellDef> Total S/: {{ calcularcostoTotal() }}</mat-footer-cell>
+                            <mat-cell *matCellDef="let element"> {{element.costototal| number:'2.2-5'}} </mat-cell>
+                            <mat-footer-cell *matFooterCellDef> Total S/: {{ calcularTotalSoles()| number:'2.2-5' }}</mat-footer-cell>
                         </ng-container>
 
                         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
