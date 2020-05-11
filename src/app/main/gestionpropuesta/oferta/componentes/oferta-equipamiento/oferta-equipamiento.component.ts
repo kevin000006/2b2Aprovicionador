@@ -53,7 +53,8 @@ export class OfertaEquipamientoComponent implements OnInit {
       cantidad: 0,
       moneda: '',
       costo: 0,
-      costototal: 0
+      costototal: 0,
+      habilitarAntiguedad:false
     };
   }
   addRow(): void {
@@ -99,7 +100,15 @@ export class OfertaEquipamientoComponent implements OnInit {
     });
   }
 
-
+  changeCondicion(event, row) {
+    if (event.isUserInput) {
+      if (event.source.value == "3") {//Cuando la concion es Residual se habilitara a true el control
+        row.habilitarAntiguedad = true;
+      }
+      else// cuando selecciona la moneda de soles
+        row.habilitarAntiguedad = false;      
+    }
+  }
   changeMoneda(event, row) {
     if (event.isUserInput) {
       if (event.source.value == "2") {//Cual el tipo de cambio es dolares 
@@ -154,9 +163,9 @@ export class OfertaEquipamientoComponent implements OnInit {
 
 }
 const dataSourceList: EquipacmientoElement[] = [
-  { id: 1, tipo: '', condicion: '', antigueadad: 0, marca: '', modelo: '', cantidad: 0, moneda: '1', costo: 0, costototal: 0 },
-  { id: 2, tipo: '', condicion: '', antigueadad: 0, marca: '', modelo: '', cantidad: 0, moneda: '1', costo: 0, costototal: 0 },
-  { id: 3, tipo: '', condicion: '', antigueadad: 0, marca: '', modelo: '', cantidad: 0, moneda: '1', costo: 0, costototal: 0 }
+  { id: 1, tipo: '', condicion: '', antigueadad: 0, marca: '', modelo: '', cantidad: 0, moneda: '1', costo: 0, costototal: 0, habilitarAntiguedad: false },
+  { id: 2, tipo: '', condicion: '', antigueadad: 0, marca: '', modelo: '', cantidad: 0, moneda: '1', costo: 0, costototal: 0, habilitarAntiguedad: false },
+  { id: 3, tipo: '', condicion: '', antigueadad: 0, marca: '', modelo: '', cantidad: 0, moneda: '1', costo: 0, costototal: 0, habilitarAntiguedad: false }
 ];
 export interface EquipacmientoElement {
   id: number;
@@ -169,6 +178,7 @@ export interface EquipacmientoElement {
   moneda: string;
   costo: number;
   costototal: number;
+  habilitarAntiguedad: boolean
 }
 export class ModelCombo {
   constructor(public id?: string, public nombre?: string) {
