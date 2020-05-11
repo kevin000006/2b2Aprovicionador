@@ -125,6 +125,7 @@ export class FileInputComponent implements OnInit {
       const formData = new FormData();
       formData.append('file', obj.file);      
       formData.append('usuario_id', obj.idUsuario);      
+      formData.append('modulo_id', "1");      
       this.fileInputService.uploadToContainers(formData).pipe(
         map(event => {
           switch (event.type) {

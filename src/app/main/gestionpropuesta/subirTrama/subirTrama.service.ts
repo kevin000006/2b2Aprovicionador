@@ -36,6 +36,7 @@ export class SubirTramaService {
   }
 
   downloadBlobl(nombre: any): any {
+    debugger;
     async function blobToString(blob: Blob): Promise<string> {
       const fileReader = new FileReader();
       return new Promise<string>((resolve, reject) => {
