@@ -23,9 +23,9 @@
             <div class="form-group">
                 <div class="col-sm-12">
                     <div class="table-responsive">
-                        <mat-table #table mat-table [dataSource]="dataSource" style="width: 100%;" class="tb-oferta-gastos">
+                        <mat-table #table mat-table [dataSource]="dataSource" class="tb-oferta-gastos">
                             <ng-container matColumnDef="accion">
-                                <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                                <mat-header-cell *matHeaderCellDef width="5%"> </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-menu #appMenu="matMenu">
                                         <button style="font-size: 12px;" mat-menu-item> Editar </button>
@@ -38,22 +38,22 @@
                                 <mat-footer-cell *matFooterCellDef></mat-footer-cell>
                             </ng-container>
                             <ng-container matColumnDef="concepto">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header>Concepto</mat-header-cell>
-                                <mat-cell *matCellDef="let row">
-                                    <mat-form-field color="accent" style="text-align: center; width: 60%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 30% !important;">Concepto</mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 30% !important;">
+                                    <mat-form-field color="accent" style="text-align: center; width: 30%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
                                         <mat-select [(ngModel)]="row.concepto">
                                             <mat-option value="">--Seleccione--</mat-option>
                                             <mat-option [value]="o.id" (onSelectionChange)="changeConcepto($event,row)" *ngFor="let o of listaConcepto">{{o.nombre}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
-                                    <mat-form-field color="accent" *ngIf="row.mostrarConcepto" style="text-align: center; width: 30%;" appearance="legacy" [style.fontSize.px]="12">
+                                    <mat-form-field color="accent" *ngIf="row.mostrarConcepto" style="text-align: center; width: 60%;" appearance="legacy" [style.fontSize.px]="12">
                                         <input matInput [(ngModel)]="row.nroconcepto" type="text">
                                     </mat-form-field>
                                 </mat-cell>
                                 <mat-footer-cell *matFooterCellDef></mat-footer-cell>
                             </ng-container>
                             <ng-container matColumnDef="cantidad">
-                                <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
+                                <mat-header-cell *matHeaderCellDef width="5%"> Cantidad </mat-header-cell>
                                 <mat-cell *matCellDef="let element">
                                     <mat-form-field style="text-align: center; width: 60%;" appearance="legacy" [style.fontSize.px]="12">
                                         <input matInput (input)="inputChangeCantidad($event.target.value,element)" [(ngModel)]="element.cantidad" type="number">
@@ -62,7 +62,7 @@
                                 <mat-footer-cell *matFooterCellDef></mat-footer-cell>
                             </ng-container>
                             <ng-container matColumnDef="nromeses">
-                                <mat-header-cell *matHeaderCellDef> Nro. Meses </mat-header-cell>
+                                <mat-header-cell *matHeaderCellDef width="5%"> Nro. Meses </mat-header-cell>
                                 <mat-cell *matCellDef="let element">
                                     <mat-form-field style="text-align: center; width: 60%;" appearance="legacy" [style.fontSize.px]="12">
                                         <input matInput (input)="inputChangeNumeroMeses($event.target.value,element)" [(ngModel)]="element.nromeses" type="number">
@@ -71,13 +71,13 @@
                                 <mat-footer-cell *matFooterCellDef></mat-footer-cell>
                             </ng-container>
                             <ng-container matColumnDef="factor">
-                                <mat-header-cell *matHeaderCellDef> Factor </mat-header-cell>
+                                <mat-header-cell *matHeaderCellDef width="5%"> Factor </mat-header-cell>
                                 <mat-cell *matCellDef="let element"> {{element.factor == 0 ? '':element.factor}} </mat-cell>
                                 <mat-footer-cell *matFooterCellDef></mat-footer-cell>
                             </ng-container>
 
                             <ng-container matColumnDef="moneda">
-                                <mat-header-cell *matHeaderCellDef> Moneda </mat-header-cell>
+                                <mat-header-cell *matHeaderCellDef width="5%"> Moneda </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
                                         <mat-select [(ngModel)]="row.moneda">
@@ -90,20 +90,20 @@
                             </ng-container>
 
                             <ng-container matColumnDef="montounitmenusal">
-                                <mat-header-cell *matHeaderCellDef> Monto unitario mensual </mat-header-cell>
+                                <mat-header-cell *matHeaderCellDef width="5%"> Monto unitario mensual </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <input matInput (input)="inputChangeMontoUnitarioMensual($event.target.value,row)" [(ngModel)]="row.montounitmenusal" type="number" step="0.01">
                                     </mat-form-field>
                                 </mat-cell>
-                                <mat-footer-cell *matFooterCellDef> Total $: {{ calcularTotalDolares() }}</mat-footer-cell>
+                                <mat-footer-cell *matFooterCellDef> Total $: {{ calcularTotalDolares()| number:'2.2-5' }}</mat-footer-cell>
                             </ng-container>
 
                             <ng-container matColumnDef="montototalmensual">
-                                <mat-header-cell *matHeaderCellDef> Monto Total mensual</mat-header-cell>
+                                <mat-header-cell *matHeaderCellDef width="5%"> Monto Total mensual</mat-header-cell>
                                 <!-- <mat-cell *matCellDef="let element"> {{calcularMontoTotalMensual()}} </mat-cell> -->
-                                <mat-cell *matCellDef="let element"> {{element.montototalmensualParseado}} </mat-cell>
-                                <mat-footer-cell *matFooterCellDef> Total S/: {{ calcularTotalSoles() }}</mat-footer-cell>
+                                <mat-cell *matCellDef="let element"> {{element.montototalmensual| number:'2.2-5'}} </mat-cell>
+                                <mat-footer-cell *matFooterCellDef> Total S/: {{ calcularTotalSoles() | number:'2.2-5' }}</mat-footer-cell>
                             </ng-container>
 
                             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

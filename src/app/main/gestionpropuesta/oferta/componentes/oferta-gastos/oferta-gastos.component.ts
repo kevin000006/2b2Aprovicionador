@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
+//import { CurrencyPipe } from '@angular/common';
+
 import { AlertConfirmComponent } from '../alertConfirm/alertConfirm.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
@@ -21,7 +22,7 @@ export class OfertaGastosComponent implements OnInit {
   displayedColumns: string[] = ['accion', 'concepto', 'cantidad', 'nromeses', 'factor', 'moneda', 'montounitmenusal', 'montototalmensual'];
 
   constructor(
-    private currencyPipe: CurrencyPipe,
+    //private currencyPipe: CurrencyPipe,
     public dialog: MatDialog,
     private http: OfertaGastosService
   ) { }
@@ -118,7 +119,7 @@ export class OfertaGastosComponent implements OnInit {
     else
       row.montounitmenusal = parseInt(input);
     row.montototalmensual = this.calcularMontoMensual(row);
-    row.montototalmensualParseado = this.formatMoney(row.montototalmensual)//.toFixed(2);
+    row.montototalmensualParseado = row.montototalmensual.toFixed(2); //this.formatMoney(row.montototalmensual)//.toFixed(2);
   }
   calcularMontoMensual(row: any): number {
     var montoCalculado: number = 0;
@@ -147,8 +148,7 @@ export class OfertaGastosComponent implements OnInit {
       factor: 0,
       moneda: '1',
       montounitmenusal: 0,
-      montototalmensual: 0,
-      montototalmensualParseado: '',
+      montototalmensual: 0,      
     };
   }
   addRow(): void {
@@ -177,38 +177,11 @@ export class OfertaGastosComponent implements OnInit {
       }
     });
   }
-
-  formatMoney(value): string {
-    const temp = `${value}`.replace(/\,/g, "");
-    return this.currencyPipe.transform(temp).replace("$", "");
-  }
-
-
-  // formatNumber(num): string {
-  //   if (!num || num == 'NaN') return '-';
-  //   if (num == 'Infinity') return '&#x221e;';
-  //   num = num.toString().replace(/\$|\,/g, '');
-  //   if (isNaN(num))
-  //     num = "0";
-  //   var sign = (num == (num = Math.abs(num)));
-  //   num = Math.floor(num * 100 + 0.50000000001);
-  //   var cents = num % 100;
-  //   num = Math.floor(num / 100).toString();
-  //   if (cents < 10)
-  //     cents = "0" + cents;
-  //   for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
-  //     num = num.substring(0, num.length - (4 * i + 3)) + '.' + num.substring(num.length - (4 * i + 3));
-  //   return (((sign) ? '' : '-') + num + ',' + cents);
-  // }
-
-
-
-
 }
 const dataSourceList: GastoElement[] = [
-  { id: 1, concepto: '', mostrarConcepto: false, nroconcepto: '', conceptootro: '', cantidad: 0, nromeses: 0, factor: 0, moneda: '1', montounitmenusal: 0, montototalmensual: 0, montototalmensualParseado: '0,00' },
-  { id: 2, concepto: '', mostrarConcepto: false, nroconcepto: '', conceptootro: '', cantidad: 0, nromeses: 0, factor: 0, moneda: '1', montounitmenusal: 0, montototalmensual: 0, montototalmensualParseado: '0,00' },
-  { id: 3, concepto: '', mostrarConcepto: false, nroconcepto: '', conceptootro: '', cantidad: 0, nromeses: 0, factor: 0, moneda: '1', montounitmenusal: 0, montototalmensual: 0, montototalmensualParseado: '0,00' }
+  { id: 1, concepto: '', mostrarConcepto: false, nroconcepto: '', conceptootro: '', cantidad: 0, nromeses: 0, factor: 0, moneda: '1', montounitmenusal: 0, montototalmensual: 0 },
+  { id: 2, concepto: '', mostrarConcepto: false, nroconcepto: '', conceptootro: '', cantidad: 0, nromeses: 0, factor: 0, moneda: '1', montounitmenusal: 0, montototalmensual: 0 },
+  { id: 3, concepto: '', mostrarConcepto: false, nroconcepto: '', conceptootro: '', cantidad: 0, nromeses: 0, factor: 0, moneda: '1', montounitmenusal: 0, montototalmensual: 0 }
 ];
 export interface GastoElement {
   id: number,
@@ -221,8 +194,7 @@ export interface GastoElement {
   factor: number;
   moneda: string;
   montounitmenusal: number;
-  montototalmensual: number;
-  montototalmensualParseado: string;
+  montototalmensual: number;  
 }
 export class ModelCombo {
   constructor(public id?: string, public nombre?: string, public factor?: number, public tipo?: string) {
