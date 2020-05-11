@@ -150,7 +150,7 @@ export class BandejaComponent implements OnInit {
 
     var obj = {
       codoportunidad: this._filtro.codoportunidad,
-      cliente: this._filtro.cliente,
+      cliente: (this._filtro.cliente || "").toUpperCase() ,
       descripcion: this._filtro.descripcion,
       complejidad:this._filtro.complejidad,
       estado: this._filtro.estado,
@@ -312,8 +312,12 @@ export class EjemploDataSource extends DataSource<BandejaModel>{
     this._exampleDatabase.getBandejaAll({});
 
     return merge(...displayDataChanges).pipe(map(() => {
+      debugger;
       // Filter data
       let data_ = this._exampleDatabase.data['data'] || [];
+     
+     
+
       this.filteredData = data_.slice().filter((issue: BandejaModel) => {
         const searchStr = (issue.version + issue.codigo + issue.cliente + issue.oportunidad + issue.descripcion).toLowerCase();
         this.loadingSubject.next(false);
@@ -323,6 +327,7 @@ export class EjemploDataSource extends DataSource<BandejaModel>{
 
       // Sort filtered data
       const sortedData = this.sortData(this.filteredData.slice());
+      if(sortedData.length == 0 && this._exampleDatabase.data['data'] !== undefined){this.loadingSubject.next(false);}
 
       // Grab the page's slice of the filtered sorted data.
       
@@ -336,13 +341,15 @@ export class EjemploDataSource extends DataSource<BandejaModel>{
     }
     ));
 
+    this.loadingSubject.next(false);
+
   }
 
   disconnect() { }
 
   sortData(data: BandejaModel[]): BandejaModel[] {
     if (!this._sort.active || this._sort.direction === '') {
-     
+    
       return data;
 
     }

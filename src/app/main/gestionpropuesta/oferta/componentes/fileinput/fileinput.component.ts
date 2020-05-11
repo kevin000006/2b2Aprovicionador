@@ -7,8 +7,12 @@ import { FileInputService } from '../fileinput/fileinput.service';
 import { catchError, map } from 'rxjs/operators';
 import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { ThemePalette } from '@angular/material/core';
+import { BlockBlobClient } from '@azure/storage-blob';
 import { AlertSuccessComponent } from '../alertSuccess/alertSuccess.component';
 import { of } from 'rxjs';
+import { async } from '@angular/core/testing';
+import { SubirTramaService } from '../../../subirTrama/subirTrama.service';
+
 @Component({
   selector: 'FileInput',
   templateUrl: './fileinput.component.html',
@@ -27,6 +31,7 @@ export class FileInputComponent implements OnInit {
   @ViewChild("fileUpload", { static: false }) fileUpload: ElementRef;
 
   constructor(
+    private subirTrama: SubirTramaService,
     private fileInputService: FileInputService,
     private datePipe: DatePipe,
     public dialog: MatDialog,
@@ -77,7 +82,7 @@ export class FileInputComponent implements OnInit {
               width: '700px',
               data: {
                 message: 'Se elimino correctamente!',
-                buttonText: {ok: 'Aceptar'}
+                buttonText: { ok: 'Aceptar' }
               }
             });
           });
@@ -86,9 +91,7 @@ export class FileInputComponent implements OnInit {
     });
   }
   descargar(item: any): void {
-    this.fileInputService.downLoadFileContainers(item.id).subscribe((res: any) => {
-      alert("se descargo")
-    });
+    this.subirTrama.downloadBlobl(item.archivoNombre);
   }
   onClick() {
     const fileUpload = this.fileUpload.nativeElement; fileUpload.onchange = () => {
@@ -134,7 +137,7 @@ export class FileInputComponent implements OnInit {
           obj.inProgress = false;
           return of(`${obj.name} fallo la cargar.`);
         })
-      ).subscribe((event: any) => {        
+      ).subscribe((event: any) => {
         if (typeof (event) === 'object') {
           this.listRespnse.push(event.body);
           if (this.listRespnse.length == listArchivosAGuardar.length) {//si la carga ha sido satisfactorio

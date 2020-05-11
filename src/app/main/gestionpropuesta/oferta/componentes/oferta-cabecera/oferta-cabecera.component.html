@@ -55,7 +55,7 @@
                     <label class="label-title">Gerente de cuentas:</label>
                 </div>
                 <div class="">
-                    <span class="font-body-oferta">{{oferta.gerente_cuenta}}</span>
+                    <span class="font-body-oferta">{{oferta.cliente.gerente_cuenta | titlecase  }}</span>
                 </div>
             </div>
             <div class="content-control-oferta">
@@ -262,7 +262,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6"></div>
-                    <div class="col-sm-6 padding-r-none">
+                    <div class="col-sm-6 padding-r-none" *ngIf="oferta.tipoproyecto.id == 2">
                         <div class=" content-title-oferta">
                             <mat-label class="label-title">Fact. actual</mat-label>
                         </div>
@@ -306,7 +306,7 @@
                             <label class="label-title">Payback:</label>
                             <div class="font-body-oferta">{{oferta.payback}}</div>
                         </div>
-                        <div class="col-sm-4 padding-none text-center">
+                        <div class="col-sm-4 padding-none text-center" *ngIf="oferta.tipoproyecto.id == 2">
                             <label class="label-title text-center">Dif Ingresos:</label>
                             <div class="font-body-oferta text-center">{{oferta.diferencia_ingresos * 100}}%</div>
                         </div>
