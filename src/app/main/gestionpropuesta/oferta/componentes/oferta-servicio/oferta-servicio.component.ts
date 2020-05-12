@@ -193,7 +193,7 @@ export class OfertaServicioComponent implements OnInit {
     this.dataSource.filtrar(obj,this.pagesize.nativeElement.value);
   }
 
-
+public addRow(){}
 
 
   public loadData() {
