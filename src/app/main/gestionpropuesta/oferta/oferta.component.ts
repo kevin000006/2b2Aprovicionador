@@ -17,10 +17,7 @@ export class OfertaComponent implements OnInit {
   constructor(
     private _router: Router,
     public dialog: MatDialog
-    ) { 
-debugger;
-
-    }
+  ) { }
 
   ngOnInit(): void {
     debugger;
@@ -35,9 +32,12 @@ debugger;
         window.sessionStorage.setItem('oferta', JSON.stringify(window.history.state));
       }
     }
-  
+
   }
   btnAdjuntar(): void {
+    // debugger;
+    // console.log(this.ofertaBase);
+    // return;
     const dialogRef = this.dialog.open(FileInputComponent, {
       // width: '100%',
       // height:'100%',
@@ -45,6 +45,7 @@ debugger;
       width: '100vw',
       panelClass: 'full-screen-modal',
       data: {
+        id:this.ofertaBase['id'],
         message: '¿Esta seguro que desea eliminar esta fila?',
         buttonText: {
           ok: 'Guardar',
@@ -74,7 +75,7 @@ debugger;
     });
   }
 
-  openBitacora():void{
+  openBitacora(): void {
     const dialogRef = this.dialog.open(BitacoraDialogComponent, {
       width: '760px',
       data: {

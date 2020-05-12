@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AlertConfirmComponent } from '../alertConfirm/alertConfirm.component';
 import { AlertSuccessComponent } from '../alertSuccess/alertSuccess.component';
 import { MatDialog } from '@angular/material/dialog';
+import { EquipamientoService } from '../oferta-equipamiento/oferta-equipamiento.servicio';
 @Component({
   selector: 'oferta-equipamiento',
   templateUrl: './oferta-equipamiento.component.html',
@@ -17,7 +18,8 @@ export class OfertaEquipamientoComponent implements OnInit {
   listaMarca: ModelCombo[] = [];
   dataSource = new MatTableDataSource<EquipacmientoElement>(dataSourceList);
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public equipamientoService :EquipamientoService
   ) { }
 
   displayedColumns: string[] = ['accion', 'tipo', 'condicion', 'antigueadad', 'marca', 'modelo', 'cantidad', 'moneda', 'costo', 'costototal'];
@@ -27,19 +29,25 @@ export class OfertaEquipamientoComponent implements OnInit {
     this.listaTipos.push(new ModelCombo("1", "Desmarcador"));
     this.listaTipos.push(new ModelCombo("2", "Desmarcador 1"));
     //Lenar combo Condicion
-    this.listaCondicion.push(new ModelCombo("1", "Stock"));
-    this.listaCondicion.push(new ModelCombo("2", "No Stock"));
-    this.listaCondicion.push(new ModelCombo("3", "Residual"));
-    this.listaCondicion.push(new ModelCombo("4", "Renting: CSI"));
+    // this.listaCondicion.push(new ModelCombo("1", "Stock"));
+    // this.listaCondicion.push(new ModelCombo("2", "No Stock"));
+    // this.listaCondicion.push(new ModelCombo("3", "Residual"));
+    // this.listaCondicion.push(new ModelCombo("4", "Renting: CSI"));
     //Lenar combo Moneda
     this.listaMoneda.push(new ModelCombo("1", "S/."));
     this.listaMoneda.push(new ModelCombo("2", "$"));
-
     //Lenar combo Moneda
-    this.listaMarca.push(new ModelCombo("1", "TELDAT"));
-    this.listaMarca.push(new ModelCombo("2", "ROUTER"));
-    this.listaMarca.push(new ModelCombo("2", "MODEN"));
+    // this.listaMarca.push(new ModelCombo("1", "TELDAT"));
+    // this.listaMarca.push(new ModelCombo("2", "ROUTER"));
+    // this.listaMarca.push(new ModelCombo("2", "MODEN"));
 
+    this.equipamientoService.findAllEquipamientoMarca().subscribe(data => {     
+      this.listaMarca = data;
+    });
+
+    this.equipamientoService.findAllEquipamientoCondicion().subscribe(data => {     
+      this.listaCondicion = data;
+    });
 
   }
   crearNuevoGastos(id: number): EquipacmientoElement {

@@ -259,9 +259,12 @@
                             <ng-container matColumnDef="otro">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Otros </mat-header-cell>
                                 <mat-cell *matCellDef="let element">
-                                    <a mat-mini-fab mat-icon-button>
+                                    <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                        <input matInput type="text" maxlength="100">
+                                    </mat-form-field>
+                                    <!-- <a mat-mini-fab mat-icon-button>
                                         <mat-icon>store</mat-icon>
-                                    </a>
+                                    </a> -->
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="facturacion">

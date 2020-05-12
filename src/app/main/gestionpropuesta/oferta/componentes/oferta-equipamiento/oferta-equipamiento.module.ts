@@ -15,6 +15,7 @@ import { AlertSuccessModule } from '../alertSuccess/alertSuccess.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import es from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { EquipamientoService } from '../oferta-equipamiento/oferta-equipamiento.servicio';
 registerLocaleData(es);
 @NgModule({
     declarations: [
@@ -36,7 +37,7 @@ registerLocaleData(es);
         AlertSuccessModule
     ],
     providers: [
-        
+        EquipamientoService,
         { provide: LOCALE_ID, useValue: 'es' }
     ],
     exports: [

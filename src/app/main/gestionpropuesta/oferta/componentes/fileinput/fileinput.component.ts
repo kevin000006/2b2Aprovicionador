@@ -7,10 +7,8 @@ import { FileInputService } from '../fileinput/fileinput.service';
 import { catchError, map } from 'rxjs/operators';
 import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { ThemePalette } from '@angular/material/core';
-import { BlockBlobClient } from '@azure/storage-blob';
 import { AlertSuccessComponent } from '../alertSuccess/alertSuccess.component';
 import { of } from 'rxjs';
-import { async } from '@angular/core/testing';
 import { SubirTramaService } from '../../../subirTrama/subirTrama.service';
 
 @Component({
@@ -25,6 +23,7 @@ export class FileInputComponent implements OnInit {
   message: string = "Are you sure?"
   confirmButtonText = "Yes"
   cancelButtonText = "Cancel"
+  IdOferta : string;
   usuario: { nombres: '', apellidos: '', id: 0 };
   public listArchivo: any = [];
   public listRespnse: any = [];
@@ -39,6 +38,7 @@ export class FileInputComponent implements OnInit {
     private dialogRef: MatDialogRef<FileInputComponent>
   ) {
     if (data) {
+      this.IdOferta =  data.id;
       this.message = data.message || this.message;
       if (data.buttonText) {
         this.confirmButtonText = data.buttonText.ok || this.confirmButtonText;
@@ -50,7 +50,7 @@ export class FileInputComponent implements OnInit {
     this.usuario = JSON.parse(localStorage.getItem('u'));
     this.showSpinner = true;
     var requestListarFies = {
-      modulo_id: 1,
+      modulo_id: this.IdOferta,
       usuario_id: this.usuario.id
     };
     this.fileInputService.listFilesContainers(requestListarFies).subscribe((res: any) => {
@@ -128,11 +128,12 @@ export class FileInputComponent implements OnInit {
   btnGuardarArchivo() {
     var listArchivosAGuardar = this.listArchivo.filter(function (el) { return el.adjunto_id == ""; });//obtenemos los elementos que guardaremos en la base de datos
     listArchivosAGuardar.forEach(obj => {
+      debugger;
       obj.inProgress = true;
       const formData = new FormData();
       formData.append('file', obj.file);
       formData.append('usuario_id', obj.idUsuario);
-      formData.append('modulo_id', "1");
+      formData.append('modulo_id', this.IdOferta);
       this.fileInputService.uploadToContainers(formData).pipe(
         map(event => {
           switch (event.type) {
