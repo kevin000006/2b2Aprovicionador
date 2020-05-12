@@ -63,7 +63,7 @@ export class OfertaServicioComponent implements OnInit {
     'platinium', 'oro', 'plata', 'bronce',
     'equipoterminal', 'router', 'otro', 'facturacion'];
   exampleDatabase: OfertaServicioService | null;
-  dataSource :  EjemploDataSource | null;
+  dataSource = new MatTableDataSource<ServicioElement>(dataSourceList);//:  EjemploDataSource | null;
   //new MatTableDataSource<ServicioElement>(dataSourceList);
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -98,9 +98,10 @@ export class OfertaServicioComponent implements OnInit {
     this.commonService.getAccionIsisAll().subscribe(data => {
       this.listAccionIsis = data;
     });
-
-    this.loadData();  
+    
    /*
+    this.loadData();  
+
     this.listBw.push(new ModelCombo("1", "Bw 1"));
     this.listBw.push(new ModelCombo("2", "Bw 2"));
     this.listBw.push(new ModelCombo("3", "Bw 3"));
@@ -138,13 +139,13 @@ export class OfertaServicioComponent implements OnInit {
       platinium: "", nroplatinium: "", oro: "", nrooro: "", plata: "", nroplata: "", bronce: "", nrobronce: "",
       equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "",condicionenlace:""
     };
-  }
+  } */
   addRow(): void {
-    this.dataSource.data.push(this.crearNuevoServicio(this.dataSource.data.length + 1));
+   // this.dataSource.data.push(this.crearNuevoServicio(this.dataSource.data.length + 1));
     this.dataSource.filter = "";
   }
-  */
-  deleteRow(item: any): void {
+ 
+  /*deleteRow(item: any): void {
     const dialogRef = this.dialog.open(AlertConfirmComponent, {
       width: '450px',
       data: {
@@ -156,7 +157,7 @@ export class OfertaServicioComponent implements OnInit {
       }
     });
 
-    /*dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         const a = document.createElement('a');
         a.click();
@@ -164,8 +165,8 @@ export class OfertaServicioComponent implements OnInit {
         this.dataSource.data.splice(this.dataSource.data.indexOf(item.id), 1);
         this.dataSource = new MatTableDataSource<ServicioElement>(dataSourceList);
       }
-    });*/
-  }
+    });
+  }*/
   geoDialog(item: any): void {
     console.log(item);
     const dialogRef = this.dialog.open(GeodialogComponent, {
@@ -182,7 +183,7 @@ export class OfertaServicioComponent implements OnInit {
       // }
     });
   }
-
+/*
   public filtrarData() {
      var obj = {
       oferta_id: this._filtro.oferta_id,
@@ -192,9 +193,6 @@ export class OfertaServicioComponent implements OnInit {
 
     this.dataSource.filtrar(obj,this.pagesize.nativeElement.value);
   }
-
-public addRow(){}
-
 
   public loadData() {
     this.exampleDatabase = new OfertaServicioService(this.httpClient);
@@ -214,12 +212,13 @@ public addRow(){}
           return;
         }
         this.filtrarData();
-      });*/
+      });/
 
   }
+*/
 
 }
- /*
+ /* */
 const dataSourceList: ServicioElement[] = [
  {
     id: 1, sede: 'Av. Argentina', direccion: 'puente camote', ubigeo: 'Callao. Callao, Callao',
@@ -289,7 +288,7 @@ export class ModelCombo {
   constructor(public id?: string, public nombre?: string) {
   }
 }
- */
+
 
 export class EjemploDataSource extends DataSource<BandejaModel>{
   _filterChange = new BehaviorSubject('');

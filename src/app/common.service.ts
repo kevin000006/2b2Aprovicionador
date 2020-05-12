@@ -36,13 +36,13 @@ export class CommonService{
     }
 
     getTipoServicioAll(): Observable<TipoServicioModel[]> {
-        return this.http.post<TipoServicioModel[]>('/tiposervicio/findAll', null);
+        return this.http.post<TipoServicioModel[]>('/TipoServicio/findAll', null);
     }
    /* getTipoInstalacionSatelitalModelAll(): Observable<TipoInstalacionSatelitalModel[]> {
         return this.http.post<TipoInstalacionSatelitalModel[]>('/tipoinstalacionsatelital/findAll', null);
     }*/
     getViaAccesoAll(): Observable<ViaAccesoModel[]> {
-        return this.http.post<ViaAccesoModel[]>('/viaacceso/findAll', null);
+        return this.http.post<ViaAccesoModel[]>('/ViaAcceso/findAll', null);
     }
     /*getVelocidadesAll(): Observable<VelocidadesModel[]> {
         return this.http.post<VelocidadesModel[]>('/velocidades/findAll', null);
@@ -60,16 +60,16 @@ export class CommonService{
         return this.http.post<ConceptosOpexModel[]>('/conceptoopex/findAll', null);
     }
     getTipoEnlaceAll(): Observable<TipoEnlaceModel[]> {
-        return this.http.post<TipoEnlaceModel[]>('/tipoenlace/findAll', null);
+        return this.http.post<TipoEnlaceModel[]>('/moneda/findAll', null);
     }
     getCondicionEnlaceAll(): Observable<CondicionEnlaceModel[]> {
-        return this.http.post<CondicionEnlaceModel[]>('/condicionenlace/findAll', null);
+        return this.http.post<CondicionEnlaceModel[]>('/moneda/findAll', null);
     } 
     getTipoCircuitoAll(): Observable<TipoCircuitoModel[]> {
         return this.http.post<TipoCircuitoModel[]>('/tipoCircuito/findAll', null);
     } 
     getTipoMonedaAll(): Observable<MonedaModel[]> {
-        return this.http.post<MonedaModel[]>('/tipomoneda/findAll', null);
+        return this.http.post<MonedaModel[]>('/moneda/findAll', null);
     } 
     getAccionIsisAll(): Observable<AccionIsisModel[]> {
         return this.http.post<AccionIsisModel[]>('/accionIsis/findAll', null);
