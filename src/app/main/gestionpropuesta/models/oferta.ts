@@ -1,3 +1,5 @@
+import { MonedaModel, ComplejidadModel, TipoContratoModel, TipoProyectoModel } from 'app/model/Common';
+
 export class UsuarioModel{
   nombres:String;
   apellidos: String;
@@ -27,18 +29,51 @@ export class BandejaModel {
 
   export class ClienteModel{
     id:number;
-    numero_identificador_fiscal:string;
+    numeroidentificadorfiscal:string;
+    gerente_cuenta:string;
     descripcion:string;
-    codigo_isis:string;
+    codigoisis:string;
     segmentoNegocio:string;
+  }
+
+  export class EstadoModel
+  {
+    id:number;
   }
 
   export class ComboModel{
     id:number
   }
 
+  export class OportunidadModel{
+    id : number;
+    descripcion: string;
+    oportunidadcodigo:string;
+  }
+
+  export class TipoPagoModel{
+    id:number;
+    descripcion:string;
+  }
+
 export class OfertaModel
 {
+  constructor(){
+    this.oferta_id=0;
+    this.analistafinanciero = new PreventaModel();
+    this.cliente = new ClienteModel();
+    this.complejidad = new ComplejidadModel();
+    this.estado = new EstadoModel();
+    this.moneda = new MonedaModel();
+    this.oportunidad = new OportunidadModel();
+    this.preventa = new PreventaModel();
+    this.tipocontrato = new TipoContratoModel();
+    this.tipoproyecto = new TipoProyectoModel();
+    this.tipopago = new TipoPagoModel();
+    this.vanval = 0;
+  }
+  vanval:number;
+  oferta_id:number;
   codigo:string;
   oportunidadSalesforce:string;
   oportunidad_pre:string;
@@ -50,6 +85,7 @@ export class OfertaModel
   analistafinanciero:PreventaModel;
   cliente:ClienteModel;
   contacto:string;
+  observaciones:string;
   correo_contacto:string;
   telefono_contacto:string;
   descripcion:string;
@@ -59,10 +95,15 @@ export class OfertaModel
   aprobadoresArr:Array<string>=[];
   tiposervicio:string;
   pago_recurrente:number;
-  tipoproyecto:ComboModel;
-  complejidad:ComboModel;
+  tipoproyecto:TipoProyectoModel;
+  complejidad:ComplejidadModel;
   tipocontrato:ComboModel;
+  moneda:MonedaModel;
+  estado :EstadoModel;
+  oportunidad:OportunidadModel;
+  tipopago:TipoPagoModel;
 }
+
 export class OfertaDetalleModel
 {
   ofertasDetalleId:number; 
@@ -149,3 +190,4 @@ export class OfertaDetalleModel
 
   activo:boolean; 
 }
+

@@ -156,7 +156,7 @@ export class OfertaServicioComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+    /*dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         const a = document.createElement('a');
         a.click();
@@ -164,7 +164,7 @@ export class OfertaServicioComponent implements OnInit {
         this.dataSource.data.splice(this.dataSource.data.indexOf(item.id), 1);
         this.dataSource = new MatTableDataSource<ServicioElement>(dataSourceList);
       }
-    });
+    });*/
   }
   geoDialog(item: any): void {
     console.log(item);

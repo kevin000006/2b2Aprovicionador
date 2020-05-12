@@ -5,6 +5,8 @@ import { MatInputModule } from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { NgxMaskModule } from 'ngx-mask';
+
 
 
 
@@ -18,6 +20,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
         MatInputModule,
         MatIconModule,
         FormsModule,
+        NgxMaskModule.forRoot(),
         MatAutocompleteModule
     ],
     exports:[

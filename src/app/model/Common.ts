@@ -1,8 +1,8 @@
 export class ClienteModel{
     id : number;
     descripcion : string;
-    numero_identificador_fiscal:string;
-    codigo_isis:string;
+    numeroidentificadorfiscal:string;
+    codigoisis:string;
     gerente_cuenta:string;
     segmentoNegocio:string;
 }
@@ -31,6 +31,19 @@ export class TipoProyectoModel
     id:number;
     descripcion:string;
 }
+
+
+export class MonedaModel
+{
+    constructor(){
+        this.id =0;
+    }
+
+    id:number;
+    sigla:string;
+    descBrv:string;
+    monedaDescrip:string;
+}
 export class ConceptosOpexModel
 {
     id:number;
@@ -51,12 +64,7 @@ export class TipoCircuitoModel
     id:number;
     descripcion:string;
 }
-export class MonedaModel
-{
-    id:number;
-    descripcion:string;
-    Sigla:string;
-}
+
 export class TipoServicioModel
 {
     id:number;
@@ -104,3 +112,4 @@ export class AccionIsisModel
     id:number;
     descripcion:string;
 }
+
