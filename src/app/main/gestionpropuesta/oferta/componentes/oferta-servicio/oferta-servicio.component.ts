@@ -5,13 +5,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AlertConfirmComponent } from '../alertConfirm/alertConfirm.component';
 import { GeodialogComponent } from '../geoDialog/geoDialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import {CommonService} from 'app/common.service';
-import { ClienteModel, MonedaModel,
-  TipoServicioModel,ViaAccesoModel,EquipamientoMarcaModel,EquipamientoCondicionModel,
-  SisegoCondicionModel,ConceptosOpexModel,TipoEnlaceModel,CondicionEnlaceModel,
-  TipoCircuitoModel
-} from 'app/model/Common';
-
 @Component({
   selector: 'oferta-servicio',
   templateUrl: './oferta-servicio.component.html',
@@ -19,9 +12,9 @@ import { ClienteModel, MonedaModel,
 })
 export class OfertaServicioComponent implements OnInit {
 
-  //listaCircuito: ModelCombo[] = [];
- // listaServicio: ModelCombo[] = [];
-  //listaMedio: ModelCombo[] = [];
+  listaCircuito: ModelCombo[] = [];
+  listaServicio: ModelCombo[] = [];
+  listaMedio: ModelCombo[] = [];
   listBw: ModelCombo[] = [];
   listLDN: ModelCombo[] = [];
   listVoz: ModelCombo[] = [];
@@ -30,59 +23,29 @@ export class OfertaServicioComponent implements OnInit {
   listOro: ModelCombo[] = [];
   listPlata: ModelCombo[] = [];
   listBronce: ModelCombo[] = [];
- //listAccionISIS: ModelCombo[] = [];
-  //listTipoSede: ModelCombo[] = [];
+  listAccionISIS: ModelCombo[] = [];
+  listTipoSede: ModelCombo[] = [];
 
-
-  listAccionIsis = [];
-  listTipoEnlace = [];
-  listCondicionEnlace = [];
-  listTipoCircuito = [];
-  listTipoServicio = [];
-  listViaAcceso = [];
   //public seldescrip: string;
   //https://stackblitz.com/edit/mat-paginator-select-page?embed=1
 
   displayedColumns: string[] = [
     'accion', 'sede', 'direccion', 'ubigeo', 'geo',
     'contacto', 'telefono', 'circuito', 'nrocircuito',
-     'acccionisis', 'tipoenlace','condicionenlace',
     'servicio', 'medio', 'bw', 'ldn', 'voz', 'video',
     'platinium', 'oro', 'plata', 'bronce',
-    'equipoterminal', 'router', 'otro', 'facturacion'];
+    'equipoterminal', 'router', 'otro', 'facturacion', 'acccionisis', 'tiposede'];
   dataSource = new MatTableDataSource<ServicioElement>(dataSourceList);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   constructor(
-    public dialog: MatDialog,
-    private commonService : CommonService
+    public dialog: MatDialog
   ) { }
   //
   ngOnInit(): void {
 
-    
-    this.commonService.getCondicionEnlaceAll().subscribe(data => {
-      this.listCondicionEnlace = data;
-    });
-    this.commonService.getTipoEnlaceAll().subscribe(data => {
-      this.listTipoEnlace = data;
-    });
-    this.commonService.getTipoCircuitoAll().subscribe(data => {
-      this.listTipoCircuito= data;
-    });
-    this.commonService.getTipoServicioAll().subscribe(data => {
-      this.listTipoServicio= data;
-    });
-    this.commonService.getViaAccesoAll().subscribe(data => {
-      this.listViaAcceso = data;
-    });
-    this.commonService.getAccionIsisAll().subscribe(data => {
-      this.listAccionIsis = data;
-    });
-
-
     //Lenar combo Circuito
-    /*this.listaCircuito.push(new ModelCombo("1", "Circuito 1"));
+    this.listaCircuito.push(new ModelCombo("1", "Circuito 1"));
     this.listaCircuito.push(new ModelCombo("2", "Circuito 2"));
     this.listaCircuito.push(new ModelCombo("3", "Circuito 3"));
     this.listaCircuito.push(new ModelCombo("4", "Circuito 4"));
@@ -95,7 +58,7 @@ export class OfertaServicioComponent implements OnInit {
     this.listaMedio.push(new ModelCombo("1", "Medio 1"));
     this.listaMedio.push(new ModelCombo("2", "Medio 2"));
     this.listaMedio.push(new ModelCombo("3", "Medio 3"));
-    this.listaMedio.push(new ModelCombo("4", "Medio 4"));*/
+    this.listaMedio.push(new ModelCombo("4", "Medio 4"));
     //Lenar combo Bw
     this.listBw.push(new ModelCombo("1", "Bw 1"));
     this.listBw.push(new ModelCombo("2", "Bw 2"));
@@ -123,24 +86,22 @@ export class OfertaServicioComponent implements OnInit {
     this.listBronce.push(new ModelCombo("1", "Kbps"));
     this.listBronce.push(new ModelCombo("2", "Mbps"));
     //Lenar combo plata
-    /*this.listAccionISIS.push(new ModelCombo("1", "(B/A) Traslado con nombre"));
+    this.listAccionISIS.push(new ModelCombo("1", "(B/A) Traslado con nombre"));
     this.listAccionISIS.push(new ModelCombo("2", "(B/A) Traslado con Apellido"));
     //Lenar combo bronce
     this.listTipoSede.push(new ModelCombo("1", "Principal"));
-    this.listTipoSede.push(new ModelCombo("2", "Secundario"));*/
-	
-	
+    this.listTipoSede.push(new ModelCombo("2", "Secundario"));
 
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
   crearNuevoServicio(id: number): ServicioElement {
     return {
-       id: id, sede: '', direccion: '', ubigeo: '', geo: '', longitud: 0, latitud: 0,
+      id: id, sede: '', direccion: '', ubigeo: '', geo: '', longitud: 0, latitud: 0,
       contacto: '', telefono: '', circuito: "", nrocircuito: "", servicio: "",
       medio: "", bw: "", nrobw: "", ldn: "", voz: "", nrovoz: "", video: "", nrovideo: "",
       platinium: "", nroplatinium: "", oro: "", nrooro: "", plata: "", nroplata: "", bronce: "", nrobronce: "",
-      equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "",condicionenlace:""
+      equipoterminal: "", router: "", facturacion: "", acccionisis: "", tiposede: ""
     };
   }
   addRow(): void {
@@ -187,13 +148,13 @@ export class OfertaServicioComponent implements OnInit {
   }
 }
 const dataSourceList: ServicioElement[] = [
-   {
+  {
     id: 1, sede: 'Av. Argentina', direccion: 'puente camote', ubigeo: 'Callao. Callao, Callao',
     geo: 'Balanceador', longitud: 0, latitud: 0,
     contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "1", nrocircuito: "1", servicio: "1",
     medio: "1", bw: "1", nrobw: "2", ldn: "1", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
     platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
-    equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "",condicionenlace:""
+    equipoterminal: "", router: "", facturacion: "", acccionisis: "", tiposede: ""
   },
   {
     id: 2, sede: 'Av. Argentina 2', direccion: 'san borja', ubigeo: 'Callao. Callao, Callao',
@@ -201,7 +162,7 @@ const dataSourceList: ServicioElement[] = [
     contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "", nrocircuito: "1", servicio: "1",
     medio: "1", bw: "1", nrobw: "2", ldn: "1", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
     platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
-    equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "",condicionenlace:""
+    equipoterminal: "", router: "", facturacion: "", acccionisis: "", tiposede: ""
   },
   {
     id: 3, sede: 'Av. Argentina 3', direccion: 'plaza norte', ubigeo: 'Callao. Callao, Callao',
@@ -209,12 +170,12 @@ const dataSourceList: ServicioElement[] = [
     contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "", nrocircuito: "1", servicio: "1",
     medio: "1", bw: "1", nrobw: "2", ldn: "1", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
     platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
-    equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "",condicionenlace:""
+    equipoterminal: "", router: "", facturacion: "", acccionisis: "", tiposede: ""
   }
 
 ];
 export interface ServicioElement {
-   id: number,
+  id: number,
   sede: string;
   direccion: string;
   ubigeo: string;
@@ -247,8 +208,7 @@ export interface ServicioElement {
   //otro: string;
   facturacion: string;
   acccionisis: string;
-  tipoenlace: string;
-  condicionenlace:string;
+  tiposede: string;
 
 }
 export class ModelCombo {
