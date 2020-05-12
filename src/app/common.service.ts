@@ -39,6 +39,7 @@ export class CommonService{
    /* getTipoInstalacionSatelitalModelAll(): Observable<TipoInstalacionSatelitalModel[]> {
         return this.http.post<TipoInstalacionSatelitalModel[]>('/tipoinstalacionsatelital/findAll', null);
     }*/
+    
     getViaAccesoAll(): Observable<ViaAccesoModel[]> {
         return this.http.post<ViaAccesoModel[]>('/viaacceso/findAll', null);
     }

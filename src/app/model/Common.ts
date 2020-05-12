@@ -31,6 +31,7 @@ export class TipoProyectoModel
     id:number;
     descripcion:string;
 }
+
 export class ConceptosOpexModel
 {
     id:number;
