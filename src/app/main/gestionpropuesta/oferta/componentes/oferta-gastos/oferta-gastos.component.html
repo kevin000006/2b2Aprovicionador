@@ -71,8 +71,8 @@
                                 <mat-footer-cell *matFooterCellDef></mat-footer-cell>
                             </ng-container>
                             <ng-container matColumnDef="factor">
-                                <mat-header-cell *matHeaderCellDef> Factor </mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{element.factor == 0 ? '':element.factor}} </mat-cell>
+                                <mat-header-cell *matHeaderCellDef style="flex: 0 0 4% !important"> Factor </mat-header-cell>
+                                <mat-cell *matCellDef="let element" style="flex: 0 0 4% !important"> {{element.factor == 0 ? '':element.factor}} </mat-cell>
                                 <mat-footer-cell *matFooterCellDef></mat-footer-cell>
                             </ng-container>
 
@@ -100,7 +100,7 @@
                             </ng-container>
 
                             <ng-container matColumnDef="montototalmensual">
-                                <mat-header-cell *matHeaderCellDef> Monto Total mensual</mat-header-cell>
+                                <mat-header-cell *matHeaderCellDef> Monto Total mensual S./</mat-header-cell>
                                 <mat-cell *matCellDef="let element"> {{element.montototalmensual| number:'2.2-5'}} </mat-cell>
                                 <mat-footer-cell *matFooterCellDef> Total S/: {{ calcularTotalSoles() | number:'2.2-5' }}</mat-footer-cell>
                             </ng-container>
