@@ -54,7 +54,7 @@
                                 <mat-form-field color="accent" style="text-align: center; width: 80%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
                                     <mat-select [(ngModel)]="row.condicion">
                                         <mat-option value="">--Seleccione--</mat-option>
-                                        <mat-option (onSelectionChange)="changeCondicion($event,row)" [value]="o.id" *ngFor="let o of listaCondicion">{{o.nombre}}</mat-option>
+                                        <mat-option (onSelectionChange)="changeCondicion($event,row)" [value]="o.id" *ngFor="let o of listaCondicion">{{o.descripcion}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </mat-cell>
@@ -77,7 +77,7 @@
                                 <mat-form-field color="accent" style="text-align: center; width: 80%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
                                     <mat-select [(ngModel)]="row.marca">
                                         <mat-option value="">--Seleccione--</mat-option>
-                                        <mat-option [value]="o.id" *ngFor="let o of listaMarca">{{o.nombre}}</mat-option>
+                                        <mat-option [value]="o.id" *ngFor="let o of listaMarca">{{o.descripcion}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
 
