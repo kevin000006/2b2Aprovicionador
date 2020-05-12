@@ -3,7 +3,8 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { ClienteModel,EstadoModel,ComplejidadModel,TipoContratoModel, TipoProyectoModel,
     TipoServicioModel,ViaAccesoModel,TipoInstalacionSatelitalModel,EquipamientoMarcaModel,EquipamientoCondicionModel,
     SisegoCondicionModel,ConceptosOpexModel,TipoEnlaceModel,CondicionEnlaceModel,
-    TipoCircuitoModel,MonedaModel,AccionIsisModel} from './model/Common';
+    TipoCircuitoModel,MonedaModel,AccionIsisModel
+} from './model/Common';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -33,13 +34,13 @@ export class CommonService{
     getTipoProyectoAll(): Observable<TipoProyectoModel[]> {
         return this.http.post<TipoProyectoModel[]>('/tipoproyecto/findAll', null);
     }
+
     getTipoServicioAll(): Observable<TipoServicioModel[]> {
         return this.http.post<TipoServicioModel[]>('/tiposervicio/findAll', null);
     }
    /* getTipoInstalacionSatelitalModelAll(): Observable<TipoInstalacionSatelitalModel[]> {
         return this.http.post<TipoInstalacionSatelitalModel[]>('/tipoinstalacionsatelital/findAll', null);
     }*/
-    
     getViaAccesoAll(): Observable<ViaAccesoModel[]> {
         return this.http.post<ViaAccesoModel[]>('/viaacceso/findAll', null);
     }
@@ -73,4 +74,8 @@ export class CommonService{
     getAccionIsisAll(): Observable<AccionIsisModel[]> {
         return this.http.post<AccionIsisModel[]>('/accionIsis/findAll', null);
     } 
+  
+     
+
+
 }
