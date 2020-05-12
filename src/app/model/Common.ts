@@ -32,6 +32,7 @@ export class TipoProyectoModel
     descripcion:string;
 }
 
+
 export class MonedaModel
 {
     constructor(){
@@ -43,3 +44,72 @@ export class MonedaModel
     descBrv:string;
     monedaDescrip:string;
 }
+export class ConceptosOpexModel
+{
+    id:number;
+    descripcion:string;
+}
+export class TipoEnlaceModel
+{
+    id:number;
+    descripcion:string;
+}
+export class CondicionEnlaceModel
+{
+    id:number;
+    descripcion:string;
+}
+export class TipoCircuitoModel
+{
+    id:number;
+    descripcion:string;
+}
+
+export class TipoServicioModel
+{
+    id:number;
+    descripcion:string;
+    satelital:Boolean;
+}
+export class TipoInstalacionSatelitalModel
+{
+    id:number;
+    descripcion:string;
+}
+
+export class ViaAccesoModel
+{
+    id:number;
+    descripcion:string;
+    TipoServicioId:number;
+}
+
+export class SisegoCondicionModel
+{
+    id:number;
+    descripcion:string;
+}
+
+export class EquipamientoCondicionModel
+{
+    id:number;
+    descripcion:string;
+}
+
+export class EquipamientoMarcaModel
+{
+    id:number;
+    descripcion:string;
+}
+export class VelocidadesModel
+{
+    id:number;
+    descripcion:string;
+    ViaAccesoId:number;
+}
+export class AccionIsisModel
+{
+    id:number;
+    descripcion:string;
+}
+

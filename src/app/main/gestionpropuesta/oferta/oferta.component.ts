@@ -17,9 +17,13 @@ export class OfertaComponent implements OnInit {
   constructor(
     private _router: Router,
     public dialog: MatDialog
-    ) { }
+    ) { 
+debugger;
+
+    }
 
   ngOnInit(): void {
+    debugger;
     if (window.sessionStorage.getItem('oferta') != null) {
       this.ofertaBase = JSON.parse(window.sessionStorage.getItem('oferta'));
     }

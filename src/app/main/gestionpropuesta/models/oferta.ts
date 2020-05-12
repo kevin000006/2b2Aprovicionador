@@ -104,5 +104,90 @@ export class OfertaModel
   tipopago:TipoPagoModel;
 }
 
+export class OfertaDetalleModel
+{
+  ofertasDetalleId:number; 
+  ofertaId :number;	   
+  clienteId :number;  
+  secuencia :number;
+  nombreSede:string; 
+  direccion :string; 
+  //departamentoId;	
+  //provinciaId;	
+  distritoId :number;
+  latitud :string; 	
+  longitud :string; 
+  zoom : string;	
+  contacto :string; 
+  telefono :string; 
+ 
+  tipoCircuitoActual:string;
+  numeroCdActual :string; 
+  tipoServicioIdActual :number;
+ 
+   bwActualActual:string;
+   caudalBronceActual:string;
+   caudal_plata_actual:string;
+   caudalOroActual:string;
+   caudalPlatinumActual:string;
+   caudalVozActual:string;
+   caudalVideoActual:string;
+   caudalLdnActual:string;
+   ultimaMillaActual;
+   routerSwitchActual:string;
+   dteActual:string;
+   equipo_adicional_actual:string;
+   equipoTerminalActual:string;
+   recursoTransporteActual:string;
+   tipoAntenaActual:string;
+   segmentoSatelitalActual:string;
+   pozoTierraActual:string;
+   upsActual:string;
+   facturacion_actual:number;
+   vrf_actual:string;
+   ofertaIsisPropuesto:string;
+   
+   accionIsisIdPropuesto:number;
+   tipoCircuitoIdPropuesto:number;
+   tipoServicioIdPropuesto:number;
+   
+   svaPropuesto:string;
+   descripcionSvaPropuesto:string;
+   bwPropuesto:string;
+   caudalBroncePropuesto:string;
+   caudalPlataPropuesto:string;
+   caudalOroPropuesto:string;
+   caudalPlatinumPropuesto:string;
+   caudalVozPropuesto:string;
+   caudalVideoPropuesto:string;
+   CaudalLdnPropuesto:string;
+ 
+   viaAccesoIdPropuesto:number;
 
+   equipoTerminalPropuesto:string;
+   routerPropuesto:string;
+   equipoStockPropuesto:string;
+   fechaLlegadaPropuesto:string;
+   otrosEquiposPropuesto:string;
+   componentesPropuesto:string;
+   vrfPropuesto:string;
+   
+   detalleAccionEnlacePropuesto:string;
+   observacionesPropuesto:string;
+   precioPropuesto:number;
+   codigoSisego:string;
+   zonaSisego:string;
+
+   //sisegoCondicionId;
+   //antiguedad; 
+   //antiguedadCosto; 
+   //valorResidual; 
+  diasEjecucion:number;
+  costoUltimaMilla:number;
+  //costoTransmision; 
+  //costoPlantaExterna;
+  //costoOpex;
+
+  activo:boolean; 
+}
 
