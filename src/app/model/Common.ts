@@ -1,8 +1,8 @@
 export class ClienteModel{
     id : number;
     descripcion : string;
-    numero_identificador_fiscal:string;
-    codigo_isis:string;
+    numeroidentificadorfiscal:string;
+    codigoisis:string;
     gerente_cuenta:string;
     segmentoNegocio:string;
 }
@@ -30,4 +30,12 @@ export class TipoProyectoModel
 {
     id:number;
     descripcion:string;
+}
+
+export class MonedaModel
+{
+    id:number;
+    sigla:string;
+    descBrv:string;
+    monedaDescrip:string;
 }

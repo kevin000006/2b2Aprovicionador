@@ -10,6 +10,7 @@ import { OfertaComponentModule } from './componentes/oferta-component.module';
 import { FormsModule } from '@angular/forms';
 import { FileInputModule } from '../oferta/componentes/fileinput/fileinput.module';
 import { MatButtonModule } from '@angular/material/button';
+import { NgxMaskModule } from 'ngx-mask';
 
 const routes: Routes = [
     {
@@ -35,7 +36,8 @@ const routes: Routes = [
         MatTabsModule,
         MatTableModule,
         FormsModule,
-        FileInputModule
+        FileInputModule,
+        NgxMaskModule.forRoot() 
     ],
     entryComponents: [
 

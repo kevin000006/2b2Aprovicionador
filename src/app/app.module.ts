@@ -38,6 +38,7 @@ import { LayoutModule } from 'app/layout/layout.module';
 import { ErrorDialogService } from 'app/main/error/error.service';
 import { LoginService } from 'app/main/pages/authentication/login-2/login-2.service';
 import { HttpConfigInterceptor } from 'app/interceptor/HttpConfig';
+import { NgxMaskModule } from 'ngx-mask';
 
 const appRoutes: Routes = [
    
@@ -126,7 +127,7 @@ const appRoutes: Routes = [
         //
         FormsModule,
         ReactiveFormsModule,
-
+        NgxMaskModule.forRoot(),
         // App modules
         LayoutModule,
         AppStoreModule
