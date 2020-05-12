@@ -91,11 +91,12 @@
                                         <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
                                         <mat-select [(ngModel)]="row.circuito">
                                             <mat-option value="">--Seleccione--</mat-option>
-                                            <mat-option [value]="o.id" *ngFor="let o of listaCircuito">{{o.nombre}}</mat-option>
+                                            <mat-option [value]="o.id" *ngFor="let o of listTipoCircuito">{{o.descripcion}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
+                            
                             <ng-container matColumnDef="nrocircuito">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Nº de circuito </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
@@ -111,7 +112,7 @@
                                         <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
                                         <mat-select [(ngModel)]="row.servicio">
                                             <mat-option value="">--Seleccione--</mat-option>
-                                            <mat-option [value]="o.id" *ngFor="let o of listaServicio">{{o.nombre}}</mat-option>
+                                            <mat-option [value]="o.id" *ngFor="let o of listTipoServicio">{{o.descripcion}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </mat-cell>
@@ -123,7 +124,7 @@
                                         <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
                                         <mat-select [(ngModel)]="row.medio">
                                             <mat-option value="">--Seleccione--</mat-option>
-                                            <mat-option [value]="o.id" *ngFor="let o of listaMedio">{{o.nombre}}</mat-option>
+                                            <mat-option [value]="o.id" *ngFor="let o of listViaAcceso">{{o.descripcion}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </mat-cell>
@@ -281,19 +282,31 @@
                                         <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
                                         <mat-select [(ngModel)]="row.acccionisis">
                                             <mat-option value="">--Seleccione--</mat-option>
-                                            <mat-option [value]="o.id" *ngFor="let o of listAccionISIS">{{o.nombre}}</mat-option>
+                                            <mat-option [value]="o.id" *ngFor="let o of listAccionIsis">{{o.descripcion}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="tiposede">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo Sede </mat-header-cell>
+                            <ng-container matColumnDef="tipoenlace">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo Enlace </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
-                                        <mat-select [(ngModel)]="row.tiposede">
+                                        <mat-select [(ngModel)]="row.tipoenlace">
                                             <mat-option value="">--Seleccione--</mat-option>
-                                            <mat-option [value]="o.id" *ngFor="let o of listTipoSede">{{o.nombre}}</mat-option>
+                                            <mat-option [value]="o.id" *ngFor="let o of listTipoEnlace">{{o.descripcion}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="condicionenlace">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Condicion Enlace </mat-header-cell>
+                                <mat-cell *matCellDef="let row">
+                                    <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                        <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
+                                        <mat-select [(ngModel)]="row.condicionenlace">
+                                            <mat-option value="">--Seleccione--</mat-option>
+                                            <mat-option [value]="o.id" *ngFor="let o of listCondicionEnlace">{{o.descripcion}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </mat-cell>
