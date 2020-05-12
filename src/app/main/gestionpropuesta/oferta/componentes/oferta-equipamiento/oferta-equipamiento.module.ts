@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { OfertaEquipamientoComponent } from './oferta-equipamiento.component'
@@ -13,6 +13,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AlertConfirmModule } from '../alertConfirm/alertConfirm.module';
 import { AlertSuccessModule } from '../alertSuccess/alertSuccess.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import es from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(es);
 @NgModule({
     declarations: [
         OfertaEquipamientoComponent,
@@ -31,6 +34,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         AlertConfirmModule,
         MatTooltipModule,
         AlertSuccessModule
+    ],
+    providers: [
+        
+        { provide: LOCALE_ID, useValue: 'es' }
     ],
     exports: [
         OfertaEquipamientoComponent

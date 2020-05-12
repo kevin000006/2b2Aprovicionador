@@ -25,7 +25,7 @@ export class FileInputComponent implements OnInit {
   message: string = "Are you sure?"
   confirmButtonText = "Yes"
   cancelButtonText = "Cancel"
-  usuario: { nombres: '', apellidos: '',id:0 };
+  usuario: { nombres: '', apellidos: '', id: 0 };
   public listArchivo: any = [];
   public listRespnse: any = [];
   @ViewChild("fileUpload", { static: false }) fileUpload: ElementRef;
@@ -49,7 +49,12 @@ export class FileInputComponent implements OnInit {
   ngOnInit(): void {
     this.usuario = JSON.parse(localStorage.getItem('u'));
     this.showSpinner = true;
-    this.fileInputService.listFilesContainers().subscribe((res: any) => {
+    var requestListarFies = {
+      modulo_id: 1,
+      usuario_id: this.usuario.id
+    };
+    this.fileInputService.listFilesContainers(requestListarFies).subscribe((res: any) => {
+      debugger;
       if (res != null)
         this.listArchivo = res;
       this.showSpinner = false;
@@ -71,11 +76,11 @@ export class FileInputComponent implements OnInit {
         const a = document.createElement('a');
         a.click();
         a.remove();
-        if (item.archivoId.trim() == "") {//Eliminanos el objecto que esta en memoria
+        if (item.adjunto_id == 0) {//Eliminanos el objecto que esta en memoria
           var ObjectIndex = this.listArchivo.findIndex(function (obj) { return obj.id === item.id; });//Obtenemos el Index del List del Objeto     
           this.listArchivo.splice(ObjectIndex, 1);
         } else {//Eliminamos el objecto que esta registrado en el sistema
-          this.fileInputService.deleteFileContainers(item.archivoId).subscribe((res: any) => {
+          this.fileInputService.deleteFileContainers(item.adjunto_id).subscribe((res: any) => {
             var ObjectIndex = this.listArchivo.findIndex(function (obj) { return obj.id === item.id; });//Obtenemos el Index del List del Objeto     
             this.listArchivo.splice(ObjectIndex, 1);
             this.dialog.open(AlertSuccessComponent, {
@@ -91,23 +96,25 @@ export class FileInputComponent implements OnInit {
     });
   }
   descargar(item: any): void {
-    this.subirTrama.downloadBlobl(item.archivoNombre);
+    this.subirTrama.downloadBlobl(item.archivo_nombre);
   }
   onClick() {
     const fileUpload = this.fileUpload.nativeElement; fileUpload.onchange = () => {
       for (let index = 0; index < fileUpload.files.length; index++) {
-        const file = fileUpload.files[index];        
+        const file = fileUpload.files[index];
+        console.log(this.usuario);
         this.listArchivo.push({
           id: this.listArchivo.length > 0 ? this.listArchivo[0].id + 1 : this.listArchivo.length + 1, // por revisar el ordenamiento 
-          archivoId: "",
-          archivoNombre: file.name,
+          adjunto_id: "",
+          nombre: file.name,
           createdDate: this.datePipe.transform(new Date(), 'dd/MM/yyyy hh:mm:ss a'),
           adjuntoUsuario: this.usuario.nombres + " " + this.usuario.apellidos,
           tx_tamanioArchivo: this.bytesToSize(file.size),
           file: file,
           inProgress: false, //Si esta el false el progreebar estara ocultado si es true el progressbar se mostrara
           progress: 0,
-          idUsuario : this.usuario.id.toString()
+          usuario: this.usuario,
+          idUsuario: this.usuario.id.toString()
         });
       }
       this.listArchivo.sort(this.compareValues('id', 'desc'));
@@ -119,13 +126,13 @@ export class FileInputComponent implements OnInit {
     this.dialogRef.close();
   }
   btnGuardarArchivo() {
-    var listArchivosAGuardar = this.listArchivo.filter(function (el) { return el.archivoId == ""; });//obtenemos los elementos que guardaremos en la base de datos
+    var listArchivosAGuardar = this.listArchivo.filter(function (el) { return el.adjunto_id == ""; });//obtenemos los elementos que guardaremos en la base de datos
     listArchivosAGuardar.forEach(obj => {
       obj.inProgress = true;
       const formData = new FormData();
-      formData.append('file', obj.file);      
-      formData.append('usuario_id', obj.idUsuario);      
-      formData.append('modulo_id', "1");      
+      formData.append('file', obj.file);
+      formData.append('usuario_id', obj.idUsuario);
+      formData.append('modulo_id', "1");
       this.fileInputService.uploadToContainers(formData).pipe(
         map(event => {
           switch (event.type) {

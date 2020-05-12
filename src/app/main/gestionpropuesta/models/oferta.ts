@@ -59,6 +59,7 @@ export class BandejaModel {
 export class OfertaModel
 {
   constructor(){
+    this.oferta_id=0;
     this.analistafinanciero = new PreventaModel();
     this.cliente = new ClienteModel();
     this.complejidad = new ComplejidadModel();
@@ -69,8 +70,10 @@ export class OfertaModel
     this.tipocontrato = new TipoContratoModel();
     this.tipoproyecto = new TipoProyectoModel();
     this.tipopago = new TipoPagoModel();
+    this.vanval = 0;
   }
-
+  vanval:number;
+  oferta_id:number;
   codigo:string;
   oportunidadSalesforce:string;
   oportunidad_pre:string;
@@ -82,6 +85,7 @@ export class OfertaModel
   analistafinanciero:PreventaModel;
   cliente:ClienteModel;
   contacto:string;
+  observaciones:string;
   correo_contacto:string;
   telefono_contacto:string;
   descripcion:string;
@@ -99,3 +103,6 @@ export class OfertaModel
   oportunidad:OportunidadModel;
   tipopago:TipoPagoModel;
 }
+
+
+

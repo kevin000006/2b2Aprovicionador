@@ -21,9 +21,7 @@ export class QuestionDialogsComponent implements OnInit {
 
   confirmar(){
     this.bandejaService.accionOferta(this.data.accion,this.data.data).subscribe(response => {
-
       this.dialogRef.close();
-    
     });
   }
 

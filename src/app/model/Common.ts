@@ -34,6 +34,10 @@ export class TipoProyectoModel
 
 export class MonedaModel
 {
+    constructor(){
+        this.id =0;
+    }
+
     id:number;
     sigla:string;
     descBrv:string;

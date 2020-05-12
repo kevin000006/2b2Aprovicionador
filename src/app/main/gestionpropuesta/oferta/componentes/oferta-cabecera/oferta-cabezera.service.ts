@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {OfertaModel,ClienteModel} from '../../../models/oferta';
+import {OfertaModel,ClienteModel,OportunidadModel} from '../../../models/oferta';
 import { SearchClassicComponent } from 'app/main/pages/search/classic/search-classic.component';
 
 @Injectable({
@@ -20,6 +20,15 @@ export class OfertaCabezeraService {
 
     getClientesSearch(search:any):Observable<ClienteModel[]>{
       return this.http.get<ClienteModel[]>('/clientes/obtenerclientes?search=' + search,{});
+    }
+
+    getOportunidadSearch(search:any):Observable<OportunidadModel[]>{
+      return this.http.get<OportunidadModel[]>('/oportunidad/obteneroportunidad?search=' + search,{});
+    }
+
+    guardarOferta(param):Observable<number>{
+
+        return this.http.post<number>('/oferta/guardaroferta' ,param);
     }
 
 

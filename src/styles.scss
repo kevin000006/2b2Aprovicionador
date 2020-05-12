@@ -280,6 +280,14 @@ body.theme-default .mat-form-field-type-mat-native-select .mat-form-field-infix:
       min-height: 26px;
     }
 
+    button.btn-telefonica-gree:disabled,
+button.btn-telefonica-gree[disabled]{
+  border: 1px solid #8ea37d;
+  background-color: #b5d49d;
+  color: #666666;
+  cursor: no-drop;
+}
+
     .btn-telefonica-gree-2{
       background:transparent;
       border-radius: 4px;
