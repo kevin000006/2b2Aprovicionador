@@ -128,6 +128,8 @@ export class OfertaServicioComponent implements OnInit {
         });
     }
   }
+
+  
   private _filterStates(value: string): State[] {
     const filterValue = value.toLowerCase();
     return this.states.filter(state => state.name.toLowerCase().indexOf(filterValue) === 0);
@@ -276,7 +278,7 @@ export class OfertaServicioComponent implements OnInit {
 /* */
 const dataSourceList: ServicioElement[] = [
   {
-    id: 1, sede: 'Av. Argentina', direccion: 'puente camote', ubigeo: 'Callao. Callao, Callao',
+    id: 1, sede: 'Av. Argentina', direccion: 'puente camote', ubigeo: '',
     geo: 'Balanceador', longitud: 0, latitud: 0,
     contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "1", nrocircuito: "1", servicio: "1",
     medio: "1", bw: "1", nrobw: "2", ldn: "1", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
@@ -284,7 +286,7 @@ const dataSourceList: ServicioElement[] = [
     equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "", condicionenlace: "", isLoading: false
   },
   {
-    id: 2, sede: 'Av. Argentina 2', direccion: 'san borja', ubigeo: 'Callao. Callao, Callao',
+    id: 2, sede: 'Av. Argentina 2', direccion: 'san borja', ubigeo: '',
     geo: 'Balanceador', longitud: 0, latitud: 0,
     contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "", nrocircuito: "1", servicio: "1",
     medio: "1", bw: "1", nrobw: "2", ldn: "1", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
@@ -292,7 +294,7 @@ const dataSourceList: ServicioElement[] = [
     equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "", condicionenlace: "", isLoading: false
   },
   {
-    id: 3, sede: 'Av. Argentina 3', direccion: 'plaza norte', ubigeo: 'Callao. Callao, Callao',
+    id: 3, sede: 'Av. Argentina 3', direccion: 'plaza norte', ubigeo: '',
     geo: 'Balanceador', longitud: -70.2190587197085, latitud: -17.9966159197085,
     contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "", nrocircuito: "1", servicio: "1",
     medio: "1", bw: "1", nrobw: "2", ldn: "1", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",

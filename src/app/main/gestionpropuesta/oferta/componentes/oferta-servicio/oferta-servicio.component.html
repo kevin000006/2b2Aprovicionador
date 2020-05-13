@@ -73,14 +73,15 @@
                                         <mat-option *ngIf="row.isLoading" class="is-loading">
                                             <mat-spinner diameter="50"></mat-spinner>
                                         </mat-option>
-                                        <mat-option *ngFor="let state of filteredStates" [value]="state.descripcion">
-                                            <!-- <img class="example-option-img" aria-hidden [src]="state.flag" height="25"> -->
-                                            <!-- <span>{{state.name}}</span> |
-                                            <small>Population: {{state.population}}</small> -->
-                                            <span>{{state.descripcion}}</span>
+                                        <ng-container *ngIf="!row.isLoading">
+                                            <mat-option *ngFor="let state of filteredStates" [value]="state.descripcion">
+                                                <!-- <img class="example-option-img" aria-hidden [src]="state.flag" height="25"> -->
+                                                <!-- <span>{{state.name}}</span> |
+                                                <small>Population: {{state.population}}</small> -->
+                                                <span>{{state.descripcion}}</span>
 
-                                        </mat-option>
-
+                                            </mat-option>
+                                        </ng-container>
                                     </mat-autocomplete>
                                     <!-- {{row.ubigeo}} -->
 
