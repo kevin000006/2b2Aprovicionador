@@ -22,6 +22,8 @@ import { DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { map, startWith, finalize, debounceTime,tap,switchMap } from 'rxjs/operators';
 
+import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
+
 export interface State {
   flag: string;
   name: string;
@@ -39,19 +41,9 @@ export class OfertaServicioComponent implements OnInit {
     Pageable: ''
   };
   pageIndex: number = 0;
-
+//https://stackblitz.com/edit/angular-material-autocomplete-async2?file=src%2Fapp%2Fapp.component.html
   lstBandeja = new Array<OfertaDetalleModel>();
-  /*
-    listBw: ModelCombo[] = [];
-    listLDN: ModelCombo[] = [];
-    listVoz: ModelCombo[] = [];
-    listVideo: ModelCombo[] = [];
-    listPlatinium: ModelCombo[] = [];
-    listOro: ModelCombo[] = [];
-    listPlata: ModelCombo[] = [];
-    listBronce: ModelCombo[] = [];
-  */
-
+ 
   listAccionIsis = [];
   listTipoEnlace = [];
   listCondicionEnlace = [];
@@ -63,46 +55,23 @@ export class OfertaServicioComponent implements OnInit {
   //https://stackblitz.com/edit/mat-paginator-select-page?embed=1
 
   displayedColumns: string[] = [
-    'accion', 'sede', 'direccion', 'ubigeo', 'geo',
-    'contacto', 'telefono', 'circuito', 'nrocircuito',
-    'acccionisis', 'tipoenlace', 'condicionenlace',
+    'sede', 'direccion', 'ubigeo', 'geo',
+    'contacto', 'telefono', 'circuito', 'nrocircuito',     
     'servicio', 'medio', 'bw', 'ldn', 'voz', 'video',
     'platinium', 'oro', 'plata', 'bronce',
-    'equipoterminal', 'router', 'otro', 'facturacion'];
+    'equipoterminal', 'router', 'otro', 'facturacion',
+    'acccionisis',
+
+    'tiposede','modo','circuitos','numerocurcuitos','servicios','medios','sva','svadescripcion',
+     'bws', 'ldns', 'vozs', 'videos','platiniums', 'oros', 'platas', 'bronces',
+     'equipoterminals', 'routers', 'otros','precio','observaciones','ofertaisis','sesego','zona','ultimamilla','diasejecucion',
+
+    'accion'];
   exampleDatabase: OfertaServicioService | null;
   dataSource = new MatTableDataSource<ServicioElement>(dataSourceList);//:  EjemploDataSource | null;
-
-  stateCtrl = new FormControl();
-  //filteredStates: Observable<State[]>;
+  stateCtrl = new FormControl();  
   filteredStates: Observable<any>;
-
-  states: State[] = [
-    {
-      name: 'Arkansas',
-      population: '2.978M',
-      // https://commons.wikimedia.org/wiki/File:Flag_of_Arkansas.svg
-      flag: 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Flag_of_Arkansas.svg'
-    },
-    {
-      name: 'California',
-      population: '39.14M',
-      // https://commons.wikimedia.org/wiki/File:Flag_of_California.svg
-      flag: 'https://upload.wikimedia.org/wikipedia/commons/0/01/Flag_of_California.svg'
-    },
-    {
-      name: 'Florida',
-      population: '20.27M',
-      // https://commons.wikimedia.org/wiki/File:Flag_of_Florida.svg
-      flag: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Florida.svg'
-    },
-    {
-      name: 'Texas',
-      population: '27.47M',
-      // https://commons.wikimedia.org/wiki/File:Flag_of_Texas.svg
-      flag: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg'
-    }
-  ];
-  //new MatTableDataSource<ServicioElement>(dataSourceList);
+  
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -115,6 +84,9 @@ export class OfertaServicioComponent implements OnInit {
     private ofertaServicioService: OfertaServicioService,
     private _router: Router,
   ) {
+  }  
+  resetAutoComplete(): void {
+    this.filteredStates = null;    
   }
   inputChangeUbigeo(input: any, row: any): void {        
     if (input.length > 2) {
@@ -127,16 +99,8 @@ export class OfertaServicioComponent implements OnInit {
           }, 1000);                      
         });
     }
-  }
-
-  
-  private _filterStates(value: string): State[] {
-    const filterValue = value.toLowerCase();
-    return this.states.filter(state => state.name.toLowerCase().indexOf(filterValue) === 0);
-  }
-  //
+  } 
   ngOnInit(): void {
-
     this.commonService.getCondicionEnlaceAll().subscribe(data => {
       this.listCondicionEnlace = data;
     });
@@ -154,55 +118,23 @@ export class OfertaServicioComponent implements OnInit {
     });
     this.commonService.getAccionIsisAll().subscribe(data => {
       this.listAccionIsis = data;
-    });
-
-    /*
-     this.loadData();  
- 
-     this.listBw.push(new ModelCombo("1", "Bw 1"));
-     this.listBw.push(new ModelCombo("2", "Bw 2"));
-     this.listBw.push(new ModelCombo("3", "Bw 3"));
-     this.listBw.push(new ModelCombo("4", "Bw 4"));
-     //Lenar combo LDN
-     this.listLDN.push(new ModelCombo("1", "Si"));
-     this.listLDN.push(new ModelCombo("2", "No"));
-     //Lenar combo Voz
-     this.listVoz.push(new ModelCombo("1", "Kbps"));
-     this.listVoz.push(new ModelCombo("2", "Mbps"));
-     //Lenar combo Video
-     this.listVideo.push(new ModelCombo("1", "Kbps"));
-     this.listVideo.push(new ModelCombo("2", "Mbps"));
-     //Lenar combo Platinium
-     this.listPlatinium.push(new ModelCombo("1", "Kbps"));
-     this.listPlatinium.push(new ModelCombo("2", "Mbps"));
-     //Lenar combo Oro
-     this.listOro.push(new ModelCombo("1", "Kbps"));
-     this.listOro.push(new ModelCombo("2", "Mbps"));
-     //Lenar combo plata
-     this.listPlata.push(new ModelCombo("1", "Kbps"));
-     this.listPlata.push(new ModelCombo("2", "Mbps"));
-     //Lenar combo bronce
-     this.listBronce.push(new ModelCombo("1", "Kbps"));
-     this.listBronce.push(new ModelCombo("2", "Mbps"));
-  */
-    //this.dataSource.paginator = this.paginator;
-    //this.dataSource.sort = this.sort;
-  }/*
+    });   
+  }
   crearNuevoServicio(id: number): ServicioElement {
     return {
       id: id, sede: '', direccion: '', ubigeo: '', geo: '', longitud: 0, latitud: 0,
       contacto: '', telefono: '', circuito: "", nrocircuito: "", servicio: "",
-      medio: "", bw: "", nrobw: "", ldn: "", voz: "", nrovoz: "", video: "", nrovideo: "",
+      medio: "", bw: "", nrobw: "", ldn: "",nroldn : "", voz: "", nrovoz: "", video: "", nrovideo: "",
       platinium: "", nroplatinium: "", oro: "", nrooro: "", plata: "", nroplata: "", bronce: "", nrobronce: "",
-      equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "",condicionenlace:""
+      equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "",condicionenlace:"", isLoading: false
     };
-  } */
+  } 
   addRow(): void {
-    // this.dataSource.data.push(this.crearNuevoServicio(this.dataSource.data.length + 1));
+    this.dataSource.data.push(this.crearNuevoServicio(this.dataSource.data.length + 1));
     this.dataSource.filter = "";
   }
 
-  /*deleteRow(item: any): void {
+  deleteRow(item: any): void {
     const dialogRef = this.dialog.open(AlertConfirmComponent, {
       width: '450px',
       data: {
@@ -223,7 +155,8 @@ export class OfertaServicioComponent implements OnInit {
         this.dataSource = new MatTableDataSource<ServicioElement>(dataSourceList);
       }
     });
-  }*/
+  }
+
   geoDialog(item: any): void {
     console.log(item);
     const dialogRef = this.dialog.open(GeodialogComponent, {
@@ -275,13 +208,12 @@ export class OfertaServicioComponent implements OnInit {
   */
 
 }
-/* */
 const dataSourceList: ServicioElement[] = [
   {
     id: 1, sede: 'Av. Argentina', direccion: 'puente camote', ubigeo: '',
     geo: 'Balanceador', longitud: 0, latitud: 0,
     contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "1", nrocircuito: "1", servicio: "1",
-    medio: "1", bw: "1", nrobw: "2", ldn: "1", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
+    medio: "1", bw: "1", nrobw: "2", ldn: "1", nroldn: "", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
     platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
     equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "", condicionenlace: "", isLoading: false
   },
@@ -289,7 +221,7 @@ const dataSourceList: ServicioElement[] = [
     id: 2, sede: 'Av. Argentina 2', direccion: 'san borja', ubigeo: '',
     geo: 'Balanceador', longitud: 0, latitud: 0,
     contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "", nrocircuito: "1", servicio: "1",
-    medio: "1", bw: "1", nrobw: "2", ldn: "1", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
+    medio: "1", bw: "1", nrobw: "2", ldn: "1", nroldn: "", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
     platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
     equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "", condicionenlace: "", isLoading: false
   },
@@ -297,7 +229,7 @@ const dataSourceList: ServicioElement[] = [
     id: 3, sede: 'Av. Argentina 3', direccion: 'plaza norte', ubigeo: '',
     geo: 'Balanceador', longitud: -70.2190587197085, latitud: -17.9966159197085,
     contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "", nrocircuito: "1", servicio: "1",
-    medio: "1", bw: "1", nrobw: "2", ldn: "1", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
+    medio: "1", bw: "1", nrobw: "2", ldn: "1", nroldn: "", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
     platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
     equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "", condicionenlace: "", isLoading: false
   }
@@ -320,6 +252,7 @@ export interface ServicioElement {
   bw: string;
   nrobw: string;
   ldn: string;
+  nroldn: string;
   voz: string;
   nrovoz: string;
   video: string;
