@@ -20,9 +20,16 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
+
+                <div class="col-md-4">
+
+                </div>
                 <!-- <div class="col-md-offset-7 col-md-2 col-xs-12 text-right">
                     <button class="btn-primary-telefonica btn-guardar">Guardar</button>
                 </div> -->
+
+
+
             </div>
             <div class="form-group">
                 <div class="col-sm-12">
@@ -57,8 +64,27 @@
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="ubigeo">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Distrito, Provincia, Departamento </mat-header-cell>
-                                <mat-cell *matCellDef="let row"> {{row.ubigeo}} </mat-cell>
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 230px !important;"> Distrito, Provincia, Departamento </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 230px !important;">
+                                    <mat-form-field color="accent" appearance="legacy" [style.fontSize.px]="12">
+                                        <input matInput [matAutocomplete]="auto" (input)="inputChangeUbigeo($event.target.value,row)" [(ngModel)]="row.ubigeo">
+                                    </mat-form-field>
+                                    <mat-autocomplete #auto="matAutocomplete">
+                                        <mat-option *ngIf="row.isLoading" class="is-loading">
+                                            <mat-spinner diameter="50"></mat-spinner>
+                                        </mat-option>
+                                        <mat-option *ngFor="let state of filteredStates" [value]="state.descripcion">
+                                            <!-- <img class="example-option-img" aria-hidden [src]="state.flag" height="25"> -->
+                                            <!-- <span>{{state.name}}</span> |
+                                            <small>Population: {{state.population}}</small> -->
+                                            <span>{{state.descripcion}}</span>
+
+                                        </mat-option>
+
+                                    </mat-autocomplete>
+                                    <!-- {{row.ubigeo}} -->
+
+                                </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="geo">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Geo </mat-header-cell>
@@ -96,7 +122,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            
+
                             <ng-container matColumnDef="nrocircuito">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Nº de circuito </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
