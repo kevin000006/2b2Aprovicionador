@@ -1,12 +1,12 @@
-import { Component, OnInit, Input,ViewChild,ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import {OfertaModel, PreventaModel,ClienteModel, ComboModel,SegmentoNegocioModel} from '../../../models/oferta';
+import { OfertaModel, PreventaModel, ClienteModel, ComboModel, SegmentoNegocioModel } from '../../../models/oferta';
 import { OfertaCabezeraService } from './oferta-cabezera.service';
-import {CommonService} from 'app/common.service'
+import { CommonService } from 'app/common.service'
 import { QuestionDialogsComponent } from 'app/main/gestionpropuesta/bandeja/dialogs/question-dialogs/question-dialogs.component';
-import {Observable,fromEvent} from 'rxjs';
+import { Observable, fromEvent } from 'rxjs';
 import { MonedaModel } from 'app/model/Common';
-import {FormControl, Validators} from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -17,116 +17,109 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class OfertaCabeceraComponent implements OnInit {
 
   self = this;
-  dataSourceCliente:any[]=[];
-  dataSourceOportunidad:any[]=[];
-  lstComplejidad=[];
-  lstTipoContrato=[];
-  lstMoneda=[];
-  lstTipoProyecto=[];
-  oferta:any=new OfertaModel();
-  constructor(private service: OfertaCabezeraService,
-  private commonService : CommonService,
-  public dialog: MatDialog,
-  private _snack :MatSnackBar) { }
+  dataSourceCliente: any[] = [];
+  dataSourceOportunidad: any[] = [];
+  lstComplejidad = [];
+  lstTipoContrato = [];
+  lstMoneda = [];
+  lstTipoProyecto = [];
+  oferta: any = new OfertaModel();
+  constructor(
+    private service: OfertaCabezeraService,
+    private commonService: CommonService,
+    public dialog: MatDialog,
+    private _snack: MatSnackBar
+  ) { }
   @ViewChild('myControl', { static: true }) autocompleteCliente: ElementRef;
   @ViewChild('codigoSalesforce', { static: true }) autocompleteOportunidad: ElementRef;
-  @Input() ofertaBase:any={}; 
+  @Input() ofertaBase: any = {};
 
-  ganarOferta(){
+  ganarOferta() {
 
     const dialogRef = this.dialog.open(QuestionDialogsComponent, {
-      width: '500px',    
-      data:  {
+      width: '500px',
+      data: {
         message: '¿Ganar Oferta?',
         accion: '/oferta/ganaroferta',
-        data:{
+        data: {
           ofertaId: this.oferta.oferta_id,
           usuario: 'maria.ramos',
           usuarioId: 1
         }
       }
     });
-
-
     dialogRef.afterClosed().subscribe(result => {
-    
-      if(result != 0)
-      {        
+      if (result != 0) {
         this.getOfertaData();
       }
-     
     });
-
-
   }
 
-  guardarOferta(){
+  guardarOferta() {
 
-    let _oferta={
-      pcliente_id:this.oferta.cliente.id,
-      pcomplejidad_id:this.oferta.complejidad.id == 0 ? null : this.oferta.complejidad.id,
-      pcontacto:this.oferta.contacto,
-      pcorreo_contacto:this.oferta.correo_contacto,
-      pdescripcion:this.oferta.descripcion,
-      pmoneda_id:this.oferta.moneda.id,
-      pnumero_caso_salesforce:this.oferta.numeroCasoSalesforce,
-      pobservaciones:(this.oferta.observaciones || ''),
-      poferta_id:this.oferta.oferta_id,
-      poportunidad_id:this.oferta.oportunidad.id,
-      ppago_recurrente:this.oferta.pago_recurrente,
-      ppago_recurrente_actual:(this.oferta.pago_recurrente_actual||0),
-      ppago_unico:this.oferta.pago_unico,
-      pperiodo_contrato:this.oferta.periodo_contrato,
-      ppreventa_id:1,
-      ptelefono_contacto:this.oferta.telefono_contacto,
-      ptiempo_implantacion:this.oferta.tiempo_implantacion,
+    let _oferta = {
+      pcliente_id: this.oferta.cliente.id,
+      pcomplejidad_id: this.oferta.complejidad.id == 0 ? null : this.oferta.complejidad.id,
+      pcontacto: this.oferta.contacto,
+      pcorreo_contacto: this.oferta.correo_contacto,
+      pdescripcion: this.oferta.descripcion,
+      pmoneda_id: this.oferta.moneda.id,
+      pnumero_caso_salesforce: this.oferta.numeroCasoSalesforce,
+      pobservaciones: (this.oferta.observaciones || ''),
+      poferta_id: this.oferta.oferta_id,
+      poportunidad_id: this.oferta.oportunidad.id,
+      ppago_recurrente: this.oferta.pago_recurrente,
+      ppago_recurrente_actual: (this.oferta.pago_recurrente_actual || 0),
+      ppago_unico: this.oferta.pago_unico,
+      pperiodo_contrato: this.oferta.periodo_contrato,
+      ppreventa_id: 1,
+      ptelefono_contacto: this.oferta.telefono_contacto,
+      ptiempo_implantacion: this.oferta.tiempo_implantacion,
       ptipo_contrato_id: this.oferta.tipocontrato.id == 0 ? null : this.oferta.tipocontrato.id,
-      ptipo_proyecto_id:this.oferta.tipoproyecto.id == 0 ? null : this.oferta.tipoproyecto.id,
-      pusuario:'Maria Ramos'
+      ptipo_proyecto_id: this.oferta.tipoproyecto.id == 0 ? null : this.oferta.tipoproyecto.id,
+      pusuario: 'Maria Ramos'
 
     };
 
-    
-   
 
-      this.service.guardarOferta(_oferta).subscribe(response=>{
-       
-        if(this.ofertaBase.id != 0)
-        {
-          this._snack.open("Oferta modificada con exito.", 'Ok', {
-            duration: 3000,
-            });
-        }else{
-         
-            this._snack.open("Se creo una nueva oferta.", 'Ok', {
-              duration: 3000,
-              });
-        }
 
-        if(response != 1)
-        {
-          this.ofertaBase.id = response;
-          window.sessionStorage.setItem('oferta',JSON.stringify(this.ofertaBase));
-        }
 
-        this.getOfertaData();
+    this.service.guardarOferta(_oferta).subscribe(response => {
 
-      });
-    
+      if (this.ofertaBase.id != 0) {
+        this._snack.open("Oferta modificada con exito.", 'Ok', {
+          duration: 3000,
+        });
+      } else {
+
+        this._snack.open("Se creo una nueva oferta.", 'Ok', {
+          duration: 3000,
+        });
+      }
+
+      if (response != 1) {
+        this.ofertaBase.id = response;
+        window.sessionStorage.setItem('oferta', JSON.stringify(this.ofertaBase));
+      }
+
+      this.getOfertaData();
+
+    });
+
   }
 
-  private getOfertaData(){
-    if(this.ofertaBase.id > 0){
+  private getOfertaData() {
+    if (this.ofertaBase.id > 0) {
       this.service.getOfertaById(this.ofertaBase.id).subscribe(data => {
-        
-        if(!data.aprobadores)
-          data['aprobadoresArr'] =[];
+
+        if (!data.aprobadores)
+          data['aprobadoresArr'] = [];
         else
           data['aprobadoresArr'] = data.aprobadores.split(",");
 
         data['tiposervicio'] = data.pago_recurrente > 0 ? 'Recurrente' : 'Oneshot';
         this.oferta = data;
-        
+
         this.oferta.vanval = this.oferta.vanval || 0;
         this.oferta.segmentonegocio = this.oferta.segmentonegocio || new SegmentoNegocioModel();
         this.oferta.complejidad = this.oferta.complejidad || new ComboModel();
@@ -135,38 +128,37 @@ export class OfertaCabeceraComponent implements OnInit {
         this.oferta.preventa = this.oferta.preventa || new PreventaModel();
         this.oferta.moneda = this.oferta.moneda || new MonedaModel();
         this.oferta.analistafinanciero = this.oferta.analistafinanciero || new PreventaModel();
-        this.oferta.cliente = this.oferta.cliente || new ClienteModel(); 
-        
+        this.oferta.cliente = this.oferta.cliente || new ClienteModel();
+
       });
     }
-    else{
+    else {
       this.oferta = new OfertaModel();
       this.oferta.moneda.id = 1;
       this.oferta.complejidad.id = 0;
       this.oferta.tipocontrato.id = 0;
-      this.oferta.tipoproyecto.id  = 0;
-      
+      this.oferta.tipoproyecto.id = 0;
+
     }
   }
-    
+
   displayFn(cliente) {
     if (cliente) { return cliente.codigoisis; }
   }
 
-  onSelectOportunidad(item)
-  {
+  onSelectOportunidad(item) {
     debugger;
-      this.oferta.oportunidad = item;
-      this.oferta.cliente = item.cliente;
-      this.oferta.descripcion = item.descripcion;
+    this.oferta.oportunidad = item;
+    this.oferta.cliente = item.cliente;
+    this.oferta.descripcion = item.descripcion;
   }
 
-  displayFnOportunidad(item)
-  {
-    
-    
+  displayFnOportunidad(item) {
 
-    if(item) {return item.oportunidadcodigo;
+
+
+    if (item) {
+      return item.oportunidadcodigo;
     }
   }
 
@@ -193,26 +185,26 @@ export class OfertaCabeceraComponent implements OnInit {
     });
 
     fromEvent(this.autocompleteCliente.nativeElement, 'keyup')
-    .subscribe(() => {
+      .subscribe(() => {
 
-      this.service.getClientesSearch(this.autocompleteCliente.nativeElement.value).subscribe(data =>{
-        this.dataSourceCliente = data;
+        this.service.getClientesSearch(this.autocompleteCliente.nativeElement.value).subscribe(data => {
+          this.dataSourceCliente = data;
+        });
+
       });
-      
-    });
 
     fromEvent(this.autocompleteOportunidad.nativeElement, 'keyup')
-    .subscribe(() => {
+      .subscribe(() => {
 
-      this.service.getOportunidadSearch(this.autocompleteOportunidad.nativeElement.value).subscribe(data =>{
-        this.dataSourceOportunidad = data;
+        this.service.getOportunidadSearch(this.autocompleteOportunidad.nativeElement.value).subscribe(data => {
+          this.dataSourceOportunidad = data;
+        });
+
       });
-      
-    });
 
 
-   this.getOfertaData();
-     
+    this.getOfertaData();
+
   }
 
   formControl = new FormControl('', [
@@ -222,11 +214,11 @@ export class OfertaCabeceraComponent implements OnInit {
 
   getErrorMessage() {
     return this.formControl.hasError('required') ? 'requerido' :
-      this.formControl.hasError('email') ?  'email no valido' :
+      this.formControl.hasError('email') ? 'email no valido' :
         '';
   }
 
-  submit(){
+  submit() {
 
   }
 

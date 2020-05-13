@@ -17,8 +17,7 @@ export class OfertaGastosComponent implements OnInit {
   isPrepositionChecked: boolean = false;
   listaConcepto: ModelCombo[] = [];
   listaMoneda: ModelCombo[] = [];
-  dataSource = new MatTableDataSource<GastoElement>(dataSourceList);
-  //dataSource = new MatTableDataSource;
+  dataSource = new MatTableDataSource<GastoElement>(dataSourceList);  
   displayedColumns: string[] = ['accion', 'concepto', 'cantidad', 'nromeses', 'factor', 'moneda', 'montounitmenusal', 'montototalmensual'];
 
   constructor(

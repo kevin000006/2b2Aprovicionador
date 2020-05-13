@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable,Input } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, BehaviorSubject, empty } from 'rxjs';
 import {OfertaDetalleModel} from '../../../models/oferta';
@@ -10,7 +10,7 @@ export class OfertaServicioService {
 
   dataChange: BehaviorSubject<OfertaDetalleModel[]> = new BehaviorSubject<OfertaDetalleModel[]>([]);
   totalDataBandeja:number=0;
-
+  @Input() ofertaBase:any={}; 
   constructor(private http: HttpClient) { }
  
   get data(): OfertaDetalleModel[] {
