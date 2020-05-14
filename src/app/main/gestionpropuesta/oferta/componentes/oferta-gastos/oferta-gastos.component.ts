@@ -16,8 +16,8 @@ import { of } from 'rxjs';
 })
 export class OfertaGastosComponent implements OnInit {
   color: ThemePalette = 'warn';
-  inProgress: boolean =false;
-  progress: number =0;
+  inProgress: boolean = false;
+  progress: number = 0;
   tipoCambio: number = 3.5;
   isPrepositionChecked: boolean = false;
   listaConcepto: any = [];
@@ -133,7 +133,8 @@ export class OfertaGastosComponent implements OnInit {
     };
   }
   addRow(): void {
-    let objecto = this.crearNuevoGastos(this.dataSource.data[this.dataSource.data.length - 1].ofertaOpexId + 1, this.ofertaBase.id);
+    var Id =this.dataSource.data.length == 0 ? 1 : this.dataSource.data[this.dataSource.data.length - 1].ofertaOpexId + 1 ;    
+    let objecto = this.crearNuevoGastos(Id, this.ofertaBase.id);
     this.dataSource.data.push(objecto);
     this.dataSource.filter = "";
   }
@@ -154,10 +155,10 @@ export class OfertaGastosComponent implements OnInit {
         return of(`fallo al guardar.`);
       })
     ).subscribe((event: any) => {
-      if (typeof (event) === 'object') {        
+      if (typeof (event) === 'object') {
         console.log("response");
       }
-    });    
+    });
   }
 
   deleteRow(item: any): void {
