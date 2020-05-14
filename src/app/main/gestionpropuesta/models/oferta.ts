@@ -111,8 +111,8 @@ export class OfertaEquipamientoModel
     this.activo = true;
     this.id = 0;
     this.modelo = "";
-    this.labelEditar = "Editar";
-    this.iconEdit = "edit";
+    this.labelEditar = "Grabar";
+    this.iconEdit = "save";
     this.total = 0.00;
     this.unitario = 0.00;
     this.cantidad = 0;

@@ -63,3 +63,30 @@ table {
     color: #00A9E0 !important;
     right: 4px !important;
 }
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+.example-option-img {
+    vertical-align: middle;
+    margin-right: 8px;
+    width: 44px;
+    height: 28px;
+}
+
+[dir='rtl'] .example-option-img {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+.desabilitarGeolocalizacion {
+    background-color: rgba(0, 0, 0, 0.12) !important;
+    color: rgba(0, 0, 0, 0.26) !important;
+}

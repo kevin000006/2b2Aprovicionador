@@ -19,6 +19,9 @@ import { AgmCoreModule } from '@agm/core';
 import { MatButtonModule } from '@angular/material/button';
 import { GeocodeService } from '../geoDialog/geocode.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @NgModule({
     declarations: [
         OfertaServicioComponent,
@@ -39,6 +42,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         AlertConfirmModule,
         MatButtonModule,
         MatTooltipModule,
+        MatAutocompleteModule,
+        ReactiveFormsModule,
+        MatProgressSpinnerModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyCkQSOz3XXowm3bOQlnCEUChPTgCmT0AXc'
         })

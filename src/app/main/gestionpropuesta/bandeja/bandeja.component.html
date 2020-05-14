@@ -34,7 +34,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-3">
                                 <mat-form-field>
-                                    <input autocomplete="off" [(ngModel)]="_filtro.cliente" matInput  class="form-control" placeholder="Cliente" name="cliente">
+                                    <input autocomplete="off" [(ngModel)]="_filtro.cliente" matInput class="form-control" placeholder="Cliente" name="cliente">
                                     <mat-icon class="icon" matSuffix>person_outlin &nbsp;</mat-icon>
                                 </mat-form-field>
                             </div>
@@ -68,13 +68,13 @@
                             </div>
                             <div class="col-xs-12 col-sm-3">
 
-                                <mat-form-field >
+                                <mat-form-field>
                                     <mat-label>Desde</mat-label>
-                                    <input [(ngModel)]="_filtro.desde" autocomplete="off"  matInput [matDatepicker]="desde" class="form-control">
+                                    <input [(ngModel)]="_filtro.desde" autocomplete="off" matInput [matDatepicker]="desde" class="form-control">
                                     <mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
                                     <mat-datepicker #desde></mat-datepicker>
-                                  </mat-form-field>
-                                  
+                                </mat-form-field>
+
                             </div>
                             <div class="col-xs-12 col-sm-3 padding-r-none">
 
@@ -83,7 +83,7 @@
                                     <input [(ngModel)]="_filtro.hasta" autocomplete="off" matInput [matDatepicker]="hasta" class="form-control">
                                     <mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
                                     <mat-datepicker #hasta></mat-datepicker>
-                                  </mat-form-field>
+                                </mat-form-field>
 
                             </div>
                         </div>
@@ -99,7 +99,7 @@
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                             </div>
                             <div class="col-xs-12 col-sm-5 padding-r-none text-right">
-                                
+
                                 <button (click)="limpiar()" class="btn-telefonica-gree-2">
                                     Limpiar
                                 </button> &nbsp;&nbsp;
@@ -123,7 +123,7 @@
                     <div class="col-xs-12 col-sm-1 control-bandeja-tabla">
 
                         <mat-form-field class="control-page-item" color="accent" style="margin-left: -30px;min-width: 90px;">
-                    <select matNativeControl #pagesize>
+                            <select matNativeControl #pagesize>
                         <option value="5" selected>5 por pagina</option> 
                         <option value="10" >10 por pagina</option> 
                         <option value="25" >25 por pagina</option> 
@@ -136,20 +136,20 @@
                         <button (click)="filtrarData()" class="btn-telefonica-2" style="min-height: 36px;">
                         <span> <mat-icon class="icon">refresh</mat-icon> Actualizar </span>
                     </button>
-                    <span style="font-size: 12px;margin-left: 10px;">Total: {{dataSource.totalRegistros}}</span>
+                        <span style="font-size: 12px;margin-left: 10px;">Total: {{dataSource.totalRegistros}}</span>
                     </div>
                 </div>
                 <div class="content-table">
-                    
-                        
-                    <mat-table style="width: 2000px;" class="mat-cell oferta-bandeja" #tbofertabandeja [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}" >
+
+
+                    <mat-table style="width: 2000px;" class="mat-cell oferta-bandeja" #tbofertabandeja [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}">
 
                         <ng-container matColumnDef="codigo">
                             <mat-header-cell *matHeaderCellDef mat-sort-header>Código PP</mat-header-cell>
                             <mat-cell *matCellDef="let row">
                                 <a target="_blank" href="{{row.url}}">
                                     {{row.codigo}} - ver.{{row.version}}
-                                  </a>                                 
+                                  </a>
                             </mat-cell>
                         </ng-container>
 
@@ -158,10 +158,10 @@
                             <mat-cell *matCellDef="let row"> {{row.oportunidad}}</mat-cell>
                         </ng-container>
 
-                        <ng-container matColumnDef="faseproyecto" >
+                        <ng-container matColumnDef="faseproyecto">
                             <mat-header-cell *matHeaderCellDef> Fase </mat-header-cell>
-                            <mat-cell *matCellDef="let row; let i=index;">      
-                                {{row.fase}}                      
+                            <mat-cell *matCellDef="let row; let i=index;">
+                                {{row.fase}}
                             </mat-cell>
                         </ng-container>
 
@@ -177,50 +177,50 @@
 
                         <ng-container matColumnDef="estado">
                             <mat-header-cell *matHeaderCellDef mat-sort-header>Estado</mat-header-cell>
-                            <mat-cell *matCellDef="let row"> <span  [ngStyle]="{'background': row.color}" class="estado-cell" > {{row.estado}}</span> </mat-cell>
+                            <mat-cell *matCellDef="let row"> <span [ngStyle]="{'background': row.color}" class="estado-cell"> {{row.estado}}</span> </mat-cell>
                         </ng-container>
 
-                        <ng-container matColumnDef="tipoproyecto" >
+                        <ng-container matColumnDef="tipoproyecto">
                             <mat-header-cell *matHeaderCellDef> Tipo de proyecto </mat-header-cell>
-                            <mat-cell *matCellDef="let row; let i=index;">   {{row.tipoproyecto}}                            
+                            <mat-cell *matCellDef="let row; let i=index;"> {{row.tipoproyecto}}
                             </mat-cell>
                         </ng-container>
 
-                        <ng-container matColumnDef="observaciones" >
+                        <ng-container matColumnDef="observaciones">
                             <mat-header-cell *matHeaderCellDef> Observaciones </mat-header-cell>
-                            <mat-cell *matCellDef="let row; let i=index;">      {{row.observaciones}}                         
+                            <mat-cell *matCellDef="let row; let i=index;"> {{row.observaciones}}
                             </mat-cell>
                         </ng-container>
 
-                        <ng-container matColumnDef="complejidad" >
+                        <ng-container matColumnDef="complejidad">
                             <mat-header-cell *matHeaderCellDef> Complejidad </mat-header-cell>
-                            <mat-cell *matCellDef="let row; let i=index;">   {{row.complejidad}}                            
+                            <mat-cell *matCellDef="let row; let i=index;"> {{row.complejidad}}
                             </mat-cell>
                         </ng-container>
 
-                        <ng-container matColumnDef="preventa" >
+                        <ng-container matColumnDef="preventa">
                             <mat-header-cell *matHeaderCellDef> Preventa </mat-header-cell>
-                            <mat-cell *matCellDef="let row; let i=index;">   {{row.preventa}}                            
+                            <mat-cell *matCellDef="let row; let i=index;"> {{row.preventa}}
                             </mat-cell>
                         </ng-container>
 
-                        <ng-container matColumnDef="analistafinanciero" >
+                        <ng-container matColumnDef="analistafinanciero">
                             <mat-header-cell *matHeaderCellDef> Analista financiero </mat-header-cell>
-                            <mat-cell *matCellDef="let row; let i=index;">   {{row.analistafinanciero}}                            
+                            <mat-cell *matCellDef="let row; let i=index;"> {{row.analistafinanciero}}
                             </mat-cell>
                         </ng-container>
 
-                       
 
-                        <ng-container matColumnDef="creado" >
+
+                        <ng-container matColumnDef="creado">
                             <mat-header-cell *matHeaderCellDef> Creado </mat-header-cell>
-                            <mat-cell *matCellDef="let row; let i=index;">    {{row.fechareg | date: 'dd/MM/yyyy HH:mm'}}                           
+                            <mat-cell *matCellDef="let row; let i=index;"> {{row.fechareg | date: 'dd/MM/yyyy HH:mm'}}
                             </mat-cell>
                         </ng-container>
 
-                        <ng-container matColumnDef="modificado" >
+                        <ng-container matColumnDef="modificado">
                             <mat-header-cell *matHeaderCellDef> Modificado </mat-header-cell>
-                            <mat-cell *matCellDef="let row; let i=index;">   {{row.fechamod | date: 'dd/MM/yyyy HH:mm'}}                            
+                            <mat-cell *matCellDef="let row; let i=index;"> {{row.fechamod | date: 'dd/MM/yyyy HH:mm'}}
                             </mat-cell>
                         </ng-container>
 
@@ -231,11 +231,11 @@
 
                             <mat-cell class="mat-column-menu" *matCellDef="let row; let i=index;">
                                 <mat-menu #appMenu="matMenu">
-                                   <!-- <button style="font-size: 12px;" mat-menu-item><mat-icon style="font-size: 15px; margin:5px 0 0 0;">visibility</mat-icon> Ver historial de versiones</button>-->
+                                    <!-- <button style="font-size: 12px;" mat-menu-item><mat-icon style="font-size: 15px; margin:5px 0 0 0;">visibility</mat-icon> Ver historial de versiones</button>-->
                                     <button (click)="openDialogNuevaVersion(row)" style="font-size: 12px;" mat-menu-item><mat-icon style="font-size: 15px; margin:5px 0 0 0;">add</mat-icon> Generar nueva version</button>
                                     <button (click)="openDialogDuplicar(row)" style="font-size: 12px;" mat-menu-item><mat-icon style="font-size: 15px; margin:5px 0 0 0;">file_copy</mat-icon> Duplicar oferta</button>
                                     <button (click)="openDialogAnular(row)" style="font-size: 12px;" mat-menu-item><mat-icon style="font-size: 15px; margin:5px 0 0 0;">clear</mat-icon> Anular oferta</button>
-                                   <!-- <button style="font-size: 12px;" mat-menu-item><mat-icon style="font-size: 15px; margin:5px 0 0 0;">show_chart</mat-icon> Seguimiento de estado</button>-->
+                                    <!-- <button style="font-size: 12px;" mat-menu-item><mat-icon style="font-size: 15px; margin:5px 0 0 0;">show_chart</mat-icon> Seguimiento de estado</button>-->
                                 </mat-menu>
 
                                 <a style="cursor:pointer;color: #979797;" mat-icon-button [matMenuTriggerFor]="appMenu">
@@ -244,19 +244,19 @@
                             </mat-cell>
                         </ng-container>
 
-                        
+
                         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                         <mat-row *matRowDef="let row; columns: displayedColumns; let i = index;" [ngClass]=" i % 2 != 0 ? 'row-color-tb' : ''"></mat-row>
-                        
+
                     </mat-table>
-                    
+
                 </div>
                 <mat-spinner *ngIf="dataSource.isWait$ | async" style="margin: 0 auto; " diameter="40" color="accent"></mat-spinner>
 
-               <!-- <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]">
+                <!-- <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]">
                 </mat-paginator> -->
 
-                <div class="text-center m-t-10 pagination" *ngIf="dataSource.totalRegistros >= 1" >
+                <div class="text-center m-t-10 pagination" *ngIf="dataSource.totalRegistros >= 1">
                     <button [disabled]="(pageIndex+1)==1" class="pag btn-pagination pointer" (click)="paginar(-1)">
                         <mat-icon class="icon" >keyboard_arrow_left</mat-icon>
                     </button>

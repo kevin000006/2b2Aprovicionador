@@ -74,12 +74,13 @@ export class CommonService{
     getAccionIsisAll(): Observable<AccionIsisModel[]> {
         return this.http.post<AccionIsisModel[]>('/accionIsis/findAll', null);
     } 
-  
+
     getTipoEquipamiento():Observable<TipoEquipamientoModel[]>{
         return this.http.post<TipoEquipamientoModel[]>('/tipoequipamiento/findAll',null);
     }
      
-
-
+    buscardistrito(search : string): Observable<any> {    
+        return this.http.get<any>('/ofertasDetalle/buscardistrito?search=' + search);
+    } 
 
 }
