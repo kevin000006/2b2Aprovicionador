@@ -17,7 +17,7 @@ export class OfertaGastosComponent implements OnInit {
   //listamoneda_id: ModelCombo[] = [];
   listaMoneda = [];
   dataSourceList: any = [];
-  dataSource = new MatTableDataSource<any>();
+  dataSource = new MatTableDataSource<OfertaOpex>();
   displayedColumns: string[] = ['concepto', 'cantidad', 'nromeses', 'factor', 'moneda', 'montounitmenusal', 'montototalmensual', 'accion'];
 
   @Input() ofertaBase: any = {};
@@ -27,26 +27,21 @@ export class OfertaGastosComponent implements OnInit {
     private commonService: CommonService,
   ) { }
 
-  async ngOnInit() {
-    //debugger;
-    //console.log(this.ofertaBase);
+  async ngOnInit() {    
     this.ofertaBase.id = 1;
-
     //Lenar combo moneda_id
     await this.commonService.getTipoMonedaAll().subscribe(data => {
-      this.listaMoneda = data;
-      console.log(this.listaMoneda);
+      this.listaMoneda = data;      
     });
-
     //Lenar combo Comcepto  
     await this.ofertaGastosService.listarConceptoOpex().subscribe(data => {
-      this.listaConcepto = data;
+      this.listaConcepto = data;      
     });
-
     await this.ofertaGastosService.obtenerOfertasOpex(this.ofertaBase.id).subscribe((data:OfertaOpex[]) => {
       if (data != null)
-        this.dataSource.data = data;
-      console.log(data);
+        this.dataSource.data = data;    
+        console.log(data); 
+        console.log(this.dataSource.data) 
     });
   }
   changeConcepto(event, row) {
@@ -117,19 +112,20 @@ export class OfertaGastosComponent implements OnInit {
   public calcularTotalDolares() {
     return this.dataSource.data.reduce((accum, curr) => accum + (curr.totalMensual / this.tipoCambio), 0).toFixed(2);
   }
-  crearNuevoGastos(ofertaOpexId: number, ofertaId: number): GastoElement {
+  crearNuevoGastos(ofertaOpexId: number, ofertaId: number): OfertaOpex {
     return {
       ofertaOpexId: ofertaOpexId,
       ofertaId: ofertaId,
-      conceptoId: -1,
-      mostrarConcepto: false,
+      conceptoId: 0,
+      //mostrarConcepto: false,
       nombre: '',
       cantidad: 0,
       meses: 0,
       factor: 0,
-      moneda_id_id: 1,
+      moneda_id: 1,
       unitarioMensual: 0,
       totalMensual: 0,
+      activo:null
     };
   }
   addRow(): void {
@@ -155,7 +151,7 @@ export class OfertaGastosComponent implements OnInit {
         a.click();
         a.remove();
         this.dataSource.data.splice(this.dataSource.data.indexOf(item.id), 1);
-        this.dataSource = new MatTableDataSource<GastoElement>(this.dataSourceList);
+        this.dataSource = new MatTableDataSource<OfertaOpex>(this.dataSourceList);
       }
     });
   }
@@ -165,19 +161,19 @@ export class OfertaGastosComponent implements OnInit {
 //   { ofertaOpexId: 2, concepto: '', mostrarConcepto: false, nroconcepto: '', conceptootro: '', cantidad: 0, meses: 0, factor: 0, moneda_id: '1', unitarioMensual: 0, montototalmensual: 0 },
 //   { ofertaOpexId: 3, concepto: '', mostrarConcepto: false, nroconcepto: '', conceptootro: '', cantidad: 0, meses: 0, factor: 0, moneda_id: '1', unitarioMensual: 0, montototalmensual: 0 }
 // ];
-export interface GastoElement {
-  ofertaOpexId: number,
-  ofertaId: number,
-  conceptoId: number;
-  mostrarConcepto: boolean,
-  nombre: string;
-  cantidad: number;
-  meses: number;
-  factor: number;
-  moneda_id_id: number;
-  unitarioMensual: number;
-  totalMensual: number;
-}
+// export interface GastoElement {
+//   ofertaOpexId: number,
+//   ofertaId: number,
+//   conceptoId: number;
+//   mostrarConcepto: boolean,
+//   nombre: string;
+//   cantidad: number;
+//   meses: number;
+//   factor: number;
+//   moneda_id_id: number;
+//   unitarioMensual: number;
+//   totalMensual: number;
+// }
 export class ModelCombo {
   constructor(public id?: string, public nombre?: string, public factor?: number, public tipo?: string) {
   }

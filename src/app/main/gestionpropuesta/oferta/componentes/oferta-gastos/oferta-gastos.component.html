@@ -29,8 +29,8 @@
                                 <mat-cell *matCellDef="let row" class="columnaConcepto">
                                     <mat-form-field color="accent" [ngStyle]="{'width': row.mostrarConcepto==true ? '30%' : '90%' }" class="columnaSelecConcepto" appearance="legacy" [style.fontSize.px]="12">
                                         <mat-select [(ngModel)]="row.conceptoId">
-                                            <mat-option value="-1">--Seleccione--</mat-option>
-                                            <mat-option [value]="o.conceptoId" (onSelectionChange)="changeConcepto($event,row)" *ngFor="let o of listaConcepto">{{o.descripcion}}</mat-option>
+                                            <mat-option value="0">--Seleccione--</mat-option>
+                                            <mat-option [value]="o.id" (onSelectionChange)="changeConcepto($event,row)" *ngFor="let o of listaConcepto">{{o.descripcion}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                     <mat-form-field color="accent" *ngIf="row.nombre" [ngStyle]="{'width': row.mostrarConcepto==true ? '60%' : '0%' }" class="columnaTextoConcepto" appearance="legacy" [style.fontSize.px]="12">
@@ -67,7 +67,7 @@
                                 <mat-header-cell *matHeaderCellDef> Moneda </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
-                                        <mat-select [(ngModel)]="row.moneda_id">
+                                        <mat-select [(ngModel)]="row.conceptoId">
                                             <mat-option [value]="o.id" (onSelectionChange)="changeMoneda($event,row)" *ngFor="let o of listaMoneda">{{o.monedaDescrip}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
