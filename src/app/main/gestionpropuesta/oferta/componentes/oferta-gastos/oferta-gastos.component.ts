@@ -217,10 +217,12 @@ export class OfertaGastosComponent implements OnInit {
         } else // si el registro ya existe en la base de datos se actualizara el estado 2: Inactivo
           objetoOfertaOpex.estado = 2;
         //Listamos los registro que estan agregado o modificados                
-        this.dataSourceList = this.dataSourceList.filter(function (obj) {
+        // this.dataSourceList = this.dataSourceList.filter(function (obj) {
+        //   return obj.estado == 0 || obj.estado == 1 || obj.estado == -1
+        // });
+        this.dataSource = new MatTableDataSource<OfertaOpex>(this.dataSourceList.filter(function (obj) {
           return obj.estado == 0 || obj.estado == 1 || obj.estado == -1
-        });
-        this.dataSource = new MatTableDataSource<OfertaOpex>(this.dataSourceList);
+        }));
       }
     });
   }
