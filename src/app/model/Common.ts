@@ -100,7 +100,7 @@ export class AccionIsisModel {
 
 
 export class OfertaOpex {    
-    ofertaOpexId: number;
+    id: number;
     ofertaId: number;
     conceptoId: number;
     nombre: string;
@@ -111,11 +111,8 @@ export class OfertaOpex {
     unitarioMensual: number;    
     mostrarConcepto: boolean;
     totalMensual: number;
-    activo: null;    
-    estado: number; //-1 ya existe en la base de datos, 0: nuevo, 1: Actualizado, 2: Inactivo
-    // esAgregado : boolean; //true, cuando el registro es nuevo
-    // esModificado:boolean; //true, cuando el registro es modificaco
-    // esEliminado: boolean; //true, cuando el registro es eliminado
+    activo: boolean;    
+    estado: number; //-1 ya existe en la base de datos, 0: nuevo, 1: Actualizado, 2: Inactivo    
 }
 
 

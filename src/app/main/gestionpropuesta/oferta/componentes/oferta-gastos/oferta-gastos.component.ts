@@ -34,7 +34,7 @@ export class OfertaGastosComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.ofertaBase.id = 1;
+    this.ofertaBase.id = 5;
     //Lenar combo moneda_id
     await this.commonService.getTipoMonedaAll().subscribe(data => {
       this.listaMoneda = data;
@@ -117,7 +117,7 @@ export class OfertaGastosComponent implements OnInit {
   }
   crearNuevoGastos(ofertaOpexId: number, ofertaId: number): OfertaOpex {
     return {
-      ofertaOpexId: ofertaOpexId,
+      id: ofertaOpexId,
       ofertaId: ofertaId,
       conceptoId: 0,
       nombre: '',
@@ -128,19 +128,50 @@ export class OfertaGastosComponent implements OnInit {
       moneda_id: 1,
       unitarioMensual: 0,
       totalMensual: 0,
-      activo: null,
+      activo: true,
       estado: 0
     };
   }
   addRow(): void {
-    var Id =this.dataSource.data.length == 0 ? 1 : this.dataSource.data[this.dataSource.data.length - 1].ofertaOpexId + 1 ;    
+    var Id = this.dataSource.data.length == 0 ? 1 : this.dataSource.data[this.dataSource.data.length - 1].id + 1;
     let objecto = this.crearNuevoGastos(Id, this.ofertaBase.id);
     this.dataSource.data.push(objecto);
     this.dataSource.filter = "";
   }
 
   guardarGastosOpex(): void {
-    this.ofertaGastosService.guardarGastos(this.dataSourceList).pipe(
+    debugger;
+    const listOfertaOpex = this.dataSourceList.map(item => {
+      //-1 ya existe en la base de datos, 0: nuevo, 1: Actualizado, 2: Inactivo   
+      /*
+          id== 0 es un insert
+          id!= 0 es un update
+          activo ==false es un eliminar para el servicio
+       */     
+      if (item.estado == 0) //Si es 0 Nuevo Registro
+        item.id = 0
+      else if (item.estado == 1)// Si es 1 Registro ha sido Actulizado
+        item.id = item.id
+      else if (item.estado == 2)
+        item.activo = false    
+      var container = {
+        id: item.id,
+        ofertaId: item.ofertaId,
+        conceptoId: item.conceptoId,
+        nombre: item.nombre,
+        cantidad: item.cantidad,
+        meses: item.meses,
+        factor: item.factor,
+        moneda_id: item.moneda_id,
+        unitarioMensual: item.unitarioMensual,
+        totalMensual: item.totalMensual,
+        activo: item.activo,
+        estado: 0       
+      };
+      return container;
+    });    
+    
+    this.ofertaGastosService.guardarGastos(listOfertaOpex).pipe(
       map(event => {
         switch (event.type) {
           case HttpEventType.UploadProgress:
@@ -179,9 +210,9 @@ export class OfertaGastosComponent implements OnInit {
         a.click();
         a.remove();
         debugger;
-        var objetoOfertaOpex = this.dataSourceList.find(function (element) { return element.ofertaOpexId == item.ofertaOpexId; });
+        var objetoOfertaOpex = this.dataSourceList.find(function (element) { return element.id == item.id; });
         if (objetoOfertaOpex.estado == 0) {// si el registro es agregado, entonce se elimina
-          var ObjectIndex = this.dataSourceList.findIndex(function (obj) { return obj.ofertaOpexId === item.ofertaOpexId; });//Obtenemos el Index del List de Objetos        
+          var ObjectIndex = this.dataSourceList.findIndex(function (obj) { return obj.id === item.id; });//Obtenemos el Index del List de Objetos        
           this.dataSourceList.splice(ObjectIndex, 1);
         } else // si el registro ya existe en la base de datos se actualizara el estado 2: Inactivo
           objetoOfertaOpex.estado = 2;
