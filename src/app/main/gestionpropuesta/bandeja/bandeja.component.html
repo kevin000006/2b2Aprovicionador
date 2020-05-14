@@ -273,20 +273,37 @@
 
         <table id="excel-table" style="display: none;">
             <tr>
-                <th>Codígo</th>
-                <th>Version</th>
-                <th> Oportunidad</th>
+                <th>Codígo PP</th>
+                <th>Oportunidad</th>
+                <th> Fase</th>
                 <th>Cliente</th>
                 <th>Descripción</th>
                 <th>Estado</th>
+               
+                <th>Tipo de proyecto</th>
+                <th>Observaciones</th>
+                <th>Complejidad</th>
+                <th>Preventa</th>
+                <th>Analista financiero</th>
+                <th>Creado</th>
+                <th>Modificado</th>
             </tr>
-            <tr *ngFor="let ds of dataSource.renderedData">
-                <td>{{ ds.codigo}}</td>
-                <td>{{ ds.version }}</td>
-                <td>{{ ds.oportunidad }}</td>
-                <td>{{ ds.cliente }}</td>
-                <td>{{ ds.descripcion }}</td>
-                <td>{{ ds.estado }}</td>
+            <tr *ngFor="let row of dataSource.renderedData">
+                <td> {{row.codigo}} - ver.{{row.version}}</td>
+                <td> {{row.oportunidad}} </td>
+                <td>{{row.fase}}</td>
+                <td>{{ row.cliente }}</td>
+                <td>{{ row.descripcion }}</td>
+                <td>{{ row.estado }}</td>
+
+                <td>{{row.tipoproyecto}}</td>
+                <td>{{row.observaciones}}</td>
+                <td>{{row.complejidad}}</td>
+                <td>{{row.preventa}} </td>
+                <td>{{row.analistafinanciero}} </td>
+                <td>{{row.fechareg | date: 'dd/MM/yyyy HH:mm'}}</td>
+                <td>{{row.fechamod | date: 'dd/MM/yyyy HH:mm'}}</td>
+
             </tr>
         </table>
 

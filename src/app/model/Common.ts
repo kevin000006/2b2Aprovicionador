@@ -119,3 +119,8 @@ export class OfertaOpex {
 }
 
 
+export class TipoEquipamientoModel
+{
+    id:number;
+    descripcion:string;
+}

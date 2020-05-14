@@ -1,4 +1,4 @@
-import { MonedaModel, ComplejidadModel, TipoContratoModel, TipoProyectoModel } from 'app/model/Common';
+import { MonedaModel, ComplejidadModel, TipoContratoModel, TipoProyectoModel, EquipamientoCondicionModel, EquipamientoMarcaModel, TipoEquipamientoModel } from 'app/model/Common';
 
 export class UsuarioModel{
   nombres:String;
@@ -103,6 +103,43 @@ export class OfertaModel
   oportunidad:OportunidadModel;
   tipopago:TipoPagoModel;
 }
+
+export class OfertaEquipamientoModel
+{
+  constructor(){
+    this.editable = true;
+    this.activo = true;
+    this.id = 0;
+    this.modelo = "";
+    this.labelEditar = "Grabar";
+    this.iconEdit = "save";
+    this.total = 0.00;
+    this.unitario = 0.00;
+    this.cantidad = 0;
+    this.antiguedad = 0;
+    this.equipamientoCondicion = new EquipamientoCondicionModel();
+    this.equipamientomarca = new EquipamientoMarcaModel();
+    this.moneda = new MonedaModel();
+    this.tipoequipamiento = new TipoEquipamientoModel();
+  }
+  id:number;
+  modelo:string;
+  iconEdit:string;
+  labelEditar:string;
+  activo:boolean;
+  antiguedad:number;
+  cantidad:number;
+  equipamientoCondicion:EquipamientoCondicionModel;
+  equipamientomarca:EquipamientoMarcaModel;
+  moneda:MonedaModel;
+  tipoequipamiento:TipoEquipamientoModel;
+  total:number;
+  unitario:number;
+  editable:boolean;
+}
+
+
+
 
 export class OfertaDetalleModel
 {
