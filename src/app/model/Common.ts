@@ -113,3 +113,9 @@ export class AccionIsisModel
     descripcion:string;
 }
 
+export class TipoEquipamientoModel
+{
+    id:number;
+    descripcion:string;
+}
+

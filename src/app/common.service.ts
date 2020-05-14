@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { ClienteModel,EstadoModel,ComplejidadModel,TipoContratoModel, TipoProyectoModel,
     TipoServicioModel,ViaAccesoModel,TipoInstalacionSatelitalModel,EquipamientoMarcaModel,EquipamientoCondicionModel,
     SisegoCondicionModel,ConceptosOpexModel,TipoEnlaceModel,CondicionEnlaceModel,
-    TipoCircuitoModel,MonedaModel,AccionIsisModel
+    TipoCircuitoModel,MonedaModel,AccionIsisModel, TipoEquipamientoModel
 } from './model/Common';
 import { Observable } from 'rxjs';
 
@@ -75,6 +75,9 @@ export class CommonService{
         return this.http.post<AccionIsisModel[]>('/accionIsis/findAll', null);
     } 
   
+    getTipoEquipamiento():Observable<TipoEquipamientoModel[]>{
+        return this.http.post<TipoEquipamientoModel[]>('/tipoequipamiento/findAll',null);
+    }
      
 
 

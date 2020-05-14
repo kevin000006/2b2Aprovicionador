@@ -1,45 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { AlertConfirmComponent } from '../alertConfirm/alertConfirm.component';
 import { AlertSuccessComponent } from '../alertSuccess/alertSuccess.component';
 import { MatDialog } from '@angular/material/dialog';
 import { EquipamientoService } from '../oferta-equipamiento/oferta-equipamiento.servicio';
+import { CommonService } from 'app/common.service';
+import { TipoEquipamientoModel,MonedaModel } from 'app/model/Common';
+import { OfertaEquipamientoModel } from 'app/main/gestionpropuesta/models/oferta';
+
 @Component({
   selector: 'oferta-equipamiento',
   templateUrl: './oferta-equipamiento.component.html',
   styleUrls: ['./oferta-equipamiento.component.scss']
 })
 export class OfertaEquipamientoComponent implements OnInit {
+
+  @Input() ofertaBase:any={}; 
+
   tipoCambio: number = 3.5;
   baseDepresiacion: number = 60;
-  listaTipos: ModelCombo[] = [];
+  listaTipos: TipoEquipamientoModel[] = [];
   listaCondicion: ModelCombo[] = [];
-  listaMoneda: ModelCombo[] = [];
+  listaMoneda: MonedaModel[] = [];
   listaMarca: ModelCombo[] = [];
-  dataSource = new MatTableDataSource<EquipacmientoElement>(dataSourceList);
+  dataSource =new MatTableDataSource<OfertaEquipamientoModel>([]);
+
   constructor(
     public dialog: MatDialog,
-    public equipamientoService :EquipamientoService
+    public equipamientoService :EquipamientoService,
+    private commonService: CommonService
   ) { }
 
-  displayedColumns: string[] = ['accion', 'tipo', 'condicion', 'antigueadad', 'marca', 'modelo', 'cantidad', 'moneda', 'costo', 'costototal'];
+  displayedColumns: string[] = ['tipo', 'condicion', 'antigueadad', 'marca', 'modelo', 'cantidad', 'moneda', 'costo', 'costototal','accion'];
 
   ngOnInit(): void {
-    //Lenar combo Tipo
-    this.listaTipos.push(new ModelCombo("1", "Desmarcador"));
-    this.listaTipos.push(new ModelCombo("2", "Desmarcador 1"));
-    //Lenar combo Condicion
-    // this.listaCondicion.push(new ModelCombo("1", "Stock"));
-    // this.listaCondicion.push(new ModelCombo("2", "No Stock"));
-    // this.listaCondicion.push(new ModelCombo("3", "Residual"));
-    // this.listaCondicion.push(new ModelCombo("4", "Renting: CSI"));
-    //Lenar combo Moneda
-    this.listaMoneda.push(new ModelCombo("1", "S/."));
-    this.listaMoneda.push(new ModelCombo("2", "$"));
-    //Lenar combo Moneda
-    // this.listaMarca.push(new ModelCombo("1", "TELDAT"));
-    // this.listaMarca.push(new ModelCombo("2", "ROUTER"));
-    // this.listaMarca.push(new ModelCombo("2", "MODEN"));
+    this.commonService.getTipoEquipamiento().subscribe(data=>{ this.listaTipos = data });
+    this.commonService.getTipoMonedaAll().subscribe(data => {this.listaMoneda = data});
 
     this.equipamientoService.findAllEquipamientoMarca().subscribe(data => {     
       this.listaMarca = data;
@@ -49,23 +45,43 @@ export class OfertaEquipamientoComponent implements OnInit {
       this.listaCondicion = data;
     });
 
+    this.equipamientoService.getEquipamientoForOfeta(this.ofertaBase.id).subscribe(data=>{
+
+      for(let d of data)
+      {
+        d["editable"]=false;
+        d["iconEdit"]="edit";
+        d["labelEditar"]="Editar";
+      }
+      
+
+      this.dataSource.data = data;
+
+      
+      
+    });
+
   }
-  crearNuevoGastos(id: number): EquipacmientoElement {
-    return {
-      id: id,
-      tipo: '',
-      condicion: '',
-      antigueadad: 0,
-      marca: '',
-      modelo: '',
-      cantidad: 0,
-      moneda: '',
-      costo: 0,
-      costototal: 0
-    };
+ 
+
+  openEdit(eq:OfertaEquipamientoModel):void{
+
+    if(eq.editable){
+      eq.labelEditar = "Editar";
+      eq.iconEdit = "edit";
+    }else{
+      eq.labelEditar = "Grabar";
+      eq.iconEdit = "save";
+    }
+    
+    eq.editable = !eq.editable;
+
   }
+
   addRow(): void {
-    this.dataSource.data.push(this.crearNuevoGastos(this.dataSource.data.length + 1));
+    debugger;
+    let row = new OfertaEquipamientoModel();
+    this.dataSource.data.unshift(row);
     this.dataSource.filter = "";
   }
   Guardar(): void {
@@ -102,20 +118,15 @@ export class OfertaEquipamientoComponent implements OnInit {
         a.click();
         a.remove();
         this.dataSource.data.splice(this.dataSource.data.indexOf(item.id), 1);
-        this.dataSource = new MatTableDataSource<EquipacmientoElement>(dataSourceList);
+      
       }
     });
   }
 
 
-  changeMoneda(event, row) {
+  changeMoneda(event, row:OfertaEquipamientoModel) {
     if (event.isUserInput) {
-      if (event.source.value == "2") {//Cual el tipo de cambio es dolares 
-        row.moneda = "2";
-      }
-      else// cuando selecciona la moneda de soles
-        row.moneda = "1";
-      row.costototal = this.calcularMontoMensual(row);
+      row.total = this.calcularMontoMensual(row);
     }
   }
   inputChangeCantidad(input: string, row: any): void {
@@ -125,59 +136,48 @@ export class OfertaEquipamientoComponent implements OnInit {
       row.cantidad = parseInt(input);
     row.costototal = this.calcularMontoMensual(row);
   }
-  inputChangeCosto(input: string, row: any): void {
+  inputChangeCosto(input: string, row: OfertaEquipamientoModel): void {
     if (input === "")
-      row.costo = 0;
+      row.unitario = 0;
     else
-      row.costo = parseInt(input);
-    row.costototal = this.calcularMontoMensual(row);
+      row.unitario = parseInt(input);
+    row.total = this.calcularMontoMensual(row);
   }
-  inputChangeAntiguedad(input: string, row: any): void {
+  inputChangeAntiguedad(input: string, row: OfertaEquipamientoModel): void {
     if (input === "")
-      row.antigueadad = 0;
+      row.antiguedad = 0;
     else
-      row.antigueadad = parseInt(input);
-    row.costototal = this.calcularMontoMensual(row);
+      row.antiguedad = parseInt(input);
+    row.total = this.calcularMontoMensual(row);
 
   }
-  calcularMontoMensual(row: any): number {
+  calcularMontoMensual(row: OfertaEquipamientoModel): number {
     var montoCalculado: number = 0;
-    if (row.antigueadad > 0) {
-      if (row.moneda == "2")
-        montoCalculado = (row.cantidad * row.costo - (row.cantidad * row.costo * row.antigueadad / this.baseDepresiacion)) * this.tipoCambio;
+    if (row.antiguedad > 0) {
+      if (row.moneda.id == 2)
+        montoCalculado = (row.cantidad * row.unitario - (row.cantidad * row.unitario * row.antiguedad / this.baseDepresiacion)) * this.tipoCambio;
       else
-        montoCalculado = row.cantidad * row.costo - (row.cantidad * row.costo * row.antigueadad / this.baseDepresiacion);
+        montoCalculado = row.cantidad * row.unitario - (row.cantidad * row.unitario * row.antiguedad / this.baseDepresiacion);
     }
     else
-      montoCalculado = row.cantidad * (row.moneda == "2" ? row.costo * this.tipoCambio : row.costo);
+      montoCalculado = row.cantidad * (row.moneda.id == 2 ? row.unitario * this.tipoCambio : row.unitario);
     return montoCalculado;
   }
 
   public calcularTotalSoles() {
-    return this.dataSource.data.reduce((accum, curr) => accum + curr.costototal, 0);
+    return this.dataSource.data.reduce((accum, curr) => accum + curr.total, 0);
   }
   public calcularTotalDolares() {
-    return this.dataSource.data.reduce((accum, curr) => accum + (curr.costototal / this.tipoCambio), 0).toFixed(2);
+    return this.dataSource.data.reduce((accum, curr) => accum + (curr.total / this.tipoCambio), 0).toFixed(2);
   }
 
+  compareValCombos(c1: any, c2:any): boolean {     
+    return c1 && c2 ? c1.id === c2.id : c1 === c2; 
+  }
+
+
 }
-const dataSourceList: EquipacmientoElement[] = [
-  { id: 1, tipo: '', condicion: '', antigueadad: 0, marca: '', modelo: '', cantidad: 0, moneda: '1', costo: 0, costototal: 0 },
-  { id: 2, tipo: '', condicion: '', antigueadad: 0, marca: '', modelo: '', cantidad: 0, moneda: '1', costo: 0, costototal: 0 },
-  { id: 3, tipo: '', condicion: '', antigueadad: 0, marca: '', modelo: '', cantidad: 0, moneda: '1', costo: 0, costototal: 0 }
-];
-export interface EquipacmientoElement {
-  id: number;
-  tipo: string;
-  condicion: string;
-  antigueadad: number;
-  marca: string;
-  modelo: string;
-  cantidad: number;
-  moneda: string;
-  costo: number;
-  costototal: number;
-}
+
 export class ModelCombo {
   constructor(public id?: string, public nombre?: string) {
   }
