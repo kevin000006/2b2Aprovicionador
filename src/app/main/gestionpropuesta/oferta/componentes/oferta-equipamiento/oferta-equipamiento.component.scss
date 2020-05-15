@@ -16,11 +16,83 @@
     min-height: 26px;
 }
 
-.tb-oferta-equipamiento .mat-header-row {
+.tb-oferta-equipamiento{
+    width: 100%;
+}
+
+.tb-oferta-equipamiento thead{
+    min-height: 46px ;
+}
+
+.tb-oferta-equipamiento thead tr {
     background: #F4F6FB;
     border-radius: 5px;
-    min-height: 45px !important;
+    min-height: 46px ;
+    width: 100%;
 }
+
+.tb-oferta-equipamiento thead tr th{
+    text-align: center;
+    color: #003245;
+    font-size: 13px;
+    font-weight: bold;
+    height: 46px ;
+}
+
+.tb-oferta-equipamiento tbody tr{
+    border-bottom:1px solid #0000001f;
+}
+
+.tb-oferta-equipamiento tbody tr td{
+    min-height: 48px;
+    min-width: 60px;
+}
+
+.tb-oferta-equipamiento tbody tr td .tipo{
+    width: 120px;
+}
+.tb-oferta-equipamiento tbody tr td .condicion{
+    width: 120px;
+    margin: 0 5px;
+}
+.tb-oferta-equipamiento tbody tr td .antiguedad{
+    width: 60px;
+}
+
+.tb-oferta-equipamiento tbody tr td .marca{
+    width: 107px;
+    margin: 0 5px;
+}
+
+.tb-oferta-equipamiento tbody tr td .modelo{
+    width: 107px;
+}
+
+.tb-oferta-equipamiento tbody tr td .cantidad{
+    width: 60px;
+    margin: 0 5px;
+}
+
+.tb-oferta-equipamiento tbody tr td .moneda{
+    width: 60px;
+}
+
+.tb-oferta-equipamiento tbody tr td .costo{
+    width: 60px;
+    margin: 0 5px;
+}
+
+.tb-oferta-equipamiento tbody tr td .total{
+    width: 80px;
+    text-align: center;
+    font-size: 12px;
+}
+.tb-oferta-equipamiento tbody tr td .instalacion{
+    width: 80px;
+    text-align: center;
+    font-size: 12px;
+}
+
 
 .tb-oferta-equipamiento .mat-header-row .mat-column-accion,
 .tb-oferta-equipamiento .mat-row .mat-column-accion {
@@ -54,7 +126,7 @@
 }
 
 .totales .monto.separador{
-    width: 45%;
+    width: 67%;
 }
 
 .totales .monto.soles{
@@ -80,4 +152,37 @@
     vertical-align: middle;
     font-size: 11px;
     color:#333030;
+}
+
+.mat-column-antigueadad{
+    flex: 0 0 60px;
+}
+
+.mat-column-cantidad{
+    flex: 0 0 60px;
+}
+
+.mat-column-costo{
+    flex: 0 0 60px;
+}
+
+.mat-column-costototal{
+    flex: 0 0 70px;   
+}
+
+.mat-column-moneda{
+    flex: 0 0 60px;
+}
+.mat-select-value-text{
+    width: 100%;
+    text-align: center;
+}
+
+.body.theme-default .mat-select-value{
+    margin-right: 0 !important;
+    text-align: center;
+}
+
+.text-center{
+    text-align: center;
 }

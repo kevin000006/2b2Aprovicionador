@@ -484,3 +484,11 @@ a.btn-primary-telefonica {
     font-weight: normal !important;
 }
 
+mat-select.comboeq > div.mat-select-trigger div{
+    margin: 0 !important;
+}
+
+mat-select.comboeq > div.mat-select-trigger div span{
+    width: 100%;
+    text-align: center;
+}

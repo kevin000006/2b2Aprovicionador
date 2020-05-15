@@ -20,7 +20,6 @@ export class OfertaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    debugger;
     if (window.sessionStorage.getItem('oferta') != null) {
       this.ofertaBase = JSON.parse(window.sessionStorage.getItem('oferta'));
     }

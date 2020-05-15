@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { OfertaEquipamientoModel } from 'app/main/gestionpropuesta/models/oferta';
+import { OfertaEquipamientoModel, EquipamientoRequest } from 'app/main/gestionpropuesta/models/oferta';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +11,12 @@ export class EquipamientoService {
   constructor(private http: HttpClient) {
   }
 
+  saveAllEquipamiento(param:EquipamientoRequest[]):Observable<any>{
+    return this.http.post<any>('/ofertacapex/guardarequipamientos',param);
+  }
 
   getEquipamientoForOfeta(oferta:number):Observable<OfertaEquipamientoModel[]>{
-    const obj={ofertas:{id:9}};
+    const obj={ofertas:{id:9},activo:true};
     return this.http.post<OfertaEquipamientoModel[]>('/ofertacapex/findQuery',obj);
   }
 

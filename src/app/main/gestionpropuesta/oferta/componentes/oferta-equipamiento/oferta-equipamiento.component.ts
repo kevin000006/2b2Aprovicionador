@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { EquipamientoService } from '../oferta-equipamiento/oferta-equipamiento.servicio';
 import { CommonService } from 'app/common.service';
 import { TipoEquipamientoModel,MonedaModel } from 'app/model/Common';
-import { OfertaEquipamientoModel } from 'app/main/gestionpropuesta/models/oferta';
+import { OfertaEquipamientoModel, EquipamientoRequest } from 'app/main/gestionpropuesta/models/oferta';
 
 @Component({
   selector: 'oferta-equipamiento',
@@ -23,6 +23,7 @@ export class OfertaEquipamientoComponent implements OnInit {
   listaCondicion: ModelCombo[] = [];
   listaMoneda: MonedaModel[] = [];
   listaMarca: ModelCombo[] = [];
+  baseDataSource=[];
   dataSource =new MatTableDataSource<OfertaEquipamientoModel>([]);
 
   constructor(
@@ -31,12 +32,11 @@ export class OfertaEquipamientoComponent implements OnInit {
     private commonService: CommonService
   ) { }
 
-  displayedColumns: string[] = ['tipo', 'condicion', 'antigueadad', 'marca', 'modelo', 'cantidad', 'moneda', 'costo', 'costototal','accion'];
+  displayedColumns: string[] = ['tipo', 'condicion', 'antigueadad', 'marca', 'modelo', 'cantidad', 'moneda', 'costo', 'costototal','instalacion','accion'];
 
   ngOnInit(): void {
     this.commonService.getTipoEquipamiento().subscribe(data=>{ this.listaTipos = data });
     this.commonService.getTipoMonedaAll().subscribe(data => {this.listaMoneda = data});
-
     this.equipamientoService.findAllEquipamientoMarca().subscribe(data => {     
       this.listaMarca = data;
     });
@@ -45,37 +45,16 @@ export class OfertaEquipamientoComponent implements OnInit {
       this.listaCondicion = data;
     });
 
-    this.equipamientoService.getEquipamientoForOfeta(this.ofertaBase.id).subscribe(data=>{
-
-      for(let d of data)
-      {
-        d["editable"]=false;
-        d["iconEdit"]="edit";
-        d["labelEditar"]="Editar";
-      }
-      
-
-      this.dataSource.data = data;
-
-      
-      
-    });
+    this.getEquipamientos();
 
   }
- 
 
-  openEdit(eq:OfertaEquipamientoModel):void{
-
-    if(eq.editable){
-      eq.labelEditar = "Editar";
-      eq.iconEdit = "edit";
-    }else{
-      eq.labelEditar = "Grabar";
-      eq.iconEdit = "save";
-    }
-    
-    eq.editable = !eq.editable;
-
+  getEquipamientos():void
+  {
+    this.equipamientoService.getEquipamientoForOfeta(this.ofertaBase.id).subscribe(data=>{
+      for(let d of data){d['instalacion']= 0;} 
+      this.dataSource.data = data;      
+    });
   }
 
   addRow(): void {
@@ -85,22 +64,54 @@ export class OfertaEquipamientoComponent implements OnInit {
     this.dataSource.filter = "";
   }
   Guardar(): void {
-    const dialogRef = this.dialog.open(AlertSuccessComponent, {
-      width: '700px',
-      data: {
-        message: 'Se registro correctamente los datos del proyecto.',
-        buttonText: { ok: 'Aceptar' }
-      }
+
+    let equipos=[];
+
+    for(let eq of this.dataSource.data)
+    {
+      let item = new EquipamientoRequest();
+      item.id = eq.id;
+      item.antiguedad = eq.antiguedad;
+      item.cantidad = eq.cantidad;
+      item.condicion = eq.equipamientoCondicion.id;
+      item.activo = eq.activo;
+      item.idoferta = 9;
+      item.marca = eq.equipamientomarca.id;
+      item.modelo = eq.modelo;
+      item.moneda = eq.moneda.id;
+      item.tipo = eq.tipoequipamiento.id;
+      item.unitario = eq.unitario;
+      item.total = eq.total;
+      if(item.id > 0 && item.activo == false)
+        item.estado = 2;
+      else if(item.id == 0 && item.activo ==true)
+        item.estado = 0;
+      else
+        item.estado = 1;
+
+      equipos.push(item);
+    }
+    this.equipamientoService.saveAllEquipamiento(equipos).subscribe(data =>{
+      this.getEquipamientos();
+      const dialogRef = this.dialog.open(AlertSuccessComponent, {
+        width: '700px',
+        data: {
+          message: 'Se registro correctamente los datos del proyecto.',
+          buttonText: { ok: 'Aceptar' }
+        }
+      });
+      dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+        if (confirmed) {
+          const a = document.createElement('a');
+          a.click();
+          a.remove();
+        }
+      });
+
     });
-    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-      if (confirmed) {
-        const a = document.createElement('a');
-        a.click();
-        a.remove();
-      }
-    });
+    
   }
-  deleteRow(item: any): void {
+  deleteRow(item: OfertaEquipamientoModel): void {
     const dialogRef = this.dialog.open(AlertConfirmComponent, {
       width: '650px',
       data: {
@@ -109,7 +120,7 @@ export class OfertaEquipamientoComponent implements OnInit {
           ok: 'Si',
           cancel: 'No'
         }
-      }
+      } 
     });
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
@@ -117,40 +128,31 @@ export class OfertaEquipamientoComponent implements OnInit {
         const a = document.createElement('a');
         a.click();
         a.remove();
-        this.dataSource.data.splice(this.dataSource.data.indexOf(item.id), 1);
-      
+
+        if(item.id > 0){ item.activo = false;}
+        else{
+          this.dataSource.data.splice(this.dataSource.data.indexOf(item),1);
+          this.dataSource.filter = "";
+        }
+
       }
     });
   }
 
+  calcularMontoTotalSoles(eq:OfertaEquipamientoModel)
+  {
+      let total = eq.unitario * eq.cantidad;
+      if(eq.moneda.id == 2)
+        total = total * this.tipoCambio;
 
-  changeMoneda(event, row:OfertaEquipamientoModel) {
-    if (event.isUserInput) {
-      row.total = this.calcularMontoMensual(row);
-    }
-  }
-  inputChangeCantidad(input: string, row: any): void {
-    if (input === "")
-      row.cantidad = 0;
-    else
-      row.cantidad = parseInt(input);
-    row.costototal = this.calcularMontoMensual(row);
-  }
-  inputChangeCosto(input: string, row: OfertaEquipamientoModel): void {
-    if (input === "")
-      row.unitario = 0;
-    else
-      row.unitario = parseInt(input);
-    row.total = this.calcularMontoMensual(row);
-  }
-  inputChangeAntiguedad(input: string, row: OfertaEquipamientoModel): void {
-    if (input === "")
-      row.antiguedad = 0;
-    else
-      row.antiguedad = parseInt(input);
-    row.total = this.calcularMontoMensual(row);
+      if(eq.equipamientoCondicion.id == 4)
+        if(eq.antiguedad > 0 && eq.antiguedad != null){ total = total * (1 * eq.antiguedad / this.baseDepresiacion);}
+      else
+        eq.antiguedad = 0;
 
+      eq.total = total;
   }
+
   calcularMontoMensual(row: OfertaEquipamientoModel): number {
     var montoCalculado: number = 0;
     if (row.antiguedad > 0) {

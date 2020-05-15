@@ -104,15 +104,34 @@ export class OfertaModel
   tipopago:TipoPagoModel;
 }
 
+export class EquipamientoRequest{
+  constructor()
+  {
+    this.estado =0;
+    this.id = 0;
+    this.modelo = "";
+  }
+  activo:boolean;
+  antiguedad:number;
+  cantidad:number;
+  condicion:number;
+  id:number;
+  idoferta:number;
+  marca:number;
+  modelo:string;
+  moneda:number;
+  tipo:number;
+  total:number;
+  unitario:number;
+  estado:number;
+}
+
 export class OfertaEquipamientoModel
 {
   constructor(){
-    this.editable = true;
     this.activo = true;
     this.id = 0;
     this.modelo = "";
-    this.labelEditar = "Grabar";
-    this.iconEdit = "save";
     this.total = 0.00;
     this.unitario = 0.00;
     this.cantidad = 0;
@@ -124,8 +143,6 @@ export class OfertaEquipamientoModel
   }
   id:number;
   modelo:string;
-  iconEdit:string;
-  labelEditar:string;
   activo:boolean;
   antiguedad:number;
   cantidad:number;
@@ -135,7 +152,6 @@ export class OfertaEquipamientoModel
   tipoequipamiento:TipoEquipamientoModel;
   total:number;
   unitario:number;
-  editable:boolean;
 }
 
 

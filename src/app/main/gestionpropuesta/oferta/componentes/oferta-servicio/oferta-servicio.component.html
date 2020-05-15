@@ -584,7 +584,7 @@
                                         <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
                                         <mat-select [(ngModel)]="row.acccionisis">
                                             <mat-option value="">--Seleccione--</mat-option>
-                                            <mat-option [value]="o.id" *ngFor="let o of listAccionIsis">{{o.descripcion}}</mat-option>
+                                            <mat-option [value]="o.id" *ngFor="let o of row.lstZonaSisego">{{o.nom +' - ' + o.dis + ' m'}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </mat-cell>

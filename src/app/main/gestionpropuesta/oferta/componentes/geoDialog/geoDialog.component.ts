@@ -63,6 +63,11 @@ export class GeodialogComponent {
         //this.loading = true;
         
     }
+
+    closeDialog():void{
+        this.dialogRef.close({lat:this.pickedLat,lng:this.pickedLon});
+    }
+
     markerDragEnd(event) {
         this.pickedLat = event.coords.lat;
         this.pickedLon = event.coords.lng;

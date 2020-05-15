@@ -16,6 +16,8 @@ export class OfertaServicioService {
   get data(): OfertaDetalleModel[] {
     return this.dataChange.value;
   }
+
+  
   
   getAllOfertaServicio(param: any): void {
   

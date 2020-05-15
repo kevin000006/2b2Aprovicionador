@@ -8,6 +8,8 @@ import { GeodialogComponent } from '../geoDialog/geoDialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CommonService } from 'app/common.service';
 import { OfertaDetalleModel, BandejaModel } from '../../../models/oferta';
+import * as $ from 'jquery';
+
 import {
   ClienteModel, MonedaModel,
   TipoServicioModel, ViaAccesoModel, EquipamientoMarcaModel, EquipamientoCondicionModel,
@@ -50,6 +52,7 @@ export class OfertaServicioComponent implements OnInit {
   listTipoCircuito = [];
   listTipoServicio = [];
   listViaAcceso = [];
+  lstZonaSisego=[];
 
   //public seldescrip: string;
   //https://stackblitz.com/edit/mat-paginator-select-page?embed=1
@@ -127,6 +130,7 @@ export class OfertaServicioComponent implements OnInit {
       medio: "", bw: "", nrobw: "", ldn: "",nroldn : "", voz: "", nrovoz: "", video: "", nrovideo: "",
       platinium: "", nroplatinium: "", oro: "", nrooro: "", plata: "", nroplata: "", bronce: "", nrobronce: "",
       equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "",condicionenlace:"", isLoading: false
+    ,lstZonaSisego:[]
     };
   } 
   addRow(): void {
@@ -163,14 +167,34 @@ export class OfertaServicioComponent implements OnInit {
       width: '500px',
       data: item
     });
-    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-      // if (confirmed) {
-      //   const a = document.createElement('a');
-      //   a.click();
-      //   a.remove();
-      //   this.dataSource.data.splice(this.dataSource.data.indexOf(item.id), 1);
-      //   this.dataSource = new MatTableDataSource<ServicioElement>(dataSourceList);
-      // }
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+
+      var settings = {
+        "url": "http://200.48.131.82/Api/zonafibra",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+          "Authorization": "SDIOxZONASFFTT0819v1",
+          "x-User": "jesus.gomez@telefonica.com",
+          "Content-Type": "application/json"
+        },
+        "data": JSON.stringify(result),
+      };
+      $.ajax(settings).done(function (response) {
+        let result_ = JSON.parse(response);
+        if(result_.status == "success"){
+         
+          let result__ = JSON.parse(result_['result']);
+          item.lstZonaSisego=result__['zonas'];
+         
+          
+        }
+        
+      }); 
+     
+        this.dataSource.filter = '';
+
     });
   }
   /*
@@ -215,7 +239,8 @@ const dataSourceList: ServicioElement[] = [
     contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "1", nrocircuito: "1", servicio: "1",
     medio: "1", bw: "1", nrobw: "2", ldn: "1", nroldn: "", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
     platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
-    equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "", condicionenlace: "", isLoading: false
+    equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "", condicionenlace: "", isLoading: false,
+    lstZonaSisego:[]
   },
   {
     id: 2, sede: 'Av. Argentina 2', direccion: 'san borja', ubigeo: '',
@@ -224,6 +249,7 @@ const dataSourceList: ServicioElement[] = [
     medio: "1", bw: "1", nrobw: "2", ldn: "1", nroldn: "", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
     platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
     equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "", condicionenlace: "", isLoading: false
+    ,lstZonaSisego:[]
   },
   {
     id: 3, sede: 'Av. Argentina 3', direccion: 'plaza norte', ubigeo: '',
@@ -232,6 +258,7 @@ const dataSourceList: ServicioElement[] = [
     medio: "1", bw: "1", nrobw: "2", ldn: "1", nroldn: "", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
     platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
     equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "", condicionenlace: "", isLoading: false
+    ,lstZonaSisego:[]
   }
 
 ];
@@ -273,6 +300,7 @@ export interface ServicioElement {
   tipoenlace: string;
   condicionenlace: string;
   isLoading: boolean;
+  lstZonaSisego:Array<any>;
 
 }
 export class ModelCombo {
