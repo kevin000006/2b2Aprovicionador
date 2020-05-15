@@ -10,7 +10,7 @@ import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { ThemePalette } from '@angular/material/core';
 import { of } from 'rxjs';
 import { AlertSuccessComponent } from '../alertSuccess/alertSuccess.component';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'oferta-gastos',
   templateUrl: './oferta-gastos.component.html',
@@ -33,9 +33,11 @@ export class OfertaGastosComponent implements OnInit {
     public dialog: MatDialog,
     private ofertaGastosService: OfertaGastosService,
     private commonService: CommonService,
+    private toastr: ToastrService
   ) { }
 
   async ngOnInit() {
+    //this.toastr.success('Hello world!', 'Toastr fun!');
     this.ofertaBase.id = 5;
     //Lenar combo moneda_id
     await this.commonService.getTipoMonedaAll().subscribe(data => {

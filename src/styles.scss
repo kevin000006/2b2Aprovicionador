@@ -4,10 +4,13 @@
 @import "app/app.theme";
 @import "assets/css/bootstrap.css";
 @import "assets/css/fonts-telefonica.css";
-
-*{
-    font-family: TelefonicaLight;;
+// @import '~ngx-toastr/toastr';
+// @import '~ngx-toastr/toastr-bs4-alert';
+* {
+    font-family: TelefonicaLight;
+    ;
 }
+
 #container-1 fuse-sidebar {
     box-shadow: 0 9px 8px 0 rgba(0, 0, 0, 0.35) !important;
 }
@@ -165,177 +168,175 @@ body.theme-default .mat-form-field-appearance-outline .mat-form-field-outline-th
 
 body.theme-default .mat-form-field-type-mat-native-select .mat-form-field-infix::after {
     color: #2493B4;
-    }
-
-    .mat-form-field{
-        width: 100%;
-    }
-
-    login-2 #login #login-form-wrapper #login-form{
-      padding: 200px 48px 48px 48px !important;
-    }
-
-    .btn-primary-telefonica{
-      background: linear-gradient(90deg, #2F9CB3 0%, #5AC4D9 100%);
-      border-radius: 8px;
-      color: #fff;
-      padding: 5px 10px;
-      border: 0;
-      font-size: 13px;
-    }
-
-    .btn-primary-telefonica-2{
-      background: linear-gradient(180deg, #980098 0%, #CE0ECE  100%);
-      border-radius: 8px;
-      color: #fff;
-      padding: 5px 10px;
-      border: 0;
-      font-size: 13px;
-    }
-
-
-    .btn-green-telefonica{
-      background: #73DE07;
-      border-radius: 11px;
-      color: #fff;
-      padding: 5px 10px;
-      border: 0;
-    }
-
-    body.theme-default .mat-tab-group.mat-primary .mat-ink-bar, body.theme-default .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-      background-color: #2593B5 !important;
-    }
-
-    .mat-ink-bar{
-      height: 3px !important;
-    }
-
-    .mat-tab-label .mat-tab-label-content{
-      font-size: 20px;
-      color: rgba(0, 50, 69, 0.6) !important;
-    }
-
-    div.mat-tab-label.mat-tab-label-active > div
-    {
-      color: #003245 !important;
-      font-weight: bold !important  ;
-    }
-
-    .mat-tab-labels{
-      padding: 0 20px !important;
-    }
-
-    .mytab-oferta mat-tab-header div.mat-tab-label-container div.mat-tab-list div.mat-tab-labels div.mat-tab-label{
-      width: 20% ;
-    }
-
-    .font-normal{
-      font-weight: normal;
-    }
-
-    .mat-form-field-appearance-outline .mat-form-field-wrapper{
-      margin: 0 !important;
-    }
-
-    .padding-none{
-      padding: 0;
-    }
-
-    .padding-l-none{
-      padding-left: 0;
-    }
-
-    .padding-r-none{
-      padding-right: 0;
-    }
-
-    .btn-primary-telefonica{
-      background: #01B1E3;
-      border-radius: 4px;
-      color: #fff !important;
-      font-size: 13px;
-      text-decoration: none !important;
-      cursor: pointer;
-      min-width: 140px;
-      text-align: center;
-      padding: 10px 15px;
-    }
-
-    
-    a.btn-primary-telefonica{
-      line-height: 36px;
-      position: absolute;
-      right: 0;
-      padding: 0;
-      height: 36px;;
-    }
-
-    .btn-telefonica-gree{
-      background: #62CE0E;
-      border-radius: 4px;
-      color: #fff;
-      min-width: 110px;
-      font-size: 12px;
-      border: 0;
-      min-height: 26px;
-    }
-
-    button.btn-telefonica-gree:disabled,
-button.btn-telefonica-gree[disabled]{
-  border: 1px solid #8ea37d;
-  background-color: #b5d49d;
-  color: #666666;
-  cursor: no-drop;
 }
 
-    .btn-telefonica-gree-2{
-      background:transparent;
-      border-radius: 4px;
-      color: #62CE0E;
-      min-width: 110px;
-      font-size: 12px;
-      border: 1px solid #62CE0E;
-      min-height: 26px;
-    }
+.mat-form-field {
+    width: 100%;
+}
 
-    .btn-telefonica-2{
-      background:transparent;
-      border-radius: 4px;
-      color: #01B1E3;
-      min-width: 110px;
-      font-size: 12px;
-      border: 1px solid #01B1E3;
-      min-height: 26px;
-    }
+login-2 #login #login-form-wrapper #login-form {
+    padding: 200px 48px 48px 48px !important;
+}
 
-    .btn-telefonica-2 .icon{
-      color: #01B1E3 !important;
-      font-size: 15px;
-      min-height: 0px !important;
-      line-height: 0 !important;
-      height: auto;
-    }
+.btn-primary-telefonica {
+    background: linear-gradient(90deg, #2F9CB3 0%, #5AC4D9 100%);
+    border-radius: 8px;
+    color: #fff;
+    padding: 5px 10px;
+    border: 0;
+    font-size: 13px;
+}
 
+.btn-primary-telefonica-2 {
+    background: linear-gradient(180deg, #980098 0%, #CE0ECE 100%);
+    border-radius: 8px;
+    color: #fff;
+    padding: 5px 10px;
+    border: 0;
+    font-size: 13px;
+}
 
-    .btn-primary-telefonica mat-icon{
-      color: #fff !important;
-    }
+.btn-green-telefonica {
+    background: #73DE07;
+    border-radius: 11px;
+    color: #fff;
+    padding: 5px 10px;
+    border: 0;
+}
 
-    .icon{
-      font-size: 15px !important;
-    }
+body.theme-default .mat-tab-group.mat-primary .mat-ink-bar,
+body.theme-default .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: #2593B5 !important;
+}
 
-    .gray-seatrch{
-      color:#B6B7B7;
-    }
-    .form-control{
-      font-size: 13px !important;
-    }
+.mat-ink-bar {
+    height: 3px !important;
+}
 
-    .mat-checkbox-layout .mat-checkbox-label{
-      font-weight: normal !important;
-    }
+.mat-tab-label .mat-tab-label-content {
+    font-size: 20px;
+    color: rgba(0, 50, 69, 0.6) !important;
+}
 
+div.mat-tab-label.mat-tab-label-active>div {
+    color: #003245 !important;
+    font-weight: bold !important;
+}
+
+.mat-tab-labels {
+    padding: 0 20px !important;
+}
+
+.mytab-oferta mat-tab-header div.mat-tab-label-container div.mat-tab-list div.mat-tab-labels div.mat-tab-label {
+    width: 20%;
+}
+
+.font-normal {
+    font-weight: normal;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+    margin: 0 !important;
+}
+
+.padding-none {
+    padding: 0;
+}
+
+.padding-l-none {
+    padding-left: 0;
+}
+
+.padding-r-none {
+    padding-right: 0;
+}
+
+.btn-primary-telefonica {
+    background: #01B1E3;
+    border-radius: 4px;
+    color: #fff !important;
+    font-size: 13px;
+    text-decoration: none !important;
+    cursor: pointer;
+    min-width: 140px;
+    text-align: center;
+    padding: 10px 15px;
+}
+
+a.btn-primary-telefonica {
+    line-height: 36px;
+    position: absolute;
+    right: 0;
+    padding: 0;
+    height: 36px;
+    ;
+}
+
+.btn-telefonica-gree {
+    background: #62CE0E;
+    border-radius: 4px;
+    color: #fff;
+    min-width: 110px;
+    font-size: 12px;
+    border: 0;
+    min-height: 26px;
+}
+
+button.btn-telefonica-gree:disabled,
+button.btn-telefonica-gree[disabled] {
+    border: 1px solid #8ea37d;
+    background-color: #b5d49d;
+    color: #666666;
+    cursor: no-drop;
+}
+
+.btn-telefonica-gree-2 {
+    background: transparent;
+    border-radius: 4px;
+    color: #62CE0E;
+    min-width: 110px;
+    font-size: 12px;
+    border: 1px solid #62CE0E;
+    min-height: 26px;
+}
+
+.btn-telefonica-2 {
+    background: transparent;
+    border-radius: 4px;
+    color: #01B1E3;
+    min-width: 110px;
+    font-size: 12px;
+    border: 1px solid #01B1E3;
+    min-height: 26px;
+}
+
+.btn-telefonica-2 .icon {
+    color: #01B1E3 !important;
+    font-size: 15px;
+    min-height: 0px !important;
+    line-height: 0 !important;
+    height: auto;
+}
+
+.btn-primary-telefonica mat-icon {
+    color: #fff !important;
+}
+
+.icon {
+    font-size: 15px !important;
+}
+
+.gray-seatrch {
+    color: #B6B7B7;
+}
+
+.form-control {
+    font-size: 13px !important;
+}
+
+.mat-checkbox-layout .mat-checkbox-label {
+    font-weight: normal !important;
+}
 
 .mat-form-field {
     width: 100%;
@@ -479,16 +480,15 @@ a.btn-primary-telefonica {
     font-size: 13px !important;
 }
 
-
 .mat-checkbox-layout .mat-checkbox-label {
     font-weight: normal !important;
 }
 
-mat-select.comboeq > div.mat-select-trigger div{
+mat-select.comboeq>div.mat-select-trigger div {
     margin: 0 !important;
 }
 
-mat-select.comboeq > div.mat-select-trigger div span{
+mat-select.comboeq>div.mat-select-trigger div span {
     width: 100%;
     text-align: center;
 }

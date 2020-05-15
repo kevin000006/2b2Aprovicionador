@@ -1,4 +1,4 @@
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { OfertaGastosComponent } from './oferta-gastos.component'
@@ -12,9 +12,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { OfertaGastosService } from './oferta-gastos.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import es from '@angular/common/locales/es';
-import { registerLocaleData } from '@angular/common';
-registerLocaleData(es);
+import { ToastrModule,ToastrService } from 'ngx-toastr';
+
+// import es from '@angular/common/locales/es';
+// import { registerLocaleData } from '@angular/common';
+// registerLocaleData(es);
+
 //import localeEs from '@angular/common/locales/es';
 @NgModule({
     declarations: [
@@ -31,14 +34,17 @@ registerLocaleData(es);
         MatInputModule,
         MatSelectModule,
         MatTooltipModule,
-        MatProgressBarModule
+        MatProgressBarModule,
+        //BrowserAnimationsModule,
+        ToastrModule.forRoot() // ToastrModule added
     ],
     exports: [
         OfertaGastosComponent
     ],
     providers: [
+        {provide: ToastrService, useClass: ToastrService},
         OfertaGastosService,
-        { provide: LOCALE_ID, useValue: 'es' }
+        //{ provide: LOCALE_ID, useValue: 'es' }
     ]
 })
 export class OfertaGastosModule { }
