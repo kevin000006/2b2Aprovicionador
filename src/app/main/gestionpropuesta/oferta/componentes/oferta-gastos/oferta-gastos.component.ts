@@ -9,6 +9,8 @@ import { catchError, map } from 'rxjs/operators';
 import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { ThemePalette } from '@angular/material/core';
 import { of } from 'rxjs';
+import { AlertSuccessComponent } from '../alertSuccess/alertSuccess.component';
+
 @Component({
   selector: 'oferta-gastos',
   templateUrl: './oferta-gastos.component.html',
@@ -140,14 +142,8 @@ export class OfertaGastosComponent implements OnInit {
   }
 
   guardarGastosOpex(): void {
-    debugger;
+    
     const listOfertaOpex = this.dataSourceList.map(item => {
-      //-1 ya existe en la base de datos, 0: nuevo, 1: Actualizado, 2: Inactivo   
-      /*
-          id== 0 es un insert
-          id!= 0 es un update
-          activo ==false es un eliminar para el servicio
-       */     
       if (item.estado == 0) //Si es 0 Nuevo Registro
         item.id = 0
       else if (item.estado == 1)// Si es 1 Registro ha sido Actulizado
@@ -170,7 +166,9 @@ export class OfertaGastosComponent implements OnInit {
       };
       return container;
     });    
-    
+    this.inProgress = true;
+    debugger;
+    console.log(listOfertaOpex);
     this.ofertaGastosService.guardarGastos(listOfertaOpex).pipe(
       map(event => {
         switch (event.type) {
@@ -186,8 +184,16 @@ export class OfertaGastosComponent implements OnInit {
         return of(`fallo al guardar.`);
       })
     ).subscribe((event: any) => {
+      debugger;
       if (typeof (event) === 'object') {
-        console.log("response");
+        this.inProgress = false;
+        this.dialog.open(AlertSuccessComponent, {
+          width: '700px',
+          data: {
+            message: 'Se proceso correctamente la información!',
+            buttonText: { ok: 'Aceptar' }
+          }
+        });
       }
     });
   }

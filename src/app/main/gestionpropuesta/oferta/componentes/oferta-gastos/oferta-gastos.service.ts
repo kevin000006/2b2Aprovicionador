@@ -21,7 +21,7 @@ export class OfertaGastosService {
                     result.data.map((element) => {
                         element.mostrarConcepto = element.nombre !== "" ? true : false;
                         element.estado = -1;
-                        element.activo = true;                        
+                        element.activo = true;
                         return element;
                     });
                     return result.data;
@@ -29,9 +29,12 @@ export class OfertaGastosService {
                 return null;
             })
         );
-    }    
+    }
     guardarGastos(data: any): Observable<any> {
-        return this.http.post<any>('/ofertaopex/guardargastos', data);
+        return this.http.post<any>('/ofertaopex/guardargastos', data, {
+            reportProgress: true,
+            observe: 'events'
+        });
     }
     ///api/ofertaopex/saveAll
     listarConceptoOpex(): Observable<any> {
