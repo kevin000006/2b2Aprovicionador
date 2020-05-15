@@ -5,19 +5,27 @@ import { MatDialog } from '@angular/material/dialog';
 import { OfertaGastosService } from './oferta-gastos.service';
 import { CommonService } from 'app/common.service';
 import { OfertaOpex } from '../../../../../model/Common';
+import { catchError, map } from 'rxjs/operators';
+import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
+import { ThemePalette } from '@angular/material/core';
+import { of } from 'rxjs';
+import { AlertSuccessComponent } from '../alertSuccess/alertSuccess.component';
+
 @Component({
   selector: 'oferta-gastos',
   templateUrl: './oferta-gastos.component.html',
   styleUrls: ['./oferta-gastos.component.scss']
 })
 export class OfertaGastosComponent implements OnInit {
+  color: ThemePalette = 'warn';
+  inProgress: boolean = false;
+  progress: number = 0;
   tipoCambio: number = 3.5;
   isPrepositionChecked: boolean = false;
-  listaConcepto: ModelCombo[] = [];
-  //listamoneda_id: ModelCombo[] = [];
+  listaConcepto: any = [];
   listaMoneda = [];
-  dataSourceList: any = [];
-  dataSource = new MatTableDataSource<any>();
+  dataSourceList: OfertaOpex[];
+  dataSource = new MatTableDataSource<OfertaOpex>();
   displayedColumns: string[] = ['concepto', 'cantidad', 'nromeses', 'factor', 'moneda', 'montounitmenusal', 'montototalmensual', 'accion'];
 
   @Input() ofertaBase: any = {};
@@ -28,25 +36,21 @@ export class OfertaGastosComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    //debugger;
-    //console.log(this.ofertaBase);
-    this.ofertaBase.id = 1;
-
+    this.ofertaBase.id = 5;
     //Lenar combo moneda_id
     await this.commonService.getTipoMonedaAll().subscribe(data => {
       this.listaMoneda = data;
-      console.log(this.listaMoneda);
+      console.log(data);
     });
-
     //Lenar combo Comcepto  
     await this.ofertaGastosService.listarConceptoOpex().subscribe(data => {
       this.listaConcepto = data;
     });
-
-    await this.ofertaGastosService.obtenerOfertasOpex(this.ofertaBase.id).subscribe((data:OfertaOpex[]) => {
-      if (data != null)
+    await this.ofertaGastosService.obtenerOfertasOpex(this.ofertaBase.id).subscribe((data: OfertaOpex[]) => {
+      if (data != null) {
+        this.dataSourceList = data;
         this.dataSource.data = data;
-      console.log(data);
+      }
     });
   }
   changeConcepto(event, row) {
@@ -58,26 +62,23 @@ export class OfertaGastosComponent implements OnInit {
       else
         row.mostrarConcepto = false;
 
-      console.log(row.mostrarConcepto);
-
       if (objetoConcepto.factor == 0) {//Si el factor es cero no se mostrara ninguna informacion en la bandeja
         row.factor = 0;
-        row.montototalmensual = this.calcularMontoMensual(row);
+        row.totalMensual = this.calcularMontoMensual(row);
       }
       else {
         row.factor = objetoConcepto.factor;
-        row.montototalmensual = this.calcularMontoMensual(row);
+        row.totalMensual = this.calcularMontoMensual(row);
       }
     }
   }
   changeMoneda(event, row) {
     if (event.isUserInput) {
-      if (event.source.value == "2") {//Cual el tipo de cambio es dolares 
-        row.moneda_id = "2";
-      }
+      if (event.source.value == 2) //Cual el tipo de cambio es dolares 
+        row.moneda_id = 2;
       else// cuando selecciona la moneda_id de soles
-        row.moneda_id = "1";
-      row.montototalmensual = this.calcularMontoMensual(row);;//.toFixed(2);      
+        row.moneda_id = 1;
+      row.totalMensual = this.calcularMontoMensual(row);;//.toFixed(2);      
     }
   }
   inputChangeCantidad(input: string, row: any): void {
@@ -85,14 +86,14 @@ export class OfertaGastosComponent implements OnInit {
       row.cantidad = 0;
     else
       row.cantidad = parseInt(input);
-    row.montototalmensual = this.calcularMontoMensual(row);
+    row.totalMensual = this.calcularMontoMensual(row);
   }
   inputChangeNumeroMeses(input: string, row: any): void {
     if (input === "")
       row.meses = 0;
     else
       row.meses = parseInt(input);
-    row.montototalmensual = this.calcularMontoMensual(row);
+    row.totalMensual = this.calcularMontoMensual(row);
   }
 
   inputChangeMontoUnitarioMensual(input: string, row: any): void {
@@ -100,43 +101,103 @@ export class OfertaGastosComponent implements OnInit {
       row.unitarioMensual = 0;
     else
       row.unitarioMensual = parseInt(input);
-    row.montototalmensual = this.calcularMontoMensual(row);
+    row.totalMensual = this.calcularMontoMensual(row);
   }
   calcularMontoMensual(row: any): number {
     var montoCalculado: number = 0;
     if (row.factor > 0)
-      montoCalculado = row.cantidad * row.meses * ((row.moneda_id == "2" ? row.unitarioMensual * this.tipoCambio : row.unitarioMensual) * (row.factor + 1));
+      montoCalculado = row.cantidad * row.meses * ((row.moneda_id == 2 ? row.unitarioMensual * this.tipoCambio : row.unitarioMensual) * (row.factor + 1));
     else
-      montoCalculado = row.cantidad * row.meses * (row.moneda_id == "2" ? row.unitarioMensual * this.tipoCambio : row.unitarioMensual);
+      montoCalculado = row.cantidad * row.meses * (row.moneda_id == 2 ? row.unitarioMensual * this.tipoCambio : row.unitarioMensual);
     return montoCalculado;
   }
-  //summaryIncome: item.incomes.reduce((acc, income) => acc + income.value, 0).toFixed(2)
   public calcularTotalSoles() {
     return this.dataSource.data.reduce((accum, curr) => accum + curr.totalMensual, 0).toFixed(2);
   }
   public calcularTotalDolares() {
     return this.dataSource.data.reduce((accum, curr) => accum + (curr.totalMensual / this.tipoCambio), 0).toFixed(2);
   }
-  crearNuevoGastos(ofertaOpexId: number, ofertaId: number): GastoElement {
+  crearNuevoGastos(ofertaOpexId: number, ofertaId: number): OfertaOpex {
     return {
-      ofertaOpexId: ofertaOpexId,
+      id: ofertaOpexId,
       ofertaId: ofertaId,
-      conceptoId: -1,
-      mostrarConcepto: false,
+      conceptoId: 0,
       nombre: '',
+      mostrarConcepto: false,
       cantidad: 0,
       meses: 0,
       factor: 0,
-      moneda_id_id: 1,
+      moneda_id: 1,
       unitarioMensual: 0,
       totalMensual: 0,
+      activo: true,
+      estado: 0
     };
   }
   addRow(): void {
-
-    this.dataSource.data.push(this.crearNuevoGastos(this.dataSource.data.length + 1, this.ofertaBase.id));
+    var Id = this.dataSource.data.length == 0 ? 1 : this.dataSource.data[this.dataSource.data.length - 1].id + 1;
+    let objecto = this.crearNuevoGastos(Id, this.ofertaBase.id);
+    this.dataSource.data.push(objecto);
     this.dataSource.filter = "";
   }
+
+  guardarGastosOpex(): void {
+    
+    const listOfertaOpex = this.dataSourceList.map(item => {
+      if (item.estado == 0) //Si es 0 Nuevo Registro
+        item.id = 0
+      else if (item.estado == 1)// Si es 1 Registro ha sido Actulizado
+        item.id = item.id
+      else if (item.estado == 2)
+        item.activo = false    
+      var container = {
+        id: item.id,
+        ofertaId: item.ofertaId,
+        conceptoId: item.conceptoId,
+        nombre: item.nombre,
+        cantidad: item.cantidad,
+        meses: item.meses,
+        factor: item.factor,
+        moneda_id: item.moneda_id,
+        unitarioMensual: item.unitarioMensual,
+        totalMensual: item.totalMensual,
+        activo: item.activo,
+        estado: 0       
+      };
+      return container;
+    });    
+    this.inProgress = true;
+    debugger;
+    console.log(listOfertaOpex);
+    this.ofertaGastosService.guardarGastos(listOfertaOpex).pipe(
+      map(event => {
+        switch (event.type) {
+          case HttpEventType.UploadProgress:
+            this.progress = Math.round(event.loaded * 100 / event.total);
+            break;
+          case HttpEventType.Response:
+            return event;
+        }
+      }),
+      catchError((error: HttpErrorResponse) => {
+        this.inProgress = false;
+        return of(`fallo al guardar.`);
+      })
+    ).subscribe((event: any) => {
+      debugger;
+      if (typeof (event) === 'object') {
+        this.inProgress = false;
+        this.dialog.open(AlertSuccessComponent, {
+          width: '700px',
+          data: {
+            message: 'Se proceso correctamente la información!',
+            buttonText: { ok: 'Aceptar' }
+          }
+        });
+      }
+    });
+  }
+
   deleteRow(item: any): void {
     const dialogRef = this.dialog.open(AlertConfirmComponent, {
       width: '450px',
@@ -154,31 +215,21 @@ export class OfertaGastosComponent implements OnInit {
         const a = document.createElement('a');
         a.click();
         a.remove();
-        this.dataSource.data.splice(this.dataSource.data.indexOf(item.id), 1);
-        this.dataSource = new MatTableDataSource<GastoElement>(this.dataSourceList);
+        debugger;
+        var objetoOfertaOpex = this.dataSourceList.find(function (element) { return element.id == item.id; });
+        if (objetoOfertaOpex.estado == 0) {// si el registro es agregado, entonce se elimina
+          var ObjectIndex = this.dataSourceList.findIndex(function (obj) { return obj.id === item.id; });//Obtenemos el Index del List de Objetos        
+          this.dataSourceList.splice(ObjectIndex, 1);
+        } else // si el registro ya existe en la base de datos se actualizara el estado 2: Inactivo
+          objetoOfertaOpex.estado = 2;
+        //Listamos los registro que estan agregado o modificados                
+        // this.dataSourceList = this.dataSourceList.filter(function (obj) {
+        //   return obj.estado == 0 || obj.estado == 1 || obj.estado == -1
+        // });
+        this.dataSource = new MatTableDataSource<OfertaOpex>(this.dataSourceList.filter(function (obj) {
+          return obj.estado == 0 || obj.estado == 1 || obj.estado == -1
+        }));
       }
     });
-  }
-}
-// const dataSourceList: GastoElement[] = [
-//   { ofertaOpexId: 1, concepto: '', mostrarConcepto: false, nroconcepto: '', conceptootro: '', cantidad: 0, meses: 0, factor: 0, moneda_id: '1', unitarioMensual: 0, montototalmensual: 0 },
-//   { ofertaOpexId: 2, concepto: '', mostrarConcepto: false, nroconcepto: '', conceptootro: '', cantidad: 0, meses: 0, factor: 0, moneda_id: '1', unitarioMensual: 0, montototalmensual: 0 },
-//   { ofertaOpexId: 3, concepto: '', mostrarConcepto: false, nroconcepto: '', conceptootro: '', cantidad: 0, meses: 0, factor: 0, moneda_id: '1', unitarioMensual: 0, montototalmensual: 0 }
-// ];
-export interface GastoElement {
-  ofertaOpexId: number,
-  ofertaId: number,
-  conceptoId: number;
-  mostrarConcepto: boolean,
-  nombre: string;
-  cantidad: number;
-  meses: number;
-  factor: number;
-  moneda_id_id: number;
-  unitarioMensual: number;
-  totalMensual: number;
-}
-export class ModelCombo {
-  constructor(public id?: string, public nombre?: string, public factor?: number, public tipo?: string) {
   }
 }

@@ -99,9 +99,8 @@ export class AccionIsisModel {
 }
 
 
-export class OfertaOpex {
-
-    ofertaOpexId: number;
+export class OfertaOpex {    
+    id: number;
     ofertaId: number;
     conceptoId: number;
     nombre: string;
@@ -109,9 +108,11 @@ export class OfertaOpex {
     meses: number;
     factor: number;
     moneda_id: number;
-    unitarioMensual: number;
+    unitarioMensual: number;    
+    mostrarConcepto: boolean;
     totalMensual: number;
-    activo: null
+    activo: boolean;    
+    estado: number; //-1 ya existe en la base de datos, 0: nuevo, 1: Actualizado, 2: Inactivo    
 }
 
 
