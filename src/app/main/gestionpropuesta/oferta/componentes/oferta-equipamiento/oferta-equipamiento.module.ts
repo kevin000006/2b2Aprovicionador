@@ -16,6 +16,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import es from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { EquipamientoService } from '../oferta-equipamiento/oferta-equipamiento.servicio';
+import { NgxMaskModule } from 'ngx-mask';
+
 registerLocaleData(es);
 @NgModule({
     declarations: [
@@ -24,6 +26,7 @@ registerLocaleData(es);
     imports: [
         FormsModule,
         CommonModule,
+        NgxMaskModule.forRoot(),
         MatButtonModule,
         MatFormFieldModule,
         MatIconModule,

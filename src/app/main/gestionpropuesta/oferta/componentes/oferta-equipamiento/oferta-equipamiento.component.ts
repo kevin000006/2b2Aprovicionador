@@ -34,6 +34,13 @@ export class OfertaEquipamientoComponent implements OnInit {
 
   displayedColumns: string[] = ['tipo', 'condicion', 'antigueadad', 'marca', 'modelo', 'cantidad', 'moneda', 'costo', 'costototal','instalacion','accion'];
 
+  pattern = {
+    P: {
+      pattern: new RegExp('\\d'),
+    },
+  };
+  customMask = ['0*.00', this.pattern];
+
   ngOnInit(): void {
     this.commonService.getTipoEquipamiento().subscribe(data=>{ this.listaTipos = data });
     this.commonService.getTipoMonedaAll().subscribe(data => {this.listaMoneda = data});
@@ -150,7 +157,7 @@ export class OfertaEquipamientoComponent implements OnInit {
       else
         eq.antiguedad = 0;
 
-      eq.total = total;
+      eq.total =Number(total.toFixed(2));
   }
 
   calcularMontoMensual(row: OfertaEquipamientoModel): number {
