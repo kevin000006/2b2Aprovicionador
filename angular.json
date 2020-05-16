@@ -29,7 +29,6 @@
                             "src/web.config"
                         ],
                         "styles": [
-
                             "src/styles.scss"
                         ],
                         "scripts": [],
