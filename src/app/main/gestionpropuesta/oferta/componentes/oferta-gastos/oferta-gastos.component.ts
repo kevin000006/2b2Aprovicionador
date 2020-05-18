@@ -189,9 +189,7 @@ export class OfertaGastosComponent implements OnInit {
       };
       return container;
     });
-    this.inProgress = true;
-    debugger;
-    console.log(listOfertaOpex);
+    this.inProgress = true;        
     this.ofertaGastosService.guardarGastos(listOfertaOpex).pipe(
       map(event => {
         switch (event.type) {
@@ -206,8 +204,8 @@ export class OfertaGastosComponent implements OnInit {
         this.inProgress = false;
         return of(`fallo al guardar.`);
       })
-    ).subscribe((event: any) => {
-      debugger;
+    ).subscribe((event: any) => {   
+      
       if (typeof (event) === 'object') {
         this.inProgress = false;
         this.toastr.success('Se proceso correctamente la información!', '', {
@@ -235,8 +233,7 @@ export class OfertaGastosComponent implements OnInit {
       if (confirmed) {
         const a = document.createElement('a');
         a.click();
-        a.remove();
-        debugger;
+        a.remove();        
         var objetoOfertaOpex = this.dataSourceList.find(function (element) { return element.id == item.id; });
         if (objetoOfertaOpex.estado == 0) {// si el registro es agregado, entonce se elimina
           var ObjectIndex = this.dataSourceList.findIndex(function (obj) { return obj.id === item.id; });//Obtenemos el Index del List de Objetos        
