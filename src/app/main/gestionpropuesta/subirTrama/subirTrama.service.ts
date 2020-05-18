@@ -25,11 +25,11 @@ export class SubirTramaService {
 
   getConnectionURL(resourceName: any): string {
     const base = this.getResourceUrl(resourceName);
-    const tokensas = '?sv=2019-02-02&ss=b&srt=sco&sp=rwdlac&se=2020-06-01T23:14:22Z&st=2020-04-22T15:14:22Z&spr=https&sig=tPTbEa4Dtrho%2Bw6irjR5DSoG873d%2BQ9WSmDB8lawsSc%3D';
+    const tokensas = '?sv=2019-10-10&ss=bfqt&srt=sco&sp=rwdlacupx&se=2020-12-31T07:22:46Z&st=2020-05-18T23:22:46Z&spr=https&sig=tQVrulnzM5beKSRYnAxIhJxBWDar9Qh9U6vAsmpzqJM%3D';
     return `${base}?${tokensas}`
   }
   getResourceUrl(resourceName: any): string {
-    const accountName = 'b2bassets';
+    const accountName = 'b2barchivos';
     const containerName = 'b2b-provisioner';
     console.log(resourceName);
     return `https://${accountName}.blob.core.windows.net/${containerName}/${resourceName}`
@@ -48,8 +48,8 @@ export class SubirTramaService {
       });
     }
     async function descargar(nombre) {
-      const tokensas = '?sv=2019-02-02&ss=b&srt=sco&sp=rwdlac&se=2020-06-01T23:14:22Z&st=2020-04-22T15:14:22Z&spr=https&sig=tPTbEa4Dtrho%2Bw6irjR5DSoG873d%2BQ9WSmDB8lawsSc%3D';
-      const accountName = 'b2bassets';
+      const tokensas = '?sv=2019-10-10&ss=bfqt&srt=sco&sp=rwdlacupx&se=2020-12-31T07:22:46Z&st=2020-05-18T23:22:46Z&spr=https&sig=tQVrulnzM5beKSRYnAxIhJxBWDar9Qh9U6vAsmpzqJM%3D';
+      const accountName = 'b2barchivos';
       const containerName = 'b2b-provisioner';
       const uri = `https://${accountName}.blob.core.windows.net/${containerName}/${nombre}` + `${tokensas}`;
       window.open(uri);
