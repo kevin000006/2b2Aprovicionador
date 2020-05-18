@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Input } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -22,7 +22,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse, } from '@angular/common/http';
 import { DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
-import { map, startWith, finalize, debounceTime,tap,switchMap } from 'rxjs/operators';
+import { map, startWith, finalize, debounceTime, tap, switchMap } from 'rxjs/operators';
 
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 
@@ -37,44 +37,45 @@ export interface State {
   styleUrls: ['./oferta-servicio.component.css']
 })
 export class OfertaServicioComponent implements OnInit {
-  isLoadings : boolean = true;
+  isLoadings: boolean = true;
   _filtro: any = {
     oferta_id: '',
     Pageable: ''
   };
   pageIndex: number = 0;
-//https://stackblitz.com/edit/angular-material-autocomplete-async2?file=src%2Fapp%2Fapp.component.html
+  //https://stackblitz.com/edit/angular-material-autocomplete-async2?file=src%2Fapp%2Fapp.component.html
   lstBandeja = new Array<OfertaDetalleModel>();
- 
+  dataSourceList: any[];
   listAccionIsis = [];
   listTipoEnlace = [];
   listCondicionEnlace = [];
   listTipoCircuito = [];
   listTipoServicio = [];
   listViaAcceso = [];
-  lstZonaSisego=[];
+  lstZonaSisego = [];
 
   //public seldescrip: string;
   //https://stackblitz.com/edit/mat-paginator-select-page?embed=1
 
   displayedColumns: string[] = [
     'sede', 'direccion', 'ubigeo', 'geo',
-    'contacto', 'telefono', 'circuito', 'nrocircuito',     
+    'contacto', 'telefono', 'circuito', 'nrocircuito',
     'servicio', 'medio', 'bw', 'ldn', 'voz', 'video',
     'platinium', 'oro', 'plata', 'bronce',
     'equipoterminal', 'router', 'otro', 'facturacion',
     'acccionisis',
 
-    'tiposede','modo','circuitos','numerocurcuitos','servicios','medios','sva','svadescripcion',
-     'bws', 'ldns', 'vozs', 'videos','platiniums', 'oros', 'platas', 'bronces',
-     'equipoterminals', 'routers', 'otros','precio','observaciones','ofertaisis','sesego','zona','ultimamilla','diasejecucion',
+    'tiposede', 'modo', 'circuitos', 'numerocurcuitos', 'servicios', 'medios', 'sva', 'svadescripcion',
+    'bws', 'ldns', 'vozs', 'videos', 'platiniums', 'oros', 'platas', 'bronces',
+    'equipoterminals', 'routers', 'otros', 'precio', 'observaciones', 'ofertaisis', 'sesego', 'zona', 'ultimamilla', 'diasejecucion',
 
     'accion'];
   exampleDatabase: OfertaServicioService | null;
-  dataSource = new MatTableDataSource<ServicioElement>(dataSourceList);//:  EjemploDataSource | null;
-  stateCtrl = new FormControl();  
+  //dataSource = new MatTableDataSource<ServicioElement>(dataSourceList);//:  EjemploDataSource | null;
+  dataSource = new MatTableDataSource<any>();
+  stateCtrl = new FormControl();
   filteredStates: Observable<any>;
-  
+  @Input() ofertaBase: any = {};
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -87,22 +88,22 @@ export class OfertaServicioComponent implements OnInit {
     private ofertaServicioService: OfertaServicioService,
     private _router: Router,
   ) {
-  }  
-  resetAutoComplete(): void {
-    this.filteredStates = null;    
   }
-  inputChangeUbigeo(input: any, row: any): void {        
+  resetAutoComplete(): void {
+    this.filteredStates = null;
+  }
+  inputChangeUbigeo(input: any, row: any): void {
     if (input.length > 2) {
       row.isLoading = true;
-      this.commonService.buscardistrito(input).              
-        subscribe(data => {          
-          setTimeout(() => {  
+      this.commonService.buscardistrito(input).
+        subscribe(data => {
+          setTimeout(() => {
             row.isLoading = false;
             this.filteredStates = data;
-          }, 1000);                      
+          }, 1000);
         });
     }
-  } 
+  }
   ngOnInit(): void {
     this.commonService.getCondicionEnlaceAll().subscribe(data => {
       this.listCondicionEnlace = data;
@@ -121,20 +122,101 @@ export class OfertaServicioComponent implements OnInit {
     });
     this.commonService.getAccionIsisAll().subscribe(data => {
       this.listAccionIsis = data;
-    });   
+    });
+    this.ofertaServicioService.obtenerOfertasDetalle({ oferta_id: this.ofertaBase.id }).subscribe(data => {
+      if (data != null) {
+        this.dataSourceList = data;
+        this.dataSource.data = data;
+        console.log(data);
+      }
+    });
   }
-  crearNuevoServicio(id: number): ServicioElement {
+  crearNuevoServicio(ofertasDetalleId: number, ofertaId: number): any {
     return {
-      id: id, sede: '', direccion: '', ubigeo: '', geo: '', longitud: 0, latitud: 0,
-      contacto: '', telefono: '', circuito: "", nrocircuito: "", servicio: "",
-      medio: "", bw: "", nrobw: "", ldn: "",nroldn : "", voz: "", nrovoz: "", video: "", nrovideo: "",
+      ofertasDetalleId: ofertasDetalleId,
+      ofertaId: ofertaId,      
+      accionIsisIdPropuesto: 0,      
+      bwActualActual: '',
+      bwPropuesto: '',
+      caudalBronceActual: '',
+      caudalBroncePropuesto: '',
+      caudalLdnActual: '',
+      caudalLdnPropuesto: '',
+      caudalOroActual: '',
+      caudalOroPropuesto: '',
+      caudalPlataPropuesto: '',
+      caudalPlatinumActual: '',
+      caudalPlatinumPropuesto: '',
+      caudalVideoActual: '',
+      caudalVideoPropuesto: '',
+      caudalVozActual: '',
+      caudalVozPropuesto: '',
+      caudal_plata_actual: '',
+      clienteId: 0,
+      codigoSisego: '',
+      componentesPropuesto: '',
+      contacto: '',
+      costoUltimaMilla: 0,
+      departamentoId: 0,
+      descripcionSvaPropuesto: '',
+      detalleAccionEnlacePropuesto: '',
+      diasEjecucion: 0,
+      direccion: '',
+      distritoId: 0,
+      dteActual: 0,
+      equipoStockPropuesto: '',
+      equipoTerminalActual: '',
+      equipoTerminalPropuesto: '',
+      equipo_adicional_actual: '',
+      facturacion_actual: 0,
+      fechaLlegadaPropuesto: '',
+      latitud: '',
+      longitud: '',
+      nombreSede: '',
+      numeroCdActual: '',
+      observacionesPropuesto: '',      
+      ofertaIsisPropuesto: '',      
+      otrosEquiposPropuesto: '',
+      pozoTierraActual: '',
+      precioPropuesto: 0,
+      provinciaId: 0,
+      recursoTransporteActual: '',
+      routerPropuesto: '',
+      routerSwitchActual: '',
+      secuencia: 0,
+      segmentoSatelitalActual: 0,
+      svaPropuesto: '',
+      telefono: '',
+      tipoAntenaActual: '',
+      tipoCircuitoActual: '',
+      tipoCircuitoIdPropuesto: 0,
+      tipoServicioIdActual: 0,
+      tipoServicioIdPropuesto: 0,
+      ultimaMillaActual: 0,
+      upsActual: '',
+      viaAccesoIdPropuesto: 0,
+      vrfPropuesto: '',
+      vrf_actual: '',
+      zonaSisego: '',
+      zoom: '',      
+      estado: 0,
+      activo: true,
+
+
+      sede: '',       
+      ubigeo: '', geo: '', 
+      //longitud: 0, latitud: 0,contacto: '', telefono: '', 
+      circuito: "", nrocircuito: "", servicio: "",
+      medio: "", bw: "", nrobw: "", ldn: "", nroldn: "", voz: "", nrovoz: "", video: "", nrovideo: "",
       platinium: "", nroplatinium: "", oro: "", nrooro: "", plata: "", nroplata: "", bronce: "", nrobronce: "",
-      equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "",condicionenlace:"", isLoading: false
-    ,lstZonaSisego:[]
+      equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "", condicionenlace: "", isLoading: false
+      , lstZonaSisego: []
     };
-  } 
+  }
   addRow(): void {
-    this.dataSource.data.push(this.crearNuevoServicio(this.dataSource.data.length + 1));
+    var Id = this.dataSource.data.length == 0 ? 1 : this.dataSource.data[this.dataSource.data.length - 1].ofertasDetalleId + 1;
+    let objecto = this.crearNuevoServicio(Id, this.ofertaBase.id);
+    this.dataSource.data.push(objecto);
     this.dataSource.filter = "";
   }
 
@@ -155,8 +237,21 @@ export class OfertaServicioComponent implements OnInit {
         const a = document.createElement('a');
         a.click();
         a.remove();
-        this.dataSource.data.splice(this.dataSource.data.indexOf(item.id), 1);
-        this.dataSource = new MatTableDataSource<ServicioElement>(dataSourceList);
+
+        debugger;
+        var objetoOfertaOpex = this.dataSourceList.find(function (element) { return element.ofertasDetalleId == item.ofertasDetalleId; });
+        if (objetoOfertaOpex.estado == 0) {// si el registro es agregado, entonce se elimina
+          var ObjectIndex = this.dataSourceList.findIndex(function (obj) { return obj.ofertasDetalleId === item.ofertasDetalleId; });//Obtenemos el Index del List de Objetos        
+          this.dataSourceList.splice(ObjectIndex, 1);
+        } else // si el registro ya existe en la base de datos se actualizara el estado 2: Inactivo
+          objetoOfertaOpex.estado = 2;
+        //Listamos los registro que estan agregado o modificados                
+        // this.dataSourceList = this.dataSourceList.filter(function (obj) {
+        //   return obj.estado == 0 || obj.estado == 1 || obj.estado == -1
+        // });
+        this.dataSource = new MatTableDataSource<any>(this.dataSourceList.filter(function (obj) {
+          return obj.estado == 0 || obj.estado == 1 || obj.estado == -1
+        }));        
       }
     });
   }
@@ -183,17 +278,12 @@ export class OfertaServicioComponent implements OnInit {
       };
       $.ajax(settings).done(function (response) {
         let result_ = JSON.parse(response);
-        if(result_.status == "success"){
+        if (result_.status == "success") {
           let result__ = JSON.parse(result_['result']);
-          item.lstZonaSisego=result__['zonas'];
-         
-          
+          item.lstZonaSisego = result__['zonas'];
         }
-        
-      }); 
-     
-        this.dataSource.filter = '';
-
+      });
+      this.dataSource.filter = '';
     });
   }
   /*
@@ -231,185 +321,79 @@ export class OfertaServicioComponent implements OnInit {
   */
 
 }
-const dataSourceList: ServicioElement[] = [
-  {
-    id: 1, sede: 'Av. Argentina', direccion: 'puente camote', ubigeo: '',
-    geo: 'Balanceador', longitud: 0, latitud: 0,
-    contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "1", nrocircuito: "1", servicio: "1",
-    medio: "1", bw: "1", nrobw: "2", ldn: "1", nroldn: "", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
-    platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
-    equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "", condicionenlace: "", isLoading: false,
-    lstZonaSisego:[]
-  },
-  {
-    id: 2, sede: 'Av. Argentina 2', direccion: 'san borja', ubigeo: '',
-    geo: 'Balanceador', longitud: 0, latitud: 0,
-    contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "", nrocircuito: "1", servicio: "1",
-    medio: "1", bw: "1", nrobw: "2", ldn: "1", nroldn: "", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
-    platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
-    equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "", condicionenlace: "", isLoading: false
-    ,lstZonaSisego:[]
-  },
-  {
-    id: 3, sede: 'Av. Argentina 3', direccion: 'plaza norte', ubigeo: '',
-    geo: 'Balanceador', longitud: -70.2190587197085, latitud: -17.9966159197085,
-    contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "", nrocircuito: "1", servicio: "1",
-    medio: "1", bw: "1", nrobw: "2", ldn: "1", nroldn: "", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
-    platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
-    equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "", condicionenlace: "", isLoading: false
-    ,lstZonaSisego:[]
-  }
+// const dataSourceList: ServicioElement[] = [
+//   {
+//     id: 1, sede: 'Av. Argentina', direccion: 'puente camote', ubigeo: '',
+//     geo: 'Balanceador', longitud: 0, latitud: 0,
+//     contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "1", nrocircuito: "1", servicio: "1",
+//     medio: "1", bw: "1", nrobw: "2", ldn: "1", nroldn: "", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
+//     platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
+//     equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "", condicionenlace: "", isLoading: false,
+//     lstZonaSisego: []
+//   },
+//   {
+//     id: 2, sede: 'Av. Argentina 2', direccion: 'san borja', ubigeo: '',
+//     geo: 'Balanceador', longitud: 0, latitud: 0,
+//     contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "", nrocircuito: "1", servicio: "1",
+//     medio: "1", bw: "1", nrobw: "2", ldn: "1", nroldn: "", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
+//     platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
+//     equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "", condicionenlace: "", isLoading: false
+//     , lstZonaSisego: []
+//   },
+//   {
+//     id: 3, sede: 'Av. Argentina 3', direccion: 'plaza norte', ubigeo: '',
+//     geo: 'Balanceador', longitud: -70.2190587197085, latitud: -17.9966159197085,
+//     contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "", nrocircuito: "1", servicio: "1",
+//     medio: "1", bw: "1", nrobw: "2", ldn: "1", nroldn: "", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
+//     platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
+//     equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "", condicionenlace: "", isLoading: false
+//     , lstZonaSisego: []
+//   }
 
-];
-export interface ServicioElement {
-  id: number,
-  sede: string;
-  direccion: string;
-  ubigeo: string;
-  geo: string;
-  longitud: number;
-  latitud: number;
-  contacto: string;
-  telefono: string;
-  circuito: string;
-  nrocircuito: string;
-  servicio: string;
-  medio: string;
-  bw: string;
-  nrobw: string;
-  ldn: string;
-  nroldn: string;
-  voz: string;
-  nrovoz: string;
-  video: string;
-  nrovideo: string;
-  platinium: string;
-  nroplatinium: string;
-  oro: string;
-  nrooro: string;
-  plata: string;
-  nroplata: string;
-  bronce: string;
-  nrobronce: string;
-  equipoterminal: string;
-  router: string;
-  //otro: string;
-  facturacion: string;
-  acccionisis: string;
-  tipoenlace: string;
-  condicionenlace: string;
-  isLoading: boolean;
-  lstZonaSisego:Array<any>;
+// ];
+// export interface ServicioElement {
+//   id: number,
+//   sede: string;
+//   direccion: string;
+//   ubigeo: string;
+//   geo: string;
+//   longitud: number;
+//   latitud: number;
+//   contacto: string;
+//   telefono: string;
+//   circuito: string;
+//   nrocircuito: string;
+//   servicio: string;
+//   medio: string;
+//   bw: string;
+//   nrobw: string;
+//   ldn: string;
+//   nroldn: string;
+//   voz: string;
+//   nrovoz: string;
+//   video: string;
+//   nrovideo: string;
+//   platinium: string;
+//   nroplatinium: string;
+//   oro: string;
+//   nrooro: string;
+//   plata: string;
+//   nroplata: string;
+//   bronce: string;
+//   nrobronce: string;
+//   equipoterminal: string;
+//   router: string;
+//   //otro: string;
+//   facturacion: string;
+//   acccionisis: string;
+//   tipoenlace: string;
+//   condicionenlace: string;
+//   isLoading: boolean;
+//   lstZonaSisego: Array<any>;
 
-}
-export class ModelCombo {
-  constructor(public id?: string, public nombre?: string) {
-  }
-}
+// }
+// export class ModelCombo {
+//   constructor(public id?: string, public nombre?: string) {
+//   }
+// }
 
-
-export class EjemploDataSource extends DataSource<BandejaModel>{
-  _filterChange = new BehaviorSubject('');
-
-  get filter(): string {
-    return this._filterChange.value;
-  }
-
-  set filter(filter: string) {
-    this._filterChange.next(filter);
-  }
-
-  filtrar(param, size) {
-    this.loadingSubject.next(true);
-    this._exampleDatabase.dataChange.next([]);
-    this._exampleDatabase.getAllOfertaServicio(param);
-    this.pageSize = size || 5;
-  }
-  pageSize = 5;
-  private loadingSubject = new BehaviorSubject<boolean>(true);
-  public isWait$ = this.loadingSubject.asObservable();
-  totalPages: number = 0;
-  totalRegistros: number = 0;
-  filteredData: BandejaModel[] = [];
-  renderedData: BandejaModel[] = [];
-
-  constructor(public _exampleDatabase: OfertaServicioService,
-    //  public _paginator: MatPaginator,
-    public _sort: MatSort) {
-    super();
-    // Reset to the first page when the user changes the filter.
-    //this._filterChange.subscribe(() => this._paginator.pageIndex = 0);
-  }
-
-  connect(): Observable<BandejaModel[]> {
-
-    const displayDataChanges = [
-      this._exampleDatabase.dataChange,
-      this._sort.sortChange,
-      this._filterChange,
-    ];
-
-    this._exampleDatabase.getAllOfertaServicio({});
-
-    return merge(...displayDataChanges).pipe(map(() => {
-      debugger;
-      // Filter data
-      let data_ = this._exampleDatabase.data['data'] || [];
-
-      this.filteredData = data_.slice().filter((issue: BandejaModel) => {
-        const searchStr = (issue.version + issue.codigo + issue.cliente + issue.oportunidad + issue.descripcion).toLowerCase();
-        this.loadingSubject.next(false);
-        return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
-
-      });
-
-      // Sort filtered data
-      const sortedData = this.sortData(this.filteredData.slice());
-      if (sortedData.length == 0 && this._exampleDatabase.data['data'] !== undefined) { this.loadingSubject.next(false); }
-
-      // Grab the page's slice of the filtered sorted data.
-
-      // const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
-      // this.renderedData = sortedData.splice(startIndex, this._paginator.pageSize);
-      this.renderedData = sortedData.splice(0, 100);
-      this.totalRegistros = this._exampleDatabase.data['rows'] || 0;
-      this.totalPages = Math.ceil((this.totalRegistros / this.pageSize));
-
-      return this.renderedData;
-    }
-    ));
-
-    this.loadingSubject.next(false);
-
-  }
-
-  disconnect() { }
-
-  sortData(data: BandejaModel[]): BandejaModel[] {
-    if (!this._sort.active || this._sort.direction === '') {
-
-      return data;
-
-    }
-
-    return data.sort((a, b) => {
-      let propertyA: number | string = '';
-      let propertyB: number | string = '';
-
-      /* switch (this._sort.active) {
-         case 'codigo': [propertyA, propertyB] = [a.codigo, b.codigo]; break;
-         case 'version': [propertyA, propertyB] = [a.version, b.version]; break;
-         case 'oportunidad': [propertyA, propertyB] = [a.oportunidad, b.oportunidad]; break;
-         case 'cliente': [propertyA, propertyB] = [a.cliente, b.cliente]; break;
-         case 'descripcion': [propertyA, propertyB] = [a.descripcion, b.descripcion]; break;
-         case 'estado': [propertyA, propertyB] = [a.estado, b.estado]; break;
-       }*/
-
-      const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
-      const valueB = isNaN(+propertyB) ? propertyB : +propertyB;
-
-      return (valueA < valueB ? -1 : 1) * (this._sort.direction === 'asc' ? 1 : -1);
-    });
-  }
-
-}

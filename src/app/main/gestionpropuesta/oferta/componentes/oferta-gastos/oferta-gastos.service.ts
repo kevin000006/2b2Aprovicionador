@@ -30,6 +30,7 @@ export class OfertaGastosService {
             })
         );
     }
+    
     guardarGastos(data: any): Observable<any> {
         return this.http.post<any>('/ofertaopex/guardargastos', data, {
             reportProgress: true,
