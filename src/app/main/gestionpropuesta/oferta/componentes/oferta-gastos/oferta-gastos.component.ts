@@ -36,7 +36,7 @@ export class OfertaGastosComponent implements OnInit {
     private toastr: ToastrService
   ) { }
 
-  async ngOnInit() {    
+  async ngOnInit() {
     // this.toastr.success('Se proceso correctamente la información!','', {
     //   //progressBar:true,
     //   //progressAnimation: 'increasing'	,
@@ -59,9 +59,7 @@ export class OfertaGastosComponent implements OnInit {
     //   //progressBar:true,
     //   //progressAnimation: 'increasing'	,
     //   closeButton:true
-    // });    
-
-    this.ofertaBase.id = 5;
+    // });
     //Lenar combo moneda_id
     await this.commonService.getTipoMonedaAll().subscribe(data => {
       this.listaMoneda = data;
@@ -167,14 +165,14 @@ export class OfertaGastosComponent implements OnInit {
   }
 
   guardarGastosOpex(): void {
-    
+
     const listOfertaOpex = this.dataSourceList.map(item => {
       if (item.estado == 0) //Si es 0 Nuevo Registro
         item.id = 0
       else if (item.estado == 1)// Si es 1 Registro ha sido Actulizado
         item.id = item.id
       else if (item.estado == 2)
-        item.activo = false    
+        item.activo = false
       var container = {
         id: item.id,
         ofertaId: item.ofertaId,
@@ -187,10 +185,10 @@ export class OfertaGastosComponent implements OnInit {
         unitarioMensual: item.unitarioMensual,
         totalMensual: item.totalMensual,
         activo: item.activo,
-        estado: 0       
+        estado: 0
       };
       return container;
-    });    
+    });
     this.inProgress = true;
     debugger;
     console.log(listOfertaOpex);
@@ -213,10 +211,10 @@ export class OfertaGastosComponent implements OnInit {
       if (typeof (event) === 'object') {
         this.inProgress = false;
         this.toastr.success('Se proceso correctamente la información!', '', {
-          progressBar:true,
-          progressAnimation: 'increasing'	,
-          closeButton:true
-        });        
+          progressBar: true,
+          progressAnimation: 'increasing',
+          closeButton: true
+        });
       }
     });
   }
