@@ -9,8 +9,8 @@ import { catchError, map } from 'rxjs/operators';
 import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { ThemePalette } from '@angular/material/core';
 import { of } from 'rxjs';
-import { AlertSuccessComponent } from '../alertSuccess/alertSuccess.component';
 import { ToastrService } from 'ngx-toastr';
+//https://www.npmjs.com/package/ngx-toastr
 @Component({
   selector: 'oferta-gastos',
   templateUrl: './oferta-gastos.component.html',
@@ -36,8 +36,31 @@ export class OfertaGastosComponent implements OnInit {
     private toastr: ToastrService
   ) { }
 
-  async ngOnInit() {
-    //this.toastr.success('Hello world!', 'Toastr fun!');
+  async ngOnInit() {    
+    this.toastr.success('Se proceso correctamente la información!','', {
+      //progressBar:true,
+      //progressAnimation: 'increasing'	,
+      closeButton:true      
+    });    
+
+    this.toastr.warning('Se proceso correctamente la información!','', {
+      //progressBar:true,
+      //progressAnimation: 'increasing'	,
+      closeButton:true
+    });    
+
+    this.toastr.error('Se proceso correctamente la información!','', {
+      //progressBar:true,
+      //progressAnimation: 'increasing'	,
+      closeButton:true
+    });    
+
+    this.toastr.info('Se proceso correctamente la información!','', {
+      //progressBar:true,
+      //progressAnimation: 'increasing'	,
+      closeButton:true
+    });    
+
     this.ofertaBase.id = 5;
     //Lenar combo moneda_id
     await this.commonService.getTipoMonedaAll().subscribe(data => {
@@ -189,13 +212,11 @@ export class OfertaGastosComponent implements OnInit {
       debugger;
       if (typeof (event) === 'object') {
         this.inProgress = false;
-        this.dialog.open(AlertSuccessComponent, {
-          width: '700px',
-          data: {
-            message: 'Se proceso correctamente la información!',
-            buttonText: { ok: 'Aceptar' }
-          }
-        });
+        this.toastr.success('Se proceso correctamente la información!', '', {
+          progressBar:true,
+          progressAnimation: 'increasing'	,
+          closeButton:true
+        });        
       }
     });
   }
