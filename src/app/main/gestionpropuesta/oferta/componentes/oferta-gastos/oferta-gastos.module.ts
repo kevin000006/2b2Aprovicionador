@@ -12,7 +12,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { OfertaGastosService } from './oferta-gastos.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { ToastrModule,ToastrService } from 'ngx-toastr';
+
 
 // import es from '@angular/common/locales/es';
 // import { registerLocaleData } from '@angular/common';
@@ -36,13 +36,13 @@ import { ToastrModule,ToastrService } from 'ngx-toastr';
         MatTooltipModule,
         MatProgressBarModule,
         //BrowserAnimationsModule,
-        ToastrModule.forRoot() // ToastrModule added
+        
     ],
     exports: [
         OfertaGastosComponent
     ],
     providers: [
-        {provide: ToastrService, useClass: ToastrService},
+       // {provide: ToastrService, useClass: ToastrService},
         OfertaGastosService,
         //{ provide: LOCALE_ID, useValue: 'es' }
     ]
