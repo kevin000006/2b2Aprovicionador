@@ -129,6 +129,8 @@ export class OfertaCabeceraComponent implements OnInit {
         this.oferta.moneda = this.oferta.moneda || new MonedaModel();
         this.oferta.analistafinanciero = this.oferta.analistafinanciero || new PreventaModel();
         this.oferta.cliente = this.oferta.cliente || new ClienteModel();
+        this.oferta.diferencia_ingresos = this.oferta.diferencia_ingresos || 0;
+        this.oferta.diferencia_ingresos = (this.oferta.diferencia_ingresos * 100).toFixed(2);
 
       });
     }

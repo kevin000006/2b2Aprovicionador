@@ -171,7 +171,7 @@ export class OfertaServicioComponent implements OnInit {
       console.log(result);
 
       var settings = {
-        "url": "http://200.48.131.82/Api/zonafibra",
+        "url": "https://cors-anywhere.herokuapp.com/http://200.48.131.82/Api/zonafibra",
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -184,7 +184,6 @@ export class OfertaServicioComponent implements OnInit {
       $.ajax(settings).done(function (response) {
         let result_ = JSON.parse(response);
         if(result_.status == "success"){
-         
           let result__ = JSON.parse(result_['result']);
           item.lstZonaSisego=result__['zonas'];
          
