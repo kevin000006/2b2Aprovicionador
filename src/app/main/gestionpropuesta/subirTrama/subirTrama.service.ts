@@ -50,7 +50,7 @@ export class SubirTramaService {
     async function descargar(nombre) {
       const tokensas = '?sv=2019-10-10&ss=bfqt&srt=sco&sp=rwdlacupx&se=2020-12-31T07:22:46Z&st=2020-05-18T23:22:46Z&spr=https&sig=tQVrulnzM5beKSRYnAxIhJxBWDar9Qh9U6vAsmpzqJM%3D';
       const accountName = 'b2barchivos';
-      const containerName = 'b2b-provisioner';
+      const containerName = 'b2bassets';
       const uri = `https://${accountName}.blob.core.windows.net/${containerName}/${nombre}` + `${tokensas}`;
       window.open(uri);
     }
