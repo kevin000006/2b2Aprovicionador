@@ -37,29 +37,29 @@ export class OfertaGastosComponent implements OnInit {
   ) { }
 
   async ngOnInit() {    
-    this.toastr.success('Se proceso correctamente la información!','', {
-      //progressBar:true,
-      //progressAnimation: 'increasing'	,
-      closeButton:true      
-    });    
+    // this.toastr.success('Se proceso correctamente la información!','', {
+    //   //progressBar:true,
+    //   //progressAnimation: 'increasing'	,
+    //   closeButton:true      
+    // });    
 
-    this.toastr.warning('Se proceso correctamente la información!','', {
-      //progressBar:true,
-      //progressAnimation: 'increasing'	,
-      closeButton:true
-    });    
+    // this.toastr.warning('Se proceso correctamente la información!','', {
+    //   //progressBar:true,
+    //   //progressAnimation: 'increasing'	,
+    //   closeButton:true
+    // });    
 
-    this.toastr.error('Se proceso correctamente la información!','', {
-      //progressBar:true,
-      //progressAnimation: 'increasing'	,
-      closeButton:true
-    });    
+    // this.toastr.error('Se proceso correctamente la información!','', {
+    //   //progressBar:true,
+    //   //progressAnimation: 'increasing'	,
+    //   closeButton:true
+    // });    
 
-    this.toastr.info('Se proceso correctamente la información!','', {
-      //progressBar:true,
-      //progressAnimation: 'increasing'	,
-      closeButton:true
-    });    
+    // this.toastr.info('Se proceso correctamente la información!','', {
+    //   //progressBar:true,
+    //   //progressAnimation: 'increasing'	,
+    //   closeButton:true
+    // });    
 
     this.ofertaBase.id = 5;
     //Lenar combo moneda_id
