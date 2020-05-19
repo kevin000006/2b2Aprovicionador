@@ -34,12 +34,11 @@ import { FakeDbService } from 'app/fake-db/fake-db.service';
 import { AppComponent } from 'app/app.component';
 import { AppStoreModule } from 'app/store/store.module';
 import { LayoutModule } from 'app/layout/layout.module';
-
 import { ErrorDialogService } from 'app/main/error/error.service';
 import { LoginService } from 'app/main/pages/authentication/login-2/login-2.service';
 import { HttpConfigInterceptor } from 'app/interceptor/HttpConfig';
 import { NgxMaskModule } from 'ngx-mask';
-
+import { ToastrModule,ToastrService } from 'ngx-toastr';
 const appRoutes: Routes = [
    
    
@@ -89,18 +88,15 @@ const appRoutes: Routes = [
         BrowserModule, 
         BrowserAnimationsModule,
         HttpClientModule,
-       
+        ToastrModule.forRoot(), // ToastrModule added
         RouterModule.forRoot(appRoutes),
-
         TranslateModule.forRoot(),
         InMemoryWebApiModule.forRoot(FakeDbService, {
             delay: 0,
             passThruUnknownUrl: true
         }),
-
         // Material moment date module
         MatMomentDateModule,
-
         // Material
         MatButtonModule,
         MatIconModule,
@@ -133,6 +129,7 @@ const appRoutes: Routes = [
         AppStoreModule
     ],
     providers: [
+        {provide: ToastrService, useClass: ToastrService},
         LoginService,
         ErrorDialogService,
         { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }

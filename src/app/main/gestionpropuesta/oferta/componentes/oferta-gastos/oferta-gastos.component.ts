@@ -9,8 +9,8 @@ import { catchError, map } from 'rxjs/operators';
 import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { ThemePalette } from '@angular/material/core';
 import { of } from 'rxjs';
-import { AlertSuccessComponent } from '../alertSuccess/alertSuccess.component';
 import { ToastrService } from 'ngx-toastr';
+//https://www.npmjs.com/package/ngx-toastr
 @Component({
   selector: 'oferta-gastos',
   templateUrl: './oferta-gastos.component.html',
@@ -37,8 +37,34 @@ export class OfertaGastosComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+
     //this.toastr.success('Hello world!', 'Toastr fun!');
     //this.ofertaBase.id = 5;
+
+    // this.toastr.success('Se proceso correctamente la información!','', {
+    //   //progressBar:true,
+    //   //progressAnimation: 'increasing'	,
+    //   closeButton:true      
+    // });    
+
+    // this.toastr.warning('Se proceso correctamente la información!','', {
+    //   //progressBar:true,
+    //   //progressAnimation: 'increasing'	,
+    //   closeButton:true
+    // });    
+
+    // this.toastr.error('Se proceso correctamente la información!','', {
+    //   //progressBar:true,
+    //   //progressAnimation: 'increasing'	,
+    //   closeButton:true
+    // });    
+
+    // this.toastr.info('Se proceso correctamente la información!','', {
+    //   //progressBar:true,
+    //   //progressAnimation: 'increasing'	,
+    //   closeButton:true
+    // });
+    
     //Lenar combo moneda_id
     await this.commonService.getTipoMonedaAll().subscribe(data => {
       this.listaMoneda = data;
@@ -144,14 +170,14 @@ export class OfertaGastosComponent implements OnInit {
   }
 
   guardarGastosOpex(): void {
-    
+
     const listOfertaOpex = this.dataSourceList.map(item => {
       if (item.estado == 0) //Si es 0 Nuevo Registro
         item.id = 0
       else if (item.estado == 1)// Si es 1 Registro ha sido Actulizado
         item.id = item.id
       else if (item.estado == 2)
-        item.activo = false    
+        item.activo = false
       var container = {
         id: item.id,
         ofertaId: item.ofertaId,
@@ -164,13 +190,11 @@ export class OfertaGastosComponent implements OnInit {
         unitarioMensual: item.unitarioMensual,
         totalMensual: item.totalMensual,
         activo: item.activo,
-        estado: 0       
+        estado: 0
       };
       return container;
-    });    
-    this.inProgress = true;
-    debugger;
-    console.log(listOfertaOpex);
+    });
+    this.inProgress = true;        
     this.ofertaGastosService.guardarGastos(listOfertaOpex).pipe(
       map(event => {
         switch (event.type) {
@@ -185,16 +209,14 @@ export class OfertaGastosComponent implements OnInit {
         this.inProgress = false;
         return of(`fallo al guardar.`);
       })
-    ).subscribe((event: any) => {
-      debugger;
+    ).subscribe((event: any) => {   
+      
       if (typeof (event) === 'object') {
         this.inProgress = false;
-        this.dialog.open(AlertSuccessComponent, {
-          width: '700px',
-          data: {
-            message: 'Se proceso correctamente la información!',
-            buttonText: { ok: 'Aceptar' }
-          }
+        this.toastr.success('Se proceso correctamente la información!', '', {
+          progressBar: true,
+          progressAnimation: 'increasing',
+          closeButton: true
         });
       }
     });
@@ -216,8 +238,7 @@ export class OfertaGastosComponent implements OnInit {
       if (confirmed) {
         const a = document.createElement('a');
         a.click();
-        a.remove();
-        debugger;
+        a.remove();        
         var objetoOfertaOpex = this.dataSourceList.find(function (element) { return element.id == item.id; });
         if (objetoOfertaOpex.estado == 0) {// si el registro es agregado, entonce se elimina
           var ObjectIndex = this.dataSourceList.findIndex(function (obj) { return obj.id === item.id; });//Obtenemos el Index del List de Objetos        
