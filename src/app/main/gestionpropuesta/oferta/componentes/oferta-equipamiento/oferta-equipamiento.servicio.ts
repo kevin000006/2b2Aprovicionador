@@ -16,7 +16,7 @@ export class EquipamientoService {
   }
 
   getEquipamientoForOfeta(oferta:number):Observable<OfertaEquipamientoModel[]>{
-    const obj={ofertas:{id:9},activo:true};
+    const obj={ofertas:{id:oferta},activo:true};
     return this.http.post<OfertaEquipamientoModel[]>('/ofertacapex/findQuery',obj);
   }
 

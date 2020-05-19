@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, BehaviorSubject, empty } from 'rxjs';
+import { BitacoraModel } from '../models/oferta';
 
 @Injectable({
     providedIn: 'root'
@@ -17,6 +18,10 @@ export class OfertaService{
     getShared(param):Observable<any>{
         return this.http.post<any>('/compartirurl/findQuery',param);
      }
+
+   
+
+
 }
 
 

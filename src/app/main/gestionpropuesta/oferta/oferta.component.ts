@@ -5,6 +5,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { FileInputComponent } from '../oferta/componentes/fileinput/fileinput.component';
 import { BitacoraDialogComponent } from './componentes/bitacora-dialog/bitacora-dialog.component';
+import * as Cookies from 'js-cookie';
+import { OfertaService } from './oferta.service';
+
+
 @Component({
   selector: 'app-oferta',
   templateUrl: './oferta.component.html',
@@ -13,33 +17,45 @@ import { BitacoraDialogComponent } from './componentes/bitacora-dialog/bitacora-
 })
 export class OfertaComponent implements OnInit {
 
-  ofertaBase = {};
+  ofertaBase = {id:0};
+  currentUser: any = { nombres: '', apellidos: '', nombrecorto: '' };
   constructor(
     private _router: Router,
-    public dialog: MatDialog
-  ) { }
+    public dialog: MatDialog,
+    private ofertaService : OfertaService
+  ){
+
+    if (Cookies.get('currentUser') === undefined) {
+      this._router.navigate(['pages/auth/login-2'], { state: {} });
+    }
+
+   }
 
   ngOnInit(): void {
-    if (window.sessionStorage.getItem('oferta') != null) {
-      this.ofertaBase = JSON.parse(window.sessionStorage.getItem('oferta'));
+
+    if (Cookies.get('currentUser') === undefined) {
+      this._router.navigate(['pages/auth/login-2'], { state: {} });
     }
     else {
-      if (window.history.state.id == 0 || window.history.state.id === undefined) {
-        this.ofertaBase = new BandejaModel();
-      } else {
-        this.ofertaBase = window.history.state;
-        window.sessionStorage.setItem('oferta', JSON.stringify(window.history.state));
+      this.currentUser = JSON.parse(Cookies.get('currentUser'));
+     
+      if (window.sessionStorage.getItem('oferta') != null) {
+        this.ofertaBase = JSON.parse(window.sessionStorage.getItem('oferta'));
       }
+      else {
+        if (window.history.state.id == 0 || window.history.state.id === undefined) {
+          this.ofertaBase = new BandejaModel();
+        } else {
+          this.ofertaBase = window.history.state;
+          window.sessionStorage.setItem('oferta', JSON.stringify(window.history.state));
+        }
+      }
+      
     }
 
   }
   btnAdjuntar(): void {
-    // debugger;
-    // console.log(this.ofertaBase);
-    // return;
     const dialogRef = this.dialog.open(FileInputComponent, {
-      // width: '100%',
-      // height:'100%',
       height: '98%',
       width: '100vw',
       panelClass: 'full-screen-modal',
@@ -75,11 +91,14 @@ export class OfertaComponent implements OnInit {
   }
 
   openBitacora(): void {
-    const dialogRef = this.dialog.open(BitacoraDialogComponent, {
-      width: '760px',
-      data: {
-      }
-    });
+debugger;
+      const dialogRef = this.dialog.open(BitacoraDialogComponent, {
+        width: '760px',
+        data: {
+          id:this.ofertaBase.id
+        }
+      });
+    
   }
 
   regresar() {

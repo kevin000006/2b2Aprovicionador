@@ -1,8 +1,8 @@
 import { MonedaModel, ComplejidadModel, TipoContratoModel, TipoProyectoModel, EquipamientoCondicionModel, EquipamientoMarcaModel, TipoEquipamientoModel } from 'app/model/Common';
 
 export class UsuarioModel{
-  nombres:String;
-  apellidos: String;
+  nombres:string;
+  apellidos: string;
 }
 
 export class SegmentoNegocioModel{
@@ -39,6 +39,8 @@ export class BandejaModel {
   export class EstadoModel
   {
     id:number;
+    descripcion:string;
+    color:string;
   }
 
   export class ComboModel{
@@ -154,7 +156,12 @@ export class OfertaEquipamientoModel
   unitario:number;
 }
 
-
+export class BitacoraModel
+{
+  usuario: UsuarioModel;
+  estado:EstadoModel;
+  fecha:any;
+}
 
 
 export class OfertaDetalleModel

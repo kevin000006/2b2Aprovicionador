@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 import { MatMenuModule } from '@angular/material/menu';
 import { OfertaCabeceraModule } from './oferta-cabecera/oferta-cabecera.module';
 import { OfertaEquipamientoModule } from './oferta-equipamiento/oferta-equipamiento.module';
@@ -23,6 +25,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     imports: [
         MatFormFieldModule,
         MatSelectModule,
+        CommonModule,
+        MatSortModule,
         OfertaCabeceraModule,
         OfertaEquipamientoModule,
         OfertaGastosModule,
@@ -35,6 +39,9 @@ import { MatDialogModule } from '@angular/material/dialog';
         MatDividerModule,
         FormsModule,
         MatDialogModule
+    ],
+    entryComponents:[
+        BitacoraDialogComponent
     ],
     exports: [
         OfertaCabeceraModule,

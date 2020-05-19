@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { FileInputModule } from '../oferta/componentes/fileinput/fileinput.module';
 import { MatButtonModule } from '@angular/material/button';
 import { NgxMaskModule } from 'ngx-mask';
+import { BitacoraDialogComponent } from './componentes/bitacora-dialog/bitacora-dialog.component';
 
 const routes: Routes = [
     {
@@ -24,7 +25,7 @@ const routes: Routes = [
 
 @NgModule({
     declarations: [
-        OfertaComponent
+        OfertaComponent,
     ],
     imports: [
         RouterModule.forChild(routes),
@@ -40,7 +41,7 @@ const routes: Routes = [
         NgxMaskModule.forRoot() 
     ],
     entryComponents: [
-
+        BitacoraDialogComponent
     ],
     providers: [
 

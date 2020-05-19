@@ -82,7 +82,7 @@ export class OfertaEquipamientoComponent implements OnInit {
       item.cantidad = eq.cantidad;
       item.condicion = eq.equipamientoCondicion.id;
       item.activo = eq.activo;
-      item.idoferta = 9;
+      item.idoferta = this.ofertaBase.id;
       item.marca = eq.equipamientomarca.id;
       item.modelo = eq.modelo;
       item.moneda = eq.moneda.id;

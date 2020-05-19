@@ -53,3 +53,53 @@
     min-width: 140px;
     font-size: 15px;
 }
+
+.row-color-tb{
+    background: #F8F9FA;
+  }
+  
+  .pagination{
+    display: table;
+    margin: 10px auto;
+  }
+  
+  .pag{
+    min-width: 29px;
+    height: 29px;
+    float: left;
+    text-align: center;
+    font-size: 11px;
+    line-height: 29px;
+  }
+  
+  .btn-pagination{
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 169, 224, 0.4);
+    box-sizing: border-box;
+    border-radius: 4px;
+    color: #00A9E0;
+    margin: 0 2px;
+  }
+  
+  .btn-pagination mat-icon{
+    line-height: 26px;
+    font-size: 22px !important;
+    color: #00A9E0;
+  }
+  
+  .pointer{
+    cursor: pointer;
+  }
+
+  button.btn-pagination:disabled,
+button.btn-pagination[disabled]{
+  border: 1px solid rgb(96, 176, 202);
+  background-color: rgb(228, 248, 255);
+  color: #dbdbdb;
+  cursor: no-drop;
+}
+
+button.btn-pagination:disabled mat-icon,
+button.btn-pagination[disabled] mat-icon{
+  color: #dbdbdb;
+}

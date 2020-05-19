@@ -38,7 +38,7 @@ export class OfertaGastosComponent implements OnInit {
 
   async ngOnInit() {
     //this.toastr.success('Hello world!', 'Toastr fun!');
-    this.ofertaBase.id = 5;
+    //this.ofertaBase.id = 5;
     //Lenar combo moneda_id
     await this.commonService.getTipoMonedaAll().subscribe(data => {
       this.listaMoneda = data;
