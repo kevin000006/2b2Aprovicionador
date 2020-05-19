@@ -22,6 +22,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 @NgModule({
     declarations: [
         OfertaServicioComponent,
@@ -45,6 +46,7 @@ import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
         MatAutocompleteModule,
         ReactiveFormsModule,
         MatProgressSpinnerModule,
+        MatProgressBarModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyCkQSOz3XXowm3bOQlnCEUChPTgCmT0AXc'
         })
