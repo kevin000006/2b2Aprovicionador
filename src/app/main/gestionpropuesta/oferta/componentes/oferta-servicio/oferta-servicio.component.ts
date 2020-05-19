@@ -9,23 +9,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { CommonService } from 'app/common.service';
 import { OfertaDetalleModel, BandejaModel } from '../../../models/oferta';
 import * as $ from 'jquery';
-
-import {
-  ClienteModel, MonedaModel,
-  TipoServicioModel, ViaAccesoModel, EquipamientoMarcaModel, EquipamientoCondicionModel,
-  SisegoCondicionModel, ConceptosOpexModel, TipoEnlaceModel, CondicionEnlaceModel,
-  TipoCircuitoModel
-} from 'app/model/Common';
 import { OfertaServicioService } from './oferta-servicio.service';
 import * as Cookies from 'js-cookie';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient, HttpErrorResponse, } from '@angular/common/http';
-import { DataSource } from '@angular/cdk/collections';
-import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
-import { map, startWith, finalize, debounceTime, tap, switchMap } from 'rxjs/operators';
-
-import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
-
+import { Router } from '@angular/router';
+import { HttpClient, HttpErrorResponse, HttpEventType } from '@angular/common/http';
+import { of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+import { ThemePalette } from '@angular/material/core';
+import { ToastrService } from 'ngx-toastr';
 export interface State {
   flag: string;
   name: string;
@@ -38,6 +30,9 @@ export interface State {
 })
 export class OfertaServicioComponent implements OnInit {
   isLoadings: boolean = true;
+  color: ThemePalette = 'warn';
+  inProgress: boolean = false;
+  progress: number = 0;
   _filtro: any = {
     oferta_id: '',
     Pageable: ''
@@ -87,6 +82,7 @@ export class OfertaServicioComponent implements OnInit {
     private commonService: CommonService,
     private ofertaServicioService: OfertaServicioService,
     private _router: Router,
+    private toastr: ToastrService
   ) {
   }
   resetAutoComplete(): void {
@@ -134,8 +130,8 @@ export class OfertaServicioComponent implements OnInit {
   crearNuevoServicio(ofertasDetalleId: number, ofertaId: number): any {
     return {
       ofertasDetalleId: ofertasDetalleId,
-      ofertaId: ofertaId,      
-      accionIsisIdPropuesto: 0,      
+      ofertaId: ofertaId,
+      accionIsisIdPropuesto: 0,
       bwActualActual: '',
       bwPropuesto: '',
       caudalBronceActual: '',
@@ -174,8 +170,8 @@ export class OfertaServicioComponent implements OnInit {
       longitud: '',
       nombreSede: '',
       numeroCdActual: '',
-      observacionesPropuesto: '',      
-      ofertaIsisPropuesto: '',      
+      observacionesPropuesto: '',
+      ofertaIsisPropuesto: '',
       otrosEquiposPropuesto: '',
       pozoTierraActual: '',
       precioPropuesto: 0,
@@ -198,13 +194,13 @@ export class OfertaServicioComponent implements OnInit {
       vrfPropuesto: '',
       vrf_actual: '',
       zonaSisego: '',
-      zoom: '',      
+      zoom: '',
       estado: 0,
       activo: true,
 
 
-      sede: '',       
-      ubigeo: '', geo: '', 
+      sede: '',
+      ubigeo: '', geo: '',
       //longitud: 0, latitud: 0,contacto: '', telefono: '', 
       circuito: "", nrocircuito: "", servicio: "",
       medio: "", bw: "", nrobw: "", ldn: "", nroldn: "", voz: "", nrovoz: "", video: "", nrovideo: "",
@@ -251,7 +247,7 @@ export class OfertaServicioComponent implements OnInit {
         // });
         this.dataSource = new MatTableDataSource<any>(this.dataSourceList.filter(function (obj) {
           return obj.estado == 0 || obj.estado == 1 || obj.estado == -1
-        }));        
+        }));
       }
     });
   }
@@ -286,6 +282,62 @@ export class OfertaServicioComponent implements OnInit {
       this.dataSource.filter = '';
     });
   }
+
+  guardarGastosOpex(): void {
+
+    const listOfertaOpex = this.dataSourceList.map(item => {
+      if (item.estado == 0) //Si es 0 Nuevo Registro
+        item.id = 0
+      else if (item.estado == 1)// Si es 1 Registro ha sido Actulizado
+        item.id = item.id
+      else if (item.estado == 2)
+        item.activo = false
+      var container = {
+        id: item.id,
+        ofertaId: item.ofertaId,
+        conceptoId: item.conceptoId,
+        nombre: item.nombre,
+        cantidad: item.cantidad,
+        meses: item.meses,
+        factor: item.factor,
+        moneda_id: item.moneda_id,
+        unitarioMensual: item.unitarioMensual,
+        totalMensual: item.totalMensual,
+        activo: item.activo,
+        estado: 0
+      };
+      return container;
+    });
+
+
+    this.inProgress = true;
+    this.ofertaServicioService.guardarservicios(listOfertaOpex).pipe(
+      map(event => {
+        switch (event.type) {
+          case HttpEventType.UploadProgress:
+            this.progress = Math.round(event.loaded * 100 / event.total);
+            break;
+          case HttpEventType.Response:
+            return event;
+        }
+      }),
+      catchError((error: HttpErrorResponse) => {
+        this.inProgress = false;
+        return of(`fallo al guardar.`);
+      })
+    ).subscribe((event: any) => {
+
+      if (typeof (event) === 'object') {
+        this.inProgress = false;
+        this.toastr.success('Se proceso correctamente la información!', '', {
+          progressBar: true,
+          progressAnimation: 'increasing',
+          closeButton: true
+        });
+      }
+    });
+  }
+
   /*
     public filtrarData() {
        var obj = {

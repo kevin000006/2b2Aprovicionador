@@ -22,6 +22,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-12">
+                    <mat-progress-bar [color]="color" [ngStyle]="{'visibility':inProgress==true ? 'visible' : 'hidden'}" [value]="progress"></mat-progress-bar>
                     <div class="table-responsive">
                         <mat-table #table mat-table [dataSource]="dataSource" style="width: 6000px;" matSort class="tb-oferta-equipamiento">
                             <ng-container matColumnDef="sede">
