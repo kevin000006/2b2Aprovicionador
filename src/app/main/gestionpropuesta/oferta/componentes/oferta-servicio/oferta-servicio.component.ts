@@ -48,6 +48,15 @@ export class OfertaServicioComponent implements OnInit {
   listTipoServicio = [];
   listViaAcceso = [];
   lstZonaSisego = [];
+  listLDN=[
+    {id:0,nombre:'NO'},
+    {id:1,nombre:'SI'}
+  ];
+  lstMedidaVelicidad=[
+    {id:'kbps',nombre:'Kbps'},
+    {id:'mbps',nombre:'Mbps'},
+    {id:'gbps',nombre:'Gbps'},
+  ];
 
   //public seldescrip: string;
   //https://stackblitz.com/edit/mat-paginator-select-page?embed=1
