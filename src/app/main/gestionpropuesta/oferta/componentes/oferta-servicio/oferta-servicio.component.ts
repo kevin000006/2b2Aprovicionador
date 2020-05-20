@@ -47,14 +47,14 @@ export class OfertaServicioComponent implements OnInit {
   listTipoServicio = [];
   listViaAcceso = [];
   lstZonaSisego = [];
-  listLDN=[
-    {id:0,nombre:'NO'},
-    {id:1,nombre:'SI'}
+  listLDN = [
+    { id: 0, nombre: 'NO' },
+    { id: 1, nombre: 'SI' }
   ];
-  lstMedidaVelicidad=[
-    {id:'kbps',nombre:'Kbps'},
-    {id:'mbps',nombre:'Mbps'},
-    {id:'gbps',nombre:'Gbps'},
+  lstMedidaVelicidad = [
+    { id: 'kbps', nombre: 'Kbps' },
+    { id: 'mbps', nombre: 'Mbps' },
+    { id: 'gbps', nombre: 'Gbps' },
   ];
 
   //public seldescrip: string;
@@ -138,7 +138,7 @@ export class OfertaServicioComponent implements OnInit {
     this.commonService.getAccionIsisAll().subscribe(data => {
       this.listAccionIsis = data;
     });
-    this.ofertaServicioService.obtenerOfertasDetalle({ oferta_id: 5, page:0 }).subscribe(data => {
+    this.ofertaServicioService.obtenerOfertasDetalle({ oferta_id: this.ofertaBase.id, page: 0 }).subscribe(data => {
       if (data != null) {
         this.dataSourceList = data;
         this.dataSource.data = data;
@@ -147,7 +147,7 @@ export class OfertaServicioComponent implements OnInit {
     });
   }
   crearNuevoServicio(ofertasDetalleId: number, ofertaId: number): OfertaDetalleModel {
-    return { 
+    return {
       clienteId: 0,
       ofertasDetalleId: ofertasDetalleId,
       ofertaId: ofertaId,
@@ -228,7 +228,7 @@ export class OfertaServicioComponent implements OnInit {
       zoom: '',
       estado: 0,
       activo: true,
-      isLoading: false           
+      isLoading: false
       //, lstZonaSisego: []
     };
   }
@@ -309,10 +309,10 @@ export class OfertaServicioComponent implements OnInit {
       else if (item.estado == 2)
         item.activo = false
       var container = {
-        bw_actual: item.bwActualActual ,
+        bw_actual: item.bwActualActual,
         bronce_actual: item.caudalBronceActual,
-        bronce_propuesto: item.caudalBroncePropuesto,        
-        bw_propuesto: item.bwPropuesto,        
+        bronce_propuesto: item.caudalBroncePropuesto,
+        bw_propuesto: item.bwPropuesto,
         contacto: item.contacto,
         dias: 0,
         direccion: item.direccion,
