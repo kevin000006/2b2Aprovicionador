@@ -7,7 +7,7 @@
                         <mat-icon>add</mat-icon>
                     </button>
                 </div>
-                <div class="col-xs-12 col-md-2">
+                <!-- <div class="col-xs-12 col-md-2">
                     <mat-form-field color="accent" appearance="legacy" [style.fontSize.px]="12">
                         <mat-label>Selecciona número por Pagina</mat-label>
                         <mat-select>
@@ -18,7 +18,7 @@
                             <mat-option value="5">50 por pagina</mat-option>
                         </mat-select>
                     </mat-form-field>
-                </div>
+                </div> -->
             </div>
             <div class="form-group">
                 <div class="col-sm-12">
@@ -89,7 +89,9 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="circuito">
+
+                            <!--servicioActual-->
+                            <ng-container matColumnDef="servicioActual_circuito">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Circuito </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
@@ -101,7 +103,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="nrocircuito">
+                            <ng-container matColumnDef="servicioActual_nrocircuito">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Nº de circuito </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
@@ -109,19 +111,19 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="servicio">
+                            <ng-container matColumnDef="servicioActual_servicio">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Servicio </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <mat-select [(ngModel)]="row.servicio">
+                                        <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
+                                        <mat-select [(ngModel)]="row.tipoServicioIdActual">
                                             <mat-option value="">--Seleccione--</mat-option>
                                             <mat-option [value]="o.id" *ngFor="let o of listTipoServicio">{{o.descripcion}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-
-                            <ng-container matColumnDef="medio">
+                            <ng-container matColumnDef="servicioActual_medio">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Medio </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
@@ -132,11 +134,13 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="bw">
+                            <ng-container matColumnDef="servicioActual_bw">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> BW </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
-                                        <mat-select [(ngModel)]="row.bw">
+                                        <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
+                                        <mat-select [(ngModel)]="row.bwActualActual">
+                                            <mat-option value="">--Seleccione--</mat-option>
                                             <mat-option [value]="o.id" *ngFor="let o of lstMedidaVelicidad">{{o.nombre}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
@@ -145,7 +149,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="ldn">
+                            <ng-container matColumnDef="servicioActual_ldn">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> LDN </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
@@ -155,7 +159,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="voz">
+                            <ng-container matColumnDef="servicioActual_voz">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Voz </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
@@ -168,7 +172,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="video">
+                            <ng-container matColumnDef="servicioActual_video">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Video </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
@@ -181,7 +185,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="platinium">
+                            <ng-container matColumnDef="servicioActual_platinium">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Platinium </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
@@ -194,7 +198,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="oro">
+                            <ng-container matColumnDef="servicioActual_oro">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Oro </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
@@ -207,7 +211,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="plata">
+                            <ng-container matColumnDef="servicioActual_plata">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Plata </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
@@ -220,7 +224,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="bronce">
+                            <ng-container matColumnDef="servicioActual_bronce">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Bronce </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
@@ -233,7 +237,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="equipoterminal">
+                            <ng-container matColumnDef="servicioActual_equipoterminal">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Equipo Terminal</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
@@ -241,7 +245,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="router">
+                            <ng-container matColumnDef="servicioActual_router">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Router</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
@@ -249,7 +253,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="otro">
+                            <ng-container matColumnDef="servicioActual_otro">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Otros </mat-header-cell>
                                 <mat-cell *matCellDef="let element">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
@@ -257,7 +261,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="facturacion">
+                            <ng-container matColumnDef="servicioActual_facturacion">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Facturación</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
@@ -265,7 +269,9 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="acccionisis">
+
+                            <!--servicioPropuesto-->
+                            <ng-container matColumnDef="servicioPropuesto_acccionisis">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Acción ISIS </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
@@ -277,11 +283,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-
-
-
-
-                            <ng-container matColumnDef="tiposede">
+                            <ng-container matColumnDef="servicioPropuesto_tiposede">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo Sede </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
@@ -293,9 +295,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-
-
-                            <ng-container matColumnDef="modo">
+                            <ng-container matColumnDef="servicioPropuesto_modo">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Modo </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
@@ -307,9 +307,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-
-
-                            <ng-container matColumnDef="circuitos">
+                            <ng-container matColumnDef="servicioPropuesto_circuito">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Circuito </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
@@ -321,8 +319,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-
-                            <ng-container matColumnDef="numerocurcuitos">
+                            <ng-container matColumnDef="servicioPropuesto_nrocircuito">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Nº de circuito</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
@@ -330,8 +327,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-
-                            <ng-container matColumnDef="servicios">
+                            <ng-container matColumnDef="servicioPropuesto_servicio">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Servicio </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
@@ -343,8 +339,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-
-                            <ng-container matColumnDef="medios">
+                            <ng-container matColumnDef="servicioPropuesto_medio">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Medio </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
@@ -356,8 +351,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-
-                            <ng-container matColumnDef="sva">
+                            <ng-container matColumnDef="servicioPropuesto_sva">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>SVA</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
@@ -365,8 +359,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-
-                            <ng-container matColumnDef="svadescripcion">
+                            <ng-container matColumnDef="servicioPropuesto_svadescripcion">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>SVA - Descripción</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
@@ -374,11 +367,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-
-
-
-
-                            <ng-container matColumnDef="bws">
+                            <ng-container matColumnDef="servicioPropuesto_bw">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> BW </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
@@ -391,20 +380,19 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="ldns">
+
+                            <!--Caudales-->
+                            <ng-container matColumnDef="servicioPropuesto_ldn">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> LDN </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
-                                    <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
+                                    <mat-form-field color="accent" style="text-align: center; width: 80%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
                                         <mat-select [(ngModel)]="row.ldn">
                                             <mat-option [value]="o.id" *ngFor="let o of listLDN">{{o.nombre}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
-                                    <mat-form-field color="accent" style="text-align: center; width: 40%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput [(ngModel)]="row.nroldn" type="text">
-                                    </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="vozs">
+                            <ng-container matColumnDef="servicioPropuesto_voz">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Voz </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
@@ -417,11 +405,12 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="videos">
+                            <ng-container matColumnDef="servicioPropuesto_video">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Video </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
-                                        <mat-select [(ngModel)]="row.video">
+                                        <mat-select [(ngModel)]="row.caudalVideoActual">
+                                            <mat-option value="">--Seleccione--</mat-option>
                                             <mat-option [value]="o.id" *ngFor="let o of lstMedidaVelicidad">{{o.nombre}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
@@ -430,7 +419,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="platiniums">
+                            <ng-container matColumnDef="servicioPropuesto_platinium">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Platinium </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
@@ -443,7 +432,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="oros">
+                            <ng-container matColumnDef="servicioPropuesto_oro">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Oro </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
@@ -456,7 +445,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="platas">
+                            <ng-container matColumnDef="servicioPropuesto_plata">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Plata </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
@@ -469,7 +458,9 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="bronces">
+
+
+                            <ng-container matColumnDef="servicioPropuesto_bronce">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Bronce </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
@@ -484,8 +475,8 @@
                             </ng-container>
 
 
-
-                            <ng-container matColumnDef="equipoterminals">
+                            <!--Equipos-->
+                            <ng-container matColumnDef="equipos_equipoterminal">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Equipo Terminal</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
@@ -493,7 +484,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="routers">
+                            <ng-container matColumnDef="equipos_routers">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Router</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
@@ -501,7 +492,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="otros">
+                            <ng-container matColumnDef="equipos_otros">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Otros </mat-header-cell>
                                 <mat-cell *matCellDef="let element">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
@@ -509,7 +500,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="precio">
+                            <ng-container matColumnDef="equipos_precio">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Precio</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
@@ -517,7 +508,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="observaciones">
+                            <ng-container matColumnDef="equipos_observaciones">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Observaciones</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
@@ -535,6 +526,7 @@
                                 </mat-cell>
                             </ng-container>
 
+                            <!--sisego-->
                             <ng-container matColumnDef="sesego">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>SISEGO</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
@@ -543,8 +535,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-
-                            <ng-container matColumnDef="zona">
+                            <ng-container matColumnDef="sisego_zona">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Zona </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
@@ -556,7 +547,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="ultimamilla">
+                            <ng-container matColumnDef="sisego_ultimamilla">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Ultima Mila S/.</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
@@ -564,8 +555,7 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-
-                            <ng-container matColumnDef="diasejecucion">
+                            <ng-container matColumnDef="sisego_diasejecucion">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Dias de ejecución</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
@@ -573,7 +563,6 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-
 
                             <ng-container matColumnDef="accion" stickyEnd>
                                 <mat-header-cell *matHeaderCellDef> </mat-header-cell>

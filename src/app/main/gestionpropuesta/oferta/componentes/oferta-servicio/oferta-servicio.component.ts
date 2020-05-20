@@ -7,10 +7,9 @@ import { AlertConfirmComponent } from '../alertConfirm/alertConfirm.component';
 import { GeodialogComponent } from '../geoDialog/geoDialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CommonService } from 'app/common.service';
-import { OfertaDetalleModel, BandejaModel } from '../../../models/oferta';
+import { OfertaDetalleModel } from '../../../models/oferta';
 import * as $ from 'jquery';
 import { OfertaServicioService } from './oferta-servicio.service';
-import * as Cookies from 'js-cookie';
 import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { of } from 'rxjs';
@@ -39,8 +38,8 @@ export class OfertaServicioComponent implements OnInit {
   };
   pageIndex: number = 0;
   //https://stackblitz.com/edit/angular-material-autocomplete-async2?file=src%2Fapp%2Fapp.component.html
-  lstBandeja = new Array<OfertaDetalleModel>();
-  dataSourceList: any[];
+  //lstBandeja = new Array<OfertaDetalleModel>();
+  dataSourceList: OfertaDetalleModel[];
   listAccionIsis = [];
   listTipoEnlace = [];
   listCondicionEnlace = [];
@@ -62,16 +61,26 @@ export class OfertaServicioComponent implements OnInit {
   //https://stackblitz.com/edit/mat-paginator-select-page?embed=1
 
   displayedColumns: string[] = [
-    'sede', 'direccion', 'ubigeo', 'geo',
-    'contacto', 'telefono', 'circuito', 'nrocircuito',
-    'servicio', 'medio', 'bw', 'ldn', 'voz', 'video',
-    'platinium', 'oro', 'plata', 'bronce',
-    'equipoterminal', 'router', 'otro', 'facturacion',
-    'acccionisis',
+    'sede', 'direccion', 'ubigeo', 'geo', 'contacto', 'telefono',
 
-    'tiposede', 'modo', 'circuitos', 'numerocurcuitos', 'servicios', 'medios', 'sva', 'svadescripcion',
-    'bws', 'ldns', 'vozs', 'videos', 'platiniums', 'oros', 'platas', 'bronces',
-    'equipoterminals', 'routers', 'otros', 'precio', 'observaciones', 'ofertaisis', 'sesego', 'zona', 'ultimamilla', 'diasejecucion',
+    'servicioActual_circuito', 'servicioActual_nrocircuito', 'servicioActual_servicio',
+    'servicioActual_medio', 'servicioActual_bw', 'servicioActual_ldn',
+    'servicioActual_voz', 'servicioActual_video', 'servicioActual_platinium',
+    'servicioActual_oro', 'servicioActual_plata', 'servicioActual_bronce', 'servicioActual_equipoterminal',
+    'servicioActual_router', 'servicioActual_otro', 'servicioActual_facturacion',
+
+    'servicioPropuesto_acccionisis', 'servicioPropuesto_tiposede',
+    'servicioPropuesto_modo', //Parece que esto es el campo Condicion    
+    'servicioPropuesto_circuito', 'servicioPropuesto_nrocircuito',
+    'servicioPropuesto_servicio', 'servicioPropuesto_medio',
+    'servicioPropuesto_sva', 'servicioPropuesto_svadescripcion',//creo que son campos nuevo agregado pos jorge
+    'servicioPropuesto_bw',
+    'servicioPropuesto_ldn', 'servicioPropuesto_voz', 'servicioPropuesto_video', 'servicioPropuesto_platinium', 'servicioPropuesto_oro', 'servicioPropuesto_plata', //nuevos campos agregado por jorge
+    'servicioPropuesto_bronce',
+
+    'equipos_equipoterminal', 'equipos_routers', 'equipos_otros', 'equipos_precio', 'equipos_observaciones', 'ofertaisis',
+
+    'sesego', 'sisego_zona', 'sisego_ultimamilla', 'sisego_diasejecucion',
 
     'accion'];
   exampleDatabase: OfertaServicioService | null;
@@ -136,86 +145,178 @@ export class OfertaServicioComponent implements OnInit {
       }
     });
   }
-  crearNuevoServicio(ofertasDetalleId: number, ofertaId: number): any {
-    return {
+  crearNuevoServicio(ofertasDetalleId: number, ofertaId: number): OfertaDetalleModel {
+    return { 
+      clienteId: 0,
       ofertasDetalleId: ofertasDetalleId,
       ofertaId: ofertaId,
-      accionIsisIdPropuesto: 0,
-      bwActualActual: '',
-      bwPropuesto: '',
-      caudalBronceActual: '',
-      caudalBroncePropuesto: '',
-      caudalLdnActual: '',
-      caudalLdnPropuesto: '',
-      caudalOroActual: '',
-      caudalOroPropuesto: '',
-      caudalPlataPropuesto: '',
-      caudalPlatinumActual: '',
-      caudalPlatinumPropuesto: '',
-      caudalVideoActual: '',
-      caudalVideoPropuesto: '',
-      caudalVozActual: '',
-      caudalVozPropuesto: '',
-      caudal_plata_actual: '',
-      clienteId: 0,
-      codigoSisego: '',
-      componentesPropuesto: '',
-      contacto: '',
-      costoUltimaMilla: 0,
-      departamentoId: 0,
-      descripcionSvaPropuesto: '',
-      detalleAccionEnlacePropuesto: '',
-      diasEjecucion: 0,
+      nombreSede: '',
       direccion: '',
+      departamentoId: 0,
+      provinciaId: 0,
       distritoId: 0,
-      dteActual: 0,
-      equipoStockPropuesto: '',
-      equipoTerminalActual: '',
-      equipoTerminalPropuesto: '',
-      equipo_adicional_actual: '',
-      facturacion_actual: 0,
-      fechaLlegadaPropuesto: '',
       latitud: '',
       longitud: '',
-      nombreSede: '',
-      numeroCdActual: '',
-      observacionesPropuesto: '',
-      ofertaIsisPropuesto: '',
-      otrosEquiposPropuesto: '',
-      pozoTierraActual: '',
-      precioPropuesto: 0,
-      provinciaId: 0,
-      recursoTransporteActual: '',
-      routerPropuesto: '',
-      routerSwitchActual: '',
-      secuencia: 0,
-      segmentoSatelitalActual: 0,
-      svaPropuesto: '',
+      contacto: '',
       telefono: '',
-      tipoAntenaActual: '',
+      //Servicio Actual
       tipoCircuitoActual: '',
-      tipoCircuitoIdPropuesto: 0,
       tipoServicioIdActual: 0,
+      //servicioActual_medio  ==>  falta este atributo
+      bwActualActual: '',
+      caudalLdnActual: '',
+      caudalVozActual: '',
+      caudalVideoActual: '',
+      caudalPlatinumActual: '',
+      caudalOroActual: '',
+      caudal_plata_actual: '',
+      caudalBronceActual: '',
+      equipoTerminalActual: '',
+      routerSwitchActual: '',
+      facturacion_actual: 0,
+      //servicioActual_otro ==> facta  estre atributo
+      equipo_adicional_actual: '',
+
+      //Servicio Propuesto y Caudal presupuesto
+      accionIsisIdPropuesto: 0,
+      //servicioPropuesto_tiposede ==> falta estre atributo
+      //servicioPropuesto_modo ==> falta estre atributo
+      tipoCircuitoIdPropuesto: 0,
+      //servicioPropuesto_nrocircuito ==> falta estre atributo
       tipoServicioIdPropuesto: 0,
-      ultimaMillaActual: 0,
-      upsActual: '',
+      //servicioPropuesto_medio ==> falta estre atributo
+      svaPropuesto: '',
+      descripcionSvaPropuesto: '',
+      bwPropuesto: '',
+      caudalLdnPropuesto: '',
+      caudalVozPropuesto: '',
+      caudalVideoPropuesto: '',
+      caudalPlatinumPropuesto: '',
+      caudalOroPropuesto: '',
+      caudalPlataPropuesto: '',
+      caudalBroncePropuesto: '',
+
+      equipoTerminalPropuesto: '',
+      routerPropuesto: '',
+      otrosEquiposPropuesto: '',
+      precioPropuesto: 0,
+      observacionesPropuesto: '',
+
+      ofertaIsisPropuesto: '',
+      codigoSisego: '',
+      zonaSisego: '',
+      costoUltimaMilla: 0,
+      diasEjecucion: 0,
+
+      componentesPropuesto: '',
+      fechaLlegadaPropuesto: '',
+      equipoStockPropuesto: '',
       viaAccesoIdPropuesto: 0,
       vrfPropuesto: '',
+      detalleAccionEnlacePropuesto: '',
+      dteActual: 0,
+      numeroCdActual: '',
+      pozoTierraActual: '',
+      recursoTransporteActual: '',
+      segmentoSatelitalActual: 0,
+      tipoAntenaActual: '',
+      secuencia: 0,
+      ultimaMillaActual: 0,
+      upsActual: '',
       vrf_actual: '',
-      zonaSisego: '',
       zoom: '',
       estado: 0,
       activo: true,
+      isLoading: false
+      // clienteId: 0,
+      // ofertasDetalleId: ofertasDetalleId,
+      // ofertaId: ofertaId,
+      // nombreSede: '',
+      // direccion: '',
+      // departamentoId: 0,      
+      // provinciaId: 0,
+      // distritoId: 0,
+      // latitud: '',
+      // longitud: '',            
+      // contacto: '',
+      // telefono: '',
+
+      // tipoCircuitoActual: '',
+      // tipoServicioIdActual: 0,
+      // bwActualActual: '',
+      // caudalLdnActual: '',
+      // caudalVozActual: '',
+      // caudalVideoActual: '',
+      // caudalPlatinumActual: '',
+      // caudalOroActual: '',
+      // caudal_plata_actual: '',
+      // caudalBronceActual: '',      
+      // equipoTerminalActual: '',
+      // routerSwitchActual: '',
 
 
-      sede: '',
-      ubigeo: '', geo: '',
-      //longitud: 0, latitud: 0,contacto: '', telefono: '', 
-      circuito: "", nrocircuito: "", servicio: "",
-      medio: "", bw: "", nrobw: "", ldn: "", nroldn: "", voz: "", nrovoz: "", video: "", nrovideo: "",
-      platinium: "", nroplatinium: "", oro: "", nrooro: "", plata: "", nroplata: "", bronce: "", nrobronce: "",
-      equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "", condicionenlace: "", isLoading: false
-      , lstZonaSisego: []
+      // accionIsisIdPropuesto: 0,
+      // bwPropuesto: '',      
+      // caudalBroncePropuesto: '',      
+      // caudalOroPropuesto: '',
+      // caudalPlataPropuesto: '',      
+      // caudalPlatinumPropuesto: '',      
+      // caudalVideoPropuesto: '',
+      // caudalLdnPropuesto: '',      
+      // caudalVozPropuesto: '',
+      // componentesPropuesto: '',
+      // descripcionSvaPropuesto: '',
+      // detalleAccionEnlacePropuesto: '',
+
+
+      // equipoStockPropuesto: '',     
+      // codigoSisego: '',            
+      // costoUltimaMilla: 0,      
+      // diasEjecucion: 0,      
+      // dteActual: 0,
+
+
+      // equipoTerminalPropuesto: '',
+      // equipo_adicional_actual: '',
+      // facturacion_actual: 0,
+      // fechaLlegadaPropuesto: '',
+
+      // numeroCdActual: '',
+      // observacionesPropuesto: '',
+      // ofertaIsisPropuesto: '',
+      // otrosEquiposPropuesto: '',
+      // pozoTierraActual: '',
+      // precioPropuesto: 0,      
+      // recursoTransporteActual: '',
+      // routerPropuesto: '',
+
+      // secuencia: 0,
+      // segmentoSatelitalActual: 0,
+      // svaPropuesto: '',      
+      // tipoAntenaActual: '',      
+
+      // tipoCircuitoIdPropuesto: 0,
+
+      // tipoServicioIdPropuesto: 0,
+      // ultimaMillaActual: 0,
+      // upsActual: '',
+      // viaAccesoIdPropuesto: 0,
+      // vrfPropuesto: '',
+      // vrf_actual: '',
+      // zonaSisego: '',
+      // zoom: '',
+      // estado: 0,
+      // activo: true,
+      // isLoading: false
+
+      // sede: '',
+      // ubigeo: '', geo: '',
+      // //longitud: 0, latitud: 0,contacto: '', telefono: '', 
+      // circuito: "", nrocircuito: "", servicio: "",
+      // medio: "", bw: "", nrobw: "", ldn: "", nroldn: "", voz: "", nrovoz: "", video: "", nrovideo: "",
+      // platinium: "", nroplatinium: "", oro: "", nrooro: "", plata: "", nroplata: "", bronce: "", nrobronce: "",
+      // equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "", condicionenlace: "", isLoading: false
+      // , lstZonaSisego: []
     };
   }
   addRow(): void {
@@ -250,10 +351,7 @@ export class OfertaServicioComponent implements OnInit {
           this.dataSourceList.splice(ObjectIndex, 1);
         } else // si el registro ya existe en la base de datos se actualizara el estado 2: Inactivo
           objetoOfertaOpex.estado = 2;
-        //Listamos los registro que estan agregado o modificados                
-        // this.dataSourceList = this.dataSourceList.filter(function (obj) {
-        //   return obj.estado == 0 || obj.estado == 1 || obj.estado == -1
-        // });
+        //Listamos los registro que estan agregado o modificados                        
         this.dataSource = new MatTableDataSource<any>(this.dataSourceList.filter(function (obj) {
           return obj.estado == 0 || obj.estado == 1 || obj.estado == -1
         }));
@@ -262,7 +360,6 @@ export class OfertaServicioComponent implements OnInit {
   }
 
   geoDialog(item: any): void {
-    console.log(item);
     const dialogRef = this.dialog.open(GeodialogComponent, {
       width: '500px',
       data: item
@@ -270,6 +367,13 @@ export class OfertaServicioComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
 
+      item.longitud = result.lng;
+      item.latitud = result.lat;
+
+      /*
+      lat: -17.9966159197085
+lng: -70.2190587197085
+      */
       var settings = {
         "url": "https://cors-anywhere.herokuapp.com/http://200.48.131.82/Api/zonafibra",
         "method": "POST",
@@ -293,34 +397,84 @@ export class OfertaServicioComponent implements OnInit {
   }
 
   guardarGastosOpex(): void {
-
-    const listOfertaOpex = this.dataSourceList.map(item => {
+    const listOfertaDetalle = this.dataSourceList.map(item => {
       if (item.estado == 0) //Si es 0 Nuevo Registro
-        item.id = 0
+        item.ofertasDetalleId = 0
       else if (item.estado == 1)// Si es 1 Registro ha sido Actulizado
-        item.id = item.id
+        item.ofertasDetalleId = item.ofertasDetalleId
       else if (item.estado == 2)
         item.activo = false
       var container = {
-        id: item.id,
-        ofertaId: item.ofertaId,
-        conceptoId: item.conceptoId,
-        nombre: item.nombre,
-        cantidad: item.cantidad,
-        meses: item.meses,
-        factor: item.factor,
-        moneda_id: item.moneda_id,
-        unitarioMensual: item.unitarioMensual,
-        totalMensual: item.totalMensual,
-        activo: item.activo,
-        estado: 0
+        bw_actual: item.bwActualActual ,
+        bronce_actual: item.caudalBronceActual,
+        bronce_propuesto: item.caudalBroncePropuesto,        
+        bw_propuesto: item.bwPropuesto,        
+        contacto: item.contacto,
+        dias: 0,
+        direccion: item.direccion,
+        equipo: item.equipoTerminalActual,
+        equipo2: item.equipoTerminalPropuesto,
+        facturacion: item.facturacion_actual,
+        id: 0,
+        idaccionisis: 0,
+        idcircuito: item.tipoCircuitoActual,
+        idcircuito2: item.tipoCircuitoIdPropuesto,
+        iddistrito: item.distritoId,
+        idmedio: 0,
+        idmedio2: 0,
+        idmodo: 0,
+        idservicio: item.tipoServicioIdActual,
+        idservicio2: item.tipoServicioIdPropuesto,
+        idtiposede: 0,
+        lat: item.latitud,
+        ldn_actual: item.caudalLdnActual,
+        ldn_propuesto: item.caudalLdnPropuesto,
+        lon: item.longitud,
+        ncircuito: item.tipoCircuitoActual,
+        ncircuito2: item.tipoCircuitoIdPropuesto,
+        observaciones: item.observacionesPropuesto,
+        ofertaisis: item.ofertaIsisPropuesto,
+        oro_actual: item.caudalOroActual,
+        oro_propuesto: item.caudalOroPropuesto,
+        otros: '',
+        otros2: '',
+        plata_actual: item.caudal_plata_actual,
+        plata_propuesto: item.caudalPlataPropuesto,
+        platinium_actual: item.caudalPlatinumActual,
+        platinium_propuesto: item.caudalPlatinumPropuesto,
+        precio: 0,
+        router: item.routerSwitchActual,
+        router2: item.routerPropuesto,
+        sede: item.nombreSede,
+        sisego: item.codigoSisego,
+        sva: item.svaPropuesto,
+        svadescripcion: item.descripcionSvaPropuesto,
+        telefono: item.telefono,
+        ultima: 0,
+        video_actual: item.caudalVideoActual,
+        video_propuesto: item.caudalVideoPropuesto,
+        voz_actual: item.caudalVozActual,
+        voz_propuesto: item.caudalVozPropuesto,
+        zona: item.zonaSisego
+        // id: item.id,
+        // ofertaId: item.ofertaId,
+        // conceptoId: item.conceptoId,
+        // nombre: item.nombre,
+        // cantidad: item.cantidad,
+        // meses: item.meses,
+        // factor: item.factor,
+        // moneda_id: item.moneda_id,
+        // unitarioMensual: item.unitarioMensual,
+        // totalMensual: item.totalMensual,
+        // activo: item.activo,
+        // estado: 0
       };
       return container;
     });
 
 
     this.inProgress = true;
-    this.ofertaServicioService.guardarservicios(listOfertaOpex).pipe(
+    this.ofertaServicioService.guardarservicios(listOfertaDetalle).pipe(
       map(event => {
         switch (event.type) {
           case HttpEventType.UploadProgress:
@@ -346,41 +500,6 @@ export class OfertaServicioComponent implements OnInit {
       }
     });
   }
-
-  /*
-    public filtrarData() {
-       var obj = {
-        oferta_id: this._filtro.oferta_id,
-        page:this.pageIndex,
-        size:this.pagesize.nativeElement.value
-      }
-  
-      this.dataSource.filtrar(obj,this.pagesize.nativeElement.value);
-    }
-  
-    public loadData() {
-      this.exampleDatabase = new OfertaServicioService(this.httpClient);
-  
-      this.dataSource = new EjemploDataSource(this.exampleDatabase, this.sort);
-      fromEvent(this.filter.nativeElement, 'keyup')
-        .subscribe(() => {
-          if (!this.dataSource) {
-            return;
-          }
-          this.dataSource.filter = this.filter.nativeElement.value;
-        });
-  
-       /* fromEvent(this.pagesize.nativeElement, 'change')
-        .subscribe(() => {
-          if (!this.dataSource) {
-            return;
-          }
-          this.filtrarData();
-        });/
-  
-    }
-  */
-
 }
 // const dataSourceList: ServicioElement[] = [
 //   {
