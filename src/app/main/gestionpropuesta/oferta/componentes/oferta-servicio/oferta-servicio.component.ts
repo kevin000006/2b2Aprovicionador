@@ -138,7 +138,7 @@ export class OfertaServicioComponent implements OnInit {
     this.commonService.getAccionIsisAll().subscribe(data => {
       this.listAccionIsis = data;
     });
-    this.ofertaServicioService.obtenerOfertasDetalle({ oferta_id: this.ofertaBase.id }).subscribe(data => {
+    this.ofertaServicioService.obtenerOfertasDetalle({ oferta_id: 5, page:0 }).subscribe(data => {
       if (data != null) {
         this.dataSourceList = data;
         this.dataSource.data = data;

@@ -27,7 +27,7 @@
                                         <input matInput [(ngModel)]="row.nombre" type="text">
                                     </mat-form-field>
                                 </mat-cell>
-                                <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                               
                             </ng-container>
                             <ng-container matColumnDef="cantidad">
                                 <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
@@ -36,7 +36,7 @@
                                         <input matInput (input)="inputChangeCantidad($event.target.value,element)" [(ngModel)]="element.cantidad" type="number">
                                     </mat-form-field>
                                 </mat-cell>
-                                <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                               
                             </ng-container>
                             <ng-container matColumnDef="nromeses">
                                 <mat-header-cell *matHeaderCellDef> Nro. Meses </mat-header-cell>
@@ -45,13 +45,13 @@
                                         <input matInput (input)="inputChangeNumeroMeses($event.target.value,element)" [(ngModel)]="element.meses" type="number">
                                     </mat-form-field>
                                 </mat-cell>
-                                <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                               
                             </ng-container>
                             <ng-container matColumnDef="factor">
                                 <mat-header-cell *matHeaderCellDef style="flex: 0 0 4% !important"> Factor </mat-header-cell>
                                 <mat-cell *matCellDef="let element" style="flex: 0 0 4% !important"> {{element.factor == 0 ? '':element.factor}} </mat-cell>
                                 <mat-footer-cell *matFooterCellDef style="background: #f8f9fa;font-family: telefonicabold;">
-                                    <h1 style="font-size: 11px;">Total $: </h1>
+                                    
                                 </mat-footer-cell>
                             </ng-container>
 
@@ -64,9 +64,7 @@
                                         </mat-select>
                                     </mat-form-field>
                                 </mat-cell>
-                                <mat-footer-cell *matFooterCellDef style="background: #f8f9fa;font-family: telefonicabold;justify-content: flex-end;">
-                                    <h1 style="font-size: 11px;"> {{ calcularTotalDolares()| number:'2.2-5' }}</h1>
-                                </mat-footer-cell>
+                               
                             </ng-container>
 
                             <ng-container matColumnDef="montounitmenusal">
@@ -76,16 +74,14 @@
                                         <input matInput (input)="inputChangeMontoUnitarioMensual($event.target.value,row)" [(ngModel)]="row.unitarioMensual" type="number" step="0.01">
                                     </mat-form-field>
                                 </mat-cell>
-                                <mat-footer-cell *matFooterCellDef style="background: #f8f9fa;font-family: telefonicabold;">
-                                    <h1 style="font-size: 11px;">Total S/:</h1>
-                                </mat-footer-cell>
+                              
                             </ng-container>
 
                             <ng-container matColumnDef="montototalmensual">
                                 <mat-header-cell *matHeaderCellDef> Monto Total S./</mat-header-cell>
                                 <mat-cell *matCellDef="let element" style="justify-content: flex-end;"> {{element.totalMensual| number:'2.2-5'}} </mat-cell>
                                 <mat-footer-cell *matFooterCellDef style="background: #f8f9fa;font-family: telefonicabold;justify-content: flex-end;">
-                                    <h1 style="font-size: 11px; ">{{ calcularTotalSoles() | number:'2.2-5' }}</h1>
+                                   
                                 </mat-footer-cell>
                             </ng-container>
                             <ng-container matColumnDef="accion">
@@ -100,12 +96,33 @@
                                         <mat-icon>more_vert</mat-icon>
                                     </button>
                                 </mat-cell>
-                                <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                               
                             </ng-container>
                             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                             <mat-row *matRowDef="let row; columns: displayedColumns; let i = index;" [ngClass]=" i % 2 != 0 ? 'row-color-tb' : ''"></mat-row>
-                            <mat-footer-row class="footerRow" *matFooterRowDef="['accion', 'concepto', 'cantidad', 'nromeses', 'factor', 'moneda', 'montounitmenusal', 'montototalmensual']"></mat-footer-row>
                         </mat-table>
+                        <div class="">
+                            <div class="totales">
+                                <div class="monto separador"></div>
+                                 <div class="monto soles">
+                                     <div class="content">
+                                         <div class="desc"> Total $ </div>
+                                         <div class="total">
+                                            {{ calcularTotalDolares()| number:'2.2-5' }}
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="monto dolares">
+                                     <div class="content">
+                                         <div class="desc"> Total S/. </div>
+                                         <div class="total">
+                                            
+                                            {{ calcularTotalSoles() | number:'2.2-5' }}
+                                         </div>
+                                     </div>
+                                 </div>
+                            </div> 
+                         </div>
                     </div>
                 </div>
             </div>

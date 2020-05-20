@@ -60,10 +60,10 @@ export class CommonService{
         return this.http.post<ConceptosOpexModel[]>('/conceptoopex/findAll', null);
     }
     getTipoEnlaceAll(): Observable<TipoEnlaceModel[]> {
-        return this.http.post<TipoEnlaceModel[]>('/moneda/findAll', null);
+        return this.http.post<TipoEnlaceModel[]>('/tipoenlace/findAll', null);
     }
     getCondicionEnlaceAll(): Observable<CondicionEnlaceModel[]> {
-        return this.http.post<CondicionEnlaceModel[]>('/moneda/findAll', null);
+        return this.http.post<CondicionEnlaceModel[]>('/condicionenlace/findAll', null);
     } 
     getTipoCircuitoAll(): Observable<TipoCircuitoModel[]> {
         return this.http.post<TipoCircuitoModel[]>('/tipoCircuito/findAll', null);
