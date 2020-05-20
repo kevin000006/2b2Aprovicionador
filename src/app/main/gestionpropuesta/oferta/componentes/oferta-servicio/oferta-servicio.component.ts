@@ -133,6 +133,7 @@ export class OfertaServicioComponent implements OnInit {
     });
     this.commonService.getViaAccesoAll().subscribe(data => {
       this.listViaAcceso = data;
+      //console.log(this.listViaAcceso);
     });
     this.commonService.getAccionIsisAll().subscribe(data => {
       this.listAccionIsis = data;
@@ -161,7 +162,7 @@ export class OfertaServicioComponent implements OnInit {
       telefono: '',
       //Servicio Actual
       tipoCircuitoActual: '',
-      tipoServicioIdActual: 0,
+      tipoServicioIdActual: -1,
       //servicioActual_medio  ==>  falta este atributo
       bwActualActual: '',
       caudalLdnActual: '',
@@ -227,96 +228,8 @@ export class OfertaServicioComponent implements OnInit {
       zoom: '',
       estado: 0,
       activo: true,
-      isLoading: false
-      // clienteId: 0,
-      // ofertasDetalleId: ofertasDetalleId,
-      // ofertaId: ofertaId,
-      // nombreSede: '',
-      // direccion: '',
-      // departamentoId: 0,      
-      // provinciaId: 0,
-      // distritoId: 0,
-      // latitud: '',
-      // longitud: '',            
-      // contacto: '',
-      // telefono: '',
-
-      // tipoCircuitoActual: '',
-      // tipoServicioIdActual: 0,
-      // bwActualActual: '',
-      // caudalLdnActual: '',
-      // caudalVozActual: '',
-      // caudalVideoActual: '',
-      // caudalPlatinumActual: '',
-      // caudalOroActual: '',
-      // caudal_plata_actual: '',
-      // caudalBronceActual: '',      
-      // equipoTerminalActual: '',
-      // routerSwitchActual: '',
-
-
-      // accionIsisIdPropuesto: 0,
-      // bwPropuesto: '',      
-      // caudalBroncePropuesto: '',      
-      // caudalOroPropuesto: '',
-      // caudalPlataPropuesto: '',      
-      // caudalPlatinumPropuesto: '',      
-      // caudalVideoPropuesto: '',
-      // caudalLdnPropuesto: '',      
-      // caudalVozPropuesto: '',
-      // componentesPropuesto: '',
-      // descripcionSvaPropuesto: '',
-      // detalleAccionEnlacePropuesto: '',
-
-
-      // equipoStockPropuesto: '',     
-      // codigoSisego: '',            
-      // costoUltimaMilla: 0,      
-      // diasEjecucion: 0,      
-      // dteActual: 0,
-
-
-      // equipoTerminalPropuesto: '',
-      // equipo_adicional_actual: '',
-      // facturacion_actual: 0,
-      // fechaLlegadaPropuesto: '',
-
-      // numeroCdActual: '',
-      // observacionesPropuesto: '',
-      // ofertaIsisPropuesto: '',
-      // otrosEquiposPropuesto: '',
-      // pozoTierraActual: '',
-      // precioPropuesto: 0,      
-      // recursoTransporteActual: '',
-      // routerPropuesto: '',
-
-      // secuencia: 0,
-      // segmentoSatelitalActual: 0,
-      // svaPropuesto: '',      
-      // tipoAntenaActual: '',      
-
-      // tipoCircuitoIdPropuesto: 0,
-
-      // tipoServicioIdPropuesto: 0,
-      // ultimaMillaActual: 0,
-      // upsActual: '',
-      // viaAccesoIdPropuesto: 0,
-      // vrfPropuesto: '',
-      // vrf_actual: '',
-      // zonaSisego: '',
-      // zoom: '',
-      // estado: 0,
-      // activo: true,
-      // isLoading: false
-
-      // sede: '',
-      // ubigeo: '', geo: '',
-      // //longitud: 0, latitud: 0,contacto: '', telefono: '', 
-      // circuito: "", nrocircuito: "", servicio: "",
-      // medio: "", bw: "", nrobw: "", ldn: "", nroldn: "", voz: "", nrovoz: "", video: "", nrovideo: "",
-      // platinium: "", nroplatinium: "", oro: "", nrooro: "", plata: "", nroplata: "", bronce: "", nrobronce: "",
-      // equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "", condicionenlace: "", isLoading: false
-      // , lstZonaSisego: []
+      isLoading: false           
+      //, lstZonaSisego: []
     };
   }
   addRow(): void {
@@ -343,8 +256,6 @@ export class OfertaServicioComponent implements OnInit {
         const a = document.createElement('a');
         a.click();
         a.remove();
-
-        debugger;
         var objetoOfertaOpex = this.dataSourceList.find(function (element) { return element.ofertasDetalleId == item.ofertasDetalleId; });
         if (objetoOfertaOpex.estado == 0) {// si el registro es agregado, entonce se elimina
           var ObjectIndex = this.dataSourceList.findIndex(function (obj) { return obj.ofertasDetalleId === item.ofertasDetalleId; });//Obtenemos el Index del List de Objetos        
@@ -365,15 +276,8 @@ export class OfertaServicioComponent implements OnInit {
       data: item
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-
       item.longitud = result.lng;
       item.latitud = result.lat;
-
-      /*
-      lat: -17.9966159197085
-lng: -70.2190587197085
-      */
       var settings = {
         "url": "https://cors-anywhere.herokuapp.com/http://200.48.131.82/Api/zonafibra",
         "method": "POST",
@@ -396,7 +300,7 @@ lng: -70.2190587197085
     });
   }
 
-  guardarGastosOpex(): void {
+  guardarServicios(): void {
     const listOfertaDetalle = this.dataSourceList.map(item => {
       if (item.estado == 0) //Si es 0 Nuevo Registro
         item.ofertasDetalleId = 0
@@ -415,7 +319,7 @@ lng: -70.2190587197085
         equipo: item.equipoTerminalActual,
         equipo2: item.equipoTerminalPropuesto,
         facturacion: item.facturacion_actual,
-        id: 0,
+        id: item.ofertasDetalleId,
         idaccionisis: 0,
         idcircuito: item.tipoCircuitoActual,
         idcircuito2: item.tipoCircuitoIdPropuesto,
@@ -442,7 +346,7 @@ lng: -70.2190587197085
         plata_propuesto: item.caudalPlataPropuesto,
         platinium_actual: item.caudalPlatinumActual,
         platinium_propuesto: item.caudalPlatinumPropuesto,
-        precio: 0,
+        precio: item.precioPropuesto,
         router: item.routerSwitchActual,
         router2: item.routerPropuesto,
         sede: item.nombreSede,
@@ -471,7 +375,7 @@ lng: -70.2190587197085
       };
       return container;
     });
-
+    debugger;
 
     this.inProgress = true;
     this.ofertaServicioService.guardarservicios(listOfertaDetalle).pipe(
@@ -501,79 +405,5 @@ lng: -70.2190587197085
     });
   }
 }
-// const dataSourceList: ServicioElement[] = [
-//   {
-//     id: 1, sede: 'Av. Argentina', direccion: 'puente camote', ubigeo: '',
-//     geo: 'Balanceador', longitud: 0, latitud: 0,
-//     contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "1", nrocircuito: "1", servicio: "1",
-//     medio: "1", bw: "1", nrobw: "2", ldn: "1", nroldn: "", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
-//     platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
-//     equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "", condicionenlace: "", isLoading: false,
-//     lstZonaSisego: []
-//   },
-//   {
-//     id: 2, sede: 'Av. Argentina 2', direccion: 'san borja', ubigeo: '',
-//     geo: 'Balanceador', longitud: 0, latitud: 0,
-//     contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "", nrocircuito: "1", servicio: "1",
-//     medio: "1", bw: "1", nrobw: "2", ldn: "1", nroldn: "", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
-//     platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
-//     equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "", condicionenlace: "", isLoading: false
-//     , lstZonaSisego: []
-//   },
-//   {
-//     id: 3, sede: 'Av. Argentina 3', direccion: 'plaza norte', ubigeo: '',
-//     geo: 'Balanceador', longitud: -70.2190587197085, latitud: -17.9966159197085,
-//     contacto: 'Jorge Omar Berrocal Sambrano', telefono: '983150754', circuito: "", nrocircuito: "1", servicio: "1",
-//     medio: "1", bw: "1", nrobw: "2", ldn: "1", nroldn: "", voz: "1", nrovoz: "12", video: "1", nrovideo: "10",
-//     platinium: "1", nroplatinium: "10", oro: "1", nrooro: "10", plata: "1", nroplata: "10", bronce: "1", nrobronce: "10",
-//     equipoterminal: "", router: "", facturacion: "", acccionisis: "", tipoenlace: "", condicionenlace: "", isLoading: false
-//     , lstZonaSisego: []
-//   }
 
-// ];
-// export interface ServicioElement {
-//   id: number,
-//   sede: string;
-//   direccion: string;
-//   ubigeo: string;
-//   geo: string;
-//   longitud: number;
-//   latitud: number;
-//   contacto: string;
-//   telefono: string;
-//   circuito: string;
-//   nrocircuito: string;
-//   servicio: string;
-//   medio: string;
-//   bw: string;
-//   nrobw: string;
-//   ldn: string;
-//   nroldn: string;
-//   voz: string;
-//   nrovoz: string;
-//   video: string;
-//   nrovideo: string;
-//   platinium: string;
-//   nroplatinium: string;
-//   oro: string;
-//   nrooro: string;
-//   plata: string;
-//   nroplata: string;
-//   bronce: string;
-//   nrobronce: string;
-//   equipoterminal: string;
-//   router: string;
-//   //otro: string;
-//   facturacion: string;
-//   acccionisis: string;
-//   tipoenlace: string;
-//   condicionenlace: string;
-//   isLoading: boolean;
-//   lstZonaSisego: Array<any>;
-
-// }
-// export class ModelCombo {
-//   constructor(public id?: string, public nombre?: string) {
-//   }
-// }
 

@@ -61,8 +61,6 @@
                                             </mat-option>
                                         </ng-container>
                                     </mat-autocomplete>
-                                    <!-- {{row.ubigeo}} -->
-
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="geo">
@@ -96,7 +94,7 @@
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
-                                        <mat-select [(ngModel)]="row.circuito">
+                                        <mat-select [(ngModel)]="row.tipoCircuitoActual">
                                             <mat-option value="">--Seleccione--</mat-option>
                                             <mat-option [value]="o.id" *ngFor="let o of listTipoCircuito">{{o.descripcion}}</mat-option>
                                         </mat-select>
@@ -117,7 +115,7 @@
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
                                         <mat-select [(ngModel)]="row.tipoServicioIdActual">
-                                            <mat-option value="">--Seleccione--</mat-option>
+                                            <mat-option value="0">--Seleccione--</mat-option>
                                             <mat-option [value]="o.id" *ngFor="let o of listTipoServicio">{{o.descripcion}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
@@ -135,10 +133,9 @@
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioActual_bw">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> BW </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 220px !important"> BW </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 220px !important">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
-                                        <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
                                         <mat-select [(ngModel)]="row.bwActualActual">
                                             <mat-option value="">--Seleccione--</mat-option>
                                             <mat-option [value]="o.id" *ngFor="let o of lstMedidaVelicidad">{{o.nombre}}</mat-option>
@@ -301,8 +298,8 @@
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <mat-select [(ngModel)]="row.acccionisis">
                                             <mat-option value="">--Seleccione--</mat-option>
-                                            <mat-option [value]="1" >Activo</mat-option>
-                                            <mat-option [value]="2" >Pasivo</mat-option>
+                                            <mat-option [value]="1">Activo</mat-option>
+                                            <mat-option [value]="2">Pasivo</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </mat-cell>
@@ -585,7 +582,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-10 col-xs-2 text-right">
-                    <button class="btn btn-md btn-guardar">Guardar</button>
+                    <button class="btn btn-md btn-guardar" (click)="guardarServicios()">Guardar</button>
                 </div>
             </div>
         </div>

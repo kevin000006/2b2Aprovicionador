@@ -176,7 +176,7 @@ export class OfertaDetalleModel {
   telefono: string;
   //Servicio Actual
   //IdCircuitoActual:number;  falta retonar el id del circuito actual
-  tipoCircuitoActual: string;
+  tipoCircuitoActual: string;  
   tipoServicioIdActual: number;
   //servicioActual_medio  ==>  falta este atributo
   bwActualActual: string;
@@ -329,7 +329,7 @@ export class OfertaDetalleModel {
   // costoUltimaMilla: number;
   // //costoTransmision; 
   // //costoPlantaExterna;
-  // //costoOpex;   
+  // //costoOpex;     
   estado: number;
   activo: boolean;
   isLoading: boolean;
