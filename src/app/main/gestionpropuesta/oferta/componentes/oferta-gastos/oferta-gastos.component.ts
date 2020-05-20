@@ -67,8 +67,7 @@ export class OfertaGastosComponent implements OnInit {
     
     //Lenar combo moneda_id
     await this.commonService.getTipoMonedaAll().subscribe(data => {
-      this.listaMoneda = data;
-      console.log(data);
+      this.listaMoneda = data;      
     });
     //Lenar combo Comcepto  
     await this.ofertaGastosService.listarConceptoOpex().subscribe(data => {
