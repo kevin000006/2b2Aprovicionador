@@ -112,7 +112,7 @@ export class OfertaOpex {
     mostrarConcepto: boolean;
     totalMensual: number;
     activo: boolean;    
-    estado: number; //-1 ya existe en la base de datos, 0: nuevo, 1: Actualizado, 2: Inactivo    
+    estado: number; //-1 ya existe en la base de datos, 0: nuevo,TipoEnlaceModel 1: Actualizado, 2: Inactivo    
 }
 
 

@@ -152,10 +152,13 @@
                             <ng-container matColumnDef="servicioActual_ldn">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> LDN </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
-                                    <mat-form-field color="accent" style="text-align: center; width: 80%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
+                                    <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
                                         <mat-select [(ngModel)]="row.ldn">
-                                            <mat-option [value]="o.id" *ngFor="let o of listLDN">{{o.nombre}}</mat-option>
+                                            <mat-option [value]="o.id" *ngFor="let o of lstMedidaVelicidad">{{o.nombre}}</mat-option>
                                         </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field color="accent" style="text-align: center; width: 40%;" appearance="legacy" [style.fontSize.px]="12">
+                                        <input matInput type="text" [(ngModel)]="row.nrovoz">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
@@ -289,8 +292,7 @@
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <mat-select [(ngModel)]="row.acccionisis">
                                             <mat-option value="">--Seleccione--</mat-option>
-                                            <mat-option [value]="1">Principal</mat-option>
-                                            <mat-option [value]="2">Contingencia</mat-option>
+                                            <mat-option [value]="o.id" *ngFor="let o of listTipoEnlace">{{o.descripcion}}</mat-option>                                            
                                         </mat-select>
                                     </mat-form-field>
                                 </mat-cell>
@@ -301,8 +303,7 @@
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <mat-select [(ngModel)]="row.acccionisis">
                                             <mat-option value="">--Seleccione--</mat-option>
-                                            <mat-option [value]="1" >Activo</mat-option>
-                                            <mat-option [value]="2" >Pasivo</mat-option>
+                                            <mat-option [value]="o.id" *ngFor="let o of listCondicionEnlace">{{o.descripcion}}</mat-option> 
                                         </mat-select>
                                     </mat-form-field>
                                 </mat-cell>
@@ -385,10 +386,13 @@
                             <ng-container matColumnDef="servicioPropuesto_ldn">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> LDN </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
-                                    <mat-form-field color="accent" style="text-align: center; width: 80%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
+                                    <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
                                         <mat-select [(ngModel)]="row.ldn">
-                                            <mat-option [value]="o.id" *ngFor="let o of listLDN">{{o.nombre}}</mat-option>
+                                            <mat-option [value]="o.id" *ngFor="let o of lstMedidaVelicidad">{{o.nombre}}</mat-option>
                                         </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field color="accent" style="text-align: center; width: 40%;" appearance="legacy" [style.fontSize.px]="12">
+                                        <input matInput type="text" [(ngModel)]="row.nrovoz">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>

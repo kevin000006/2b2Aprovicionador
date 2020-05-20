@@ -7,6 +7,7 @@ import { EquipamientoService } from '../oferta-equipamiento/oferta-equipamiento.
 import { CommonService } from 'app/common.service';
 import { TipoEquipamientoModel,MonedaModel } from 'app/model/Common';
 import { OfertaEquipamientoModel, EquipamientoRequest } from 'app/main/gestionpropuesta/models/oferta';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'oferta-equipamiento',
@@ -29,7 +30,8 @@ export class OfertaEquipamientoComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     public equipamientoService :EquipamientoService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private toastr : ToastrService
   ) { }
 
   displayedColumns: string[] = ['tipo', 'condicion', 'antigueadad', 'marca', 'modelo', 'cantidad', 'moneda', 'costo', 'costototal','instalacion','accion'];
@@ -99,22 +101,12 @@ export class OfertaEquipamientoComponent implements OnInit {
       equipos.push(item);
     }
     this.equipamientoService.saveAllEquipamiento(equipos).subscribe(data =>{
-      this.getEquipamientos();
-      const dialogRef = this.dialog.open(AlertSuccessComponent, {
-        width: '700px',
-        data: {
-          message: 'Se registro correctamente los datos del proyecto.',
-          buttonText: { ok: 'Aceptar' }
-        }
+      this.getEquipamientos();     
+      this.toastr.success('Se proceso correctamente la información!', '', {
+        progressBar: true,
+        progressAnimation: 'increasing',
+        closeButton: true
       });
-      dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-        if (confirmed) {
-          const a = document.createElement('a');
-          a.click();
-          a.remove();
-        }
-      });
-
     });
     
   }
