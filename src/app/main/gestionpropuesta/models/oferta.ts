@@ -173,15 +173,14 @@ export class OfertaDetalleModel {
   latitud: string;
   longitud: string;
   contacto: string;
-  telefono: string;
-  //Servicio Actual
-  //IdCircuitoActual:number;  falta retonar el id del circuito actual
+  telefono: string;  
   tipoCircuitoActual: string;  
+  //nrotipoCircuitoActual: string;   
   tipoServicioIdActual: number;
   //servicioActual_medio  ==>  falta este atributo
   bwActualActual: string;
   nrobwActualActual: string;
-  //bwActualActualNumero  ==>  falta este atributo
+  
   caudalLdnActual: string;
   nrocaudalLdnActual: string;
 
