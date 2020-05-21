@@ -84,7 +84,7 @@ export class OfertaServicioService {
 
                  element.nrocaudalBroncePropuesto = element.caudalBroncePropuesto!==null ? element.caudalBroncePropuesto.split(" ")[1]: "";
                  element.caudalBroncePropuesto = element.caudalBroncePropuesto!==null ? element.caudalBroncePropuesto.split(" ")[0]: "";
-                // element.activo = true;
+                
                 return element;
             });
             return result.data;

@@ -105,9 +105,18 @@ export class OfertaServicioComponent implements OnInit {
     private toastr: ToastrService
   ) {
   }
-  resetAutoComplete(): void {
-    this.filteredStates = null;
+
+  setBillingActivity(object,row ){
+    debugger;
+    //this.actionData.libraryContent.billingActivityId=object.activityId;
   }
+  selectedOption(event) {
+    const selectedValue = event.option.value;
+    console.log(selectedValue);
+    this.filteredStates = null
+ }
+ 
+  
   inputChangeUbigeo(input: any, row: any): void {
     if (input.length > 2) {
       row.isLoading = true;
@@ -340,6 +349,7 @@ export class OfertaServicioComponent implements OnInit {
         const a = document.createElement('a');
         a.click();
         a.remove();
+        debugger;
         var objetoOfertaOpex = this.dataSourceList.find(function (element) { return element.ofertasDetalleId == item.ofertasDetalleId; });
         if (objetoOfertaOpex.estado == 0) {// si el registro es agregado, entonce se elimina
           var ObjectIndex = this.dataSourceList.findIndex(function (obj) { return obj.ofertasDetalleId === item.ofertasDetalleId; });//Obtenemos el Index del List de Objetos        
@@ -386,7 +396,7 @@ export class OfertaServicioComponent implements OnInit {
 //2-->cliente
 //32 distrito
   guardarServicios(): void {
-    const listOfertaDetalle = this.dataSource.data.map(item => {
+    const listOfertaDetalle = this.dataSourceList.map(item => {
       if (item.estado == 0) //Si es 0 Nuevo Registro
         item.ofertasDetalleId = 0
       else if (item.estado == 1)// Si es 1 Registro ha sido Actulizado
@@ -407,9 +417,9 @@ export class OfertaServicioComponent implements OnInit {
         id: item.ofertasDetalleId,
         idoferta: item.ofertaId,
         idaccionisis: item.accionIsisIdPropuesto,
-        idcircuito: item.tipoCircuitoActual,
+        idcircuito: 1,//item.tipoCircuitoActual, se tiene queq quitar del hardcode
         idcircuito2: item.tipoCircuitoIdPropuesto,
-        iddistrito: null,// item.distritoId,
+        iddistrito: 32,// item.distritoId, se tiene que quitar el hardcode
         idmedio: item.servicioActual_medio,
         idmedio2: item.servicioPropuesto_medio,
         idmodo: item.servicioPropuesto_modo,
@@ -452,9 +462,7 @@ export class OfertaServicioComponent implements OnInit {
       };
       return container;
     });
-    debugger;
-
-    console.log(listOfertaDetalle);
+    console.log(JSON.stringify(listOfertaDetalle));
     this.inProgress = true;
     this.ofertaServicioService.guardarservicios(listOfertaDetalle).pipe(
       map(event => {
