@@ -165,6 +165,7 @@ export class OfertaGastosComponent implements OnInit {
     var Id = this.dataSource.data.length == 0 ? 1 : this.dataSource.data[this.dataSource.data.length - 1].id + 1;
     let objecto = this.crearNuevoGastos(Id, this.ofertaBase.id);
     this.dataSource.data.push(objecto);
+    this.dataSourceList.push(objecto);
     this.dataSource.filter = "";
   }
 
@@ -238,6 +239,7 @@ export class OfertaGastosComponent implements OnInit {
         const a = document.createElement('a');
         a.click();
         a.remove();        
+        debugger;
         var objetoOfertaOpex = this.dataSourceList.find(function (element) { return element.id == item.id; });
         if (objetoOfertaOpex.estado == 0) {// si el registro es agregado, entonce se elimina
           var ObjectIndex = this.dataSourceList.findIndex(function (obj) { return obj.id === item.id; });//Obtenemos el Index del List de Objetos        
