@@ -175,9 +175,9 @@ export class OfertaDetalleModel {
   contacto: string;
   telefono: string;  
   tipoCircuitoActual: string;  
-  //nrotipoCircuitoActual: string;   
+  nrotipoCircuitoActual: string;   
   tipoServicioIdActual: number;
-  //servicioActual_medio  ==>  falta este atributo
+  servicioActual_medio: number;
   bwActualActual: string;
   nrobwActualActual: string;
   
@@ -205,17 +205,17 @@ export class OfertaDetalleModel {
   equipoTerminalActual: string;
   routerSwitchActual: string;
   facturacion_actual: number;
-  //servicioActual_otro ==> facta  estre atributo
+  servicioActual_otro : string;
   equipo_adicional_actual: string;
 
   //Servicio Propuesto y Caudal presupuesto
   accionIsisIdPropuesto: number;
-  //servicioPropuesto_tiposede ==> falta estre atributo
-  //servicioPropuesto_modo ==> falta estre atributo
+  servicioPropuesto_tiposede: number;
+  servicioPropuesto_modo : number;
   tipoCircuitoIdPropuesto: number;
-  //servicioPropuesto_nrocircuito ==> falta estre atributo
+  servicioPropuesto_nrocircuito: string;
   tipoServicioIdPropuesto: number;
-  //servicioPropuesto_medio ==> falta estre atributo
+  servicioPropuesto_medio : number;
   svaPropuesto: string;
   descripcionSvaPropuesto: string;
 

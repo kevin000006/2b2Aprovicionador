@@ -132,11 +132,11 @@ export class OfertaServicioComponent implements OnInit {
     });
     await this.commonService.getTipoServicioAll().subscribe(data => {
       this.listTipoServicio = data;
-      console.log(data);
+      //console.log(data);
     });
     await this.commonService.getViaAccesoAll().subscribe(data => {
       this.listViaAcceso = data;
-      //console.log(this.listViaAcceso);
+      console.log(this.listViaAcceso);
     });
     await this.commonService.getAccionIsisAll().subscribe(data => {
       this.listAccionIsis = data;
@@ -212,8 +212,9 @@ export class OfertaServicioComponent implements OnInit {
       telefono: '',
       //Servicio Actual
       tipoCircuitoActual: '',
+      nrotipoCircuitoActual:'',
       tipoServicioIdActual: 0,
-      //servicioActual_medio  ==>  falta este atributo
+      servicioActual_medio:0,
       bwActualActual: 'kbps',
       nrobwActualActual: '2500',
       //bwActualActual: '',
@@ -240,17 +241,17 @@ export class OfertaServicioComponent implements OnInit {
       equipoTerminalActual: '',
       routerSwitchActual: '',
       facturacion_actual: 0,
-      //servicioActual_otro ==> facta  estre atributo
+      servicioActual_otro :'',
       equipo_adicional_actual: '',
 
       //Servicio Propuesto y Caudal presupuesto
       accionIsisIdPropuesto: 0,
-      //servicioPropuesto_tiposede ==> falta estre atributo
-      //servicioPropuesto_modo ==> falta estre atributo
+      servicioPropuesto_tiposede: 0,
+      servicioPropuesto_modo: 0,
       tipoCircuitoIdPropuesto: 0,
-      //servicioPropuesto_nrocircuito ==> falta estre atributo
+      servicioPropuesto_nrocircuito :'',
       tipoServicioIdPropuesto: 0,
-      //servicioPropuesto_medio ==> falta estre atributo
+      servicioPropuesto_medio: 0,
       svaPropuesto: '',
       descripcionSvaPropuesto: '',
       
@@ -407,23 +408,23 @@ export class OfertaServicioComponent implements OnInit {
         idcircuito: item.tipoCircuitoActual,
         idcircuito2: item.tipoCircuitoIdPropuesto,
         iddistrito: item.distritoId,
-        idmedio: 0,
-        idmedio2: 0,
-        idmodo: 0,
+        idmedio: item.servicioActual_medio,
+        idmedio2: item.servicioPropuesto_medio,
+        idmodo: item.servicioPropuesto_modo,
         idservicio: item.tipoServicioIdActual,
         idservicio2: item.tipoServicioIdPropuesto,
-        idtiposede: 0,
+        idtiposede: item.servicioPropuesto_tiposede,
         lat: item.latitud,
         ldn_actual: item.caudalLdnActual + ' ' + item.nrocaudalLdnActual,
         ldn_propuesto: item.caudalLdnPropuesto+ ' ' + item.nrocaudalLdnPropuesto,
         lon: item.longitud,
-        ncircuito: item.tipoCircuitoActual,
-        ncircuito2: item.tipoCircuitoIdPropuesto,
+        ncircuito: item.nrotipoCircuitoActual,
+        ncircuito2: item.servicioPropuesto_nrocircuito,
         observaciones: item.observacionesPropuesto,
         ofertaisis: item.ofertaIsisPropuesto,
         oro_actual: item.caudalOroActual + ' ' + item.nrocaudalOroActual,
         oro_propuesto: item.caudalOroPropuesto+ ' ' + item.nrocaudalOroPropuesto,
-        otros: '',
+        otros: item.servicioActual_otro,
         otros2: '',
         plata_actual: item.caudal_plata_actual + ' ' + item.nrocaudal_plata_actual,
         plata_propuesto: item.caudalPlataPropuesto+ ' ' + item.nrocaudalPlataPropuesto,

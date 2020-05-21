@@ -26,17 +26,17 @@
                     <div class="table-responsive">
                         <mat-table #table mat-table [dataSource]="dataSource" style="width: 6000px;" matSort class="tb-oferta-equipamiento">
                             <ng-container matColumnDef="sede">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header>Sede</mat-header-cell>
-                                <mat-cell *matCellDef="let row">
-                                    <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 200px !important">Sede</mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 200px !important">
+                                    <mat-form-field color="accent" style="text-align: center; width: 90%;" appearance="legacy" [style.fontSize.px]="12">
                                         <input matInput [(ngModel)]="row.nombreSede" type="text" maxlength="100">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="direccion">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Dirección </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
-                                    <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 200px !important"> Dirección </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 200px !important">
+                                    <mat-form-field color="accent" style="text-align: center; width: 90%;" appearance="legacy" [style.fontSize.px]="12">
                                         <input matInput [(ngModel)]="row.direccion" type="text" maxlength="100">
                                     </mat-form-field>
                                 </mat-cell>
@@ -72,25 +72,25 @@
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="contacto">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Contacto </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
-                                    <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 200px !important"> Contacto </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 200px !important">
+                                    <mat-form-field color="accent" style="text-align: center; width: 90%;" appearance="legacy" [style.fontSize.px]="12">
                                         <input matInput [(ngModel)]="row.contacto" type="text" maxlength="100">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="telefono">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Teléfono </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
-                                    <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 200px !important"> Teléfono </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 200px !important">
+                                    <mat-form-field color="accent" style="text-align: center; width: 90%;" appearance="legacy" [style.fontSize.px]="12">
                                         <input matInput [(ngModel)]="row.telefono" type="text" maxlength="100">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
                             <!--servicioActual-->
                             <ng-container matColumnDef="servicioActual_circuito">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Circuito </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 160px !important"> Circuito </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 160px !important">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
                                         <mat-select [(ngModel)]="row.tipoCircuitoActual">
@@ -104,13 +104,13 @@
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Nº de circuito </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput [(ngModel)]="row.tipoCircuitoActual" type="text">
+                                        <input matInput [(ngModel)]="row.nrotipoCircuitoActual" type="text">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioActual_servicio">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Servicio </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 160px !important"> Servicio </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 160px !important">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
                                         <mat-select [(ngModel)]="row.tipoServicioIdActual">
@@ -121,10 +121,10 @@
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioActual_medio">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Medio </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 160px !important"> Medio </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 160px !important">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <mat-select [(ngModel)]="row.medio">
+                                        <mat-select [(ngModel)]="row.servicioActual_medio">
                                             <mat-option [value]="0">--Seleccione--</mat-option>
                                             <mat-option [value]="o.id" *ngFor="let o of listViaAcceso">{{o.descripcion}}</mat-option>
                                         </mat-select>
@@ -256,7 +256,7 @@
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Otros </mat-header-cell>
                                 <mat-cell *matCellDef="let element">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput type="text" maxlength="100">
+                                        <input matInput type="text" [(ngModel)]="element.servicioActual_otro" maxlength="100">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
@@ -285,7 +285,7 @@
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo Sede </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <mat-select [(ngModel)]="row.acccionisis">
+                                        <mat-select [(ngModel)]="row.servicioPropuesto_tiposede">
                                             <mat-option value="">--Seleccione--</mat-option>
                                             <mat-option [value]="o.id" *ngFor="let o of listTipoEnlace">{{o.descripcion}}</mat-option>
                                         </mat-select>
@@ -296,7 +296,7 @@
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Modo </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <mat-select [(ngModel)]="row.acccionisis">
+                                        <mat-select [(ngModel)]="row.servicioPropuesto_modo">
                                             <mat-option value="">--Seleccione--</mat-option>
                                             <mat-option [value]="o.id" *ngFor="let o of listCondicionEnlace">{{o.descripcion}}</mat-option>
                                         </mat-select>
@@ -319,7 +319,7 @@
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Nº de circuito</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput [(ngModel)]="row.facturacion" type="text" maxlength="100">
+                                        <input matInput [(ngModel)]="row.servicioPropuesto_nrocircuito" type="text" maxlength="100">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
@@ -340,7 +340,7 @@
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
-                                        <mat-select [(ngModel)]="row.medio">
+                                        <mat-select [(ngModel)]="row.servicioPropuesto_medio">
                                             <mat-option value="">--Seleccione--</mat-option>
                                             <mat-option [value]="o.id" *ngFor="let o of listViaAcceso">{{o.descripcion}}</mat-option>
                                         </mat-select>
