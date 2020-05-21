@@ -164,8 +164,8 @@ export class OfertaGastosComponent implements OnInit {
   addRow(): void {
     var Id = this.dataSource.data.length == 0 ? 1 : this.dataSource.data[this.dataSource.data.length - 1].id + 1;
     let objecto = this.crearNuevoGastos(Id, this.ofertaBase.id);
-    this.dataSource.data.push(objecto);
     this.dataSourceList.push(objecto);
+    this.dataSource.data =this.dataSourceList;    
     this.dataSource.filter = "";
   }
 

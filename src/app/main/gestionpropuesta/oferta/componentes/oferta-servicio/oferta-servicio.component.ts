@@ -350,8 +350,8 @@ export class OfertaServicioComponent implements OnInit {
   addRow(): void {
     var Id = this.dataSource.data.length == 0 ? 1 : this.dataSource.data[this.dataSource.data.length - 1].ofertasDetalleId + 1;
     let objecto = this.crearNuevoServicio(Id, this.ofertaBase.id);
-    this.dataSource.data.push(objecto);
     this.dataSourceList.push(objecto);
+    this.dataSource.data=this.dataSourceList;    
     this.dataSource.filter = "";
   }
 
@@ -432,7 +432,7 @@ export class OfertaServicioComponent implements OnInit {
         bronce_propuesto: item.caudalBroncePropuesto + ' ' + item.nrocaudalBroncePropuesto,
         bw_propuesto: item.bwPropuesto + ' ' + item.nrobwPropuesto,
         contacto: item.contacto,
-        dias: 0,
+        dias: item.diasEjecucion,
         direccion: item.direccion,
         equipo: item.equipoTerminalActual,
         equipo2: item.equipoTerminalPropuesto,
@@ -440,7 +440,7 @@ export class OfertaServicioComponent implements OnInit {
         id: item.ofertasDetalleId,
         idoferta: item.ofertaId,
         idaccionisis: item.accionIsisIdPropuesto,
-        idcircuito: 1,//item.tipoCircuitoActual, se tiene queq quitar del hardcode
+        idcircuito: item.tipoCircuitoActual, //se tiene queq quitar del hardcode
         idcircuito2: item.tipoCircuitoIdPropuesto,
         iddistrito: 32,// item.distritoId, se tiene que quitar el hardcode
         idmedio: item.servicioActual_medio,
@@ -452,8 +452,7 @@ export class OfertaServicioComponent implements OnInit {
         lat: item.latitud.toString(),
         lon: item.longitud.toString(),
         ldn_actual: item.caudalLdnActual + ' ' + item.nrocaudalLdnActual,
-        ldn_propuesto: item.caudalLdnPropuesto+ ' ' + item.nrocaudalLdnPropuesto,
-        
+        ldn_propuesto: item.caudalLdnPropuesto+ ' ' + item.nrocaudalLdnPropuesto,        
         ncircuito: item.nrotipoCircuitoActual,
         ncircuito2: item.servicioPropuesto_nrocircuito,
         observaciones: item.observacionesPropuesto,
@@ -474,7 +473,7 @@ export class OfertaServicioComponent implements OnInit {
         sva: item.svaPropuesto,
         svadescripcion: item.descripcionSvaPropuesto,
         telefono: item.telefono,
-        ultima: 0,
+        ultima: item.costoUltimaMilla,
         video_actual: item.caudalVideoActual + ' ' + item.nrocaudalVideoActual,
         video_propuesto: item.caudalVideoPropuesto+ ' ' + item.nrocaudalVideoPropuesto,
         voz_actual: item.caudalVozActual + ' ' + item.nrocaudalVozActual,
