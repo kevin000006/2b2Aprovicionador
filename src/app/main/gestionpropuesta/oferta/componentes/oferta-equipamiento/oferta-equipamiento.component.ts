@@ -166,10 +166,14 @@ export class OfertaEquipamientoComponent implements OnInit {
   }
 
   public calcularTotalSoles() {
-    return this.dataSource.data.reduce((accum, curr) => accum + curr.total, 0);
+
+    let data = this.dataSource.data.filter(x => x.activo == true);
+    
+
+    return data.reduce((accum, curr) => accum + curr.total, 0);
   }
   public calcularTotalDolares() {
-    return this.dataSource.data.reduce((accum, curr) => accum + (curr.total / this.tipoCambio), 0).toFixed(2);
+    return this.dataSource.data.filter(x => x.activo == true).reduce((accum, curr) => accum + (curr.total / this.tipoCambio), 0).toFixed(2);
   }
 
   compareValCombos(c1: any, c2:any): boolean {     
