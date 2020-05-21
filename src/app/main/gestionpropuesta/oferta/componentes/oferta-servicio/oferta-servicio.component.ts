@@ -198,14 +198,14 @@ export class OfertaServicioComponent implements OnInit {
   }
   crearNuevoServicio(ofertasDetalleId: number, ofertaId: number): OfertaDetalleModel {
     return {
-      clienteId: 0,
+      clienteId: null,
       ofertasDetalleId: ofertasDetalleId,
       ofertaId: ofertaId,
       nombreSede: '',
       direccion: '',
-      departamentoId: 0,
-      provinciaId: 0,
-      distritoId: 0,
+      departamentoId: null,
+      provinciaId: null,
+      distritoId: null,
       latitud: '',
       longitud: '',
       contacto: '',
@@ -383,7 +383,7 @@ export class OfertaServicioComponent implements OnInit {
   }
 
   guardarServicios(): void {
-    const listOfertaDetalle = this.dataSourceList.map(item => {
+    const listOfertaDetalle = this.dataSource.data.map(item => {
       if (item.estado == 0) //Si es 0 Nuevo Registro
         item.ofertasDetalleId = 0
       else if (item.estado == 1)// Si es 1 Registro ha sido Actulizado
@@ -403,7 +403,7 @@ export class OfertaServicioComponent implements OnInit {
         facturacion: item.facturacion_actual,
         id: item.ofertasDetalleId,
         idoferta: item.ofertaId,
-        idaccionisis: 0,
+        idaccionisis: item.accionIsisIdPropuesto,
         idcircuito: item.tipoCircuitoActual,
         idcircuito2: item.tipoCircuitoIdPropuesto,
         iddistrito: item.distritoId,
