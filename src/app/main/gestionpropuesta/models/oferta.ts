@@ -180,14 +180,29 @@ export class OfertaDetalleModel {
   tipoServicioIdActual: number;
   //servicioActual_medio  ==>  falta este atributo
   bwActualActual: string;
+  nrobwActualActual: string;
   //bwActualActualNumero  ==>  falta este atributo
   caudalLdnActual: string;
+  nrocaudalLdnActual: string;
+
   caudalVozActual: string;
+  nrocaudalVozActual: string;
+
   caudalVideoActual: string;
+  nrocaudalVideoActual: string;
+
   caudalPlatinumActual: string;
+  nrocaudalPlatinumActual: string;
+
   caudalOroActual: string;
+  nrocaudalOroActual: string;
+
   caudal_plata_actual: string;
+  nrocaudal_plata_actual: string;
+
   caudalBronceActual: string;
+  nrocaudalBronceActual: string;
+
   equipoTerminalActual: string;
   routerSwitchActual: string;
   facturacion_actual: number;
@@ -204,14 +219,31 @@ export class OfertaDetalleModel {
   //servicioPropuesto_medio ==> falta estre atributo
   svaPropuesto: string;
   descripcionSvaPropuesto: string;
+
   bwPropuesto: string;
+  nrobwPropuesto: string;
+
   caudalLdnPropuesto: string;
+  nrocaudalLdnPropuesto: string;
+
   caudalVozPropuesto: string;
+  nrocaudalVozPropuesto: string;
+
   caudalVideoPropuesto: string;
+  nrocaudalVideoPropuesto: string;
+  
   caudalPlatinumPropuesto: string;  
+  nrocaudalPlatinumPropuesto: string;  
+
   caudalOroPropuesto: string;
+  nrocaudalOroPropuesto: string;
+
   caudalPlataPropuesto: string;
+  nrocaudalPlataPropuesto: string;
+  
   caudalBroncePropuesto: string;
+  nrocaudalBroncePropuesto: string;
+
   equipoTerminalPropuesto: string;
   routerPropuesto: string;
   otrosEquiposPropuesto: string;

@@ -87,7 +87,6 @@
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
-
                             <!--servicioActual-->
                             <ng-container matColumnDef="servicioActual_circuito">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Circuito </mat-header-cell>
@@ -115,7 +114,7 @@
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
                                         <mat-select [(ngModel)]="row.tipoServicioIdActual">
-                                            <mat-option value="0">--Seleccione--</mat-option>
+                                            <mat-option [value]="0">--Seleccione--</mat-option>
                                             <mat-option [value]="o.id" *ngFor="let o of listTipoServicio">{{o.descripcion}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
@@ -126,114 +125,114 @@
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <mat-select [(ngModel)]="row.medio">
-                                            <mat-option value="">--Seleccione--</mat-option>
+                                            <mat-option [value]="0">--Seleccione--</mat-option>
                                             <mat-option [value]="o.id" *ngFor="let o of listViaAcceso">{{o.descripcion}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioActual_bw">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 220px !important"> BW </mat-header-cell>
-                                <mat-cell *matCellDef="let row" style="flex: 0 0 220px !important">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 160px !important"> BW </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 160px !important">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
                                         <mat-select [(ngModel)]="row.bwActualActual">
-                                            <mat-option value="">--Seleccione--</mat-option>
+                                            <mat-option [value]="">--Seleccione--</mat-option>
                                             <mat-option [value]="o.id" *ngFor="let o of lstMedidaVelicidad">{{o.nombre}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput [(ngModel)]="row.nrobw" type="text">
+                                        <input matInput [(ngModel)]="row.nrobwActualActual" (input)="inputChangebw($event.target.value,row)" type="text">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioActual_ldn">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> LDN </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 160px !important"> LDN </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 160px !important">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
-                                        <mat-select [(ngModel)]="row.ldn">
+                                        <mat-select [(ngModel)]="row.caudalLdnActual">
                                             <mat-option [value]="o.id" *ngFor="let o of lstMedidaVelicidad">{{o.nombre}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput type="text" [(ngModel)]="row.nrovoz">
+                                        <input matInput type="text" [(ngModel)]="row.nrocaudalLdnActual">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioActual_voz">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Voz </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 160px !important"> Voz </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 160px !important">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
-                                        <mat-select [(ngModel)]="row.voz">
+                                        <mat-select [(ngModel)]="row.caudalVozActual">
                                             <mat-option [value]="o.id" *ngFor="let o of lstMedidaVelicidad">{{o.nombre}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput type="text" [(ngModel)]="row.nrovoz">
+                                        <input matInput type="text" [(ngModel)]="row.nrocaudalVozActual">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioActual_video">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Video </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 160px !important"> Video </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 160px !important">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
-                                        <mat-select [(ngModel)]="row.video">
+                                        <mat-select [(ngModel)]="row.caudalVideoActual">
                                             <mat-option [value]="o.id" *ngFor="let o of lstMedidaVelicidad">{{o.nombre}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput type="text" [(ngModel)]="row.nrovideo">
+                                        <input matInput type="text" [(ngModel)]="row.nrocaudalVideoActual">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioActual_platinium">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Platinium </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 160px !important"> Platinium </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 160px !important">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
-                                        <mat-select [(ngModel)]="row.platinium">
+                                        <mat-select [(ngModel)]="row.caudalPlatinumActual">
                                             <mat-option [value]="o.id" *ngFor="let o of lstMedidaVelicidad">{{o.nombre}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput type="text" [(ngModel)]="row.nroplatinium">
+                                        <input matInput type="text" [(ngModel)]="row.nrocaudalPlatinumActual">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioActual_oro">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Oro </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 160px !important"> Oro </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 160px !important">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
-                                        <mat-select [(ngModel)]="row.oro">
+                                        <mat-select [(ngModel)]="row.caudalOroActual">
                                             <mat-option [value]="o.id" *ngFor="let o of lstMedidaVelicidad">{{o.nombre}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput type="text" [(ngModel)]="row.nrooro">
+                                        <input matInput type="text" [(ngModel)]="row.nrocaudalOroActual">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioActual_plata">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Plata </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 160px !important"> Plata </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 160px !important">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
-                                        <mat-select [(ngModel)]="row.plata">
+                                        <mat-select [(ngModel)]="row.caudal_plata_actual">
                                             <mat-option [value]="o.id" *ngFor="let o of lstMedidaVelicidad">{{o.nombre}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput type="text" [(ngModel)]="row.nroplata">
+                                        <input matInput type="text" [(ngModel)]="row.nrocaudal_plata_actual">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioActual_bronce">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Bronce </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 160px !important"> Bronce </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 160px !important">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
-                                        <mat-select [(ngModel)]="row.bronce">
+                                        <mat-select [(ngModel)]="row.caudalBronceActual">
                                             <mat-option [value]="o.id" *ngFor="let o of lstMedidaVelicidad">{{o.nombre}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput type="text" [(ngModel)]="row.nrobronce">
+                                        <input matInput type="text" [(ngModel)]="row.nrocaudalBronceActual">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
@@ -275,9 +274,8 @@
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Acción ISIS </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
-                                        <mat-select [(ngModel)]="row.acccionisis">
-                                            <mat-option value="">--Seleccione--</mat-option>
+                                        <mat-select [(ngModel)]="row.idaccionisis">
+                                            <mat-option [value]="0">--Seleccione--</mat-option>
                                             <mat-option [value]="o.id" *ngFor="let o of listAccionIsis">{{o.descripcion}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
@@ -310,8 +308,8 @@
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
-                                        <mat-select [(ngModel)]="row.circuito">
-                                            <mat-option value="">--Seleccione--</mat-option>
+                                        <mat-select [(ngModel)]="row.tipoCircuitoIdPropuesto">
+                                            <mat-option [value]="0">--Seleccione--</mat-option>
                                             <mat-option [value]="o.id" *ngFor="let o of listTipoCircuito">{{o.descripcion}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
@@ -330,8 +328,8 @@
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
-                                        <mat-select [(ngModel)]="row.servicio">
-                                            <mat-option value="">--Seleccione--</mat-option>
+                                        <mat-select [(ngModel)]="row.tipoServicioIdPropuesto">
+                                            <mat-option [value]="0">--Seleccione--</mat-option>
                                             <mat-option [value]="o.id" *ngFor="let o of listTipoServicio">{{o.descripcion}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
@@ -353,7 +351,7 @@
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>SVA</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput [(ngModel)]="row.facturacion" type="text" maxlength="100">
+                                        <input matInput [(ngModel)]="row.svaPropuesto" type="text" maxlength="100">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
@@ -361,116 +359,116 @@
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>SVA - Descripción</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput [(ngModel)]="row.facturacion" type="text" maxlength="100">
+                                        <input matInput [(ngModel)]="row.descripcionSvaPropuesto" type="text" maxlength="100">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioPropuesto_bw">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> BW </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 160px !important"> BW </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 160px !important">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
-                                        <mat-select [(ngModel)]="row.bw">
+                                        <mat-select [(ngModel)]="row.bwPropuesto">
                                             <mat-option [value]="o.id" *ngFor="let o of lstMedidaVelicidad">{{o.nombre}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput [(ngModel)]="row.nrobw" type="text">
+                                        <input matInput [(ngModel)]="row.nrobwPropuesto" type="text">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
 
                             <!--Caudales-->
                             <ng-container matColumnDef="servicioPropuesto_ldn">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> LDN </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 160px !important"> LDN </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 160px !important">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
-                                        <mat-select [(ngModel)]="row.ldn">
+                                        <mat-select [(ngModel)]="row.caudalLdnPropuesto">
                                             <mat-option [value]="o.id" *ngFor="let o of lstMedidaVelicidad">{{o.nombre}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput type="text" [(ngModel)]="row.nrovoz">
+                                        <input matInput type="text" [(ngModel)]="row.nrocaudalLdnPropuesto">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioPropuesto_voz">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Voz </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 160px !important"> Voz </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 160px !important">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
-                                        <mat-select [(ngModel)]="row.voz">
+                                        <mat-select [(ngModel)]="row.caudalVozPropuesto">
                                             <mat-option [value]="o.id" *ngFor="let o of lstMedidaVelicidad">{{o.nombre}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput type="text" [(ngModel)]="row.nrovoz">
+                                        <input matInput type="text" [(ngModel)]="row.nrocaudalVozPropuesto">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioPropuesto_video">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Video </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 160px !important"> Video </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 160px !important">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
-                                        <mat-select [(ngModel)]="row.caudalVideoActual">
+                                        <mat-select [(ngModel)]="row.caudalVideoPropuesto">
                                             <mat-option value="">--Seleccione--</mat-option>
                                             <mat-option [value]="o.id" *ngFor="let o of lstMedidaVelicidad">{{o.nombre}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput type="text" [(ngModel)]="row.nrovideo">
+                                        <input matInput type="text" [(ngModel)]="row.nrocaudalVideoPropuesto">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioPropuesto_platinium">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Platinium </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 160px !important"> Platinium </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 160px !important">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
-                                        <mat-select [(ngModel)]="row.platinium">
+                                        <mat-select [(ngModel)]="row.caudalPlatinumPropuesto">
                                             <mat-option [value]="o.id" *ngFor="let o of lstMedidaVelicidad">{{o.nombre}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput type="text" [(ngModel)]="row.nroplatinium">
+                                        <input matInput type="text" [(ngModel)]="row.nrocaudalPlatinumPropuesto">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioPropuesto_oro">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Oro </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 160px !important"> Oro </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 160px !important">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
-                                        <mat-select [(ngModel)]="row.oro">
+                                        <mat-select [(ngModel)]="row.caudalOroPropuesto">
                                             <mat-option [value]="o.id" *ngFor="let o of lstMedidaVelicidad">{{o.nombre}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput type="text" [(ngModel)]="row.nrooro">
+                                        <input matInput type="text" [(ngModel)]="row.nrocaudalOroPropuesto">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioPropuesto_plata">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Plata </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 160px !important"> Plata </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 160px !important">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
-                                        <mat-select [(ngModel)]="row.plata">
+                                        <mat-select [(ngModel)]="row.caudalPlataPropuesto">
                                             <mat-option [value]="o.id" *ngFor="let o of lstMedidaVelicidad">{{o.nombre}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput type="text" [(ngModel)]="row.nroplata">
+                                        <input matInput type="text" [(ngModel)]="row.nrocaudalPlataPropuesto">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
 
 
                             <ng-container matColumnDef="servicioPropuesto_bronce">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Bronce </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 160px !important"> Bronce </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 160px !important">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
-                                        <mat-select [(ngModel)]="row.bronce">
+                                        <mat-select [(ngModel)]="row.caudalBroncePropuesto">
                                             <mat-option [value]="o.id" *ngFor="let o of lstMedidaVelicidad">{{o.nombre}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput type="text" [(ngModel)]="row.nrobronce">
+                                        <input matInput type="text" [(ngModel)]="row.nrocaudalBroncePropuesto">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
