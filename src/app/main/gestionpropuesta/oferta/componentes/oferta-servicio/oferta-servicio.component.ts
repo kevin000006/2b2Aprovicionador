@@ -108,11 +108,10 @@ export class OfertaServicioComponent implements OnInit {
     private _router: Router,
     private toastr: ToastrService
   ) {
-  }
+  } 
 
-  
-//
-  public selected(user,row) {    
+  public selected(user,row) {        
+    row.ubigeo=user.descripcion;
     row.distritoId = user.iddistrito
   }
   
@@ -403,6 +402,7 @@ export class OfertaServicioComponent implements OnInit {
         router2: item.routerPropuesto,
         sede: item.nombreSede,
         sisego: item.codigoSisego,
+        ubigeo:item.ubigeo,
         sva: item.svaPropuesto,
         svadescripcion: item.descripcionSvaPropuesto,
         telefono: item.telefono,
