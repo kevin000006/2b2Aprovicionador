@@ -111,7 +111,7 @@ export class OfertaServicioComponent implements OnInit {
   }
 
   
-
+//
   public selected(user,row) {    
     row.distritoId = user.iddistrito
   }
@@ -272,6 +272,7 @@ export class OfertaServicioComponent implements OnInit {
       upsActual: '',
       vrf_actual: '',
       zoom: '',
+      ubigeo:'',
       estado: 0,
       activo: true,
       isLoading: false

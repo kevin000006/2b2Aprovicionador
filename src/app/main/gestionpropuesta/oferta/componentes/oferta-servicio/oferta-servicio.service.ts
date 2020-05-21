@@ -85,6 +85,7 @@ export class OfertaServicioService {
                  element.nrocaudalBroncePropuesto = element.caudalBroncePropuesto!==null ? element.caudalBroncePropuesto.split(" ")[1]: "";
                  element.caudalBroncePropuesto = element.caudalBroncePropuesto!==null ? element.caudalBroncePropuesto.split(" ")[0]: "";
                 
+                 //element.ubigeo='Lima, Lima, Callao';
                 return element;
             });
             return result.data;
