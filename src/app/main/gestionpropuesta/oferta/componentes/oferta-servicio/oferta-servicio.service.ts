@@ -1,5 +1,5 @@
 import { Injectable, Input } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, empty } from 'rxjs';
 import { OfertaDetalleModel } from '../../../models/oferta';
 import { Guid } from "guid-typescript";
@@ -17,15 +17,16 @@ export class OfertaServicioService {
 
   get data(): OfertaDetalleModel[] {
     return this.dataChange.value;
-  }  
+  }
   guardarservicios(data: any): Observable<any> {
     return this.http.post<any>('/ofertasDetalle/guardarservicios', data, {
-        reportProgress: true,
-        observe: 'events'
+      reportProgress: true,
+      observe: 'events'
     });
-}
+  }
   obtenerOfertasDetalle(param: any): Observable<any> {
-    return this.http.get<OfertaDetalleModel[]>('/ofertasDetalle/obtenerOfertasDetalle?oferta_id=' + param.oferta_id + '&Pageable=' + param.page, {}).pipe(
+    debugger;
+    return this.http.get<OfertaDetalleModel[]>('/ofertasDetalle/obtenerOfertasDetalle?ofertaId=' + param.oferta_id + '&Pageable=' + param.page, {}).pipe(
       map(res => {
         var result: any = res;
         if (result.msj == "200") {
