@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Input,Output,EventEmitter } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -92,6 +92,10 @@ export class OfertaServicioComponent implements OnInit {
   filteredStates: Observable<any>;
   @Input() ofertaBase: any = {};
 
+  @Input() value: any;
+  @Output() valueChange = new EventEmitter();
+
+
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild('filter', { static: true }) filter: ElementRef;
@@ -110,6 +114,25 @@ export class OfertaServicioComponent implements OnInit {
     debugger;
     //this.actionData.libraryContent.billingActivityId=object.activityId;
   }
+
+  public getDisplayFn() {
+    debugger;
+    return (val) => this.display(val);
+ }
+
+ private display(user): string {
+    //access component "this" here
+    debugger;
+    return user ? user.displayName : user;
+ }
+
+  public selected(user) {
+    debugger;
+    this.value = user;
+    //send to parent or do whatever you want to do
+    this.valueChange.emit(user);
+  }
+
   selectedOption(event) {
     const selectedValue = event.option.value;
     console.log(selectedValue);

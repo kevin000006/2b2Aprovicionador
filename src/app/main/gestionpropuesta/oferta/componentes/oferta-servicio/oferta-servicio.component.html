@@ -52,7 +52,7 @@
                                             <mat-spinner diameter="50"></mat-spinner>
                                         </mat-option>
                                         <ng-container *ngIf="!row.isLoading">
-                                            <mat-option *ngFor="let state of filteredStates" (onSelectionChange)="setBillingActivity($event,row)" [value]="state.descripcion">
+                                            <mat-option *ngFor="let state of filteredStates" (onSelectionChange)="selected(state)" [value]="state">
                                                 <!-- <img class="example-option-img" aria-hidden [src]="state.flag" height="25"> -->
                                                 <!-- <span>{{state.name}}</span> |
                                                 <small>Population: {{state.population}}</small> -->
@@ -264,7 +264,7 @@
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Facturación</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput [(ngModel)]="row.facturacion_actual" type="text" maxlength="100">
+                                        <input matInput [(ngModel)]="row.facturacion_actual" type="number" maxlength="100">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
@@ -503,7 +503,7 @@
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Precio</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput [(ngModel)]="row.precioPropuesto" type="text" maxlength="100">
+                                        <input matInput [(ngModel)]="row.precioPropuesto" type="number" maxlength="100">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
@@ -550,7 +550,7 @@
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Ultima Mila S/.</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput [(ngModel)]="row.costoUltimaMilla" type="text" maxlength="100">
+                                        <input matInput [(ngModel)]="row.costoUltimaMilla" type="number" maxlength="100">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
@@ -558,7 +558,7 @@
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Dias de ejecución</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput [(ngModel)]="row.diasEjecucion" type="text" maxlength="100">
+                                        <input matInput [(ngModel)]="row.diasEjecucion" type="number" maxlength="100">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
