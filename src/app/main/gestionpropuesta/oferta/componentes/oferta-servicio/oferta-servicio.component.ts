@@ -351,7 +351,7 @@ export class OfertaServicioComponent implements OnInit {
     var Id = this.dataSource.data.length == 0 ? 1 : this.dataSource.data[this.dataSource.data.length - 1].ofertasDetalleId + 1;
     let objecto = this.crearNuevoServicio(Id, this.ofertaBase.id);
     this.dataSource.data.push(objecto);
-    console.log(this.dataSource.data);
+    this.dataSourceList.push(objecto);
     this.dataSource.filter = "";
   }
 
