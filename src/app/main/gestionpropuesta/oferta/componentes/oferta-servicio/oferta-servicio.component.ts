@@ -116,6 +116,7 @@ export class OfertaServicioComponent implements OnInit {
           setTimeout(() => {
             row.isLoading = false;
             this.filteredStates = data;
+            console.log(data);
           }, 1000);
         });
     }
@@ -382,7 +383,8 @@ export class OfertaServicioComponent implements OnInit {
       this.dataSource.filter = '';
     });
   }
-
+//2-->cliente
+//32 distrito
   guardarServicios(): void {
     const listOfertaDetalle = this.dataSource.data.map(item => {
       if (item.estado == 0) //Si es 0 Nuevo Registro
@@ -407,17 +409,18 @@ export class OfertaServicioComponent implements OnInit {
         idaccionisis: item.accionIsisIdPropuesto,
         idcircuito: item.tipoCircuitoActual,
         idcircuito2: item.tipoCircuitoIdPropuesto,
-        iddistrito: item.distritoId,
+        iddistrito: null,// item.distritoId,
         idmedio: item.servicioActual_medio,
         idmedio2: item.servicioPropuesto_medio,
         idmodo: item.servicioPropuesto_modo,
         idservicio: item.tipoServicioIdActual,
         idservicio2: item.tipoServicioIdPropuesto,
         idtiposede: item.servicioPropuesto_tiposede,
-        lat: item.latitud,
+        lat: item.latitud.toString(),
+        lon: item.longitud.toString(),
         ldn_actual: item.caudalLdnActual + ' ' + item.nrocaudalLdnActual,
         ldn_propuesto: item.caudalLdnPropuesto+ ' ' + item.nrocaudalLdnPropuesto,
-        lon: item.longitud,
+        
         ncircuito: item.nrotipoCircuitoActual,
         ncircuito2: item.servicioPropuesto_nrocircuito,
         observaciones: item.observacionesPropuesto,
@@ -451,6 +454,7 @@ export class OfertaServicioComponent implements OnInit {
     });
     debugger;
 
+    console.log(listOfertaDetalle);
     this.inProgress = true;
     this.ofertaServicioService.guardarservicios(listOfertaDetalle).pipe(
       map(event => {
