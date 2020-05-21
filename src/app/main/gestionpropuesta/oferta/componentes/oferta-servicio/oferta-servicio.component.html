@@ -52,12 +52,8 @@
                                             <mat-spinner diameter="50"></mat-spinner>
                                         </mat-option>
                                         <ng-container *ngIf="!row.isLoading">
-                                            <mat-option *ngFor="let state of filteredStates" (onSelectionChange)="selected(state)" [value]="state">
-                                                <!-- <img class="example-option-img" aria-hidden [src]="state.flag" height="25"> -->
-                                                <!-- <span>{{state.name}}</span> |
-                                                <small>Population: {{state.population}}</small> -->
+                                            <mat-option *ngFor="let state of filteredStates" (onSelectionChange)="selected(state,row)" [value]="state.descripcion">                                                
                                                 <span>{{state.descripcion}}</span>
-
                                             </mat-option>
                                         </ng-container>
                                     </mat-autocomplete>
@@ -141,7 +137,7 @@
                                         </mat-select>
                                     </mat-form-field>
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput [(ngModel)]="row.nrobwActualActual" (input)="inputChangebw($event.target.value,row)" type="text">
+                                        <input matInput [(ngModel)]="row.nrobwActualActual" type="text">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>

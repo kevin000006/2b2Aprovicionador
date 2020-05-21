@@ -110,35 +110,11 @@ export class OfertaServicioComponent implements OnInit {
   ) {
   }
 
-  setBillingActivity(object,row ){
-    debugger;
-    //this.actionData.libraryContent.billingActivityId=object.activityId;
+  
+
+  public selected(user,row) {    
+    row.distritoId = user.iddistrito
   }
-
-  public getDisplayFn() {
-    debugger;
-    return (val) => this.display(val);
- }
-
- private display(user): string {
-    //access component "this" here
-    debugger;
-    return user ? user.displayName : user;
- }
-
-  public selected(user) {
-    debugger;
-    this.value = user;
-    //send to parent or do whatever you want to do
-    this.valueChange.emit(user);
-  }
-
-  selectedOption(event) {
-    const selectedValue = event.option.value;
-    console.log(selectedValue);
-    this.filteredStates = null
- }
- 
   
   inputChangeUbigeo(input: any, row: any): void {
     if (input.length > 2) {
@@ -182,53 +158,8 @@ export class OfertaServicioComponent implements OnInit {
       }
     });
   }
+ 
 
-  selectedbwActualActual(event, row) {
-    debugger;
-    // let target = event.source._element.nativeElement;
-    // let selectedData = {
-    //   value: event.source.value,
-    //   text: target.innerText.trim()
-    // };
-
-    let listServicioActual_bw: Array<String>;
-    var inputIngresado = "";
-    if (row.bwActualActual.length > 0) {
-      inputIngresado = row.bwActualActual.split(" ")[1];
-    }
-    // if (input === "") {
-    //   listServicioActual_bw = [comboSeleccionado, ''];
-    // }
-    // else {
-    //   listServicioActual_bw = [comboSeleccionado, input];
-    // }
-    listServicioActual_bw = [event.source.value, inputIngresado];
-    row.bwActualActual = listServicioActual_bw.join(" ");
-
-    // let listServicioActual_bw: Array<String> = [event.source.value, ''];
-    // row.bwActualActual = listServicioActual_bw.join(" ");
-    //console.log(selectedData);
-  }
-  modelChanged(newObj, row) {
-    debugger;
-    newObj = 'kbps';
-    return newObj;
-    // do something with new value
-  }
-  inputChangebw(input, row): void {
-    let listServicioActual_bw: Array<String>;
-    var comboSeleccionado = "";
-    if (row.bwActualActual.length > 0) {
-      comboSeleccionado = row.bwActualActual.split(" ")[0];
-    }
-    if (input === "") {
-      listServicioActual_bw = [comboSeleccionado, ''];
-    }
-    else {
-      listServicioActual_bw = [comboSeleccionado, input];
-    }
-    row.bwActualActual = listServicioActual_bw.join(" ");
-  }
   crearNuevoServicio(ofertasDetalleId: number, ofertaId: number): OfertaDetalleModel {
     return {
       clienteId: null,
@@ -372,7 +303,7 @@ export class OfertaServicioComponent implements OnInit {
         const a = document.createElement('a');
         a.click();
         a.remove();
-        debugger;
+        
         var objetoOfertaOpex = this.dataSourceList.find(function (element) { return element.ofertasDetalleId == item.ofertasDetalleId; });
         if (objetoOfertaOpex.estado == 0) {// si el registro es agregado, entonce se elimina
           var ObjectIndex = this.dataSourceList.findIndex(function (obj) { return obj.ofertasDetalleId === item.ofertasDetalleId; });//Obtenemos el Index del List de Objetos        
@@ -440,9 +371,9 @@ export class OfertaServicioComponent implements OnInit {
         id: item.ofertasDetalleId,
         idoferta: item.ofertaId,
         idaccionisis: item.accionIsisIdPropuesto,
-        idcircuito: item.tipoCircuitoActual, //se tiene queq quitar del hardcode
+        idcircuito: item.tipoCircuitoActual,
         idcircuito2: item.tipoCircuitoIdPropuesto,
-        iddistrito: 32,// item.distritoId, se tiene que quitar el hardcode
+        iddistrito: item.distritoId,
         idmedio: item.servicioActual_medio,
         idmedio2: item.servicioPropuesto_medio,
         idmodo: item.servicioPropuesto_modo,
