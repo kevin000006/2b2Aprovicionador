@@ -24,7 +24,7 @@
                 <div class="col-sm-12">
                     <mat-progress-bar [color]="color" [ngStyle]="{'visibility':inProgress==true ? 'visible' : 'hidden'}" [value]="progress"></mat-progress-bar>
                     <div class="table-responsive">
-                        <mat-table #table mat-table [dataSource]="dataSource" style="width: 6000px;" matSort class="tb-oferta-equipamiento">
+                        <mat-table #table mat-table [dataSource]="dataSource" style="width: 9000px;" matSort class="tb-oferta-equipamiento">
                             <ng-container matColumnDef="sede">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 200px !important">Sede</mat-header-cell>
                                 <mat-cell *matCellDef="let row" style="flex: 0 0 200px !important">
@@ -233,32 +233,32 @@
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioActual_equipoterminal">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header>Equipo Terminal</mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 230px !important;">Equipo Terminal</mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 230px !important;">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <input matInput [(ngModel)]="row.equipoTerminalActual" type="text" maxlength="100">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioActual_router">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header>Router</mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 230px !important;">Router</mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 230px !important;">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <input matInput [(ngModel)]="row.routerSwitchActual" type="text" maxlength="100">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioActual_otro">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Otros </mat-header-cell>
-                                <mat-cell *matCellDef="let element">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 230px !important;"> Otros </mat-header-cell>
+                                <mat-cell *matCellDef="let element" style="flex: 0 0 230px !important;">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <input matInput type="text" [(ngModel)]="element.servicioActual_otro" maxlength="100">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioActual_facturacion">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header>Facturación</mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 200px !important;">Facturación</mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 200px !important;">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <input matInput [(ngModel)]="row.facturacion_actual" type="number" maxlength="100">
                                     </mat-form-field>
@@ -267,8 +267,8 @@
 
                             <!--servicioPropuesto-->
                             <ng-container matColumnDef="servicioPropuesto_acccionisis">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Acción ISIS </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 230px !important;"> Acción ISIS </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 230px !important;">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <mat-select [(ngModel)]="row.accionIsisIdPropuesto">
                                             <mat-option [value]="0">--Seleccione--</mat-option>
@@ -320,8 +320,8 @@
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioPropuesto_servicio">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Servicio </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 230px !important;"> Servicio </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 230px !important;">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
                                         <mat-select [(ngModel)]="row.tipoServicioIdPropuesto">
@@ -332,8 +332,8 @@
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioPropuesto_medio">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Medio </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 80px !important;"> Medio </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 80px !important;">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
                                         <mat-select [(ngModel)]="row.servicioPropuesto_medio">
@@ -344,16 +344,16 @@
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioPropuesto_sva">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header>SVA</mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 230px !important;">SVA</mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 230px !important;">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <input matInput [(ngModel)]="row.svaPropuesto" type="text" maxlength="100">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="servicioPropuesto_svadescripcion">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header>SVA - Descripción</mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 230px !important;">SVA - Descripción</mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 230px !important;">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <input matInput [(ngModel)]="row.descripcionSvaPropuesto" type="text" maxlength="100">
                                     </mat-form-field>
@@ -472,16 +472,16 @@
 
                             <!--Equipos-->
                             <ng-container matColumnDef="equipos_equipoterminal">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header>Equipo Terminal</mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 230px !important;">Equipo Terminal</mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 230px !important;">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <input matInput [(ngModel)]="row.equipoTerminalPropuesto" type="text" maxlength="100">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="equipos_routers">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header>Router</mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 230px !important;">Router</mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 230px !important;">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <input matInput [(ngModel)]="row.routerPropuesto" type="text" maxlength="100">
                                     </mat-form-field>
@@ -504,8 +504,8 @@
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="equipos_observaciones">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header>Observaciones</mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 300px !important;">Observaciones</mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 300px !important;">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <input matInput [(ngModel)]="row.observacionesPropuesto" type="text" maxlength="100">
                                     </mat-form-field>
@@ -513,8 +513,8 @@
                             </ng-container>
 
                             <ng-container matColumnDef="ofertaisis">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header>Oferta ISIS</mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 200px !important;">Oferta ISIS</mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 200px !important;">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <input matInput [(ngModel)]="row.ofertaIsisPropuesto" type="text" maxlength="100">
                                     </mat-form-field>
@@ -523,16 +523,16 @@
 
                             <!--sisego-->
                             <ng-container matColumnDef="sesego">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header>SISEGO</mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 200px !important;">SISEGO</mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 200px !important;">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <input matInput [(ngModel)]="row.codigoSisego" type="text" maxlength="100">
                                     </mat-form-field>
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="sisego_zona">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Zona </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 230px !important;">  Zona </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 230px !important;">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
                                         <mat-select [(ngModel)]="row.zonaSisego">
@@ -543,8 +543,8 @@
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="sisego_ultimamilla">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header>Ultima Mila S/.</mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 230px !important;">Ultima Mila S/.</mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="flex: 0 0 230px !important;">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <input matInput [(ngModel)]="row.costoUltimaMilla" type="number" maxlength="100">
                                     </mat-form-field>

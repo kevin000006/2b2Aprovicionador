@@ -282,9 +282,10 @@ export class OfertaServicioComponent implements OnInit {
     this.dataSourceList = [];
     var Id = this.dataSource.data.length == 0 ? 1 : this.dataSource.data[this.dataSource.data.length - 1].ofertasDetalleId + 1;
     let objecto = this.crearNuevoServicio(Id, this.ofertaBase.id);
+    debugger;
     this.dataSourceList.push(objecto);
     this.dataSource.data=this.dataSourceList;    
-    this.dataSource.filter = "";
+   // this.dataSource.filter = "";
   }
 
   deleteRow(item: any): void {
