@@ -348,6 +348,7 @@ export class OfertaServicioComponent implements OnInit {
     };
   }
   addRow(): void {
+    this.dataSourceList = [];
     var Id = this.dataSource.data.length == 0 ? 1 : this.dataSource.data[this.dataSource.data.length - 1].ofertasDetalleId + 1;
     let objecto = this.crearNuevoServicio(Id, this.ofertaBase.id);
     this.dataSourceList.push(objecto);

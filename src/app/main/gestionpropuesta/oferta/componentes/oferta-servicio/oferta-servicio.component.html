@@ -53,9 +53,7 @@
                                         </mat-option>
                                         <ng-container *ngIf="!row.isLoading">
                                             <mat-option *ngFor="let state of filteredStates" (onSelectionChange)="selected(state)" [value]="state">
-                                                <!-- <img class="example-option-img" aria-hidden [src]="state.flag" height="25"> -->
-                                                <!-- <span>{{state.name}}</span> |
-                                                <small>Population: {{state.population}}</small> -->
+                                              
                                                 <span>{{state.descripcion}}</span>
 
                                             </mat-option>
