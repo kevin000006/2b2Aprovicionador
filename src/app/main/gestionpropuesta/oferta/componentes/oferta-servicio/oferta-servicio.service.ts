@@ -36,56 +36,57 @@ export class OfertaServicioService {
                  element.estado = -1;
                  element.activo = true;
                  
-                 element.nrobwActualActual = element.bwActualActual!=="" ? element.bwActualActual.split(" ")[1]: "";
-                 element.bwActualActual = element.bwActualActual!=="" ? element.bwActualActual.split(" ")[0]: "";
+                 debugger;
+                 element.nrobwActualActual = element.bwActualActual!==null ? element.bwActualActual.split(" ")[1]: "";
+                 element.bwActualActual = element.bwActualActual!==null ? element.bwActualActual.split(" ")[0]: "";
 
-                 element.nrocaudalLdnActual = element.nrocaudalLdnActual!=="" ? element.nrocaudalLdnActual.split(" ")[1]: "";
-                 element.caudalLdnActual = element.caudalLdnActual!=="" ? element.caudalLdnActual.split(" ")[0]: "";
+                 element.nrocaudalLdnActual = element.caudalLdnActual!==null ? element.nrocaudalLdnActual.split(" ")[1]: "";
+                 element.caudalLdnActual = element.caudalLdnActual!==null ? element.caudalLdnActual.split(" ")[0]: "";
 
-                 element.nrocaudalVozActual = element.nrocaudalVozActual!=="" ? element.nrocaudalVozActual.split(" ")[1]: "";
-                 element.caudalVideoActual = element.caudalVideoActual!=="" ? element.caudalVideoActual.split(" ")[0]: "";
+                 element.nrocaudalVozActual = element.caudalVideoActual!==null ? element.nrocaudalVozActual.split(" ")[1]: "";
+                 element.caudalVideoActual = element.caudalVideoActual!==null ? element.caudalVideoActual.split(" ")[0]: "";
                  
-                 element.nrocaudalVideoActual = element.nrocaudalVideoActual!=="" ? element.nrocaudalVideoActual.split(" ")[1]: "";
-                 element.caudalVozActual = element.caudalVozActual!=="" ? element.caudalVozActual.split(" ")[0]: "";
+                 element.nrocaudalVideoActual = element.caudalVozActual!==null ? element.nrocaudalVideoActual.split(" ")[1]: "";
+                 element.caudalVozActual = element.caudalVozActual!==null ? element.caudalVozActual.split(" ")[0]: "";
 
-                 element.nrocaudalPlatinumActual = element.nrocaudalPlatinumActual!=="" ? element.nrocaudalPlatinumActual.split(" ")[1]: "";
-                 element.caudalPlatinumActual = element.caudalPlatinumActual!=="" ? element.caudalPlatinumActual.split(" ")[0]: "";
+                 element.nrocaudalPlatinumActual = element.caudalPlatinumActual!==null? element.nrocaudalPlatinumActual.split(" ")[1]: "";
+                 element.caudalPlatinumActual = element.caudalPlatinumActual!==null ? element.caudalPlatinumActual.split(" ")[0]: "";
 
-                 element.nrocaudalOroActual = element.nrocaudalOroActual!=="" ? element.nrocaudalOroActual.split(" ")[1]: "";
-                 element.caudalOroActual = element.caudalOroActual!=="" ? element.caudalOroActual.split(" ")[0]: "";
+                 element.nrocaudalOroActual = element.caudalOroActual!==null ? element.nrocaudalOroActual.split(" ")[1]: "";
+                 element.caudalOroActual = element.caudalOroActual!==null ? element.caudalOroActual.split(" ")[0]: "";
 
-                 element.nrocaudal_plata_actual = element.nrocaudal_plata_actual!=="" ? element.nrocaudal_plata_actual.split(" ")[1]: "";
-                 element.caudal_plata_actual = element.caudal_plata_actual!=="" ? element.caudal_plata_actual.split(" ")[0]: "";
+                 element.nrocaudal_plata_actual = element.caudal_plata_actual!==null ? element.nrocaudal_plata_actual.split(" ")[1]: "";
+                 element.caudal_plata_actual = element.caudal_plata_actual!==null ? element.caudal_plata_actual.split(" ")[0]: "";
 
-                 element.nrocaudalBronceActual = element.nrocaudalBronceActual!=="" ? element.nrocaudalBronceActual.split(" ")[1]: "";
-                 element.caudalBronceActual = element.caudalBronceActual!=="" ? element.caudalBronceActual.split(" ")[0]: "";
-
-
+                 element.nrocaudalBronceActual = element.caudalBronceActual!==null ? element.nrocaudalBronceActual.split(" ")[1]: "";
+                 element.caudalBronceActual = element.caudalBronceActual!==null ? element.caudalBronceActual.split(" ")[0]: "";
 
 
-                 element.nrobwPropuesto = element.nrobwPropuesto!=="" ? element.nrobwPropuesto.split(" ")[1]: "";
-                 element.bwPropuesto = element.bwPropuesto!=="" ? element.bwPropuesto.split(" ")[0]: "";
 
-                 element.nrocaudalLdnPropuesto = element.nrocaudalLdnPropuesto!=="" ? element.nrocaudalLdnPropuesto.split(" ")[1]: "";
-                 element.caudalLdnPropuesto = element.caudalLdnPropuesto!=="" ? element.caudalLdnPropuesto.split(" ")[0]: "";
 
-                 element.nrocaudalVozPropuesto = element.nrocaudalVozPropuesto!=="" ? element.nrocaudalVozPropuesto.split(" ")[1]: "";
-                 element.caudalVozPropuesto = element.caudalVozPropuesto!=="" ? element.caudalVozPropuesto.split(" ")[0]: "";
+                 element.nrobwPropuesto = element.bwPropuesto!==null ? element.nrobwPropuesto.split(" ")[1]: "";
+                 element.bwPropuesto = element.bwPropuesto!==null ? element.bwPropuesto.split(" ")[0]: "";
 
-                 element.nrocaudalVideoPropuesto = element.nrocaudalVideoPropuesto!=="" ? element.nrocaudalVideoPropuesto.split(" ")[1]: "";
-                 element.caudalVideoPropuesto = element.caudalVideoPropuesto!=="" ? element.caudalVideoPropuesto.split(" ")[0]: "";
+                 element.nrocaudalLdnPropuesto = element.caudalLdnPropuesto!==null ? element.nrocaudalLdnPropuesto.split(" ")[1]: "";
+                 element.caudalLdnPropuesto = element.caudalLdnPropuesto!==null ? element.caudalLdnPropuesto.split(" ")[0]: "";
 
-                 element.nrocaudalPlatinumPropuesto = element.nrocaudalPlatinumPropuesto!=="" ? element.nrocaudalPlatinumPropuesto.split(" ")[1]: "";
-                 element.caudalPlatinumPropuesto = element.caudalPlatinumPropuesto!=="" ? element.caudalPlatinumPropuesto.split(" ")[0]: "";
+                 element.nrocaudalVozPropuesto = element.caudalVozPropuesto!==null ? element.nrocaudalVozPropuesto.split(" ")[1]: "";
+                 element.caudalVozPropuesto = element.caudalVozPropuesto!==null ? element.caudalVozPropuesto.split(" ")[0]: "";
 
-                 element.nrocaudalOroPropuesto = element.nrocaudalOroPropuesto!=="" ? element.nrocaudalOroPropuesto.split(" ")[1]: "";
-                 element.caudalOroPropuesto = element.caudalOroPropuesto!=="" ? element.caudalOroPropuesto.split(" ")[0]: "";
+                 element.nrocaudalVideoPropuesto = element.caudalVideoPropuesto!==null ? element.nrocaudalVideoPropuesto.split(" ")[1]: "";
+                 element.caudalVideoPropuesto = element.caudalVideoPropuesto!==null ? element.caudalVideoPropuesto.split(" ")[0]: "";
 
-                 element.nrocaudalPlataPropuesto = element.nrocaudalPlataPropuesto!=="" ? element.nrocaudalPlataPropuesto.split(" ")[1]: "";
-                 element.caudalPlataPropuesto = element.caudalPlataPropuesto!=="" ? element.caudalPlataPropuesto.split(" ")[0]: "";
+                 element.nrocaudalPlatinumPropuesto = element.caudalPlatinumPropuesto!==null ? element.nrocaudalPlatinumPropuesto.split(" ")[1]: "";
+                 element.caudalPlatinumPropuesto = element.caudalPlatinumPropuesto!==null ? element.caudalPlatinumPropuesto.split(" ")[0]: "";
 
-                 element.nrocaudalBroncePropuesto = element.nrocaudalBroncePropuesto!=="" ? element.nrocaudalBroncePropuesto.split(" ")[1]: "";
-                 element.caudalBroncePropuesto = element.caudalBroncePropuesto!=="" ? element.caudalBroncePropuesto.split(" ")[0]: "";
+                 element.nrocaudalOroPropuesto = element.caudalOroPropuesto!==null ? element.nrocaudalOroPropuesto.split(" ")[1]: "";
+                 element.caudalOroPropuesto = element.caudalOroPropuesto!==null ? element.caudalOroPropuesto.split(" ")[0]: "";
+
+                 element.nrocaudalPlataPropuesto = element.caudalPlataPropuesto!==null ? element.nrocaudalPlataPropuesto.split(" ")[1]: "";
+                 element.caudalPlataPropuesto = element.caudalPlataPropuesto!==null ? element.caudalPlataPropuesto.split(" ")[0]: "";
+
+                 element.nrocaudalBroncePropuesto = element.caudalBroncePropuesto!==null ? element.nrocaudalBroncePropuesto.split(" ")[1]: "";
+                 element.caudalBroncePropuesto = element.caudalBroncePropuesto!==null ? element.caudalBroncePropuesto.split(" ")[0]: "";
                 // element.activo = true;
                 return element;
             });
