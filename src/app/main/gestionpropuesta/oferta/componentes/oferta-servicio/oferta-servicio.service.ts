@@ -50,8 +50,7 @@ export class OfertaServicioService {
   //   // );
   // }
 
-  obtenerOfertasDetalle(param: any): Observable<any> {
-    debugger;
+  obtenerOfertasDetalle(param: any): Observable<any> {    
     return this.http.get<OfertaDetalleModel[]>('/ofertasDetalle/obtenerOfertasDetalle?ofertaId=' + param.oferta_id + '&Pageable=' + param.page, {}).pipe(
       map(res => {
         var result: any = res;
@@ -61,8 +60,7 @@ export class OfertaServicioService {
             element.nombreGeolocalizacion;
             element.estado = -1;
             element.activo = true;
-
-            debugger;
+                        
             element.nrobwActualActual = element.bwActualActual !== null ? element.bwActualActual.split(" ")[1] : "";
             element.bwActualActual = element.bwActualActual !== null ? element.bwActualActual.split(" ")[0] : "";
 

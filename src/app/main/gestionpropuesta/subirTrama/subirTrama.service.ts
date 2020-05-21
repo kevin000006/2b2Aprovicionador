@@ -35,8 +35,7 @@ export class SubirTramaService {
     return `https://${accountName}.blob.core.windows.net/${containerName}/${resourceName}`
   }
 
-  downloadBlobl(nombre: any): any {
-    debugger;
+  downloadBlobl(nombre: any): any {    
     async function blobToString(blob: Blob): Promise<string> {
       const fileReader = new FileReader();
       return new Promise<string>((resolve, reject) => {
