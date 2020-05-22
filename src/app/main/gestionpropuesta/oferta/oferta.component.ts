@@ -91,7 +91,6 @@ export class OfertaComponent implements OnInit {
   }
 
   openBitacora(): void {
-debugger;
       const dialogRef = this.dialog.open(BitacoraDialogComponent, {
         width: '760px',
         data: {

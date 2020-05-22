@@ -52,7 +52,8 @@ export class BandejaComponent implements OnInit {
     complejidad:'', 
     estado:'', 
     desde: '', 
-    hasta:''
+    hasta:'',
+    nroItmes:5
    };
   pageIndex:number=0;
   fileName = 'bandeja_oferta.xlsx';
@@ -91,7 +92,7 @@ export class BandejaComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild('filter', { static: true }) filter: ElementRef;
-  @ViewChild('pagesize', { static: true }) pagesize: ElementRef;
+  //@ViewChild('pagesize', { static: true }) pagesize: ElementRef;
 
   ngOnInit(): void {
 
@@ -120,7 +121,7 @@ export class BandejaComponent implements OnInit {
 
   public paginar(accion:number){
     this.pageIndex = this.pageIndex + accion;
-    this.filtrarData();
+    this.filtrarData(this._filtro.nroItmes);
   }
 
   public limpiar():void{
@@ -133,11 +134,11 @@ export class BandejaComponent implements OnInit {
     this._filtro.desde='';
     this._filtro.hasta='';
 
-    this.filtrarData();
+    this.filtrarData(this._filtro.nroItmes);
 
   }
 
-  public filtrarData() {
+  public filtrarData(nro:any) {
 
     let _desde = '', _hasta = '';
     if(this._filtro.desde != null && this._filtro.desde !== undefined)
@@ -157,13 +158,11 @@ export class BandejaComponent implements OnInit {
       desde: _desde,
       hasta: _hasta,
       page:this.pageIndex,
-      size:this.pagesize.nativeElement.value
+      size:nro || this._filtro.nroItmes
     }
 
-    this.dataSource.filtrar(obj,this.pagesize.nativeElement.value);
+    this.dataSource.filtrar(obj,this._filtro.nroItmes);
   }
-
-
 
   public loadData() {
     this.exampleDatabase = new BandejaService(this.httpClient);
@@ -177,14 +176,18 @@ export class BandejaComponent implements OnInit {
         this.dataSource.filter = this.filter.nativeElement.value;
       });
 
-      fromEvent(this.pagesize.nativeElement, 'change')
+     /* fromEvent(this.pagesize.nativeElement, 'change')
       .subscribe(() => {
         if (!this.dataSource) {
           return;
         }
-        this.filtrarData();
-      });
+        this.filtrarData(this._filtro.nroItmes);
+      });*/
 
+  }
+
+  public changeSizeItems(items):void{
+    this.filtrarData(items);
   }
 
   public openDialogNuevaVersion(oferta)
@@ -206,7 +209,7 @@ export class BandejaComponent implements OnInit {
     
       if(result != 0)
       {        
-        this.filtrarData();
+        this.filtrarData(this._filtro.nroItmes);
       }
     });
 
@@ -231,7 +234,7 @@ export class BandejaComponent implements OnInit {
     
       if(result != 0)
       {        
-        this.filtrarData();
+        this.filtrarData(this._filtro.nroItmes);
       }
     });
 
@@ -258,7 +261,7 @@ export class BandejaComponent implements OnInit {
     
       if(result != 0)
       {        
-        this.filtrarData();
+        this.filtrarData(this._filtro.nroItmes);
       }
     });
 
@@ -312,7 +315,7 @@ export class EjemploDataSource extends DataSource<BandejaModel>{
     this._exampleDatabase.getBandejaAll({});
 
     return merge(...displayDataChanges).pipe(map(() => {
-      debugger;
+    
       // Filter data
       let data_ = this._exampleDatabase.data['data'] || [];
      

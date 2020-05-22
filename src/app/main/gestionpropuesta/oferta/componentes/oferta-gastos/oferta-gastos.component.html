@@ -79,7 +79,7 @@
 
                             <ng-container matColumnDef="montototalmensual">
                                 <mat-header-cell *matHeaderCellDef> Monto Total S./</mat-header-cell>
-                                <mat-cell *matCellDef="let element" style="justify-content: flex-end;"> {{element.totalMensual| number:'2.2-5'}} </mat-cell>
+                                <mat-cell *matCellDef="let element" style="justify-content: flex-end;"> {{element.totalMensual.toFixed(2) | mask: 'separator':','}} </mat-cell>
                                 <mat-footer-cell *matFooterCellDef style="background: #f8f9fa;font-family: telefonicabold;justify-content: flex-end;">
 
                                 </mat-footer-cell>
@@ -108,7 +108,7 @@
                                     <div class="content">
                                         <div class="desc"> Total $ </div>
                                         <div class="total">
-                                            {{ calcularTotalDolares()| number:'2.2-5' }}
+                                            {{ calcularTotalDolares()| mask: 'separator':',' }}
                                         </div>
                                     </div>
                                 </div>
@@ -117,7 +117,7 @@
                                         <div class="desc"> Total S/. </div>
                                         <div class="total">
 
-                                            {{ calcularTotalSoles() | number:'2.2-5' }}
+                                            {{ calcularTotalSoles() | mask: 'separator':',' }}
                                         </div>
                                     </div>
                                 </div>

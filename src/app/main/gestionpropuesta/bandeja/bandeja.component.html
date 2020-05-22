@@ -49,20 +49,20 @@
                             <div class="col-xs-12 col-sm-3 padding-l-none">
                                 <mat-form-field>
                                     <mat-label class="font-normal">Complejidad</mat-label>
-                                    <select matNativeControl [(ngModel)]="_filtro.complejidad" name="tipocosto" class="form-control">
-                                        <option value="" selected>Seleccionar</option>
-                                        <option *ngFor="let c of lstComplejidad" [ngValue]="c.id">{{c.descripcion}}</option>
-                                    </select>
+                                    <mat-select style="height: 17.5px;" [(ngModel)]="_filtro.complejidad" class="form-control">
+                                        <mat-option [value]="">Seleccionar</mat-option>                                       
+                                        <mat-option *ngFor="let c of lstComplejidad" [value]="c.id">{{c.descripcion}}</mat-option>
+                                    </mat-select>
                                     <span matSuffix>&nbsp; &nbsp;</span>
                                 </mat-form-field>
                             </div>
                             <div class="col-xs-12 col-sm-3">
                                 <mat-form-field>
                                     <mat-label class="font-normal">Estado</mat-label>
-                                    <select matNativeControl [(ngModel)]="_filtro.estado" class="form-control" name="tipocompra">
-                                        <option value="" selected>Seleccionar</option>
-                                        <option *ngFor="let cl of lstEstado" [ngValue]="cl.id">{{cl.descripcion}}</option>
-                                    </select>
+                                    <mat-select style="height: 17.5px;" [(ngModel)]="_filtro.estado" class="form-control">
+                                        <mat-option [value]="">Seleccionar</mat-option>                                       
+                                        <mat-option *ngFor="let o of lstEstado" [value]="o.id">{{o.descripcion}}</mat-option>
+                                    </mat-select>
                                     <span matSuffix>&nbsp; &nbsp;</span>
                                 </mat-form-field>
                             </div>
@@ -122,14 +122,16 @@
                     </div>
                     <div class="col-xs-12 col-sm-1 control-bandeja-tabla">
 
-                        <mat-form-field class="control-page-item" color="accent" style="margin-left: -30px;min-width: 90px;">
-                        <select matNativeControl #pagesize >
-                        <option value="5" selected>5 por pagina</option> 
-                        <option value="10" >10 por pagina</option> 
-                        <option value="25" >25 por pagina</option> 
-                        <option value="50" >50 por pagina</option> 
-                        <option value="100" >100 por pagina</option> 
-                    </select>
+                    <mat-form-field class="control-page-item" color="accent" style="margin-left: -30px;min-width: 90px;">
+                       
+                        <mat-select (selectionChange)="changeSizeItems($event.value)" [(ngModel)]="_filtro.nroItmes">
+                            <mat-option [value]="5">5 por pagina</mat-option>
+                            <mat-option [value]="10">10 por pagina</mat-option>
+                            <mat-option [value]="25">25 por pagina</mat-option>
+                            <mat-option [value]="50">50 por pagina</mat-option>
+                            <mat-option [value]="100">100 por pagina</mat-option>
+                        </mat-select>
+
                         </mat-form-field>
                     </div>
                     <div class="col-xs-12 col-sm-9 text-right control-bandeja-tabla padding-none">

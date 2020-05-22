@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="row opciones-oferta">
+            <div class="row opciones-oferta" *ngIf="ofertaBase.id != 0">
                 <div class="col-md-10">
                     <button mat-flat-button class="button-personalizado" (click)="btnAdjuntar()">
                         <mat-icon class="icon icon-personalizado">cloud_upload </mat-icon>Adjuntar
@@ -44,18 +44,18 @@
                 <mat-tab label="Datos de proyecto">
                     <oferta-cabecera [ofertaBase]="ofertaBase"></oferta-cabecera>
                 </mat-tab>
-                <mat-tab label="Servicios">
+                <mat-tab label="Servicios" *ngIf="ofertaBase.id != 0">
                     <br />
                     <oferta-servicio [ofertaBase]="ofertaBase"></oferta-servicio>
                     <br />
                 </mat-tab>
                 <!-- <mat-tab label="Facilidades técnicas"> Facilidades técnicas </mat-tab>-->
-                <mat-tab label="Equipamiento">
+                <mat-tab label="Equipamiento" *ngIf="ofertaBase.id != 0">
                     <br />
                     <oferta-equipamiento [ofertaBase]="ofertaBase"></oferta-equipamiento>
                     <br />
                 </mat-tab>
-                <mat-tab label="Gastos">
+                <mat-tab label="Gastos" *ngIf="ofertaBase.id != 0">
                     <br />
                     <oferta-gastos [ofertaBase]="ofertaBase"></oferta-gastos>
                     <br />

@@ -8,6 +8,7 @@ import { Observable, fromEvent } from 'rxjs';
 import { MonedaModel } from 'app/model/Common';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'oferta-cabecera',
@@ -28,11 +29,12 @@ export class OfertaCabeceraComponent implements OnInit {
     private service: OfertaCabezeraService,
     private commonService: CommonService,
     public dialog: MatDialog,
-    private _snack: MatSnackBar
+    private _snack: MatSnackBar,
+    private toastr: ToastrService
   ) { }
   @ViewChild('myControl', { static: true }) autocompleteCliente: ElementRef;
   @ViewChild('codigoSalesforce', { static: true }) autocompleteOportunidad: ElementRef;
-  @Input() ofertaBase: any = {};
+  @Input() ofertaBase: any = {id:0};
 
   ganarOferta() {
 
@@ -85,17 +87,18 @@ export class OfertaCabeceraComponent implements OnInit {
 
 
     this.service.guardarOferta(_oferta).subscribe(response => {
-
+      let message ="";
       if (this.ofertaBase.id != 0) {
-        this._snack.open("Oferta modificada con exito.", 'Ok', {
-          duration: 3000,
-        });
+        message = "Oferta modificada con exito.";
       } else {
-
-        this._snack.open("Se creo una nueva oferta.", 'Ok', {
-          duration: 3000,
-        });
+        message = "Se creo una nueva oferta.";
       }
+
+      this.toastr.success(message, '', {
+        progressBar: true,
+        progressAnimation: 'increasing',
+        closeButton: true
+      });
 
       if (response != 1) {
         this.ofertaBase.id = response;
@@ -131,7 +134,7 @@ export class OfertaCabeceraComponent implements OnInit {
         this.oferta.cliente = this.oferta.cliente || new ClienteModel();
         this.oferta.diferencia_ingresos = this.oferta.diferencia_ingresos || 0;
         this.oferta.diferencia_ingresos = (this.oferta.diferencia_ingresos * 100).toFixed(2);
-
+        
       });
     }
     else {
@@ -140,8 +143,9 @@ export class OfertaCabeceraComponent implements OnInit {
       this.oferta.complejidad.id = 0;
       this.oferta.tipocontrato.id = 0;
       this.oferta.tipoproyecto.id = 0;
-
+      
     }
+   
   }
 
   displayFn(cliente) {
@@ -149,7 +153,6 @@ export class OfertaCabeceraComponent implements OnInit {
   }
 
   onSelectOportunidad(item) {
-    debugger;
     this.oferta.oportunidad = item;
     this.oferta.cliente = item.cliente;
     this.oferta.descripcion = item.descripcion;

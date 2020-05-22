@@ -131,9 +131,10 @@ export class OfertaEquipamientoModel {
     this.id = 0;
     this.modelo = "";
     this.total = 0.00;
-    this.unitario = 0.00;
-    this.cantidad = 0;
-    this.antiguedad = 0;
+    this.unitario = null;
+    this.cantidad = null;
+    this.antiguedad = null;
+    this.instalacion = 0.00;
     this.equipamientoCondicion = new EquipamientoCondicionModel();
     this.equipamientomarca = new EquipamientoMarcaModel();
     this.moneda = new MonedaModel();
@@ -150,6 +151,8 @@ export class OfertaEquipamientoModel {
   tipoequipamiento: TipoEquipamientoModel;
   total: number;
   unitario: number;
+  instalacion:number;
+  
 }
 
 export class BitacoraModel {

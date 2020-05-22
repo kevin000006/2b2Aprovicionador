@@ -27,7 +27,7 @@
                     <input type="text" [(ngModel)]="oferta.oportunidad"  class="form-control font-body-oferta" placeholder="" aria-label="Number" matInput  name="oportunidad" #codigoSalesforce
                            [matAutocomplete]="autoO">
                     <mat-autocomplete class="autocomplete"  #autoO="matAutocomplete" [displayWith]="displayFnOportunidad">
-                        <mat-option (onSelectionChange)="onSelectOportunidad(option)" *ngFor="let option of dataSourceOportunidad" [value]="option" class="item-autocomplete">
+                        <mat-option (onSelectionChange)="onSelectOportunidad(option)" *ngFor="let option of dataSourceOportunidad" [value]="option" class="item-auto-clinet">
                             {{option.oportunidadcodigo}}
                         </mat-option>
                     </mat-autocomplete>
@@ -70,7 +70,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="oferta.oferta_id > 0">
             <div class="content-btn-ganada">
                 <button class="btn btn-md btn-telefonica-gree-2" (click)="ganarOferta()">Ganado</button>
             </div>
@@ -189,10 +189,12 @@
                         </div>
                         <div class="content-control-oferta">
                             <mat-form-field color="accent">
-                                <select matNativeControl name="tipoproyecto" class="font-body-oferta" [(ngModel)]="oferta.tipoproyecto.id">
-                                    <option value="0">-Seleccionar-</option>
-                                    <option *ngFor="let o of lstTipoProyecto" [ngValue]="o.id">{{o.descripcion}}</option>
-                                </select>
+                              
+                                <mat-select style="margin-top: 6px;" class="font-body-oferta" name="tipoproyecto" [(ngModel)]="oferta.tipoproyecto.id" >
+                                    <mat-option [value]="0">-Seleccionar-</mat-option>
+                                    <mat-option *ngFor="let o of lstTipoProyecto" [value]="o.id">{{o.descripcion}}</mat-option>
+                                </mat-select>
+
                             </mat-form-field>
                         </div>
 
@@ -203,10 +205,12 @@
                         </div>
                         <div class="content-control-oferta">
                             <mat-form-field color="accent">
-                                <select matNativeControl class="font-body-oferta" name="complejidad" [(ngModel)]="oferta.complejidad.id">
-                                    <option value="0">-Seleccionar-</option>
-                                    <option *ngFor="let o of lstComplejidad" [ngValue]="o.id">{{o.descripcion}}</option>
-                            </select>
+
+                            <mat-select style="margin-top: 6px;" class="font-body-oferta" name="complejidad" [(ngModel)]="oferta.complejidad.id" >
+                                <mat-option [value]="0">-Seleccionar-</mat-option>
+                                <mat-option *ngFor="let o of lstComplejidad" [value]="o.id">{{o.descripcion}}</mat-option>
+                            </mat-select>
+
                             </mat-form-field>
                         </div>
 
@@ -217,10 +221,12 @@
                         </div>
                         <div class="content-control-oferta">
                             <mat-form-field color="accent">
-                                <select matNativeControl class="font-body-oferta" name="tipocontrato" [(ngModel)]="oferta.tipocontrato.id">
-                                    <option value="0">-Seleccionar-</option>
-                                    <option *ngFor="let o of lstTipoContrato" [ngValue]="o.id">{{o.descripcion}}</option>
-                                </select>
+
+                                <mat-select style="margin-top: 6px;" class="font-body-oferta" name="tipocontrato" [(ngModel)]="oferta.tipocontrato.id" >
+                                    <mat-option [value]="0">-Seleccionar-</mat-option>
+                                    <mat-option *ngFor="let o of lstTipoContrato" [value]="o.id">{{o.descripcion}}</mat-option>
+                                </mat-select>
+
                             </mat-form-field>
                         </div>
                     </div>
@@ -256,10 +262,10 @@
                             <mat-label class="label-title">Pago único</mat-label>
                         </div>
                         <div class="col-sm-2 padding-none content-control-oferta">
-                            <mat-form-field>
-                                <select matNativeControl class="font-body-oferta" name="moneda" [(ngModel)]="oferta.moneda.id">
-                                    <option *ngFor="let m of lstMoneda" [ngValue]="m.id">{{m.descBrv}}</option>
-                                </select>
+                            <mat-form-field color="accent">
+                                <mat-select style="margin-top: 6px;" class="font-body-oferta" name="moneda" [(ngModel)]="oferta.moneda.id" >
+                                    <mat-option *ngFor="let m of lstMoneda" [value]="m.id">{{m.descBrv}}</mat-option>
+                                </mat-select>
                             </mat-form-field>
                         </div>
                         <div class="col-sm-10 padding-r-none content-control-oferta">
@@ -273,10 +279,10 @@
                             <mat-label class="label-title">Pago recurrente</mat-label>
                         </div>
                         <div class="col-sm-2 padding-none content-control-oferta">
-                            <mat-form-field>
-                                <select matNativeControl class="font-body-oferta" name="moneda2" [(ngModel)]="oferta.moneda.id">
-                                    <option *ngFor="let m of lstMoneda" [ngValue]="m.id">{{m.descBrv}}</option>
-                                </select>
+                            <mat-form-field color="accent">
+                                <mat-select style="margin-top: 6px;" class="font-body-oferta" name="moneda2" [(ngModel)]="oferta.moneda.id" >
+                                    <mat-option *ngFor="let m of lstMoneda" [value]="m.id">{{m.descBrv}}</mat-option>
+                                </mat-select>
                             </mat-form-field>
                         </div>
                         <div class="col-sm-10 padding-r-none content-control-oferta">
@@ -293,10 +299,10 @@
                             <mat-label class="label-title">Fact. actual</mat-label>
                         </div>
                         <div class="col-sm-2 padding-none content-control-oferta">
-                            <mat-form-field>
-                                <select matNativeControl class="font-body-oferta" [(ngModel)]="oferta.moneda.id" name="moneda3">
-                                    <option *ngFor="let m of lstMoneda" [ngValue]="m.id">{{m.descBrv}}</option>
-                                </select>
+                            <mat-form-field color="accent">
+                                <mat-select style="margin-top: 6px;" class="font-body-oferta" name="moneda3" [(ngModel)]="oferta.moneda.id" >
+                                    <mat-option *ngFor="let m of lstMoneda" [value]="m.id">{{m.descBrv}}</mat-option>
+                                </mat-select>
                             </mat-form-field>
                         </div>
                         <div class="col-sm-10 padding-r-none content-control-oferta">

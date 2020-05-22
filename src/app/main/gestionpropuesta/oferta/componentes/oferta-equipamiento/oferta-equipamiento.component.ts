@@ -67,9 +67,9 @@ export class OfertaEquipamientoComponent implements OnInit {
   }
 
   addRow(): void {
-    debugger;
     let row = new OfertaEquipamientoModel();
-    this.dataSource.data.unshift(row);
+    row.moneda.id = 2;
+    this.dataSource.data.push(row);
     this.dataSource.filter = "";
   }
   Guardar(): void {
@@ -162,15 +162,11 @@ export class OfertaEquipamientoComponent implements OnInit {
     }
     else
       montoCalculado = row.cantidad * (row.moneda.id == 2 ? row.unitario * this.tipoCambio : row.unitario);
-    return montoCalculado;
+    return (montoCalculado * 1.00);
   }
 
   public calcularTotalSoles() {
-
-    let data = this.dataSource.data.filter(x => x.activo == true);
-    
-
-    return data.reduce((accum, curr) => accum + curr.total, 0);
+    return this.dataSource.data.filter(x => x.activo == true).reduce((accum, curr) => accum + curr.total, 0);
   }
   public calcularTotalDolares() {
     return this.dataSource.data.filter(x => x.activo == true).reduce((accum, curr) => accum + (curr.total / this.tipoCambio), 0).toFixed(2);

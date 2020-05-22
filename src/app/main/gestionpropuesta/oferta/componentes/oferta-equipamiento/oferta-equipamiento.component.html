@@ -53,7 +53,7 @@
                                         </td>
                                         <td>
                                             <mat-form-field *ngIf="row.equipamientoCondicion.id == 4" appearance="legacy" [style.fontSize.px]="12" class="antiguedad">
-                                                <input matInput [(ngModel)]="row.antiguedad" (change)="calcularMontoTotalSoles(row)" mask="0*" class="text-center" type="text">
+                                                <input matInput [(ngModel)]="row.antiguedad" (keyup)="calcularMontoTotalSoles(row)" mask="0*" class="text-center" type="text">
                                             </mat-form-field>
                                         </td>
                                         <td>
@@ -71,7 +71,7 @@
                                         </td>
                                         <td>
                                             <mat-form-field  appearance="legacy" [style.fontSize.px]="12" class="cantidad">
-                                                <input matInput [(ngModel)]="row.cantidad" (change)="calcularMontoTotalSoles(row)" mask="0*" type="text" class="text-center">
+                                                <input matInput [(ngModel)]="row.cantidad" (keyup)="calcularMontoTotalSoles(row)" mask="0*" type="text" class="text-center">
                                             </mat-form-field>
                                         </td> 
                                         <td>
@@ -83,12 +83,12 @@
                                         </td>
                                         <td>
                                             <mat-form-field  appearance="legacy" [style.fontSize.px]="12" class="costo">
-                                                <input matInput [(ngModel)]="row.unitario" (change)="calcularMontoTotalSoles(row)" thousandSeparator="" mask="separator.2" type="text" class="text-center">
+                                                <input matInput [(ngModel)]="row.unitario" (keyup)="calcularMontoTotalSoles(row)" thousandSeparator="" mask="separator.2" type="text" class="text-center">
                                             </mat-form-field>
                                         </td>
                                         <td class="text-center">
                                             <span class="total" mask="separator.2">
-                                                {{row.total| mask: 'separator':','}}
+                                                {{row.total.toFixed(2) | mask: 'separator':','}}
                                             </span>
                                             
                                         </td>
@@ -117,17 +117,18 @@
                        <div class="monto separador"></div>
                         <div class="monto soles">
                             <div class="content">
-                                <div class="desc"> Total S/ </div>
+                                <div class="desc"> Total $ </div>
                                 <div class="total">
-                                    {{ calcularTotalSoles() | mask: 'separator':',' }}
+                                    {{ calcularTotalDolares() | mask: 'separator':',' }}
                                 </div>
                             </div>
                         </div>
                         <div class="monto dolares">
                             <div class="content">
-                                <div class="desc"> Total $ </div>
+                                <div class="desc"> Total S/. </div>
                                 <div class="total">
-                                    {{ calcularTotalDolares() | mask: 'separator':',' }}
+                                    
+                                    {{ calcularTotalSoles().toFixed(2) | mask: 'separator':',' }}
                                 </div>
                             </div>
                         </div>

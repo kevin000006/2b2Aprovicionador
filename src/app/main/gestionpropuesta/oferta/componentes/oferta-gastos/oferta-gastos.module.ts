@@ -12,6 +12,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { OfertaGastosService } from './oferta-gastos.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { NgxMaskModule } from 'ngx-mask';
+
 
 
 // import es from '@angular/common/locales/es';
@@ -35,6 +37,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
         MatSelectModule,
         MatTooltipModule,
         MatProgressBarModule,
+        NgxMaskModule
         //BrowserAnimationsModule,
         
     ],
