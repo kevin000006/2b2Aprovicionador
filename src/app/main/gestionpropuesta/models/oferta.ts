@@ -255,6 +255,7 @@ export class OfertaDetalleModel {
   ofertaIsisPropuesto: string;
   codigoSisego: string;
   zonaSisego: string;
+  IdZonaSigego: number;
   costoUltimaMilla: number;
   diasEjecucion: number;
 
@@ -274,6 +275,7 @@ export class OfertaDetalleModel {
   ultimaMillaActual: number;
   upsActual: string;
   vrf_actual: string;  
+  lstZonaSisego: [];
   zoom: string;
   ubigeo: string;
   estado: number;
