@@ -138,7 +138,7 @@ export class BandejaComponent implements OnInit {
 
   }
 
-  public filtrarData(nro:any) {
+  public filtrarData(nro?:any) {
 
     let _desde = '', _hasta = '';
     if(this._filtro.desde != null && this._filtro.desde !== undefined)
