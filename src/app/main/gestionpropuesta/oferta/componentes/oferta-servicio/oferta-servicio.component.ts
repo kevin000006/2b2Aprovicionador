@@ -256,7 +256,7 @@ export class OfertaServicioComponent implements OnInit {
       ofertaIsisPropuesto: '',
       codigoSisego: '',
       zonaSisego: '',
-      IdZonaSigego:0,
+      IdZonaSigego: 0,
       costoUltimaMilla: 0,
       diasEjecucion: 0,
 
@@ -374,6 +374,7 @@ export class OfertaServicioComponent implements OnInit {
         item.ofertasDetalleId = item.ofertasDetalleId
       else if (item.estado == 2)
         item.activo = false
+      debugger;
       var container = {
         bw_actual: item.bwActualActual + ' ' + item.nrobwActualActual,
         bronce_actual: item.caudalBronceActual + ' ' + item.nrocaudalBronceActual,
@@ -387,16 +388,16 @@ export class OfertaServicioComponent implements OnInit {
         facturacion: item.facturacion_actual,
         id: item.ofertasDetalleId,
         idoferta: item.ofertaId,
-        idaccionisis: item.accionIsisIdPropuesto,
+        idaccionisis: item.accionIsisIdPropuesto ==0 ? null: item.accionIsisIdPropuesto,//item.accionIsisIdPropuesto,
         idcircuito: item.tipoCircuitoActual,
         idcircuito2: item.tipoCircuitoIdPropuesto,
         iddistrito: item.distritoId,
-        idmedio: item.servicioActual_medio,
-        idmedio2: item.servicioPropuesto_medio,
-        idmodo: item.servicioPropuesto_modo,
-        idservicio: item.tipoServicioIdActual,
-        idservicio2: item.tipoServicioIdPropuesto,
-        idtiposede: item.servicioPropuesto_tiposede,
+        idmedio: item.servicioActual_medio ==0 ? null: item.servicioActual_medio, //item.servicioActual_medio,
+        idmedio2: item.servicioPropuesto_medio ==0 ? null: item.servicioPropuesto_medio,//item.servicioPropuesto_medio,
+        idmodo: item.servicioPropuesto_modo ==0 ? null: item.servicioPropuesto_modo, //item.servicioPropuesto_modo,
+        idservicio: item.tipoServicioIdActual ==0 ? null: item.tipoServicioIdActual,
+        idservicio2: item.tipoServicioIdPropuesto ==0 ? null: item.tipoServicioIdPropuesto, //item.tipoServicioIdPropuesto,
+        idtiposede: item.servicioPropuesto_tiposede ==0 ? null: item.servicioPropuesto_tiposede,//item.servicioPropuesto_tiposede,
         lat: item.latitud.toString(),
         lon: item.longitud.toString(),
         ldn_actual: item.caudalLdnActual + ' ' + item.nrocaudalLdnActual,
