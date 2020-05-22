@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, Input,Output,EventEmitter } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -108,13 +108,18 @@ export class OfertaServicioComponent implements OnInit {
     private _router: Router,
     private toastr: ToastrService
   ) {
-  } 
+  }
 
-  public selected(user,row) {        
-    row.ubigeo=user.descripcion;
+  public selected(user, row) {
+    row.ubigeo = user.descripcion;
     row.distritoId = user.iddistrito
   }
-  
+
+  selectedZona(event, row) {
+    let target = event.source._element.nativeElement;
+    row.zonaSisego = target.innerText.trim();
+  }
+
   inputChangeUbigeo(input: any, row: any): void {
     if (input.length > 2) {
       row.isLoading = true;
@@ -150,14 +155,14 @@ export class OfertaServicioComponent implements OnInit {
       this.listAccionIsis = data;
     });
     this.ofertaServicioService.obtenerOfertasDetalle({ oferta_id: this.ofertaBase.id, page: 0 }).subscribe(data => {
-      if (data != null) {        
+      if (data != null) {
         this.dataSourceList = data;
         this.dataSource.data = data;
         console.log(data);
       }
     });
   }
- 
+
 
   crearNuevoServicio(ofertasDetalleId: number, ofertaId: number): OfertaDetalleModel {
     return {
@@ -175,36 +180,36 @@ export class OfertaServicioComponent implements OnInit {
       telefono: '',
       //Servicio Actual
       tipoCircuitoActual: '',
-      nrotipoCircuitoActual:'',
+      nrotipoCircuitoActual: '',
       tipoServicioIdActual: 0,
-      servicioActual_medio:0,
+      servicioActual_medio: 0,
       bwActualActual: 'kbps',
-      nrobwActualActual: '2500',
+      nrobwActualActual: '',
       //bwActualActual: '',
       caudalLdnActual: 'kbps',
-      nrocaudalLdnActual: '2500',
+      nrocaudalLdnActual: '',
       caudalVozActual: 'kbps',
-      nrocaudalVozActual: '2500',
+      nrocaudalVozActual: '',
 
       caudalVideoActual: 'kbps',
-      nrocaudalVideoActual: '2500',
+      nrocaudalVideoActual: '',
 
       caudalPlatinumActual: 'kbps',
-      nrocaudalPlatinumActual: '1400',
+      nrocaudalPlatinumActual: '',
 
       caudalOroActual: 'kbps',
-      nrocaudalOroActual: '1800',
+      nrocaudalOroActual: '',
 
       caudal_plata_actual: 'kbps',
-      nrocaudal_plata_actual: '1800',
+      nrocaudal_plata_actual: '',
 
       caudalBronceActual: 'kbps',
-      nrocaudalBronceActual: '1800',
+      nrocaudalBronceActual: '',
 
       equipoTerminalActual: '',
       routerSwitchActual: '',
       facturacion_actual: 0,
-      servicioActual_otro :'',
+      servicioActual_otro: '',
       equipo_adicional_actual: '',
 
       //Servicio Propuesto y Caudal presupuesto
@@ -212,35 +217,35 @@ export class OfertaServicioComponent implements OnInit {
       servicioPropuesto_tiposede: 0,
       servicioPropuesto_modo: 0,
       tipoCircuitoIdPropuesto: 0,
-      servicioPropuesto_nrocircuito :'',
+      servicioPropuesto_nrocircuito: '',
       tipoServicioIdPropuesto: 0,
       servicioPropuesto_medio: 0,
       svaPropuesto: '',
       descripcionSvaPropuesto: '',
-      
+
       bwPropuesto: 'kbps',
-      nrobwPropuesto: '1800',
+      nrobwPropuesto: '',
 
       caudalLdnPropuesto: 'kbps',
-      nrocaudalLdnPropuesto: '1800',
+      nrocaudalLdnPropuesto: '',
 
       caudalVozPropuesto: 'kbps',
-      nrocaudalVozPropuesto: '1800',
+      nrocaudalVozPropuesto: '',
 
       caudalVideoPropuesto: 'kbps',
-      nrocaudalVideoPropuesto: '1800',
+      nrocaudalVideoPropuesto: '',
 
       caudalPlatinumPropuesto: 'kbps',
-      nrocaudalPlatinumPropuesto: '1800',
+      nrocaudalPlatinumPropuesto: '',
 
       caudalOroPropuesto: 'kbps',
-      nrocaudalOroPropuesto: '1800',
+      nrocaudalOroPropuesto: '',
 
       caudalPlataPropuesto: 'kbps',
-      nrocaudalPlataPropuesto: '1800',
+      nrocaudalPlataPropuesto: '',
 
       caudalBroncePropuesto: 'kbps',
-      nrocaudalBroncePropuesto: '1800',
+      nrocaudalBroncePropuesto: '',
 
       equipoTerminalPropuesto: '',
       routerPropuesto: '',
@@ -251,6 +256,7 @@ export class OfertaServicioComponent implements OnInit {
       ofertaIsisPropuesto: '',
       codigoSisego: '',
       zonaSisego: '',
+      IdZonaSigego:0,
       costoUltimaMilla: 0,
       diasEjecucion: 0,
 
@@ -270,8 +276,9 @@ export class OfertaServicioComponent implements OnInit {
       ultimaMillaActual: 0,
       upsActual: '',
       vrf_actual: '',
+      lstZonaSisego: [],
       zoom: '',
-      ubigeo:'',
+      ubigeo: '',
       estado: 0,
       activo: true,
       isLoading: false
@@ -281,11 +288,11 @@ export class OfertaServicioComponent implements OnInit {
   addRow(): void {
     this.dataSourceList = [];
     var Id = this.dataSource.data.length == 0 ? 1 : this.dataSource.data[this.dataSource.data.length - 1].ofertasDetalleId + 1;
-    let objecto = this.crearNuevoServicio(Id, this.ofertaBase.id);    
-    this.dataSourceList =this.dataSource.data;    
+    let objecto = this.crearNuevoServicio(Id, this.ofertaBase.id);
+    this.dataSourceList = this.dataSource.data;
     this.dataSourceList.push(objecto);
-    this.dataSource.data=this.dataSourceList;    
-   // this.dataSource.filter = "";
+    this.dataSource.data = this.dataSourceList;
+    // this.dataSource.filter = "";
   }
 
   deleteRow(item: any): void {
@@ -305,7 +312,7 @@ export class OfertaServicioComponent implements OnInit {
         const a = document.createElement('a');
         a.click();
         a.remove();
-        
+
         var objetoOfertaOpex = this.dataSourceList.find(function (element) { return element.ofertasDetalleId == item.ofertasDetalleId; });
         if (objetoOfertaOpex.estado == 0) {// si el registro es agregado, entonce se elimina
           var ObjectIndex = this.dataSourceList.findIndex(function (obj) { return obj.ofertasDetalleId === item.ofertasDetalleId; });//Obtenemos el Index del List de Objetos        
@@ -343,14 +350,22 @@ export class OfertaServicioComponent implements OnInit {
         let result_ = JSON.parse(response);
         if (result_.status == "success") {
           let result__ = JSON.parse(result_['result']);
-          item.lstZonaSisego = result__['zonas'];
+          debugger;
+          item.lstZonaSisego = result__['zonas'].map(obj => {
+            var entidad = {
+              id: obj.id,
+              nombre: obj.nom + ' - ' + obj.dis + ' m'
+            };
+            return entidad;
+          });
+          console.log(item.lstZonaSisego);
         }
       });
       this.dataSource.filter = '';
     });
   }
-//2-->cliente
-//32 distrito
+  //2-->cliente
+  //32 distrito
   guardarServicios(): void {
     const listOfertaDetalle = this.dataSourceList.map(item => {
       if (item.estado == 0) //Si es 0 Nuevo Registro
@@ -385,33 +400,33 @@ export class OfertaServicioComponent implements OnInit {
         lat: item.latitud.toString(),
         lon: item.longitud.toString(),
         ldn_actual: item.caudalLdnActual + ' ' + item.nrocaudalLdnActual,
-        ldn_propuesto: item.caudalLdnPropuesto+ ' ' + item.nrocaudalLdnPropuesto,        
+        ldn_propuesto: item.caudalLdnPropuesto + ' ' + item.nrocaudalLdnPropuesto,
         ncircuito: item.nrotipoCircuitoActual,
         ncircuito2: item.servicioPropuesto_nrocircuito,
         observaciones: item.observacionesPropuesto,
         ofertaisis: item.ofertaIsisPropuesto,
         oro_actual: item.caudalOroActual + ' ' + item.nrocaudalOroActual,
-        oro_propuesto: item.caudalOroPropuesto+ ' ' + item.nrocaudalOroPropuesto,
+        oro_propuesto: item.caudalOroPropuesto + ' ' + item.nrocaudalOroPropuesto,
         otros: item.servicioActual_otro,
         otros2: '',
         plata_actual: item.caudal_plata_actual + ' ' + item.nrocaudal_plata_actual,
-        plata_propuesto: item.caudalPlataPropuesto+ ' ' + item.nrocaudalPlataPropuesto,
+        plata_propuesto: item.caudalPlataPropuesto + ' ' + item.nrocaudalPlataPropuesto,
         platinium_actual: item.caudalPlatinumActual + ' ' + item.nrocaudalPlatinumActual,
-        platinium_propuesto: item.caudalPlatinumPropuesto+ ' ' + item.nrocaudalPlatinumPropuesto,
+        platinium_propuesto: item.caudalPlatinumPropuesto + ' ' + item.nrocaudalPlatinumPropuesto,
         precio: item.precioPropuesto,
         router: item.routerSwitchActual,
         router2: item.routerPropuesto,
         sede: item.nombreSede,
         sisego: item.codigoSisego,
-        ubigeo:item.ubigeo,
+        ubigeo: item.ubigeo,
         sva: item.svaPropuesto,
         svadescripcion: item.descripcionSvaPropuesto,
         telefono: item.telefono,
         ultima: item.costoUltimaMilla,
         video_actual: item.caudalVideoActual + ' ' + item.nrocaudalVideoActual,
-        video_propuesto: item.caudalVideoPropuesto+ ' ' + item.nrocaudalVideoPropuesto,
+        video_propuesto: item.caudalVideoPropuesto + ' ' + item.nrocaudalVideoPropuesto,
         voz_actual: item.caudalVozActual + ' ' + item.nrocaudalVozActual,
-        voz_propuesto: item.caudalVozPropuesto+ ' ' + item.nrocaudalVozPropuesto,
+        voz_propuesto: item.caudalVozPropuesto + ' ' + item.nrocaudalVozPropuesto,
         zona: item.zonaSisego,
         activo: item.activo,
         estado: 0

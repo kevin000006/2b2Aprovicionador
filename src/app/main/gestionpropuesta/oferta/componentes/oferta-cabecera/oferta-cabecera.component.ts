@@ -17,7 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class OfertaCabeceraComponent implements OnInit {
 
-  self = this;
+  processIsis = false;
   dataSourceCliente: any[] = [];
   dataSourceOportunidad: any[] = [];
   lstComplejidad = [];
@@ -165,6 +165,29 @@ export class OfertaCabeceraComponent implements OnInit {
     if (item) {
       return item.oportunidadcodigo;
     }
+  }
+
+  enviarIsis():void{
+    this.processIsis=true;
+    
+    this.service.enviarIsis(this.oferta.oferta_id).subscribe(data => {
+      this.processIsis=false;
+      this.toastr.success('integracion ISIS con éxito.', '', {
+        progressBar: true,
+        progressAnimation: 'increasing',
+        closeButton: true
+      });
+    },
+    error => {
+      this.processIsis=false;
+      
+      this.toastr.error(error.error.message, '', {
+        progressBar: true,
+        progressAnimation: 'increasing',
+        closeButton: true
+      });
+    });
+
   }
 
   ngOnInit(): void {

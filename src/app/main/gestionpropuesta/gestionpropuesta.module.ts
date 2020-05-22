@@ -3,7 +3,9 @@ import { RouterModule } from '@angular/router';
 import { FuseSharedModule } from '@fuse/shared.module';
 
 
+
 const routes = [
+
   {
     path        : 'oferta',
     loadChildren: () => import('./oferta/oferta.module').then(m => m.OfertaModule)

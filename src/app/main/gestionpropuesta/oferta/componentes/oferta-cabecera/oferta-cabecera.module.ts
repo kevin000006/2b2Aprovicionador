@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { NgxMaskModule } from 'ngx-mask';
 import { MatSelectModule } from '@angular/material/select';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -22,7 +23,8 @@ import { MatSelectModule } from '@angular/material/select';
         MatSelectModule,
         FormsModule,
         NgxMaskModule.forRoot(),
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatProgressSpinnerModule
     ],
     exports:[
         OfertaCabeceraComponent

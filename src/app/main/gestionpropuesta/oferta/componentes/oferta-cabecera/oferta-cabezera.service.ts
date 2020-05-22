@@ -31,6 +31,9 @@ export class OfertaCabezeraService {
         return this.http.post<number>('/oferta/guardaroferta' ,param);
     }
 
+    enviarIsis(oferta:any):Observable<any>{
+      return this.http.post('/isis/enviartrama?oferta_id=' + oferta,{});
+    }
 
 
 }

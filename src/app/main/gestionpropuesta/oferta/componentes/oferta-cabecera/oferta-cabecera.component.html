@@ -75,6 +75,19 @@
                 <button class="btn btn-md btn-telefonica-gree-2" (click)="ganarOferta()">Ganado</button>
             </div>
         </div>
+
+        <div class="row" *ngIf="oferta.oferta_id > 0">
+            <div class="content-btn-ganada">
+                <button class="btn btn-md btn-telefonica-gree-2" (click)="enviarIsis()">Enviar a ISIS
+
+                    <mat-spinner *ngIf="processIsis"  style="display: inline-block; " diameter="15" color="accent"></mat-spinner>
+
+                </button>
+                
+            </div>
+            
+        </div>
+
     </div>
     <div class="col-xs-12 col-sm-10">
         <div class=" content-title-oferta">

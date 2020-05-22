@@ -25,30 +25,6 @@ export class OfertaServicioService {
     });
   }
 
-  // async buscardistrito(distrito: string): Observable<string> {
-  //   var result =  "";
-  //   return this.http.get<string>('/ofertasDetalle/buscardistrito?search=' + distrito).subscribe(data => {
-  //     var response=data;      
-  //     if (response != null) {
-  //       //result = response
-  //     }
-  //   });
-
-  //   return result;
-
-  //   // return this.http.get<any>('/ofertasDetalle/buscardistrito?search=' + distrito).pipe(
-  //   //   map(res => {
-  //   //     debugger;
-  //   //     if (res != null) {
-  //   //       return res[0].descripcion;
-  //   //     }
-  //   //     return "";
-  //   //   })
-  //   // ).subscribe(apiData => {
-  //   //   return "";
-  //   // }
-  //   // );
-  // }
 
   obtenerOfertasDetalle(param: any): Observable<any> {    
     return this.http.get<OfertaDetalleModel[]>('/ofertasDetalle/obtenerOfertasDetalle?ofertaId=' + param.oferta_id + '&Pageable=' + param.page, {}).pipe(
@@ -108,10 +84,9 @@ export class OfertaServicioService {
 
             element.nrocaudalBroncePropuesto = element.caudalBroncePropuesto !== null ? element.caudalBroncePropuesto.split(" ")[1] : "";
             element.caudalBroncePropuesto = element.caudalBroncePropuesto !== null ? element.caudalBroncePropuesto.split(" ")[0] : "";
-
-            //element.ubigeo =  await this.buscardistrito(element.ubigeo);
-
-
+            
+            element.IdZonaSigego = 1;
+            element.lstZonaSisego  = [{ id: 1, nombre: element.zonaSisego }]
             return element;
           });
           return result.data;

@@ -535,9 +535,9 @@
                                 <mat-cell *matCellDef="let row" style="flex: 0 0 230px !important;">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
                                         <!-- <mat-label>Selecciona número por Pagina</mat-label> -->
-                                        <mat-select [(ngModel)]="row.zonaSisego">
-                                            <mat-option value="">--Seleccione--</mat-option>
-                                            <mat-option [value]="o.id" *ngFor="let o of row.lstZonaSisego">{{o.nom +' - ' + o.dis + ' m'}}</mat-option>
+                                        <mat-select [(ngModel)]="row.IdZonaSigego">
+                                            <mat-option [value]="">--Seleccione--</mat-option>
+                                            <mat-option [value]="o.id" (onSelectionChange)="selectedZona($event,row)" *ngFor="let o of row.lstZonaSisego">{{o.nombre}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </mat-cell>
