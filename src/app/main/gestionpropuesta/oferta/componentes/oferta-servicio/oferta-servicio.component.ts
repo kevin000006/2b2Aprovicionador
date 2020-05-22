@@ -256,6 +256,7 @@ export class OfertaServicioComponent implements OnInit {
       ofertaIsisPropuesto: '',
       codigoSisego: '',
       zonaSisego: '',
+      IdZonaSigego:0,
       costoUltimaMilla: 0,
       diasEjecucion: 0,
 
