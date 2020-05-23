@@ -172,7 +172,13 @@ export class OfertaCabeceraComponent implements OnInit {
     
     this.service.enviarIsis(this.oferta.oferta_id).subscribe(data => {
       this.processIsis=false;
-      this.toastr.success('integracion ISIS con éxito.', '', {
+      let message = '';
+      if(data == 1){
+        message = 'integracion ISIS con éxito.';
+      }else{
+        message = 'ha ocurrido un error.';
+      }
+      this.toastr.success(message, '', {
         progressBar: true,
         progressAnimation: 'increasing',
         closeButton: true
