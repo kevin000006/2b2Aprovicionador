@@ -1,0 +1,17 @@
+.tb-flujo-caja {
+    width: 100%;
+}
+
+.tb-flujo-caja .mat-header-row {
+    background: #F4F6FB;
+    border-radius: 5px;
+    min-height: 45px !important;
+}
+
+.tb-flujo-caja .mat-header-row .mat-column-accion,
+.tb-flujo-caja .mat-row .mat-column-accion {
+    flex: 0 0 50px;
+}
+.row-color-tb {
+    background: #F8F9FA;
+}

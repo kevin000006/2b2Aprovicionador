@@ -1,0 +1,76 @@
+<div class="row oferta-head">
+    <div class="col-xs-12 col-sm-2 col-lg-12">
+        <div class="form-horizontal">
+            <!-- <div class="form-group">
+                <div class="col-md-2">
+                    <button (click)="descargar_excel()" style="height: 36px; padding: 0 36px;"
+                        class="btn-telefonica-gree-2">
+                        Descargar
+                    </button>
+                </div>
+                <div class=" col-md-offset-8 col-md-2 text-right">
+                    <button (click)="filtrarData()" class="btn-telefonica-2" style="min-height: 36px;">
+                        <span>
+                            <mat-icon class="icon">refresh</mat-icon> Actualizar
+                        </span>
+                    </button>
+                </div>
+            </div> -->
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <mat-table #table mat-table [dataSource]="dataSource" class="tb-cmi">
+                        <ng-container matColumnDef="accion">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <mat-menu #appMenu="matMenu">
+                                    <button style="font-size: 12px;" mat-menu-item> Editar </button>
+                                    <button style="font-size: 12px;" mat-menu-item (click)="deleteRow(row)"> Eliminar</button>
+                                </mat-menu>
+                                <a style="cursor:pointer;color: #2493B4;" mat-icon-button [matMenuTriggerFor]="appMenu">
+                                    <mat-icon>more_vert</mat-icon>
+                                </a>
+                            </mat-cell>
+                            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="linea">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Línea</mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{row.linea}}
+                            </mat-cell>                            
+                        </ng-container>
+                        <ng-container matColumnDef="sublinea">
+                            <mat-header-cell *matHeaderCellDef> Sub Línea </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{row.sublinea}}
+                            </mat-cell>                            
+                        </ng-container>
+
+                        <ng-container matColumnDef="serviciocmi">
+                            <mat-header-cell *matHeaderCellDef> Servicio CMI </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{row.servicio}}
+                            </mat-cell>
+                            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="productoaf">
+                            <mat-header-cell *matHeaderCellDef> Producto_AF </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{row.productoaf}}
+                            </mat-cell>                            
+                        </ng-container>
+
+                        <ng-container matColumnDef="porcentaje">
+                            <mat-header-cell *matHeaderCellDef> % </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{row.porcentaje}}
+                            </mat-cell>                            
+                        </ng-container>
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns; let i = index;"  [ngClass]=" i % 2 != 0 ? 'row-color-tb' : ''"></mat-row>                        
+                    </mat-table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

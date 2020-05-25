@@ -25,14 +25,3 @@ export class FileInputService {
     });
   }
 }
-
-
-/*
-public upload(formData) {
-
-	return this.httpClient.post<any>(this.SERVER_URL, formData, {
-      reportProgress: true,
-      observe: 'events'
-    });
-}
-*/

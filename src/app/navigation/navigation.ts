@@ -28,6 +28,12 @@ export const navigation: FuseNavigation[] = [
                         url  : '/gestion-propuesta/subirTrama'
                     },
                     {
+                        id   : 'parametroglobal',
+                        title: 'Parametro Global',
+                        type : 'item',
+                        url  : '/gestion-propuesta/parametroglobal'
+                    },
+                    {
                         id       : 'gestionpropuestareporte',
                         title    : 'Reportes',
                         type     : 'collapsable',
