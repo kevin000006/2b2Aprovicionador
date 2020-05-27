@@ -6,10 +6,14 @@ import { MatTableDataSource } from '@angular/material/table';
     styleUrls: ['./parametrogobal.component.css'],
 })
 export class ParametroGlobalComponent {    
+    _filtro: any = { nroItmes:5};
     displayedColumns: string[] = ['grupo', 'concepto', 'parametro'];
     dataSource = new MatTableDataSource<EquipacmientoElement>(dataSourceList);
     constructor() {        
     }    
+    public changeSizeItems(items):void{
+      //this.filtrarData(items);
+    }
 }
 
 const dataSourceList: EquipacmientoElement[] = [

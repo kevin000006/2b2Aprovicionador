@@ -14,33 +14,35 @@ export class FlujoCajaComponent implements OnInit {
     if (item.nombre == "tipo") {
       return {
         columnDef: item.nombre,
-        header: "Tipo", 
-        width : true,
-        cell: (element: any) =>  `${element.nombre}`
+        header: "Tipo",
+        width: true,
+        cell: (element: any) => `${element.nombre}`
       }
     } else {
       return {
         columnDef: "periodo" + item.periodo,
-        width : false,
-        header: this.RetornarNombreMeses(item.mes) + "-" + item.anio.toString().substr(2, 4), 
-        cell: (element: any) => {          
-          if ( `${element["periodo" + item.periodo]}` === 'undefined' || `${element["periodo" + item.periodo]}` === '-') {
+        width: false,
+        header: this.RetornarNombreMeses(item.mes) + "-" + item.anio.toString().substr(2, 4),
+        cell: (element: any) => {
+          if (`${element["periodo" + item.periodo]}` === 'undefined' || `${element["periodo" + item.periodo]}` === '-') {
             return '-';
-          }else{            
-            return this._decimalPipe.transform(element["periodo" + item.periodo],"1.2-2")            
-          }           
+          } else {
+            return this._decimalPipe.transform(element["periodo" + item.periodo], "1.2-2")
+          }
         }
       }
     }
   });
   displayedColumns = this.columns.map(c => c.columnDef);
+  widthTabla = (this.columns.length * 100) + 150;
+  
   dataSource = this.getPivotArray(dataSourceList.filter((item) => { return item.concepto_id !== 0; }), "nombre", "periodo", "montosoles");
-  constructor(private _decimalPipe: DecimalPipe) {}
+  constructor(private _decimalPipe: DecimalPipe) { }
   ngOnInit(): void {
     // debugger;
-    var output = this.getPivotArray(dataSourceList.filter((item) => { return item.concepto_id !== 0; }), "nombre", "periodo", "montosoles");    
+    //var output = this.getPivotArray(dataSourceList.filter((item) => { return item.concepto_id !== 0; }), "nombre", "periodo", "montosoles");    
     // console.log(ELEMENT_DATA);
-     console.log(output);
+    //console.log(output);
   }
   RetornarNombreMeses(NroMeses): string {
     var nombreMeses = "";
@@ -85,59 +87,34 @@ export class FlujoCajaComponent implements OnInit {
 
     return nombreMeses;
   }
-  getPivotArray(dataArray, rowIndex, colIndex, dataIndex): any[] {    
+  getPivotArray(dataArray, rowIndex, colIndex, dataIndex): any[] {
     var result = {}, ret = [];
     var newCols = [];
-    for (var i = 0; i < dataArray.length; i++) {        
-        if (!result[dataArray[i][rowIndex]]) {
-            result[dataArray[i][rowIndex]] = {};
-        }
-        result[dataArray[i][rowIndex]][dataArray[i][colIndex]] = dataArray[i][dataIndex];
+    for (var i = 0; i < dataArray.length; i++) {
+      if (!result[dataArray[i][rowIndex]]) {
+        result[dataArray[i][rowIndex]] = {};
+      }
+      result[dataArray[i][rowIndex]][dataArray[i][colIndex]] = dataArray[i][dataIndex];
 
-        //To get column names
-        if (newCols.indexOf(dataArray[i][colIndex]) == -1) {
-            newCols.push(dataArray[i][colIndex]);
-        }
+      //To get column names
+      if (newCols.indexOf(dataArray[i][colIndex]) == -1) {
+        newCols.push(dataArray[i][colIndex]);
+      }
     }
     newCols.sort();
     //Add content 
     for (var key in result) {
-      var item = {};        
-        item[rowIndex] = key;
-        //item["width"] = "220px";
-        for (var i = 0; i < newCols.length; i++) {
-          item[colIndex+newCols[i]] = result[key][newCols[i]] || "-";
-        }
-        ret.push(item);
+      var item = {};
+      item[rowIndex] = key;
+      //item["width"] = "220px";
+      for (var i = 0; i < newCols.length; i++) {
+        item[colIndex + newCols[i]] = result[key][newCols[i]] || "-";
+      }
+      ret.push(item);
     }
     return ret;
   }
 }
-
-
-const ELEMENT_DATA: any[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-  { position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na' },
-  { position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg' },
-  { position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al' },
-  { position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si' },
-  { position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P' },
-  { position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S' },
-  { position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl' },
-  { position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar' },
-  { position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K' },
-  { position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca' },
-];
-
 const dataSourceList: FlujoCajaElement[] = [
 
   { flujo_caja_id: 1, oferta_id: 2, concepto_id: 0, periodo: 0, anio: 0, mes: 0, montosoles: 0, montodolares: 0, nombre: 'tipo' },
