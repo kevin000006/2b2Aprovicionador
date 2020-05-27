@@ -70,7 +70,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" *ngIf="oferta.oferta_id > 0">
+        <div class="row" *ngIf="oferta.oferta_id > 0 && oferta.resultado == 'GO'">
             <div class="content-btn-ganada">
                 <button class="btn btn-md btn-telefonica-gree-2" (click)="ganarOferta()">Ganado</button>
             </div>
@@ -83,9 +83,7 @@
                     <mat-spinner *ngIf="processIsis"  style="display: inline-block; " diameter="15" color="accent"></mat-spinner>
 
                 </button>
-                
             </div>
-            
         </div>
 
     </div>
@@ -345,7 +343,7 @@
                     <div class="row content-control-oferta">
                         <div class="col-sm-4 padding-l-none">
                             <label class="label-title">VAN/VAI:</label>
-                            <div class="font-body-oferta">{{(oferta.vanval * 100) + '%' }}</div>
+                            <div class="font-body-oferta">{{(oferta.vanvai * 100) + '%' }}</div>
                         </div>
                         <div class="col-sm-4">
                             <label class="label-title">Payback:</label>

@@ -55,7 +55,7 @@ export class BandejaComponent implements OnInit {
     hasta:'',
     nroItmes:5
    };
-  pageIndex:number=0;
+  pageIndex:number=1;
   fileName = 'bandeja_oferta.xlsx';
 
   lstBandeja = new Array<BandejaModel>();

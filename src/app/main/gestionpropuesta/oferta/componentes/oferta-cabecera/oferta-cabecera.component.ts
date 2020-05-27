@@ -123,7 +123,7 @@ export class OfertaCabeceraComponent implements OnInit {
         data['tiposervicio'] = data.pago_recurrente > 0 ? 'Recurrente' : 'Oneshot';
         this.oferta = data;
 
-        this.oferta.vanval = this.oferta.vanval || 0;
+        this.oferta.vanvai = this.oferta.vanvai || 0;
         this.oferta.segmentonegocio = this.oferta.segmentonegocio || new SegmentoNegocioModel();
         this.oferta.complejidad = this.oferta.complejidad || new ComboModel();
         this.oferta.tipocontrato = this.oferta.tipocontrato || new ComboModel();
@@ -174,15 +174,19 @@ export class OfertaCabeceraComponent implements OnInit {
       this.processIsis=false;
       let message = '';
       if(data == 1){
-        message = 'integracion ISIS con éxito.';
+        this.toastr.success('integracion ISIS con éxito.', '', {
+          progressBar: true,
+          progressAnimation: 'increasing',
+          closeButton: true
+        });
       }else{
-        message = 'ha ocurrido un error.';
+        this.toastr.error('ha ocurrido un error.', '', {
+          progressBar: true,
+          progressAnimation: 'increasing',
+          closeButton: true
+        });
       }
-      this.toastr.success(message, '', {
-        progressBar: true,
-        progressAnimation: 'increasing',
-        closeButton: true
-      });
+      
     },
     error => {
       this.processIsis=false;

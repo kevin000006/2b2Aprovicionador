@@ -22,15 +22,18 @@ export class BandejaService {
     //let formatoFecha = "yyyy/MM/dd";
 
     let params = new HttpParams();
-    params = params.append('codoportunidad', param.codoportunidad || '');
-    params = params.append('cliente', param.cliente || '');
-    params = params.append('descripcion', param.descripcion || '');
-    params = params.append('complejidad', param.complejidad || '');
-    params = params.append('estado', param.estado || '');
-    params = params.append('desde', param.desde || '');
-    params = params.append('hasta', param.hasta || '');
-    params = params.append('page', param.page || 0);
+    params = params.append('page', param.page || 1);
     params = params.append('size', param.size || 5);
+    params = params.append('sort', '');
+    params = params.append('cliente', param.cliente || '');
+    params = params.append('codoportunidad', param.codoportunidad || '');
+    params = params.append('complejidad', param.complejidad || '');
+    params = params.append('descripcion', param.descripcion || '');
+    params = params.append('desde', param.desde || '');
+    params = params.append('estado', param.estado || '');
+    params = params.append('hasta', param.hasta || '');
+   
+
 
     this.http.get<BandejaModel[]>('/oferta/obtenerofertas', { params: params }).subscribe(data => {
 
