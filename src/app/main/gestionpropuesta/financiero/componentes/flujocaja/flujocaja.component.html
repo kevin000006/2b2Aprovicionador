@@ -23,7 +23,7 @@
                             <mat-header-cell *matHeaderCellDef 
                             [ngClass]="{'tipo':column.width == true,'meses':column.width == false}">{{ column.header }}</mat-header-cell>
                             <mat-cell *matCellDef="let row"
-                            [ngClass]="{'tipo':column.width == true,'meses':column.width == false}">{{ column.cell(row) }}</mat-cell>
+                            [ngClass]="{'tipo lefttipo':column.width == true,'meses':column.width == false}">{{ column.cell(row) }}</mat-cell>
                         </ng-container>
                         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                         <mat-row *matRowDef="let row; columns: displayedColumns; let i = index;" [ngClass]=" i % 2 != 0 ? 'row-color-tb' : ''"></mat-row>                   

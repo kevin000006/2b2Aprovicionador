@@ -21,3 +21,6 @@
 .tipo{
     flex: 0 0 250px !important;    
 }
+.lefttipo{
+    justify-content: flex-start !important;    
+}
