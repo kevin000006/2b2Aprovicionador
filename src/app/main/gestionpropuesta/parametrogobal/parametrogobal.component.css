@@ -1,0 +1,27 @@
+.mytab-oferta {
+    background: #fff;
+    padding: 15px 20px;
+    border-radius: 4px;
+}
+
+.oferta-head {
+    margin: 0;
+    background: #FFFFFF;
+    border-radius: 5px;
+    padding: 15px 24px;
+}
+.tb-parametro-global {
+    width: 100%;
+}
+.tb-parametro-global .mat-header-row {
+    background: #F4F6FB;
+    border-radius: 5px;
+    min-height: 45px !important;
+}
+.tb-parametro-global .mat-header-row .mat-column-accion,
+.tb-parametro-global .mat-row .mat-column-accion {
+    flex: 0 0 50px;
+}
+.row-color-tb {
+    background: #F8F9FA;
+}

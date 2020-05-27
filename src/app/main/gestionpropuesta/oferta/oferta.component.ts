@@ -90,6 +90,10 @@ export class OfertaComponent implements OnInit {
     });
   }
 
+  openFinanciero(): void {   
+    this._router.navigate(['gestion-propuesta/financiero'], { state: {} });   
+  }
+
   openBitacora(): void {
       const dialogRef = this.dialog.open(BitacoraDialogComponent, {
         width: '760px',

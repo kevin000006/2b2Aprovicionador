@@ -1,52 +1,55 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { OfertaComponent } from './oferta.component';
+import { FinancieroComponent } from './financiero.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { OfertaComponentModule } from './componentes/oferta-component.module';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FinancieroService } from '../financiero/financiero.service';
 import { FormsModule } from '@angular/forms';
 import { FileInputModule } from '../oferta/componentes/fileinput/fileinput.module';
 import { MatButtonModule } from '@angular/material/button';
 import { NgxMaskModule } from 'ngx-mask';
-import { BitacoraDialogComponent } from './componentes/bitacora-dialog/bitacora-dialog.component';
-
+import { CMIModule } from './componentes/cmi/cmi.module';
+import { FlujoCajaModule } from './componentes/flujocaja/flujocaja.module';
 const routes: Routes = [
     {
         path: '**',
-        component: OfertaComponent,
+        component: FinancieroComponent,
         resolve: {}
-    },   
+    }
 ];
 
 @NgModule({
     declarations: [
-        OfertaComponent,
+        FinancieroComponent,
     ],
     imports: [
         RouterModule.forChild(routes),
         CommonModule,
         MatButtonModule,
-        OfertaComponentModule,
+        MatDialogModule,
         MatMenuModule,
         MatIconModule,
         MatTabsModule,
         MatTableModule,
         FormsModule,
         FileInputModule,
-        NgxMaskModule.forRoot()
-    ],
-    entryComponents: [
-        BitacoraDialogComponent
-    ],
+        NgxMaskModule.forRoot(),
+        CMIModule,
+        FlujoCajaModule
+    ],    
     providers: [
-
+        FinancieroService
+    ],
+    exports: [
+        CMIModule,
+        FlujoCajaModule        
     ]
 })
-
-export class OfertaModule {
+export class FinancieroModule {
 
 }
 

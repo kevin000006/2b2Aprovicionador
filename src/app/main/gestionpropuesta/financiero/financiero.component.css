@@ -1,0 +1,34 @@
+.oferta-head {
+    margin: 0;
+    background: #FFFFFF;
+    border-radius: 4px;
+    padding: 15px 0;
+}
+
+.mytab-oferta {
+    background: #fff;
+    padding: 0px 8px;
+    border-radius: 4px;
+}
+.opcion-oferta {
+    margin-right: 20px;
+    position: relative;
+    display: inline-block;
+    width: auto;
+    color: #00A9E0;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.opcion-oferta .icon {
+    line-height: 55px;
+    font-size: 15px;
+    position: absolute;
+    color: #00A9E0 !important;
+}
+
+.opcion-oferta span {
+    font-size: 14px;
+    margin-left: 20px;
+}
+
