@@ -1,21 +1,22 @@
 <div class="row oferta-head">
     <div class="col-xs-12 col-sm-2 col-lg-12">
         <div class="form-horizontal">
-            <!-- <div class="form-group">
+            <div class="form-group">
                 <div class="col-md-2">
-                    <button (click)="descargar_excel()" style="height: 36px; padding: 0 36px;"
-                        class="btn-telefonica-gree-2">
-                        Descargar
-                    </button>
+                    <mat-form-field class="control-page-item" color="accent" appearance="legacy" [style.fontSize.px]="12">
+                        <mat-select  (selectionChange)="changeSizeItems($event.value)"  [(ngModel)]="_filtro.nroItmes">
+                            <mat-option [value]="5">5 por pagina</mat-option>
+                            <mat-option [value]="10">10 por pagina</mat-option>
+                            <mat-option [value]="25">25 por pagina</mat-option>
+                            <mat-option [value]="50">50 por pagina</mat-option>
+                            <mat-option [value]="100">100 por pagina</mat-option>
+                        </mat-select>
+                    </mat-form-field>
                 </div>
                 <div class=" col-md-offset-8 col-md-2 text-right">
-                    <button (click)="filtrarData()" class="btn-telefonica-2" style="min-height: 36px;">
-                        <span>
-                            <mat-icon class="icon">refresh</mat-icon> Actualizar
-                        </span>
-                    </button>
+                    <span style="font-size: 12px;margin-left: 10px;">Total: 5</span>
                 </div>
-            </div> -->
+            </div>
             <div class="form-group">
                 <div class="col-sm-12">
                     <mat-table #table mat-table [dataSource]="dataSource" class="tb-cmi">
@@ -24,7 +25,8 @@
                             <mat-cell *matCellDef="let element">
                                 <mat-menu #appMenu="matMenu">
                                     <button style="font-size: 12px;" mat-menu-item> Editar </button>
-                                    <button style="font-size: 12px;" mat-menu-item (click)="deleteRow(row)"> Eliminar</button>
+                                    <button style="font-size: 12px;" mat-menu-item (click)="deleteRow(row)">
+                                        Eliminar</button>
                                 </mat-menu>
                                 <a style="cursor:pointer;color: #2493B4;" mat-icon-button [matMenuTriggerFor]="appMenu">
                                     <mat-icon>more_vert</mat-icon>
@@ -36,13 +38,13 @@
                             <mat-header-cell *matHeaderCellDef mat-sort-header>Línea</mat-header-cell>
                             <mat-cell *matCellDef="let row">
                                 {{row.linea}}
-                            </mat-cell>                            
+                            </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="sublinea">
                             <mat-header-cell *matHeaderCellDef> Sub Línea </mat-header-cell>
                             <mat-cell *matCellDef="let row">
                                 {{row.sublinea}}
-                            </mat-cell>                            
+                            </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="serviciocmi">
@@ -57,17 +59,18 @@
                             <mat-header-cell *matHeaderCellDef> Producto_AF </mat-header-cell>
                             <mat-cell *matCellDef="let row">
                                 {{row.productoaf}}
-                            </mat-cell>                            
+                            </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="porcentaje">
                             <mat-header-cell *matHeaderCellDef> % </mat-header-cell>
                             <mat-cell *matCellDef="let row">
                                 {{row.porcentaje}}
-                            </mat-cell>                            
+                            </mat-cell>
                         </ng-container>
                         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                        <mat-row *matRowDef="let row; columns: displayedColumns; let i = index;"  [ngClass]=" i % 2 != 0 ? 'row-color-tb' : ''"></mat-row>                        
+                        <mat-row *matRowDef="let row; columns: displayedColumns; let i = index;"
+                            [ngClass]=" i % 2 != 0 ? 'row-color-tb' : ''"></mat-row>
                     </mat-table>
                 </div>
             </div>

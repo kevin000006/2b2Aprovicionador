@@ -9,8 +9,14 @@ import { MatTableDataSource } from '@angular/material/table';
 export class CMIComponent {   
     displayedColumns: string[] = ['linea', 'sublinea', 'serviciocmi', 'productoaf', 'porcentaje'];
     dataSource = new MatTableDataSource<EquipacmientoElement>(dataSourceList); 
+
+    _filtro: any = { nroItmes:5};
+    pageI
     constructor() {        
     }    
+    public changeSizeItems(items):void{
+      //this.filtrarData(items);
+    }
 }
 
 const dataSourceList: EquipacmientoElement[] = [

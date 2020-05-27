@@ -15,3 +15,9 @@
 .row-color-tb {
     background: #F8F9FA;
 }
+.meses{
+    flex: 0 0 100px !important
+}
+.tipo{
+    flex: 0 0 250px !important;    
+}

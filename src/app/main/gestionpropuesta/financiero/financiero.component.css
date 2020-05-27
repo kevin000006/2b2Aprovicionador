@@ -1,6 +1,13 @@
+.oferta-head {
+    margin: 0;
+    background: #FFFFFF;
+    border-radius: 4px;
+    padding: 15px 0;
+}
+
 .mytab-oferta {
     background: #fff;
-    padding: 15px 20px;
+    padding: 0px 8px;
     border-radius: 4px;
 }
 .opcion-oferta {

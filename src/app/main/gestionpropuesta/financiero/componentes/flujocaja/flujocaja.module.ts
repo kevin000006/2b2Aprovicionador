@@ -13,7 +13,7 @@ import { FlujoService } from './flujocaja.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { NgxMaskModule } from 'ngx-mask';
-
+import { DecimalPipe } from '@angular/common';
 @NgModule({
     declarations: [
         FlujoCajaComponent
@@ -38,6 +38,7 @@ import { NgxMaskModule } from 'ngx-mask';
         FlujoCajaComponent
     ],
     providers: [
+        DecimalPipe,
        // {provide: ToastrService, useClass: ToastrService},
        FlujoService,
         //{ provide: LOCALE_ID, useValue: 'es' }
