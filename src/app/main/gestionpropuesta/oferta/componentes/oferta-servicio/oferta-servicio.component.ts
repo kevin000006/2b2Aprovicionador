@@ -42,6 +42,8 @@ export class OfertaServicioComponent implements OnInit {
   //https://stackblitz.com/edit/angular-material-autocomplete-async2?file=src%2Fapp%2Fapp.component.html
   //lstBandeja = new Array<OfertaDetalleModel>();
   dataSourceList: OfertaDetalleModel[];
+  listaConcidionServicio: ModelCombo[] = [];
+
   listAccionIsis = [];
   listTipoEnlace = [];
   listCondicionEnlace = [];
@@ -78,7 +80,7 @@ export class OfertaServicioComponent implements OnInit {
     'servicioPropuesto_sva', 'servicioPropuesto_svadescripcion',//creo que son campos nuevo agregado pos jorge
     'servicioPropuesto_bw',
     'servicioPropuesto_ldn', 'servicioPropuesto_voz', 'servicioPropuesto_video', 'servicioPropuesto_platinium', 'servicioPropuesto_oro', 'servicioPropuesto_plata', //nuevos campos agregado por jorge
-    'servicioPropuesto_bronce',
+    'servicioPropuesto_bronce','servicio_condicion',
 
     'equipos_equipoterminal', 'equipos_routers', 'equipos_otros', 'equipos_precio', 'equipos_observaciones', 'ofertaisis',
 
@@ -134,6 +136,12 @@ export class OfertaServicioComponent implements OnInit {
     }
   }
   async ngOnInit() {
+
+    this.listaConcidionServicio.push(new ModelCombo(1, "Alta Nueva"));
+    this.listaConcidionServicio.push(new ModelCombo(2, "Upgrade"));
+    this.listaConcidionServicio.push(new ModelCombo(3, "Renovación"));   
+    
+    
     await this.commonService.getCondicionEnlaceAll().subscribe(data => {
       this.listCondicionEnlace = data;
     });
@@ -246,7 +254,7 @@ export class OfertaServicioComponent implements OnInit {
 
       caudalBroncePropuesto: 'kbps',
       nrocaudalBroncePropuesto: '',
-
+      condicionServicio : 0,
       equipoTerminalPropuesto: '',
       routerPropuesto: '',
       otrosEquiposPropuesto: '',
@@ -379,6 +387,7 @@ export class OfertaServicioComponent implements OnInit {
         bw_actual: item.bwActualActual + ' ' + item.nrobwActualActual,
         bronce_actual: item.caudalBronceActual + ' ' + item.nrocaudalBronceActual,
         bronce_propuesto: item.caudalBroncePropuesto + ' ' + item.nrocaudalBroncePropuesto,
+        condicionServicio: item.condicionServicio ==0 ? null: item.condicionServicio, // en el back se debe de enviar ese valor condicionServicio--> coordinar con omar
         bw_propuesto: item.bwPropuesto + ' ' + item.nrobwPropuesto,
         contacto: item.contacto,
         dias: item.diasEjecucion,
@@ -465,3 +474,7 @@ export class OfertaServicioComponent implements OnInit {
 }
 
 
+export class ModelCombo {
+  constructor(public id?: number, public nombre?: string) {
+  }
+}

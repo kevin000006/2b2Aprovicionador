@@ -3,12 +3,13 @@
         <div class="form-horizontal">
             <div class="form-group">
                 <div class="col-xs-12 col-md-1">
-                    <button mat-mini-fab mat-mini-fab matTooltip="Agregar Equipamiento" matTooltipPosition="above" (click)="addRow()">
+                    <button mat-mini-fab mat-mini-fab matTooltip="Agregar Equipamiento" matTooltipPosition="above"
+                        (click)="addRow()">
                         <mat-icon>add</mat-icon>
                     </button>
                 </div>
                 <div class="col-xs-12 col-md-2">
-                   
+
                 </div>
             </div>
             <div class="row">
@@ -21,7 +22,7 @@
                                 <th>Ant</th>
                                 <th>Marca</th>
                                 <th>Modelo</th>
-                                <th>Cant</th> 
+                                <th>Cant</th>
                                 <th>Moneda</th>
                                 <th>Costo</th>
                                 <th>Total S/.</th>
@@ -30,91 +31,117 @@
                             </tr>
                         </thead>
                         <tbody *ngFor="let row of dataSource.data;let i = index">
-                            
-                                <tr *ngIf="row.activo" [ngClass]=" i % 2 != 0 ? 'row-color-tb' : ''">
-                                   
-                                        <td>
-                                           
-                                                <mat-form-field color="accent" appearance="legacy" [style.fontSize.px]="12" class="tipo">
-                                                    <mat-select [(ngModel)]="row.tipoequipamiento"  [compareWith]="compareValCombos">
-                                                        <mat-option value="">--Seleccione--</mat-option>
-                                                        <mat-option [value]="o" *ngFor="let o of listaTipos">{{o.descripcion}}</mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
-                                            
-                                        </td>
-                                        <td>
-                                            <mat-form-field color="accent" appearance="legacy" [style.fontSize.px]="12" class="condicion">
-                                                <mat-select [(ngModel)]="row.equipamientoCondicion" (selectionChange)="calcularMontoTotalSoles(row)" [compareWith]="compareValCombos" >
-                                                    <mat-option value="">--Seleccione--</mat-option>
-                                                    <mat-option [value]="o" *ngFor="let o of listaCondicion">{{o.descripcion}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </td>
-                                        <td>
-                                            <mat-form-field *ngIf="row.equipamientoCondicion.id == 4" appearance="legacy" [style.fontSize.px]="12" class="antiguedad">
-                                                <input matInput [(ngModel)]="row.antiguedad" (keyup)="calcularMontoTotalSoles(row)" mask="0*" class="text-center" type="text">
-                                            </mat-form-field>
-                                        </td>
-                                        <td>
-                                            <mat-form-field color="accent" appearance="legacy" [style.fontSize.px]="12" class="marca">
-                                                <mat-select  [(ngModel)]="row.equipamientomarca"  [compareWith]="compareValCombos" class="text-center">
-                                                    <mat-option value="">--Seleccione--</mat-option>
-                                                    <mat-option [value]="o" *ngFor="let o of listaMarca">{{o.descripcion}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </td>
-                                        <td>
-                                            <mat-form-field  appearance="legacy" [style.fontSize.px]="12" class="modelo">
-                                                <input matInput [(ngModel)]="row.modelo" type="text" class="text-center">
-                                            </mat-form-field>
-                                        </td>
-                                        <td>
-                                            <mat-form-field  appearance="legacy" [style.fontSize.px]="12" class="cantidad">
-                                                <input matInput [(ngModel)]="row.cantidad" (keyup)="calcularMontoTotalSoles(row)" mask="0*" type="text" class="text-center">
-                                            </mat-form-field>
-                                        </td> 
-                                        <td>
-                                            <mat-form-field color="accent"  appearance="legacy" [style.fontSize.px]="12" class="moneda">
-                                                <mat-select [(ngModel)]="row.moneda" (selectionChange)="calcularMontoTotalSoles(row)"  class="comboeq"  [compareWith]="compareValCombos">
-                                                    <mat-option [value]="o" style="text-align: center;" *ngFor="let o of listaMoneda">{{o.descBrv}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </td>
-                                        <td>
-                                            <mat-form-field  appearance="legacy" [style.fontSize.px]="12" class="costo">
-                                                <input matInput [(ngModel)]="row.unitario" (keyup)="calcularMontoTotalSoles(row)" thousandSeparator="" mask="separator.2" type="text" class="text-center">
-                                            </mat-form-field>
-                                        </td>
-                                        <td class="text-center">
-                                            <span class="total" mask="separator.2">
-                                                {{row.total.toFixed(2) | mask: 'separator':','}}
-                                            </span>
-                                            
-                                        </td>
-                                        <td class="text-center">
-                                            <span class="instalacion">
-                                                {{ row.instalacion | mask: 'separator':','}}
-                                            </span>
-                                        </td>
-                                        <td class="text-center">
-                                            <mat-menu #appMenu="matMenu">
-                                                <button style="font-size: 12px;" mat-menu-item (click)="deleteRow(row)">
-                                                    <mat-icon class="icon" matSuffix>delete &nbsp;</mat-icon>
-                                                    Eliminar</button>
-                                            </mat-menu>
-                                            <a style="cursor:pointer;" class="accion" mat-icon-button [matMenuTriggerFor]="appMenu">
-                                                <mat-icon>more_vert</mat-icon>
-                                            </a>
-                                        </td>
-                                    
-                                </tr>
+
+                            <tr *ngIf="row.activo" [ngClass]=" i % 2 != 0 ? 'row-color-tb' : ''">
+                                <td>
+                                    <mat-form-field color="accent" appearance="legacy" [style.fontSize.px]="12"
+                                        class="tipo">
+                                        <mat-select [(ngModel)]="row.tipoequipamiento"
+                                            (selectionChange)="selectedchangeTipoEquipamiento($event.value,row)"
+                                            [compareWith]="compareValCombos">
+                                            <mat-option value="">--Seleccione--</mat-option>
+                                            <mat-option [value]="o" *ngFor="let o of listaTipos">{{o.descripcion}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field color="accent" appearance="legacy" [style.fontSize.px]="12"
+                                        class="condicion"
+                                        [ngStyle]="{'width': row.equipamientoCondicion.id==5 ? '30%' : '90%' }">
+                                        <mat-select [(ngModel)]="row.equipamientoCondicion"
+                                            (selectionChange)="calcularMontoTotalSoles(row)"
+                                            [compareWith]="compareValCombos">
+                                            <mat-option value="">--Seleccione--</mat-option>
+                                            <mat-option [value]="o" *ngFor="let o of listaCondicion">{{o.descripcion}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field color="accent" *ngIf="row.equipamientoCondicion.id==5"
+                                        [ngStyle]="{'width': row.equipamientoCondicion.id==5 ? '60%' : '0%' }"
+                                        class="columnaTextoConcepto" appearance="legacy" [style.fontSize.px]="12">
+                                        <input matInput [(ngModel)]="row.proveedor" type="text">
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field *ngIf="row.equipamientoCondicion.id == 4" appearance="legacy"
+                                        [style.fontSize.px]="12" class="antiguedad">
+                                        <input matInput [(ngModel)]="row.antiguedad"
+                                            (keyup)="calcularMontoTotalSoles(row)" mask="0*" class="text-center"
+                                            type="text">
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field color="accent" appearance="legacy" [style.fontSize.px]="12"
+                                        class="marca">
+                                        <mat-select [(ngModel)]="row.equipamientomarca" [compareWith]="compareValCombos"
+                                            class="text-center">
+                                            <mat-option value="">--Seleccione--</mat-option>
+                                            <mat-option [value]="o" *ngFor="let o of listaMarca">{{o.descripcion}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field appearance="legacy" [style.fontSize.px]="12" class="modelo">
+                                        <input matInput [(ngModel)]="row.modelo" type="text" class="text-center">
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field appearance="legacy" [style.fontSize.px]="12" class="cantidad">
+                                        <input matInput [(ngModel)]="row.cantidad"
+                                            (keyup)="calcularMontoTotalSoles(row)" mask="0*" type="text"
+                                            class="text-center">
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field color="accent" appearance="legacy" [style.fontSize.px]="12"
+                                        class="moneda">
+                                        <mat-select [(ngModel)]="row.moneda"
+                                            (selectionChange)="calcularMontoTotalSoles(row)" class="comboeq"
+                                            [compareWith]="compareValCombos">
+                                            <mat-option [value]="o" style="text-align: center;"
+                                                *ngFor="let o of listaMoneda">{{o.descBrv}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field appearance="legacy" [style.fontSize.px]="12" class="costo">
+                                        <input matInput [(ngModel)]="row.unitario"
+                                            (keyup)="calcularMontoTotalSoles(row)" thousandSeparator=""
+                                            mask="separator.2" type="text" class="text-center">
+                                    </mat-form-field>
+                                </td>
+                                <td class="text-center">
+                                    <span class="total" mask="separator.2">
+                                        {{row.total.toFixed(2) | mask: 'separator':','}}
+                                    </span>
+
+                                </td>
+                                <td class="text-center">
+                                    <span class="instalacion">
+                                        {{ row.instalacion | mask: 'separator':','}}
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <mat-menu #appMenu="matMenu">
+                                        <button style="font-size: 12px;" mat-menu-item (click)="deleteRow(row)">
+                                            <mat-icon class="icon" matSuffix>delete &nbsp;</mat-icon>
+                                            Eliminar
+                                        </button>
+                                    </mat-menu>
+                                    <a style="cursor:pointer;" class="accion" mat-icon-button
+                                        [matMenuTriggerFor]="appMenu">
+                                        <mat-icon>more_vert</mat-icon>
+                                    </a>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="">
-                   <div class="totales">
-                       <div class="monto separador"></div>
+                    <div class="totales">
+                        <div class="monto separador"></div>
                         <div class="monto soles">
                             <div class="content">
                                 <div class="desc"> Total $ </div>
@@ -127,15 +154,15 @@
                             <div class="content">
                                 <div class="desc"> Total S/. </div>
                                 <div class="total">
-                                    
+
                                     {{ calcularTotalSoles().toFixed(2) | mask: 'separator':',' }}
                                 </div>
                             </div>
                         </div>
-                   </div> 
+                    </div>
                 </div>
             </div>
-            <br/>
+            <br />
             <div class="form-group">
                 <div class="col-sm-offset-10 col-xs-2 text-right">
                     <button class="btn btn-md btn-guardar" (click)="Guardar()">Guardar</button>

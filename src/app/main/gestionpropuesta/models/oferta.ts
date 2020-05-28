@@ -123,6 +123,7 @@ export class EquipamientoRequest {
   total: number;
   unitario: number;
   estado: number;
+  proveedor:string;
 }
 
 export class OfertaEquipamientoModel {
@@ -152,7 +153,7 @@ export class OfertaEquipamientoModel {
   total: number;
   unitario: number;
   instalacion:number;
-  
+  proveedor:string; 
 }
 
 export class BitacoraModel {
@@ -245,7 +246,7 @@ export class OfertaDetalleModel {
   
   caudalBroncePropuesto: string;
   nrocaudalBroncePropuesto: string;
-
+  condicionServicio: number; // se agrego este nuevo campo
   equipoTerminalPropuesto: string;
   routerPropuesto: string;
   otrosEquiposPropuesto: string;
