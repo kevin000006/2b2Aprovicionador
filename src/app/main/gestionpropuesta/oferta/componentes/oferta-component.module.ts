@@ -17,11 +17,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DialogAfComponent } from './dialog-af/dialog-af.component';
 @NgModule({
 
     declarations: [
         ShareDialogComponent,
-        BitacoraDialogComponent],
+        BitacoraDialogComponent,
+        DialogAfComponent],
     imports: [
         MatFormFieldModule,
         MatSelectModule,
@@ -41,7 +43,8 @@ import { MatDialogModule } from '@angular/material/dialog';
         MatDialogModule
     ],
     entryComponents:[
-        BitacoraDialogComponent
+        BitacoraDialogComponent,
+        DialogAfComponent
     ],
     exports: [
         OfertaCabeceraModule,

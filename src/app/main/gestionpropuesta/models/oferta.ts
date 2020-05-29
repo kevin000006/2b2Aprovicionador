@@ -1,8 +1,15 @@
 import { MonedaModel, ComplejidadModel, TipoContratoModel, TipoProyectoModel, EquipamientoCondicionModel, EquipamientoMarcaModel, TipoEquipamientoModel } from 'app/model/Common';
 
 export class UsuarioModel {
+  constructor(){
+    this.token = '';
+  }
   nombres: string;
   apellidos: string;
+  usuario:string;
+  token:string;
+  nombrecorto:string;
+  id:number;
 }
 
 export class SegmentoNegocioModel {

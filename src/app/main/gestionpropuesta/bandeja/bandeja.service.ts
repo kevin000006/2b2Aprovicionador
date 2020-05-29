@@ -32,6 +32,7 @@ export class BandejaService {
     params = params.append('desde', param.desde || '');
     params = params.append('estado', param.estado || '');
     params = params.append('hasta', param.hasta || '');
+    params = params.append('usuarioid', param.usuarioid || 0);
    
 
 

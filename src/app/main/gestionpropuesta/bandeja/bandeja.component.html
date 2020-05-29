@@ -85,7 +85,7 @@
 
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" *ngIf="currentUser.token == 'Lider Preventa' || currentUser.token=='Coordinador Financiero'">
                             <div class="col-xs-12 padding-l-none">
                                 <mat-checkbox class="example-margin font-normal" [(ngModel)]="checked" style="font-size: 12px;font-weight: normal;">Visualizar las plantilla de proyectos de todos los preventas</mat-checkbox>
                             </div>
