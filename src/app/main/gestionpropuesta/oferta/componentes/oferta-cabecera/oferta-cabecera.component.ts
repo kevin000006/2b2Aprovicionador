@@ -27,6 +27,7 @@ export class OfertaCabeceraComponent implements OnInit {
   disableControls = false;
   showSelectAF=false;
   processIsis = false;
+  isRequiredFactActual = false;
   dataSourceCliente: any[] = [];
   dataSourceOportunidad: any[] = [];
   lstComplejidad = [];
@@ -45,7 +46,7 @@ export class OfertaCabeceraComponent implements OnInit {
   }
   @ViewChild('myControl', { static: true }) autocompleteCliente: ElementRef;
   @ViewChild('codigoSalesforce', { static: true }) autocompleteOportunidad: ElementRef;
-  @Input() ofertaBase: any = {id:0};
+  @Input() ofertaBase: any = { id: 0 };
 
   ganarOferta() {
 
@@ -56,8 +57,8 @@ export class OfertaCabeceraComponent implements OnInit {
         accion: '/oferta/ganaroferta',
         data: {
           ofertaId: this.oferta.oferta_id,
-          usuario: 'maria.ramos',
-          usuarioId: 1
+          usuario: this.currentUser.usuario,
+          usuarioId: this.currentUser.id
         }
       }
     });
@@ -67,7 +68,13 @@ export class OfertaCabeceraComponent implements OnInit {
       }
     });
   }
-
+  public selectedchangeTipoProyecto(opcion) {    
+    if(opcion == 2 ){ //Si el tipo de proyecto es Renovacion, se obligara a que el control fact Actual sea requerido
+      this.isRequiredFactActual =true;
+    }else{
+      this.isRequiredFactActual =false;
+    }    
+  }
   guardarOferta() {
 
     let _oferta = {
@@ -93,39 +100,29 @@ export class OfertaCabeceraComponent implements OnInit {
       pusuario: this.currentUser.usuario
 
     };
-
-
-
-
     this.service.guardarOferta(_oferta).subscribe(response => {
-      let message ="";
+      let message = "";
       if (this.ofertaBase.id != 0) {
         message = "Oferta modificada con exito.";
       } else {
         message = "Se creo una nueva oferta.";
       }
-
       this.toastr.success(message, '', {
         progressBar: true,
         progressAnimation: 'increasing',
         closeButton: true
       });
-
       if (response != 1) {
         this.ofertaBase.id = response;
         window.sessionStorage.setItem('oferta', JSON.stringify(this.ofertaBase));
       }
-
       this.getOfertaData();
-
     });
-
   }
 
   private getOfertaData() {
     if (this.ofertaBase.id > 0) {
       this.service.getOfertaById(this.ofertaBase.id).subscribe(data => {
-
         if (!data.aprobadores)
           data['aprobadoresArr'] = [];
         else
@@ -155,9 +152,8 @@ export class OfertaCabeceraComponent implements OnInit {
       this.oferta = new OfertaModel();
       this.oferta.moneda.id = 1;
       this.oferta.complejidad.id = 0;
-      this.oferta.tipocontrato.id = 0;
+      this.oferta.tipocontrato.id = 2;// se seteara por default la opcion Forzoso
       this.oferta.tipoproyecto.id = 0;
-      
     }
    
     
@@ -180,37 +176,33 @@ export class OfertaCabeceraComponent implements OnInit {
     }
   }
 
-  enviarIsis():void{
-    this.processIsis=true;
-    
+  enviarIsis(): void {
+    this.processIsis = true;
     this.service.enviarIsis(this.oferta.oferta_id).subscribe(data => {
-      this.processIsis=false;
+      this.processIsis = false;
       let message = '';
-      if(data == 1){
+      if (data == 1) {
         this.toastr.success('integracion ISIS con éxito.', '', {
           progressBar: true,
           progressAnimation: 'increasing',
           closeButton: true
         });
-      }else{
+      } else {
         this.toastr.error('ha ocurrido un error.', '', {
           progressBar: true,
           progressAnimation: 'increasing',
           closeButton: true
         });
       }
-      
     },
-    error => {
-      this.processIsis=false;
-      
-      this.toastr.error(error.error.message, '', {
-        progressBar: true,
-        progressAnimation: 'increasing',
-        closeButton: true
+      error => {
+        this.processIsis = false;
+        this.toastr.error(error.error.message, '', {
+          progressBar: true,
+          progressAnimation: 'increasing',
+          closeButton: true
+        });
       });
-    });
-
   }
 
   derivarOfertaAF():void{
@@ -355,7 +347,6 @@ export class OfertaCabeceraComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.commonService.getComplejidadAll().subscribe(data => {
       this.lstComplejidad = data;
     });
@@ -366,6 +357,7 @@ export class OfertaCabeceraComponent implements OnInit {
 
     this.commonService.getTipoProyectoAll().subscribe(data => {
       this.lstTipoProyecto = data;
+      console.log(data);
     });
 
     /*this.commonService.getClienteAll().subscribe(data => {
@@ -405,9 +397,7 @@ export class OfertaCabeceraComponent implements OnInit {
   ]);
 
   getErrorMessage() {
-    return this.formControl.hasError('required') ? 'requerido' :
-      this.formControl.hasError('email') ? 'email no valido' :
-        '';
+    return this.formControl.hasError('required') ? 'requerido' : this.formControl.hasError('email') ? 'email no valido' : '';
   }
 
   submit() {

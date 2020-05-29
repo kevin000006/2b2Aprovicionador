@@ -205,9 +205,9 @@
                         <div class="content-control-oferta">
                             <mat-form-field color="accent">
                               
-                                <mat-select [disabled]="disableControls" style="margin-top: 6px;" class="font-body-oferta" name="tipoproyecto" [(ngModel)]="oferta.tipoproyecto.id" >
+                                <mat-select style="margin-top: 6px;" [disabled]="disableControls" (selectionChange)="selectedchangeTipoProyecto($event.value)" class="font-body-oferta" name="tipoproyecto" [(ngModel)]="oferta.tipoproyecto.id" >
                                     <mat-option [value]="0">-Seleccionar-</mat-option>
-                                    <mat-option *ngFor="let o of lstTipoProyecto" [value]="o.id">{{o.descripcion}}</mat-option>
+                                    <mat-option [value]="o.id" *ngFor="let o of lstTipoProyecto"  >{{o.descripcion}}</mat-option>
                                 </mat-select>
 
                             </mat-form-field>
@@ -322,7 +322,8 @@
                         </div>
                         <div class="col-sm-10 padding-r-none content-control-oferta">
                             <mat-form-field color="accent">
-                                <input autocomplete="off" [disabled]="disableControls" [(ngModel)]="oferta.pago_recurrente_actual" name="pago_recurrente_actual" mask="0*.00"  matInput class="form-control text-right" placeholder="">
+                                <input autocomplete="off" [disabled]="disableControls" [required]="isRequiredFactActual" [(ngModel)]="oferta.pago_recurrente_actual" name="pago_recurrente_actual" mask="0*.00"  matInput class="form-control text-right" placeholder="">
+                                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
                             </mat-form-field>
                         </div>
                     </div>

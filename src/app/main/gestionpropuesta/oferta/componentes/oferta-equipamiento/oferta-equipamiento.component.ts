@@ -1,11 +1,11 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { AlertConfirmComponent } from '../alertConfirm/alertConfirm.component';
 import { AlertSuccessComponent } from '../alertSuccess/alertSuccess.component';
 import { MatDialog } from '@angular/material/dialog';
 import { EquipamientoService } from '../oferta-equipamiento/oferta-equipamiento.servicio';
 import { CommonService } from 'app/common.service';
-import { TipoEquipamientoModel,MonedaModel } from 'app/model/Common';
+import { TipoEquipamientoModel, MonedaModel } from 'app/model/Common';
 import { OfertaEquipamientoModel, EquipamientoRequest } from 'app/main/gestionpropuesta/models/oferta';
 import { ToastrService } from 'ngx-toastr';
 
@@ -16,7 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class OfertaEquipamientoComponent implements OnInit {
 
-  @Input() ofertaBase:any={}; 
+  @Input() ofertaBase: any = {};
 
   tipoCambio: number = 3.5;
   baseDepresiacion: number = 60;
@@ -24,17 +24,17 @@ export class OfertaEquipamientoComponent implements OnInit {
   listaCondicion: ModelCombo[] = [];
   listaMoneda: MonedaModel[] = [];
   listaMarca: ModelCombo[] = [];
-  baseDataSource=[];
-  dataSource =new MatTableDataSource<OfertaEquipamientoModel>([]);
+  baseDataSource = [];
+  dataSource = new MatTableDataSource<OfertaEquipamientoModel>([]);
 
   constructor(
     public dialog: MatDialog,
-    public equipamientoService :EquipamientoService,
+    public equipamientoService: EquipamientoService,
     private commonService: CommonService,
-    private toastr : ToastrService
+    private toastr: ToastrService
   ) { }
 
-  displayedColumns: string[] = ['tipo', 'condicion', 'antigueadad', 'marca', 'modelo', 'cantidad', 'moneda', 'costo', 'costototal','instalacion','accion'];
+  displayedColumns: string[] = ['tipo', 'condicion', 'antigueadad', 'marca', 'modelo', 'cantidad', 'moneda', 'costo', 'costototal', 'instalacion', 'accion'];
 
   pattern = {
     P: {
@@ -44,25 +44,21 @@ export class OfertaEquipamientoComponent implements OnInit {
   customMask = ['0*.00', this.pattern];
 
   ngOnInit(): void {
-    this.commonService.getTipoEquipamiento().subscribe(data=>{ this.listaTipos = data });
-    this.commonService.getTipoMonedaAll().subscribe(data => {this.listaMoneda = data});
-    this.equipamientoService.findAllEquipamientoMarca().subscribe(data => {     
-      this.listaMarca = data;
+    this.commonService.getTipoEquipamiento().subscribe(data => {
+      debugger;
+      this.listaTipos = data
+      console.log(this.listaTipos);
     });
-
-    this.equipamientoService.findAllEquipamientoCondicion().subscribe(data => {     
-      this.listaCondicion = data;
-    });
-
+    this.commonService.getTipoMonedaAll().subscribe(data => { this.listaMoneda = data });
+    this.equipamientoService.findAllEquipamientoMarca().subscribe(data => { this.listaMarca = data; });
+    this.equipamientoService.findAllEquipamientoCondicion().subscribe(data => { this.listaCondicion = data; });
     this.getEquipamientos();
-
   }
 
-  getEquipamientos():void
-  {
-    this.equipamientoService.getEquipamientoForOfeta(this.ofertaBase.id).subscribe(data=>{
-      for(let d of data){d['instalacion']= 0;} 
-      this.dataSource.data = data;      
+  getEquipamientos(): void {
+    this.equipamientoService.getEquipamientoForOfeta(this.ofertaBase.id).subscribe(data => {
+      for (let d of data) { d['instalacion'] = 0; }
+      this.dataSource.data = data;
     });
   }
 
@@ -73,11 +69,8 @@ export class OfertaEquipamientoComponent implements OnInit {
     this.dataSource.filter = "";
   }
   Guardar(): void {
-
-    let equipos=[];
-
-    for(let eq of this.dataSource.data)
-    {
+    let equipos = [];
+    for (let eq of this.dataSource.data) {
       let item = new EquipamientoRequest();
       item.id = eq.id;
       item.antiguedad = eq.antiguedad;
@@ -91,24 +84,24 @@ export class OfertaEquipamientoComponent implements OnInit {
       item.tipo = eq.tipoequipamiento.id;
       item.unitario = eq.unitario;
       item.total = eq.total;
-      if(item.id > 0 && item.activo == false)
+      if (item.id > 0 && item.activo == false)
         item.estado = 2;
-      else if(item.id == 0 && item.activo ==true)
+      else if (item.id == 0 && item.activo == true)
         item.estado = 0;
       else
         item.estado = 1;
-
+      item.proveedor = eq.proveedor;  // se agrego esta propiedad  faltar enviar el valor del back-->coordianr con omar
       equipos.push(item);
     }
-    this.equipamientoService.saveAllEquipamiento(equipos).subscribe(data =>{
-      this.getEquipamientos();     
+    this.equipamientoService.saveAllEquipamiento(equipos).subscribe(data => {
+      this.getEquipamientos();
       this.toastr.success('Se proceso correctamente la información!', '', {
         progressBar: true,
         progressAnimation: 'increasing',
         closeButton: true
       });
     });
-    
+
   }
   deleteRow(item: OfertaEquipamientoModel): void {
     const dialogRef = this.dialog.open(AlertConfirmComponent, {
@@ -119,7 +112,7 @@ export class OfertaEquipamientoComponent implements OnInit {
           ok: 'Si',
           cancel: 'No'
         }
-      } 
+      }
     });
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
@@ -128,9 +121,9 @@ export class OfertaEquipamientoComponent implements OnInit {
         a.click();
         a.remove();
 
-        if(item.id > 0){ item.activo = false;}
-        else{
-          this.dataSource.data.splice(this.dataSource.data.indexOf(item),1);
+        if (item.id > 0) { item.activo = false; }
+        else {
+          this.dataSource.data.splice(this.dataSource.data.indexOf(item), 1);
           this.dataSource.filter = "";
         }
 
@@ -138,18 +131,18 @@ export class OfertaEquipamientoComponent implements OnInit {
     });
   }
 
-  calcularMontoTotalSoles(eq:OfertaEquipamientoModel)
-  {
-      let total = eq.unitario * eq.cantidad;
-      if(eq.moneda.id == 2)
-        total = total * this.tipoCambio;
+  calcularMontoTotalSoles(eq: OfertaEquipamientoModel) {
+    debugger;
 
-      if(eq.equipamientoCondicion.id == 4)
-        if(eq.antiguedad > 0 && eq.antiguedad != null){ total = total * (1 * eq.antiguedad / this.baseDepresiacion);}
+    let total = eq.unitario * eq.cantidad;
+    if (eq.moneda.id == 2)
+      total = total * this.tipoCambio;
+
+    if (eq.equipamientoCondicion.id == 4)
+      if (eq.antiguedad > 0 && eq.antiguedad != null) { total = total * (1 * eq.antiguedad / this.baseDepresiacion); }
       else
         eq.antiguedad = 0;
-
-      eq.total =Number(total.toFixed(2));
+    eq.total = Number(total.toFixed(2));
   }
 
   calcularMontoMensual(row: OfertaEquipamientoModel): number {
@@ -166,16 +159,27 @@ export class OfertaEquipamientoComponent implements OnInit {
   }
 
   public calcularTotalSoles() {
-    return this.dataSource.data.filter(x => x.activo == true).reduce((accum, curr) => accum + curr.total, 0);
+    return this.dataSource.data.filter(x => x.activo == true).reduce((accum, curr) => accum + curr.total + curr.instalacion, 0);
   }
   public calcularTotalDolares() {
-    return this.dataSource.data.filter(x => x.activo == true).reduce((accum, curr) => accum + (curr.total / this.tipoCambio), 0).toFixed(2);
+    return this.dataSource.data.filter(x => x.activo == true).reduce((accum, curr) => accum + (curr.total + curr.instalacion / this.tipoCambio), 0).toFixed(2);
   }
 
-  compareValCombos(c1: any, c2:any): boolean {     
-    return c1 && c2 ? c1.id === c2.id : c1 === c2; 
+  compareValCombos(c1: any, c2: any): boolean {
+    return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
-
+  public selectedchangeTipoEquipamiento(opcion, row) {
+    debugger;
+    /*
+    "11 - Modem"
+    "13 - Router"
+    */
+    if (opcion.id == 11 || opcion.id == 13) { //Si es router o model la instalacion cuesta 100 soles
+      row.instalacion = 350;
+    } else {
+      row.instalacion = 0;
+    }
+  }
 
 }
 
