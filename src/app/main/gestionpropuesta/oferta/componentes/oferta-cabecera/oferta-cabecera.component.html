@@ -24,7 +24,7 @@
             </div>
             <div class="content-control-oferta">
                 <mat-form-field color="accent">
-                    <input type="text" [(ngModel)]="oferta.oportunidad"  class="form-control font-body-oferta" placeholder="" aria-label="Number" matInput  name="oportunidad" #codigoSalesforce
+                    <input type="text" [(ngModel)]="oferta.oportunidad" [disabled]="disableControls"  class="form-control font-body-oferta" placeholder="" aria-label="Number" matInput  name="oportunidad" #codigoSalesforce
                            [matAutocomplete]="autoO">
                     <mat-autocomplete class="autocomplete"  #autoO="matAutocomplete" [displayWith]="displayFnOportunidad">
                         <mat-option (onSelectionChange)="onSelectOportunidad(option)" *ngFor="let option of dataSourceOportunidad" [value]="option" class="item-auto-clinet">
@@ -40,7 +40,7 @@
             </div>
             <div class="">
                 <mat-form-field color="accent">
-                    <input autocomplete="off" [(ngModel)]="oferta.numeroCasoSalesforce" mask="0*"  matInput class="form-control font-body-oferta" placeholder="" name="numeroCasoSalesforce">
+                    <input autocomplete="off" [disabled]="disableControls" [(ngModel)]="oferta.numeroCasoSalesforce" mask="0*"  matInput class="form-control font-body-oferta" placeholder="" name="numeroCasoSalesforce">
                 </mat-form-field>
             </div>
         </div>
@@ -62,11 +62,23 @@
                 </div>
             </div>
             <div class="content-control-oferta">
-                <div class="">
-                    <label class="label-title">Analista Financiero:</label>
+                <div *ngIf="!showSelectAF">
+                    <div class="">
+                        <label class="label-title">Analista Financiero:</label>
+                    </div>
+                    <div class="">
+                        <span class="font-body-oferta">{{oferta.analistafinanciero.nombre}}</span>
+                    </div>
                 </div>
-                <div class="">
-                    <span class="font-body-oferta">{{oferta.analistafinanciero.nombre}}</span>
+                <div *ngIf="showSelectAF">
+                    <div class="alert_select_af" (click)="openChangeAF()">
+                        <div class="texto section">
+                            Seleccione Analista Financiero
+                        </div>
+                        <div class="_icon_ section">
+                            <mat-icon class="icon" matSuffix>warning</mat-icon>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -76,15 +88,7 @@
             </div>
         </div>
 
-        <div class="row" *ngIf="oferta.oferta_id > 0">
-            <div class="content-btn-ganada">
-                <button class="btn btn-md btn-telefonica-gree-2" (click)="enviarIsis()">Enviar a ISIS
-
-                    <mat-spinner *ngIf="processIsis"  style="display: inline-block; " diameter="15" color="accent"></mat-spinner>
-
-                </button>
-            </div>
-        </div>
+      
 
     </div>
     <div class="col-xs-12 col-sm-10">
@@ -95,7 +99,7 @@
             <div class="col-sm-2 padding-l-none">
 
                <mat-form-field class="example-full-width">
-                    <input required type="text" [(ngModel)]="oferta.cliente" class="form-control font-body-oferta"  name="cliente" aria-label="Number" matInput  #myControl
+                    <input required type="text" [disabled]="disableControls" [(ngModel)]="oferta.cliente" class="form-control font-body-oferta"  name="cliente" aria-label="Number" matInput  #myControl
                            [matAutocomplete]="auto">
                            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
                     <mat-autocomplete class="autocompletecliente"  #auto="matAutocomplete" [displayWith]="displayFn">
@@ -128,7 +132,7 @@
                 </div>
                 <div class="content-control-oferta">
                     <mat-form-field color="accent">
-                        <input autocomplete="off" required class="font-body-oferta" [(ngModel)]="oferta.contacto"  name="contacto" matInput class="form-control font-body-oferta" placeholder="">
+                        <input autocomplete="off" [disabled]="disableControls" required class="font-body-oferta" [(ngModel)]="oferta.contacto"  name="contacto" matInput class="form-control font-body-oferta" placeholder="">
                         <mat-icon class="icon" matSuffix>person_outlin &nbsp;</mat-icon>
                         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
                     </mat-form-field>
@@ -142,7 +146,7 @@
                 </div>
                 <div class="content-control-oferta">
                     <mat-form-field color="accent">
-                        <input autocomplete="off" [(ngModel)]="oferta.telefono_contacto" name="telefono_contacto" matInput class="form-control font-body-oferta" placeholder="">
+                        <input autocomplete="off" [disabled]="disableControls" [(ngModel)]="oferta.telefono_contacto" name="telefono_contacto" matInput class="form-control font-body-oferta" placeholder="">
                         <mat-icon class="icon" matSuffix>phone &nbsp;</mat-icon>
                     </mat-form-field>
                 </div>
@@ -154,7 +158,7 @@
                 </div>
                 <div class="content-control-oferta">
                     <mat-form-field color="accent">
-                        <input autocomplete="off" [(ngModel)]="oferta.correo_contacto" name="correo_contacto" matInput class="form-control font-body-oferta" placeholder="">
+                        <input autocomplete="off" [disabled]="disableControls" [(ngModel)]="oferta.correo_contacto" name="correo_contacto" matInput class="form-control font-body-oferta" placeholder="">
                         <mat-icon class="icon" matSuffix>mail &nbsp;</mat-icon>
                     </mat-form-field>
                 </div>
@@ -170,7 +174,7 @@
                         </div>
                         <div class=" content-control-oferta">
                             <mat-form-field color="accent">
-                                <input autocomplete="off" required matInput class="form-control font-body-oferta" [(ngModel)]="oferta.descripcion" name="descripcion" placeholder="">
+                                <input autocomplete="off" [disabled]="disableControls" required matInput class="form-control font-body-oferta" [(ngModel)]="oferta.descripcion" name="descripcion" placeholder="">
                                 <mat-icon class="icon" matSuffix>description &nbsp;</mat-icon>
                                 <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
                             </mat-form-field>
@@ -185,7 +189,7 @@
                         </div>
                         <div class=" content-control-oferta">
                             <mat-form-field color="accent">
-                                <input autocomplete="off" matInput class="form-control font-body-oferta" [(ngModel)]="oferta.observaciones" name="observaciones" placeholder="">
+                                <input autocomplete="off" [disabled]="disableControls" matInput class="form-control font-body-oferta" [(ngModel)]="oferta.observaciones" name="observaciones" placeholder="">
                                 <mat-icon class="icon" matSuffix>description &nbsp;</mat-icon>
                             </mat-form-field>
                         </div>
@@ -201,7 +205,7 @@
                         <div class="content-control-oferta">
                             <mat-form-field color="accent">
                               
-                                <mat-select style="margin-top: 6px;" class="font-body-oferta" name="tipoproyecto" [(ngModel)]="oferta.tipoproyecto.id" >
+                                <mat-select [disabled]="disableControls" style="margin-top: 6px;" class="font-body-oferta" name="tipoproyecto" [(ngModel)]="oferta.tipoproyecto.id" >
                                     <mat-option [value]="0">-Seleccionar-</mat-option>
                                     <mat-option *ngFor="let o of lstTipoProyecto" [value]="o.id">{{o.descripcion}}</mat-option>
                                 </mat-select>
@@ -217,7 +221,7 @@
                         <div class="content-control-oferta">
                             <mat-form-field color="accent">
 
-                            <mat-select style="margin-top: 6px;" class="font-body-oferta" name="complejidad" [(ngModel)]="oferta.complejidad.id" >
+                            <mat-select [disabled]="disableControls" style="margin-top: 6px;" class="font-body-oferta" name="complejidad" [(ngModel)]="oferta.complejidad.id" >
                                 <mat-option [value]="0">-Seleccionar-</mat-option>
                                 <mat-option *ngFor="let o of lstComplejidad" [value]="o.id">{{o.descripcion}}</mat-option>
                             </mat-select>
@@ -233,7 +237,7 @@
                         <div class="content-control-oferta">
                             <mat-form-field color="accent">
 
-                                <mat-select style="margin-top: 6px;" class="font-body-oferta" name="tipocontrato" [(ngModel)]="oferta.tipocontrato.id" >
+                                <mat-select [disabled]="disableControls" style="margin-top: 6px;" class="font-body-oferta" name="tipocontrato" [(ngModel)]="oferta.tipocontrato.id" >
                                     <mat-option [value]="0">-Seleccionar-</mat-option>
                                     <mat-option *ngFor="let o of lstTipoContrato" [value]="o.id">{{o.descripcion}}</mat-option>
                                 </mat-select>
@@ -250,7 +254,7 @@
                         <div class="content-control-oferta">
                             <mat-form-field color="accent">
                                 <span class="prefix font-body-oferta" matPrefix>Meses &nbsp;</span>
-                                <input autocomplete="off" [(ngModel)]="oferta.tiempo_implantacion" mask="0*"  matInput class="form-control font-body-oferta text-center" style="text-align: center;" placeholder="" name="tiempo_implantacion">
+                                <input autocomplete="off" [disabled]="disableControls" [(ngModel)]="oferta.tiempo_implantacion" mask="0*"  matInput class="form-control font-body-oferta text-center" style="text-align: center;" placeholder="" name="tiempo_implantacion">
                             </mat-form-field>
                         </div>
 
@@ -262,7 +266,7 @@
                         <div class="content-control-oferta">
                             <mat-form-field color="accent">
                                 <span class="prefix font-body-oferta" matPrefix>Meses &nbsp;</span>
-                                <input autocomplete="off" matInput [(ngModel)]="oferta.periodo_contrato" mask="0*"  class="form-control font-body-oferta text-center" style="text-align: center;" placeholder="" name="periodo_contrato">
+                                <input autocomplete="off" [disabled]="disableControls" matInput [(ngModel)]="oferta.periodo_contrato" mask="0*"  class="form-control font-body-oferta text-center" style="text-align: center;" placeholder="" name="periodo_contrato">
                             </mat-form-field>
                         </div>
                     </div>
@@ -274,14 +278,14 @@
                         </div>
                         <div class="col-sm-2 padding-none content-control-oferta">
                             <mat-form-field color="accent">
-                                <mat-select style="margin-top: 6px;" class="font-body-oferta" name="moneda" [(ngModel)]="oferta.moneda.id" >
+                                <mat-select [disabled]="disableControls" style="margin-top: 6px;" class="font-body-oferta" name="moneda" [(ngModel)]="oferta.moneda.id" >
                                     <mat-option *ngFor="let m of lstMoneda" [value]="m.id">{{m.descBrv}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
                         <div class="col-sm-10 padding-r-none content-control-oferta">
                             <mat-form-field color="accent">
-                                <input autocomplete="off" [(ngModel)]="oferta.pago_unico" name="pago_unico" mask="0*.00" matInput class="form-control font-body-oferta text-right" placeholder="">
+                                <input autocomplete="off" [disabled]="disableControls" [(ngModel)]="oferta.pago_unico" name="pago_unico" mask="0*.00" matInput class="form-control font-body-oferta text-right" placeholder="">
                             </mat-form-field>
                         </div>
                     </div>
@@ -291,14 +295,14 @@
                         </div>
                         <div class="col-sm-2 padding-none content-control-oferta">
                             <mat-form-field color="accent">
-                                <mat-select style="margin-top: 6px;" class="font-body-oferta" name="moneda2" [(ngModel)]="oferta.moneda.id" >
+                                <mat-select [disabled]="disableControls" style="margin-top: 6px;" class="font-body-oferta" name="moneda2" [(ngModel)]="oferta.moneda.id" >
                                     <mat-option *ngFor="let m of lstMoneda" [value]="m.id">{{m.descBrv}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
                         <div class="col-sm-10 padding-r-none content-control-oferta">
                             <mat-form-field color="accent">
-                                <input autocomplete="off" [(ngModel)]="oferta.pago_recurrente" name="pago_recurrente" mask="0*.00"  matInput class="form-control font-body-oferta text-right" placeholder="">
+                                <input autocomplete="off" [disabled]="disableControls" [(ngModel)]="oferta.pago_recurrente" name="pago_recurrente" mask="0*.00"  matInput class="form-control font-body-oferta text-right" placeholder="">
                             </mat-form-field>
                         </div>
                     </div>
@@ -311,14 +315,14 @@
                         </div>
                         <div class="col-sm-2 padding-none content-control-oferta">
                             <mat-form-field color="accent">
-                                <mat-select style="margin-top: 6px;" class="font-body-oferta" name="moneda3" [(ngModel)]="oferta.moneda.id" >
+                                <mat-select [disabled]="disableControls" style="margin-top: 6px;" class="font-body-oferta" name="moneda3" [(ngModel)]="oferta.moneda.id" >
                                     <mat-option *ngFor="let m of lstMoneda" [value]="m.id">{{m.descBrv}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
                         <div class="col-sm-10 padding-r-none content-control-oferta">
                             <mat-form-field color="accent">
-                                <input autocomplete="off" [(ngModel)]="oferta.pago_recurrente_actual" name="pago_recurrente_actual" mask="0*.00"  matInput class="form-control text-right" placeholder="">
+                                <input autocomplete="off" [disabled]="disableControls" [(ngModel)]="oferta.pago_recurrente_actual" name="pago_recurrente_actual" mask="0*.00"  matInput class="form-control text-right" placeholder="">
                             </mat-form-field>
                         </div>
                     </div>
@@ -372,13 +376,27 @@
                         
                     </div>
                 </div>
+                <div class="col-xs-12 padding-none">
+                    <div class=" content-btn-guardar">
+                        <div class="col">
+                            <button *ngIf="oferta.oferta_id > 0 && oferta.resultado == 'GO'" class="btn btn-md btn-telefonica-gree-2" (click)="enviarIsis()">Enviar a ISIS
+                                <mat-spinner *ngIf="processIsis"  style="display: inline-block; " diameter="15" color="accent"></mat-spinner>
+                            </button>
+                            <button *ngIf="oferta.resultado == 'NO GO' && showActionPreventa " class="btn btn-md btn-telefonica-gree-2" (click)="derivarOfertaAF()" >Derivar Oferta a AF
+                            </button>
+                            <button *ngIf="showDevolverPreventa" class="btn btn-md btn-telefonica-gree-2" (click)="devolverPreventa()" >Devolver a Preventa</button>
+                        </div>
+                        <div *ngIf="showActionPreventa" class="col col-g" >
+                            <button  [disabled]="!formControl.valid" class="btn-telefonica-gree btn-guardar-oferta" (click)="guardarOferta()">Guardar</button>
+                        </div>
+                       
+                        
+                    </div>
+                   
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class=" content-btn-guardar">
-                <button  [disabled]="!formControl.valid" class="btn-telefonica-gree btn-guardar-oferta" (click)="guardarOferta()">Guardar</button>
-            </div>
-        </div>
+        
     </div>
     
 </form>

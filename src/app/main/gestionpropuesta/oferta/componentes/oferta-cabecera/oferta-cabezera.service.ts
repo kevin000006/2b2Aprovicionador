@@ -35,5 +35,16 @@ export class OfertaCabezeraService {
       return this.http.post('/isis/enviartrama?oferta_id=' + oferta,{});
     }
 
+    derivarOferta(param:any):Observable<any>{
+      return this.http.post('/oferta/_derivaroferta?ofertaId=' + param.ofertaId + '&usuarioId=' + param.usuarioId ,{});
+    }
+
+    asignarOfertAF(param):Observable<any>{
+      return this.http.post('/oferta/_asignaraf?analistafinancieroId=' + param.analistafinancieroId + '&ofertaId=' + param.ofertaId + '&usuarioId=' + param.usuarioId ,{});
+    }
+
+    devolverOfertaPreventa(param):Observable<any>{
+      return this.http.post('/oferta/_devolverpv?ofertaId=' + param.ofertaId + '&usuarioId=' + param.usuarioId ,{});
+    }
 
 }

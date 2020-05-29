@@ -158,7 +158,8 @@ export class BandejaComponent implements OnInit {
       desde: _desde,
       hasta: _hasta,
       page:this.pageIndex,
-      size:nro || this._filtro.nroItmes
+      size:nro || this._filtro.nroItmes,
+      usuarioid: this.currentUser.id
     }
 
     this.dataSource.filtrar(obj,this._filtro.nroItmes);

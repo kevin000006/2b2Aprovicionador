@@ -121,3 +121,8 @@ export class TipoEquipamientoModel
     id:number;
     descripcion:string;
 }
+
+export class AnalistaFinancieroModel{
+    id:number;
+    nombre:string;
+}

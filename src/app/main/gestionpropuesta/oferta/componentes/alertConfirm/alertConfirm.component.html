@@ -1,14 +1,18 @@
-<button mat-icon-button class="close-ico" (click)="onCancelcick()">
-    <mat-icon>close</mat-icon>
-</button>
+<div class="text-right">
+    <button mat-icon-button class="close-ico" (click)="onCancelcick()">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
 <mat-dialog-content>
-    <div class="row text-center imagenConfirmacion">
+    <div *ngIf="!data.hiddenlogo" class="row text-center imagenConfirmacion">
         <img src="../../../.../../../../../assets/images/icon/ico-error.png" class="logoPrincipalLogin">
     </div>
-    <div class="row text-center">
+    <div *ngIf="!data.hiddentitle" class="row text-center">
         <p class="mensajeConfirmacion" class="mensajeConfirmacion">!Atento!</p>
     </div>
     <div class="row text-center">
+        <br/>
         <p class="mensaje">
             {{message}}
         </p>

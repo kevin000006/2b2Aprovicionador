@@ -48,6 +48,25 @@
 .content-btn-guardar {
     line-height: 50px;
     text-align: right;
+    display: table;
+    width: 100%;
+}
+
+.content-btn-guardar .col{
+    display: table-cell;
+    padding-right: 5%;
+
+}
+
+.content-btn-guardar .col.col-g{
+    display: table-cell;
+    width: 30%;
+    padding: 0;
+}
+
+.content-btn-guardar .col button{
+    width: 100%;
+    min-width: auto;
 }
 
 .cliente-nombre {
@@ -156,3 +175,29 @@
 
 }
 
+.alert_select_af{
+    border: 2px solid #f8e08a;
+    border-radius: 4px;
+    background: #fffbec;
+    padding: 5px 3px;
+    color: #907513;
+    cursor: pointer;
+    display: table;
+}
+
+.alert_select_af .section{
+    display: table-cell;
+}
+
+.alert_select_af .texto{
+    font-size: 11px;
+}
+
+.alert_select_af ._icon_{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.alert_select_af ._icon_ mat-icon{
+    color: #907513;
+}

@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { ClienteModel,EstadoModel,ComplejidadModel,TipoContratoModel, TipoProyectoModel,
     TipoServicioModel,ViaAccesoModel,TipoInstalacionSatelitalModel,EquipamientoMarcaModel,EquipamientoCondicionModel,
     SisegoCondicionModel,ConceptosOpexModel,TipoEnlaceModel,CondicionEnlaceModel,
-    TipoCircuitoModel,MonedaModel,AccionIsisModel, TipoEquipamientoModel
+    TipoCircuitoModel,MonedaModel,AccionIsisModel, TipoEquipamientoModel, AnalistaFinancieroModel
 } from './model/Common';
 import { Observable } from 'rxjs';
 
@@ -82,5 +82,9 @@ export class CommonService{
     buscardistrito(search : string): Observable<any> {    
         return this.http.get<any>('/ofertasDetalle/buscardistrito?search=' + search);
     } 
+
+    getAllAnalistasFinanciero():Observable<AnalistaFinancieroModel[]>{
+        return this.http.post<AnalistaFinancieroModel[]>('/analistaFinaciero/findAll',null);
+    }
 
 }

@@ -3,12 +3,16 @@ import { MatDialog } from '@angular/material/dialog';
 import { OfertaModel, PreventaModel, ClienteModel, ComboModel, SegmentoNegocioModel } from '../../../models/oferta';
 import { OfertaCabezeraService } from './oferta-cabezera.service';
 import { CommonService } from 'app/common.service'
+import { AlertConfirmComponent } from '../alertConfirm/alertConfirm.component';
 import { QuestionDialogsComponent } from 'app/main/gestionpropuesta/bandeja/dialogs/question-dialogs/question-dialogs.component';
 import { Observable, fromEvent } from 'rxjs';
 import { MonedaModel } from 'app/model/Common';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ToastrService } from 'ngx-toastr';
+import { UsuarioModel } from 'app/main/gestionpropuesta/models/oferta';
+import * as Cookies from 'js-cookie';
+import { DialogAfComponent } from '../dialog-af/dialog-af.component';
 
 @Component({
   selector: 'oferta-cabecera',
@@ -17,6 +21,11 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class OfertaCabeceraComponent implements OnInit {
 
+  currentUser :UsuarioModel= new UsuarioModel();
+  showActionPreventa=false;
+  showDevolverPreventa = false;
+  disableControls = false;
+  showSelectAF=false;
   processIsis = false;
   dataSourceCliente: any[] = [];
   dataSourceOportunidad: any[] = [];
@@ -31,7 +40,9 @@ export class OfertaCabeceraComponent implements OnInit {
     public dialog: MatDialog,
     private _snack: MatSnackBar,
     private toastr: ToastrService
-  ) { }
+  ) { 
+    this.currentUser = JSON.parse(Cookies.get('currentUser'));
+  }
   @ViewChild('myControl', { static: true }) autocompleteCliente: ElementRef;
   @ViewChild('codigoSalesforce', { static: true }) autocompleteOportunidad: ElementRef;
   @Input() ofertaBase: any = {id:0};
@@ -74,12 +85,12 @@ export class OfertaCabeceraComponent implements OnInit {
       ppago_recurrente_actual: (this.oferta.pago_recurrente_actual || 0),
       ppago_unico: this.oferta.pago_unico,
       pperiodo_contrato: this.oferta.periodo_contrato,
-      ppreventa_id: 1,
+      ppreventa_id: this.currentUser.id,
       ptelefono_contacto: this.oferta.telefono_contacto,
       ptiempo_implantacion: this.oferta.tiempo_implantacion,
       ptipo_contrato_id: this.oferta.tipocontrato.id == 0 ? null : this.oferta.tipocontrato.id,
       ptipo_proyecto_id: this.oferta.tipoproyecto.id == 0 ? null : this.oferta.tipoproyecto.id,
-      pusuario: 'Maria Ramos'
+      pusuario: this.currentUser.usuario
 
     };
 
@@ -134,7 +145,10 @@ export class OfertaCabeceraComponent implements OnInit {
         this.oferta.cliente = this.oferta.cliente || new ClienteModel();
         this.oferta.diferencia_ingresos = this.oferta.diferencia_ingresos || 0;
         this.oferta.diferencia_ingresos = (this.oferta.diferencia_ingresos * 100).toFixed(2);
-        
+        this.disableControls = this.oferta.estado.id == 3 || this.oferta.estado.id == 4 || this.oferta.preventa.id != this.currentUser.id;
+        this.showActionPreventa = this.oferta.estado.id != 3 && this.oferta.estado.id != 4 && this.oferta.preventa.id == this.currentUser.id;
+        this.showSelectAF = this.oferta.estado.id == 3 &&  this.currentUser.token =='Coordinador Financiero';
+        this.showDevolverPreventa = this.oferta.estado.id == 4 && (this.oferta.analistafinanciero != null ? this.oferta.analistafinanciero.id : -1) == this.currentUser.id;
       });
     }
     else {
@@ -146,6 +160,8 @@ export class OfertaCabeceraComponent implements OnInit {
       
     }
    
+    
+
   }
 
   displayFn(cliente) {
@@ -159,9 +175,6 @@ export class OfertaCabeceraComponent implements OnInit {
   }
 
   displayFnOportunidad(item) {
-
-
-
     if (item) {
       return item.oportunidadcodigo;
     }
@@ -198,6 +211,147 @@ export class OfertaCabeceraComponent implements OnInit {
       });
     });
 
+  }
+
+  derivarOfertaAF():void{
+
+    const dialogRef = this.dialog.open(AlertConfirmComponent, {
+      width: '650px',
+      data: {
+        hiddenlogo:true,
+        hiddentitle:true,
+        message: '¿Está seguro que desea derivar a analista financiero?',
+        buttonText: {
+          ok: 'Aceptar',
+          cancel: 'Cancelar'
+        }
+      }
+    });
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        const a = document.createElement('a');
+        a.click();
+        a.remove();
+        const param={
+          ofertaId:this.oferta.oferta_id,
+          usuarioId:this.currentUser.id
+        };
+        this.service.derivarOferta(param).subscribe(response =>{
+
+          if(response && response.error)
+          {
+            this.toastr.error(response.error, '', {
+              progressBar: true,
+              progressAnimation: 'increasing',
+              closeButton: true
+            });
+          }else{
+            this.toastr.success('Se ha derivado con éxito la oferta.', '', {
+              progressBar: true,
+              progressAnimation: 'increasing',
+              closeButton: true
+            });
+            this.getOfertaData();
+          }
+
+        });
+      }
+    });
+
+  }
+
+  devolverPreventa():void{
+
+    const dialogRef = this.dialog.open(AlertConfirmComponent, {
+      width: '650px',
+      data: {
+        hiddenlogo:true,
+        hiddentitle:true,
+        message: '¿Está seguro que desea devolver la oferta a preventa?',
+        buttonText: {
+          ok: 'Aceptar',
+          cancel: 'Cancelar'
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        const a = document.createElement('a');
+        a.click();
+        a.remove();
+        const param={
+          ofertaId:this.oferta.oferta_id,
+          usuarioId:this.currentUser.id
+        };
+        this.service.devolverOfertaPreventa(param).subscribe(response =>{
+
+          if(response && response.error)
+          {
+            this.toastr.error(response.error, '', {
+              progressBar: true,
+              progressAnimation: 'increasing',
+              closeButton: true
+            });
+          }else{
+            this.toastr.success('Se ha derivado con éxito la oferta.', '', {
+              progressBar: true,
+              progressAnimation: 'increasing',
+              closeButton: true
+            });
+            this.getOfertaData();
+          }
+
+        });
+      }
+    });
+
+
+  }
+
+  openChangeAF():void{
+
+    let af = 0;
+    if(this.oferta.analistaFinanciero)
+      af = this.oferta.analistaFinanciero.id;
+
+    const dialogRef = this.dialog.open(DialogAfComponent, {
+      width: '650px',
+      data: {analistaFinanciero: af}
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        const param={
+          usuarioId : this.currentUser.id,
+          ofertaId : this.oferta.oferta_id,
+          analistafinancieroId : result
+        };
+        this.service.asignarOfertAF(param).subscribe(response => {
+
+          if(response)
+          {
+
+            this.toastr.success('Se ha asignado al analista financiero con éxito.', '', {
+              progressBar: true,
+              progressAnimation: 'increasing',
+              closeButton: true
+            });
+            this.getOfertaData();
+          }else{
+            
+          this.toastr.error(response.error, '', {
+            progressBar: true,
+            progressAnimation: 'increasing',
+            closeButton: true
+          });
+          }
+
+
+        });
+
+      }
+    });
   }
 
   ngOnInit(): void {

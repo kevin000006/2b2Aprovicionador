@@ -1,0 +1,34 @@
+<div class="text-right">
+    <div class="header">
+        <div class="section title">
+            Seleccion de analista financiero
+        </div>
+       <div class="section close">
+        <button mat-icon-button class="close-ico" (click)="onCancelcick()">
+            <mat-icon>close</mat-icon>
+        </button>
+       </div>
+    </div>
+</div>
+<mat-dialog-content>
+    <div class="body">
+        <mat-form-field color="accent">
+            <mat-select style="margin-top: 6px;" class="font-body-oferta"  [(ngModel)]="data.analistaFinanciero" >
+                <mat-option [value]="0">-Seleccionar-</mat-option>
+                <mat-option *ngFor="let o of lstAnalistasFinancieros" [value]="o.id">{{o.nombre}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="header">
+        <div class="section">
+            <button class="btn-telefonica-gree-2 _btn" (click)="onCancelcick()">
+                Cancelar
+            </button>
+        </div>
+        <div class="section btn-ok">
+            <button class="btn-telefonica-gree _btn" (click)="onAceptclick()">
+                Aceptar
+            </button>
+        </div>
+    </div>
+</mat-dialog-content>
