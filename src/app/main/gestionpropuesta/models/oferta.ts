@@ -124,6 +124,7 @@ export class EquipamientoRequest {
   unitario: number;
   estado: number;
   proveedor:string;
+  instalacion:number;
 }
 
 export class OfertaEquipamientoModel {

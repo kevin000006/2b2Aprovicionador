@@ -91,6 +91,7 @@ export class OfertaEquipamientoComponent implements OnInit {
       else
         item.estado = 1;
       item.proveedor = eq.proveedor;  // se agrego esta propiedad  faltar enviar el valor del back-->coordianr con omar
+      item.instalacion = eq.instalacion;
       equipos.push(item);
     }
     this.equipamientoService.saveAllEquipamiento(equipos).subscribe(data => {
