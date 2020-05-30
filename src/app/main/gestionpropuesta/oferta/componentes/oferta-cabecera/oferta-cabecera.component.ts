@@ -154,6 +154,8 @@ export class OfertaCabeceraComponent implements OnInit {
       this.oferta.complejidad.id = 0;
       this.oferta.tipocontrato.id = 2;// se seteara por default la opcion Forzoso
       this.oferta.tipoproyecto.id = 0;
+      this.showActionPreventa = true;
+      this.disableControls = false;
     }
    
     
@@ -286,7 +288,7 @@ export class OfertaCabeceraComponent implements OnInit {
               closeButton: true
             });
           }else{
-            this.toastr.success('Se ha derivado con éxito la oferta.', '', {
+            this.toastr.success('Se devolvio la oferta al preventa con éxito.', '', {
               progressBar: true,
               progressAnimation: 'increasing',
               closeButton: true

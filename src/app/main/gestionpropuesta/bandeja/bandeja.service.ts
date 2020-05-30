@@ -33,6 +33,7 @@ export class BandejaService {
     params = params.append('estado', param.estado || '');
     params = params.append('hasta', param.hasta || '');
     params = params.append('usuarioid', param.usuarioid || 0);
+    params = params.append('visualizartodo',param.visualizartodo || false);
    
 
 

@@ -73,7 +73,7 @@ export class BandejaComponent implements OnInit {
   dataSource: EjemploDataSource | null;
   index: number;
   id: number;
-  currentUser: any = { nombres: '', apellidos: '', nombrecorto: '' };
+  currentUser: any = {id: 0, nombres: '', apellidos: '', nombrecorto: '' };
 
   constructor(public httpClient: HttpClient,
     private bandejaService: BandejaService,
@@ -81,6 +81,10 @@ export class BandejaComponent implements OnInit {
     public dialog: MatDialog,
     private _router: Router,
     public datepipe: DatePipe) {
+
+      
+   
+
     this.commonService.getComplejidadAll()
       .subscribe(data => this.lstComplejidad = data);
 
@@ -95,7 +99,6 @@ export class BandejaComponent implements OnInit {
   //@ViewChild('pagesize', { static: true }) pagesize: ElementRef;
 
   ngOnInit(): void {
-
     if (Cookies.get('currentUser') === undefined) {
       this._router.navigate(['pages/auth/login-2'], { state: {} });
     }
@@ -159,7 +162,8 @@ export class BandejaComponent implements OnInit {
       hasta: _hasta,
       page:this.pageIndex,
       size:nro || this._filtro.nroItmes,
-      usuarioid: this.currentUser.id
+      usuarioid: this.currentUser.id,
+      visualizartodo: this.checked
     }
 
     this.dataSource.filtrar(obj,this._filtro.nroItmes);
@@ -168,7 +172,7 @@ export class BandejaComponent implements OnInit {
   public loadData() {
     this.exampleDatabase = new BandejaService(this.httpClient);
 
-    this.dataSource = new EjemploDataSource(this.exampleDatabase, this.sort);
+    this.dataSource = new EjemploDataSource(this.exampleDatabase, this.sort, this.currentUser.id);
     fromEvent(this.filter.nativeElement, 'keyup')
       .subscribe(() => {
         if (!this.dataSource) {
@@ -299,7 +303,8 @@ export class EjemploDataSource extends DataSource<BandejaModel>{
 
   constructor(public _exampleDatabase: BandejaService,
   //  public _paginator: MatPaginator,
-    public _sort: MatSort) {
+    public _sort: MatSort,
+    public usuario :number) {
     super();
     // Reset to the first page when the user changes the filter.
     //this._filterChange.subscribe(() => this._paginator.pageIndex = 0);
@@ -313,7 +318,7 @@ export class EjemploDataSource extends DataSource<BandejaModel>{
       this._filterChange,
     ];
 
-    this._exampleDatabase.getBandejaAll({});
+    this._exampleDatabase.getBandejaAll({ usuarioid: this.usuario });
 
     return merge(...displayDataChanges).pipe(map(() => {
     
