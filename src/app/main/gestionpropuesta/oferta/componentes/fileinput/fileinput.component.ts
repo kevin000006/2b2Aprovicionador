@@ -101,8 +101,7 @@ export class FileInputComponent implements OnInit {
   onClick() {
     const fileUpload = this.fileUpload.nativeElement; fileUpload.onchange = () => {
       for (let index = 0; index < fileUpload.files.length; index++) {
-        const file = fileUpload.files[index];
-        console.log(this.usuario);
+        const file = fileUpload.files[index];        
         this.listArchivo.push({
           id: this.listArchivo.length > 0 ? this.listArchivo[0].id + 1 : this.listArchivo.length + 1, // por revisar el ordenamiento 
           adjunto_id: "",
@@ -117,8 +116,7 @@ export class FileInputComponent implements OnInit {
           idUsuario: this.usuario.id.toString()
         });
       }
-      this.listArchivo.sort(this.compareValues('id', 'desc'));
-      console.log(this.listArchivo);
+      this.listArchivo.sort(this.compareValues('id', 'desc'));      
     };
     fileUpload.click();
   }

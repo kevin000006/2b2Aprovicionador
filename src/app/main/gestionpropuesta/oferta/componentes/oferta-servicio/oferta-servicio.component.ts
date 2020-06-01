@@ -129,8 +129,7 @@ export class OfertaServicioComponent implements OnInit {
         subscribe(data => {
           setTimeout(() => {
             row.isLoading = false;
-            this.filteredStates = data;
-            console.log(data);
+            this.filteredStates = data;            
           }, 1000);
         });
     }
@@ -152,12 +151,10 @@ export class OfertaServicioComponent implements OnInit {
       this.listTipoCircuito = data;
     });
     await this.commonService.getTipoServicioAll().subscribe(data => {
-      this.listTipoServicio = data;
-      //console.log(data);
+      this.listTipoServicio = data;      
     });
     await this.commonService.getViaAccesoAll().subscribe(data => {
-      this.listViaAcceso = data;
-      console.log(this.listViaAcceso);
+      this.listViaAcceso = data;      
     });
     await this.commonService.getAccionIsisAll().subscribe(data => {
       this.listAccionIsis = data;
@@ -165,8 +162,7 @@ export class OfertaServicioComponent implements OnInit {
     this.ofertaServicioService.obtenerOfertasDetalle({ oferta_id: this.ofertaBase.id, page: 0 }).subscribe(data => {
       if (data != null) {
         this.dataSourceList = data;
-        this.dataSource.data = data;
-        console.log(data);
+        this.dataSource.data = data;        
       }
     });
   }
@@ -365,8 +361,7 @@ export class OfertaServicioComponent implements OnInit {
               nombre: obj.nom + ' - ' + obj.dis + ' m'
             };
             return entidad;
-          });
-          console.log(item.lstZonaSisego);
+          });          
         }
       });
       this.dataSource.filter = '';
@@ -442,8 +437,7 @@ export class OfertaServicioComponent implements OnInit {
         estado: 0
       };
       return container;
-    });
-    console.log(JSON.stringify(listOfertaDetalle));
+    });    
     this.inProgress = true;
     this.ofertaServicioService.guardarservicios(listOfertaDetalle).pipe(
       map(event => {

@@ -5,13 +5,18 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class FlujoService {
+export class FlujoCajaService {
 
   constructor(private http: HttpClient) {
   }
-  deleteFileContainers(id: string): Observable<any> {
-    return this.http.post<FormData>('/Containers/deleteFileContainers/' + id + '', {});
+
+  Obtenerflujocaja(ofertaId:number):Observable<any[]>{
+    return this.http.get<any[]>('/finanzas/obtenerflujocaja?ofertaId=' + ofertaId);
   }
+
+  // deleteFileContainers(id: string): Observable<any> {
+  //   return this.http.post<FormData>('/Containers/deleteFileContainers/' + id + '', {});
+  // }
 //   downLoadFileContainers(data: any): Observable<any> {
 //     return this.http.get<FormData>('/Containers/downLoadFileContainers/' + data);
 //   }

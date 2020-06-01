@@ -9,7 +9,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { FlujoService } from './flujocaja.service';
+import { FlujoCajaService } from './flujocaja.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { NgxMaskModule } from 'ngx-mask';
@@ -40,7 +40,7 @@ import { DecimalPipe } from '@angular/common';
     providers: [
         DecimalPipe,
        // {provide: ToastrService, useClass: ToastrService},
-       FlujoService,
+       FlujoCajaService,
         //{ provide: LOCALE_ID, useValue: 'es' }
     ]
 })
