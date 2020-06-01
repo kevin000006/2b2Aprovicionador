@@ -529,3 +529,7 @@ mat-select.comboeq>div.mat-select-trigger div span {
 .mat-form-field.mat-form-field-type-mat-select .mat-form-field-infix .mat-select-trigger .mat-select-value{
     margin: 0;
 }
+
+body.theme-default .mat-select-disabled .mat-select-value{
+    color: #756f6f !important;
+}

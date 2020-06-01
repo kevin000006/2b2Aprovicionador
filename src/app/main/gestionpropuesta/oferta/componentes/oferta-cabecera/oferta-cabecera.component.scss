@@ -201,3 +201,7 @@
 .alert_select_af ._icon_ mat-icon{
     color: #907513;
 }
+
+input:disabled {
+    color: #756f6f !important;
+}
