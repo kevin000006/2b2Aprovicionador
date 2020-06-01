@@ -11,72 +11,73 @@ import { FlujoCajaService } from './flujocaja.service';
 })
 export class FlujoCajaComponent implements OnInit {
 
-  // columns = dataSourceList.filter((item) => { return item.concepto_id == 0; }).map((item) => {
-  //   if (item.nombre == "tipo") {
-  //     return {
-  //       columnDef: item.nombre,
-  //       header: "Tipo",
-  //       width: true,
-  //       cell: (element: any) => `${element.nombre}`
-  //     }
-  //   } else {
-  //     return {
-  //       columnDef: "periodo" + item.periodo,
-  //       width: false,
-  //       header: this.RetornarNombreMeses(item.mes) + "-" + item.anio.toString().substr(2, 4),
-  //       cell: (element: any) => {
-  //         if (`${element["periodo" + item.periodo]}` === 'undefined' || `${element["periodo" + item.periodo]}` === '-') {
-  //           return '-';
-  //         } else {
-  //           return this._decimalPipe.transform(element["periodo" + item.periodo], "1.2-2")
-  //         }
-  //       }
-  //     }
-  //   }
-  // });
-  // displayedColumns = this.columns.map(c => c.columnDef);
-  // widthTabla = (this.columns.length * 100) + 150;  
-  // dataSource = this.getPivotArray(dataSourceList.filter((item) => { return item.concepto_id !== 0; }), "nombre", "periodo", "montosoles");
-  columns:any;
-  displayedColumns:any;
-  widthTabla:number;
-  dataSource:any;
+  columns = dataSourceList.filter((item) => { return item.concepto_id == 0; }).map((item) => {
+    if (item.nombre == "tipo") {
+      return {
+        columnDef: item.nombre,
+        header: "Tipo",
+        width: true,
+        cell: (element: any) => `${element.nombre}`
+      }
+    } else {
+      return {
+        columnDef: "periodo" + item.periodo,
+        width: false,
+        header: this.RetornarNombreMeses(item.mes) + "-" + item.anio.toString().substr(2, 4),
+        cell: (element: any) => {
+          if (`${element["periodo" + item.periodo]}` === 'undefined' || `${element["periodo" + item.periodo]}` === '-') {
+            return '-';
+          } else {
+            return this._decimalPipe.transform(element["periodo" + item.periodo], "1.2-2")
+          }
+        }
+      }
+    }
+  });
+  displayedColumns = this.columns.map(c => c.columnDef);
+  widthTabla = (this.columns.length * 100) + 150;  
+  dataSource = this.getPivotArray(dataSourceList.filter((item) => { return item.concepto_id !== 0; }), "nombre", "periodo", "montosoles");
+
+  // columns:any;
+  // displayedColumns:any;
+  // widthTabla:number;
+  // dataSource:any;
   constructor(
     private _decimalPipe: DecimalPipe, 
     private servicioFlujoCaja: FlujoCajaService,) { }
   ngOnInit(): void {
     
-    this.servicioFlujoCaja.Obtenerflujocaja(2).subscribe(data => { 
-      console.log(data);
-      if(data !=null){
-        this.columns = dataSourceList.filter((item) => { return item.concepto_id == 0; }).map((item) => {
-          if (item.nombre == "tipo") {
-            return {
-              columnDef: item.nombre,
-              header: "Tipo",
-              width: true,
-              cell: (element: any) => `${element.nombre}`
-            }
-          } else {
-            return {
-              columnDef: "periodo" + item.periodo,
-              width: false,
-              header: this.RetornarNombreMeses(item.mes) + "-" + item.anio.toString().substr(2, 4),
-              cell: (element: any) => {
-                if (`${element["periodo" + item.periodo]}` === 'undefined' || `${element["periodo" + item.periodo]}` === '-') {
-                  return '-';
-                } else {
-                  return this._decimalPipe.transform(element["periodo" + item.periodo], "1.2-2")
-                }
-              }
-            }
-          }
-        });
-        this.displayedColumns = this.columns.map(c => c.columnDef);
-        this.widthTabla = (this.columns.length * 100) + 150;  
-        this.dataSource = this.getPivotArray(dataSourceList.filter((item) => { return item.concepto_id !== 0; }), "nombre", "periodo", "montosoles");
-      }
-    });
+    // this.servicioFlujoCaja.Obtenerflujocaja(2).subscribe(data => { 
+    //   console.log(data);
+    //   if(data !=null){
+    //     this.columns = dataSourceList.filter((item) => { return item.concepto_id == 0; }).map((item) => {
+    //       if (item.nombre == "tipo") {
+    //         return {
+    //           columnDef: item.nombre,
+    //           header: "Tipo",
+    //           width: true,
+    //           cell: (element: any) => `${element.nombre}`
+    //         }
+    //       } else {
+    //         return {
+    //           columnDef: "periodo" + item.periodo,
+    //           width: false,
+    //           header: this.RetornarNombreMeses(item.mes) + "-" + item.anio.toString().substr(2, 4),
+    //           cell: (element: any) => {
+    //             if (`${element["periodo" + item.periodo]}` === 'undefined' || `${element["periodo" + item.periodo]}` === '-') {
+    //               return '-';
+    //             } else {
+    //               return this._decimalPipe.transform(element["periodo" + item.periodo], "1.2-2")
+    //             }
+    //           }
+    //         }
+    //       }
+    //     });
+    //     this.displayedColumns = this.columns.map(c => c.columnDef);
+    //     this.widthTabla = (this.columns.length * 100) + 150;  
+    //     this.dataSource = this.getPivotArray(dataSourceList.filter((item) => { return item.concepto_id !== 0; }), "nombre", "periodo", "montosoles");
+    //   }
+    // });
     // debugger;
     //var output = this.getPivotArray(dataSourceList.filter((item) => { return item.concepto_id !== 0; }), "nombre", "periodo", "montosoles");    
     // console.log(ELEMENT_DATA);

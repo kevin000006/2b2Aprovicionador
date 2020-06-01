@@ -158,9 +158,6 @@ export class OfertaCabeceraComponent implements OnInit {
       this.showActionPreventa = true;
       this.disableControls = false;
     }
-   
-    
-
   }
 
   displayFn(cliente) {
