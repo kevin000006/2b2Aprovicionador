@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {OfertaModel,ClienteModel,OportunidadModel} from '../../../models/oferta';
+import {OfertaModel,ClienteModel,OportunidadModel, ResponseIsis} from '../../../models/oferta';
 import { SearchClassicComponent } from 'app/main/pages/search/classic/search-classic.component';
 
 @Injectable({
@@ -31,8 +31,8 @@ export class OfertaCabezeraService {
         return this.http.post<number>('/oferta/guardaroferta' ,param);
     }
 
-    enviarIsis(oferta:any):Observable<any>{
-      return this.http.post('/isis/enviartrama?oferta_id=' + oferta,{});
+    enviarIsis(oferta:any):Observable<ResponseIsis>{
+      return this.http.post<ResponseIsis>('/isis/enviartrama?oferta_id=' + oferta,{});
     }
 
     derivarOferta(param:any):Observable<any>{
