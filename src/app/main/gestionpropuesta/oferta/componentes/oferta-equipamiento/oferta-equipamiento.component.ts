@@ -55,7 +55,9 @@ export class OfertaEquipamientoComponent implements OnInit {
 
   getEquipamientos(): void {
     this.equipamientoService.getEquipamientoForOfeta(this.ofertaBase.id).subscribe(data => {
-      for (let d of data) { d['instalacion'] = 0; }
+      // console.log(data);
+      // debugger;
+      // for (let d of data) { d['instalacion'] = 0; }
       this.dataSource.data = data;
     });
   }
@@ -88,10 +90,11 @@ export class OfertaEquipamientoComponent implements OnInit {
         item.estado = 0;
       else
         item.estado = 1;
-      item.proveedor = eq.proveedor;  // se agrego esta propiedad  faltar enviar el valor del back-->coordianr con omar
+      item.proveedor = eq.proveedor == null ? "": eq.proveedor;  // se agrego esta propiedad  faltar enviar el valor del back-->coordianr con omar
       item.instalacion = eq.instalacion;
       equipos.push(item);
     }
+    console.log(JSON.stringify(equipos));
     this.equipamientoService.saveAllEquipamiento(equipos).subscribe(data => {
       this.getEquipamientos();
       this.toastr.success('Se proceso correctamente la información!', '', {

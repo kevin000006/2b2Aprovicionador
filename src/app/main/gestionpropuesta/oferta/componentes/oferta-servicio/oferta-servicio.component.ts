@@ -136,9 +136,9 @@ export class OfertaServicioComponent implements OnInit {
   }
   async ngOnInit() {
 
-    this.listaConcidionServicio.push(new ModelCombo(1, "Alta Nueva"));
-    this.listaConcidionServicio.push(new ModelCombo(2, "Upgrade"));
-    this.listaConcidionServicio.push(new ModelCombo(3, "Renovación"));   
+    // this.listaConcidionServicio.push(new ModelCombo(1, "Alta Nueva"));
+    // this.listaConcidionServicio.push(new ModelCombo(2, "Upgrade"));
+    // this.listaConcidionServicio.push(new ModelCombo(3, "Renovación"));   
     
     
     await this.commonService.getCondicionEnlaceAll().subscribe(data => {
@@ -159,7 +159,9 @@ export class OfertaServicioComponent implements OnInit {
     await this.commonService.getAccionIsisAll().subscribe(data => {
       this.listAccionIsis = data;
     });
-    debugger;
+    await this.ofertaServicioService.listarCondicionServicios().subscribe(data => {      
+      this.listaConcidionServicio = data;      
+    });    
     this.ofertaServicioService.obtenerOfertasDetalle({ oferta_id: this.ofertaBase.id, page: 0 }).subscribe(data => {
       if (data != null) {
         this.dataSourceList = data;

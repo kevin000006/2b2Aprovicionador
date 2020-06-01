@@ -18,6 +18,12 @@ export class OfertaServicioService {
   get data(): OfertaDetalleModel[] {
     return this.dataChange.value;
   }
+  ///api/condicionservicio/findAll
+
+  listarCondicionServicios(): Observable<any> {
+    return this.http.post<any>('/condicionservicio/findAll', {});
+  }
+
   guardarservicios(data: any): Observable<any> {
     return this.http.post<any>('/ofertasDetalle/guardarservicios', data, {
       reportProgress: true,

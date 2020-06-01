@@ -470,7 +470,7 @@
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
                                         <mat-select [(ngModel)]="row.condicion_servicio">
                                             <mat-option [value]="0">--Seleccione--</mat-option>
-                                            <mat-option [value]="o.id" *ngFor="let o of listaConcidionServicio">{{o.nombre}}</mat-option>
+                                            <mat-option [value]="o.id" *ngFor="let o of listaConcidionServicio">{{o.descripcion}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>                                    
                                 </mat-cell>
