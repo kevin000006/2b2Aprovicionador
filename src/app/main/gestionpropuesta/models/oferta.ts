@@ -292,3 +292,15 @@ export class OfertaDetalleModel {
   isLoading: boolean;
 }
 
+
+export class ResponseIsis {
+  proyecto:number;
+  version:number;
+  transaccion : number;
+  error_bd:number;
+  mensaje_transaccion:String;
+  exceptionId:String;
+  exceptionText:String;
+  moreInfo:String;
+  userMessage:String;
+}

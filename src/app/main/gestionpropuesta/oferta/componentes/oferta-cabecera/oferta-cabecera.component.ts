@@ -184,15 +184,35 @@ export class OfertaCabeceraComponent implements OnInit {
     this.service.enviarIsis(this.oferta.oferta_id).subscribe(data => {
       this.processIsis = false;
       let message = '';
-      if (data == 1) {
-        this.toastr.success('integracion ISIS con éxito.', '', {
+      if (data['transaccion'] == 1 && data['error_bd'] == 1) {
+
+        let message = '';
+        if(data['proyecto'])
+          message += '<br/> Oferta Isis: '  + data['proyecto'];
+
+        this.toastr.success(message, 'integracion ISIS con éxito', {
           progressBar: true,
+          enableHtml :  true,
           progressAnimation: 'increasing',
           closeButton: true
         });
       } else {
-        this.toastr.error('ha ocurrido un error.', '', {
+        let message = '';
+        if(data['mensaje_transaccion'])
+          message += '<br/>Mensaje Transaccion : '+  (data['mensaje_transaccion'] || '');        
+        if(data['exceptionId'])
+          message += '<br/>exceptionId : '+ (data['exceptionId'] ||'');          
+        if(data['exceptionText'])
+          message += '<br/>exceptionText : '+ (data['exceptionText'] ||'');        
+        if(data['userMessage'])
+          message += '<br/>userMessage : '+ (data['userMessage'] || '');
+ 
+        if(!data['mensaje_transaccion'] && !data['exceptionId'] && !data['exceptionText'])
+          message += 'servicio no responde.';
+
+        this.toastr.error(message, 'ha ocurrido un error', {
           progressBar: true,
+          enableHtml :  true,
           progressAnimation: 'increasing',
           closeButton: true
         });
@@ -201,6 +221,7 @@ export class OfertaCabeceraComponent implements OnInit {
       error => {
         this.processIsis = false;
         this.toastr.error(error.error.message, '', {
+          enableHtml :  true,
           progressBar: true,
           progressAnimation: 'increasing',
           closeButton: true
@@ -324,22 +345,20 @@ export class OfertaCabeceraComponent implements OnInit {
         };
         this.service.asignarOfertAF(param).subscribe(response => {
 
-          if(response)
+          if(response && response.error)
           {
-
+            this.toastr.error(response.error, '', {
+              progressBar: true,
+              progressAnimation: 'increasing',
+              closeButton: true
+            });
+          }else{           
             this.toastr.success('Se ha asignado al analista financiero con éxito.', '', {
               progressBar: true,
               progressAnimation: 'increasing',
               closeButton: true
             });
-            this.getOfertaData();
-          }else{
-            
-          this.toastr.error(response.error, '', {
-            progressBar: true,
-            progressAnimation: 'increasing',
-            closeButton: true
-          });
+            this.getOfertaData();           
           }
 
 
