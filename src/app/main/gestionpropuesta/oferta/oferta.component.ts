@@ -91,7 +91,8 @@ export class OfertaComponent implements OnInit {
   }
 
   openFinanciero(): void {   
-    this._router.navigate(['gestion-propuesta/financiero'], { state: {} });   
+    //this._router.navigate(['gestion-propuesta/financiero'], { state: {} });   
+    this._router.navigate([]).then(result => {  window.open('gestion-propuesta/financiero', '_blank'); });
   }
 
   openBitacora(): void {

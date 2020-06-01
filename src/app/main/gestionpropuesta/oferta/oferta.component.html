@@ -44,7 +44,7 @@
                 <mat-tab label="Datos de proyecto">
                     <oferta-cabecera [ofertaBase]="ofertaBase"></oferta-cabecera>
                 </mat-tab>
-                <mat-tab label="CIRCUITOS" *ngIf="ofertaBase.id != 0">
+                <mat-tab label="Circuitos" *ngIf="ofertaBase.id != 0">
                     <br />
                     <oferta-servicio [ofertaBase]="ofertaBase"></oferta-servicio>
                     <br />
@@ -55,7 +55,7 @@
                     <oferta-equipamiento [ofertaBase]="ofertaBase"></oferta-equipamiento>
                     <br />
                 </mat-tab>
-                <mat-tab label="OPEX" *ngIf="ofertaBase.id != 0">
+                <mat-tab label="Opex" *ngIf="ofertaBase.id != 0">
                     <br />
                     <oferta-gastos [ofertaBase]="ofertaBase"></oferta-gastos>
                     <br />
