@@ -81,8 +81,7 @@ export class OfertaGastosComponent implements OnInit {
     });
   }
   changeConcepto(event, row) {
-    if (event.isUserInput) {
-      console.log(event.source.value, event.source.selected);
+    if (event.isUserInput) {      
       var objetoConcepto = this.listaConcepto.find(function (element) { return element.id == event.source.value; });
       if (objetoConcepto.tipo == "O")// si seleccione otros se mostrara el campo nroconcepto
         row.mostrarConcepto = true;

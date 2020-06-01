@@ -44,10 +44,8 @@ export class OfertaEquipamientoComponent implements OnInit {
   customMask = ['0*.00', this.pattern];
 
   ngOnInit(): void {
-    this.commonService.getTipoEquipamiento().subscribe(data => {
-      debugger;
-      this.listaTipos = data
-      console.log(this.listaTipos);
+    this.commonService.getTipoEquipamiento().subscribe(data => {      
+      this.listaTipos = data      
     });
     this.commonService.getTipoMonedaAll().subscribe(data => { this.listaMoneda = data });
     this.equipamientoService.findAllEquipamientoMarca().subscribe(data => { this.listaMarca = data; });

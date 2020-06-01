@@ -120,6 +120,7 @@ export class OfertaCabeceraComponent implements OnInit {
     });
   }
 
+  
   private getOfertaData() {
     if (this.ofertaBase.id > 0) {
       this.service.getOfertaById(this.ofertaBase.id).subscribe(data => {
@@ -377,8 +378,7 @@ export class OfertaCabeceraComponent implements OnInit {
     });
 
     this.commonService.getTipoProyectoAll().subscribe(data => {
-      this.lstTipoProyecto = data;
-      console.log(data);
+      this.lstTipoProyecto = data;      
     });
 
     /*this.commonService.getClienteAll().subscribe(data => {
