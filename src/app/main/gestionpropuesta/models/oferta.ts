@@ -254,7 +254,7 @@ export class OfertaDetalleModel {
   
   caudalBroncePropuesto: string;
   nrocaudalBroncePropuesto: string;
-  condicionServicio: number; // se agrego este nuevo campo
+  condicion_servicio: number; // se agrego este nuevo campo
   equipoTerminalPropuesto: string;
   routerPropuesto: string;
   otrosEquiposPropuesto: string;

@@ -159,6 +159,7 @@ export class OfertaServicioComponent implements OnInit {
     await this.commonService.getAccionIsisAll().subscribe(data => {
       this.listAccionIsis = data;
     });
+    debugger;
     this.ofertaServicioService.obtenerOfertasDetalle({ oferta_id: this.ofertaBase.id, page: 0 }).subscribe(data => {
       if (data != null) {
         this.dataSourceList = data;
@@ -250,7 +251,7 @@ export class OfertaServicioComponent implements OnInit {
 
       caudalBroncePropuesto: 'kbps',
       nrocaudalBroncePropuesto: '',
-      condicionServicio : 0,
+      condicion_servicio : 0,
       equipoTerminalPropuesto: '',
       routerPropuesto: '',
       otrosEquiposPropuesto: '',
@@ -382,7 +383,7 @@ export class OfertaServicioComponent implements OnInit {
         bw_actual: item.bwActualActual + ' ' + item.nrobwActualActual,
         bronce_actual: item.caudalBronceActual + ' ' + item.nrocaudalBronceActual,
         bronce_propuesto: item.caudalBroncePropuesto + ' ' + item.nrocaudalBroncePropuesto,
-        condicionServicio: item.condicionServicio ==0 ? null: item.condicionServicio, // en el back se debe de enviar ese valor condicionServicio--> coordinar con omar
+        condicion_servicio: item.condicion_servicio ==0 ? null: item.condicion_servicio, // en el back se debe de enviar ese valor condicionServicio--> coordinar con omar
         bw_propuesto: item.bwPropuesto + ' ' + item.nrobwPropuesto,
         contacto: item.contacto,
         dias: item.diasEjecucion,
@@ -393,8 +394,8 @@ export class OfertaServicioComponent implements OnInit {
         id: item.ofertasDetalleId,
         idoferta: item.ofertaId,
         idaccionisis: item.accionIsisIdPropuesto ==0 ? null: item.accionIsisIdPropuesto,//item.accionIsisIdPropuesto,
-        idcircuito: item.tipoCircuitoActual,
-        idcircuito2: item.tipoCircuitoIdPropuesto,
+        idcircuito:  item.tipoCircuitoActual =="" ? null: item.accionIsisIdPropuesto,   //item.tipoCircuitoActual,
+        idcircuito2:  item.tipoCircuitoIdPropuesto ==0 ? null: item.accionIsisIdPropuesto, //item.tipoCircuitoIdPropuesto,
         iddistrito: item.distritoId,
         idmedio: item.servicioActual_medio ==0 ? null: item.servicioActual_medio, //item.servicioActual_medio,
         idmedio2: item.servicioPropuesto_medio ==0 ? null: item.servicioPropuesto_medio,//item.servicioPropuesto_medio,
@@ -402,8 +403,8 @@ export class OfertaServicioComponent implements OnInit {
         idservicio: item.tipoServicioIdActual ==0 ? null: item.tipoServicioIdActual,
         idservicio2: item.tipoServicioIdPropuesto ==0 ? null: item.tipoServicioIdPropuesto, //item.tipoServicioIdPropuesto,
         idtiposede: item.servicioPropuesto_tiposede ==0 ? null: item.servicioPropuesto_tiposede,//item.servicioPropuesto_tiposede,
-        lat: item.latitud.toString(),
-        lon: item.longitud.toString(),
+        lat: item.latitud !=null ?  item.latitud.toString(): "",
+        lon: item.longitud!=null ?  item.longitud.toString(): "", 
         ldn_actual: item.caudalLdnActual + ' ' + item.nrocaudalLdnActual,
         ldn_propuesto: item.caudalLdnPropuesto + ' ' + item.nrocaudalLdnPropuesto,
         ncircuito: item.nrotipoCircuitoActual,
@@ -434,11 +435,13 @@ export class OfertaServicioComponent implements OnInit {
         voz_propuesto: item.caudalVozPropuesto + ' ' + item.nrocaudalVozPropuesto,
         zona: item.zonaSisego,
         activo: item.activo,
-        estado: 0
+        estado: 0,
+        idcliente : item.clienteId
       };
       return container;
     });    
     this.inProgress = true;
+    console.log(JSON.stringify(listOfertaDetalle));
     this.ofertaServicioService.guardarservicios(listOfertaDetalle).pipe(
       map(event => {
         switch (event.type) {
