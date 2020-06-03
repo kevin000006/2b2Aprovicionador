@@ -10,33 +10,6 @@ import * as Cookies from 'js-cookie';
   styleUrls: ['./flujocaja.component.css'],
 })
 export class FlujoCajaComponent implements OnInit {
-
-  // columns = dataSourceList.filter((item) => { return item.concepto_id == 0; }).map((item) => {
-  //   if (item.nombre == "tipo") {
-  //     return {
-  //       columnDef: item.nombre,
-  //       header: "Tipo",
-  //       width: true,
-  //       cell: (element: any) => `${element.nombre}`
-  //     }
-  //   } else {
-  //     return {
-  //       columnDef: "periodo" + item.periodo,
-  //       width: false,
-  //       header: this.RetornarNombreMeses(item.mes) + "-" + item.anio.toString().substr(2, 4),
-  //       cell: (element: any) => {
-  //         if (`${element["periodo" + item.periodo]}` === 'undefined' || `${element["periodo" + item.periodo]}` === '-') {
-  //           return '-';
-  //         } else {
-  //           return this._decimalPipe.transform(element["periodo" + item.periodo], "1.2-2")
-  //         }
-  //       }
-  //     }
-  //   }
-  // });
-  // displayedColumns = this.columns.map(c => c.columnDef);
-  // widthTabla = (this.columns.length * 100) + 150;  
-  // dataSource = this.getPivotArray(dataSourceList.filter((item) => { return item.concepto_id !== 0; }), "nombre", "periodo", "montosoles");
   ofertaBase = { id: 0 };
   currentUser: any = { nombres: '', apellidos: '', nombrecorto: '' };
   columns:any;
@@ -48,8 +21,7 @@ export class FlujoCajaComponent implements OnInit {
     private servicioFlujoCaja: FlujoCajaService,
     private _router: Router,
     ) { }
-  ngOnInit(): void {     
-    debugger;   
+  ngOnInit(): void {         
     if (Cookies.get('currentUser') === undefined) {
         this._router.navigate(['pages/auth/login-2'], { state: {} });
     }
@@ -90,11 +62,7 @@ export class FlujoCajaComponent implements OnInit {
         this.dataSource = this.getPivotArray(data.filter((item) => { return item.concepto_id !== 0; }), "nombre", "periodo", "montosoles");
         console.log(this.dataSource );
       }
-    });
-    // debugger;
-    //var output = this.getPivotArray(dataSourceList.filter((item) => { return item.concepto_id !== 0; }), "nombre", "periodo", "montosoles");    
-    // console.log(ELEMENT_DATA);
-    //console.log(output);
+    });    
   }
   RetornarNombreMeses(NroMeses): string {
     var nombreMeses = "";
