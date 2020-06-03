@@ -80,9 +80,7 @@ export class BandejaComponent implements OnInit {
     private commonService: CommonService,
     public dialog: MatDialog,
     private _router: Router,
-    public datepipe: DatePipe) {
-
-      
+    public datepipe: DatePipe) {     
    
 
     this.commonService.getComplejidadAll()

@@ -9,7 +9,7 @@ import { Guid } from "guid-typescript";
 })
 export class BandejaService {
   dataChange: BehaviorSubject<BandejaModel[]> = new BehaviorSubject<BandejaModel[]>([]);
-  totalDataBandeja:number=0;
+  totalDataBandeja: number = 0;
 
   constructor(private http: HttpClient) { }
 
@@ -33,40 +33,35 @@ export class BandejaService {
     params = params.append('estado', param.estado || '');
     params = params.append('hasta', param.hasta || '');
     params = params.append('usuarioid', param.usuarioid || 0);
-    params = params.append('visualizartodo',param.visualizartodo || false);
-   
+    params = params.append('visualizartodo', param.visualizartodo || false);
+
 
 
     this.http.get<BandejaModel[]>('/oferta/obtenerofertas', { params: params }).subscribe(data => {
-
-
+      debugger;
       let urls = JSON.parse(window.localStorage.getItem('bandeja') || '[]');
-      for(let rb of data['data']){
+      for (let rb of data['data']) {
         let _codigo = Guid.create().toString().split('-').join('');;
         urls.push({
           codigo: _codigo,
-          url:'gestion-propuesta/oferta',
+          url: 'gestion-propuesta/oferta',
           model: rb
         });
-
-        rb.url =  'bandeja-redirect/' + _codigo;
+        rb.url = 'bandeja-redirect/' + _codigo;
       }
-
-      window.localStorage.setItem('bandeja',JSON.stringify(urls));
-     
-
+      window.localStorage.setItem('bandeja', JSON.stringify(urls));
       this.dataChange.next(data);
 
     },
       (error: HttpErrorResponse) => {
         console.log(error.name + ' ' + error.message);
-        
+
       });
 
   }
 
-  accionOferta(url:string,param:any):Observable<any>{
-    return this.http.post(url+'?ofertaId=' + param.ofertaId + '&usuario=' + param.usuario + '&usuarioId=' + param.usuarioId  , param);
+  accionOferta(url: string, param: any): Observable<any> {
+    return this.http.post(url + '?ofertaId=' + param.ofertaId + '&usuario=' + param.usuario + '&usuarioId=' + param.usuarioId, param);
   }
 
 }

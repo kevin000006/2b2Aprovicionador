@@ -161,8 +161,7 @@ export class OfertaServicioComponent implements OnInit {
     });
     await this.ofertaServicioService.listarCondicionServicios().subscribe(data => {      
       this.listaConcidionServicio = data;      
-    });    
-    debugger;
+    });        
     this.ofertaServicioService.obtenerOfertasDetalle({ oferta_id: this.ofertaBase.id, page: 0 }).subscribe(data => {
       if (data != null) {
         this.dataSourceList = data;

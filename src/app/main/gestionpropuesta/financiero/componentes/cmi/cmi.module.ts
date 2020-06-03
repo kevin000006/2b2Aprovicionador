@@ -31,16 +31,12 @@ import { NgxMaskModule } from 'ngx-mask';
         MatTooltipModule,
         MatProgressBarModule,
         NgxMaskModule
-        //BrowserAnimationsModule,
-        
     ],
     exports: [
         CMIComponent
     ],
-    providers: [
-       // {provide: ToastrService, useClass: ToastrService},
-       CMIService,
-        //{ provide: LOCALE_ID, useValue: 'es' }
+    providers: [       
+       CMIService        
     ]
 })
 export class CMIModule { }

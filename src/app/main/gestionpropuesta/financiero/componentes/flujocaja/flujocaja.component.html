@@ -16,7 +16,7 @@
                     </button>
                 </div>
             </div> -->
-            <div class="form-group">
+            <div class="form-group" *ngIf="dataSource?.length > 0">
                 <div class="col-sm-12">
                     <mat-table #table mat-table [dataSource]="dataSource" [style.width.px]="widthTabla"  class="tb-flujo-caja">
                         <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
