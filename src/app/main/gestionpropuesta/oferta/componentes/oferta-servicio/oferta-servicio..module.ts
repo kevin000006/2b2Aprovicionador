@@ -17,6 +17,7 @@ import { AlertConfirmModule } from '../alertConfirm/alertConfirm.module';
 import { GeodialogComponent } from '../geoDialog/geoDialog.component';
 import { AgmCoreModule } from '@agm/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { GeocodeService } from '../geoDialog/geocode.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -42,6 +43,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
         MatDialogModule,
         AlertConfirmModule,
         MatButtonModule,
+        MatCheckboxModule,
         MatTooltipModule,
         MatAutocompleteModule,
         ReactiveFormsModule,

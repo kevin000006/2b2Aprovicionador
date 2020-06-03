@@ -61,6 +61,11 @@ export class OfertaServicioComponent implements OnInit {
     { id: 'gbps', nombre: 'Gbps' },
   ];
 
+  showSedeInfo:boolean=true;
+  showServActual:boolean=true;
+  showServPropuesto:boolean=true;
+  showSisego:boolean=true;
+
   //public seldescrip: string;
   //https://stackblitz.com/edit/mat-paginator-select-page?embed=1
 
@@ -162,7 +167,7 @@ export class OfertaServicioComponent implements OnInit {
     await this.ofertaServicioService.listarCondicionServicios().subscribe(data => {      
       this.listaConcidionServicio = data;      
     });    
-    debugger;
+    
     this.ofertaServicioService.obtenerOfertasDetalle({ oferta_id: this.ofertaBase.id, page: 0 }).subscribe(data => {
       if (data != null) {
         this.dataSourceList = data;
@@ -358,7 +363,7 @@ export class OfertaServicioComponent implements OnInit {
         let result_ = JSON.parse(response);
         if (result_.status == "success") {
           let result__ = JSON.parse(result_['result']);
-          debugger;
+         
           item.lstZonaSisego = result__['zonas'].map(obj => {
             var entidad = {
               id: obj.id,
@@ -381,7 +386,7 @@ export class OfertaServicioComponent implements OnInit {
         item.ofertasDetalleId = item.ofertasDetalleId
       else if (item.estado == 2)
         item.activo = false
-      debugger;
+      
       var container = {
         bw_actual: item.bwActualActual + ' ' + item.nrobwActualActual,
         bronce_actual: item.caudalBronceActual + ' ' + item.nrocaudalBronceActual,

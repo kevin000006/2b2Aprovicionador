@@ -389,19 +389,23 @@ export class OfertaCabeceraComponent implements OnInit {
     fromEvent(this.autocompleteCliente.nativeElement, 'keyup')
       .subscribe(() => {
 
-        this.service.getClientesSearch(this.autocompleteCliente.nativeElement.value).subscribe(data => {
-          this.dataSourceCliente = data;
-        });
+        if(this.autocompleteCliente.nativeElement.value && this.autocompleteCliente.nativeElement.value.length > 2){
+          this.service.getClientesSearch(this.autocompleteCliente.nativeElement.value).subscribe(data => {
+            this.dataSourceCliente = data;
+          });
+        }
 
       });
 
     fromEvent(this.autocompleteOportunidad.nativeElement, 'keyup')
       .subscribe(() => {
 
-        this.service.getOportunidadSearch(this.autocompleteOportunidad.nativeElement.value).subscribe(data => {
-          this.dataSourceOportunidad = data;
-        });
-
+        if(this.autocompleteOportunidad.nativeElement.value && this.autocompleteOportunidad.nativeElement.value.length > 2 ){
+          this.service.getOportunidadSearch(this.autocompleteOportunidad.nativeElement.value).subscribe(data => {
+            this.dataSourceOportunidad = data;
+          });
+        }
+       
       });
 
 

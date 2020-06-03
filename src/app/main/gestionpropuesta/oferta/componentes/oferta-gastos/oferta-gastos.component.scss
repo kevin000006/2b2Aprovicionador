@@ -72,7 +72,7 @@
     height: 50px;
     vertical-align: middle;
     background: #fff;
-    margin-top: 10px;
+    margin-top: 3px;
 }
 
 .totales .monto{
@@ -89,15 +89,7 @@
 }
 
 .totales .monto.separador{
-    width: 65%;
-}
-
-.totales .monto.soles{
-    padding-right: 4px;
-}
-
-.totales .monto.dolares{
-    padding-left: 4px;
+    width: 80%;
 }
 
 .totales .monto .content .desc{

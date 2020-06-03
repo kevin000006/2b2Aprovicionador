@@ -86,14 +86,9 @@
                             <ng-container matColumnDef="accion">
                                 <mat-header-cell *matHeaderCellDef> </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
-                                    <mat-menu #appMenu="matMenu">
-                                        <button mat-menu-item style="font-size: 12px;" (click)="deleteRow(row)"> 
-                                            <mat-icon class="icon">delete</mat-icon>Eliminar
-                                        </button>
-                                    </mat-menu>
-                                    <button style="cursor:pointer;" mat-icon-button [matMenuTriggerFor]="appMenu">
-                                        <mat-icon>more_vert</mat-icon>
-                                    </button>
+                                    <span style="font-size: 15px;cursor: pointer;" (click)="deleteRow(row)">
+                                        <mat-icon style="font-weight: bold;color: #00a9e0;font-size: 18px !important;" class="icon" >delete</mat-icon>
+                                    </span>
                                 </mat-cell>
 
                             </ng-container>
@@ -103,20 +98,23 @@
                         <div class="">
                             <div class="totales">
                                 <div class="monto separador"></div>
-                                <div class="monto soles">
-                                    <div class="content">
-                                        <div class="desc"> Total $ </div>
-                                        <div class="total">
-                                            {{ calcularTotalDolares()| mask: 'separator':',' }}
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="monto dolares">
                                     <div class="content">
                                         <div class="desc"> Total S/. </div>
                                         <div class="total">
 
                                             {{ calcularTotalSoles() | mask: 'separator':',' }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="totales">
+                                <div class="monto separador"></div>
+                                <div class="monto soles">
+                                    <div class="content">
+                                        <div class="desc"> Total $ </div>
+                                        <div class="total">
+                                            {{ calcularTotalDolares()| mask: 'separator':',' }}
                                         </div>
                                     </div>
                                 </div>

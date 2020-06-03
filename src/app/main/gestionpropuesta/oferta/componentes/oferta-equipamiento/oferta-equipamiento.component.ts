@@ -55,9 +55,6 @@ export class OfertaEquipamientoComponent implements OnInit {
 
   getEquipamientos(): void {
     this.equipamientoService.getEquipamientoForOfeta(this.ofertaBase.id).subscribe(data => {
-      // console.log(data);
-      // debugger;
-      // for (let d of data) { d['instalacion'] = 0; }
       this.dataSource.data = data;
     });
   }
@@ -134,16 +131,21 @@ export class OfertaEquipamientoComponent implements OnInit {
   }
 
   calcularMontoTotalSoles(eq: OfertaEquipamientoModel) {
-    debugger;
 
     let total = eq.unitario * eq.cantidad;
-    if (eq.moneda.id == 2)
-      total = total * this.tipoCambio;
+    if (eq.moneda.id == 1)
+      total = total / this.tipoCambio;
 
-    if (eq.equipamientoCondicion.id == 4)
+    if (eq.equipamientoCondicion.id == 4){
       if (eq.antiguedad > 0 && eq.antiguedad != null) { total = total * (1 * eq.antiguedad / this.baseDepresiacion); }
-      else
-        eq.antiguedad = 0;
+      else{  eq.antiguedad = 0;}
+    }
+
+    if(eq.tipoequipamiento.id == 11 || eq.tipoequipamiento.id == 13)
+    {
+      eq.instalacion = (eq.cantidad * 100);
+    }
+
     eq.total = Number(total.toFixed(2));
   }
 
@@ -161,21 +163,17 @@ export class OfertaEquipamientoComponent implements OnInit {
   }
 
   public calcularTotalSoles() {
-    return this.dataSource.data.filter(x => x.activo == true).reduce((accum, curr) => accum + curr.total + curr.instalacion, 0);
+    return this.dataSource.data.filter(x => x.activo == true).reduce((accum, curr) => accum + ((curr.total  + curr.instalacion) * this.tipoCambio), 0);
   }
   public calcularTotalDolares() {
-    return this.dataSource.data.filter(x => x.activo == true).reduce((accum, curr) => accum + (curr.total + curr.instalacion / this.tipoCambio), 0).toFixed(2);
+    
+    return this.dataSource.data.filter(x => x.activo == true).reduce((accum, curr) => accum + curr.total + curr.instalacion, 0);
   }
 
   compareValCombos(c1: any, c2: any): boolean {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
   public selectedchangeTipoEquipamiento(opcion, row) {
-    debugger;
-    /*
-    "11 - Modem"
-    "13 - Router"
-    */
     if (opcion.id == 11 || opcion.id == 13) { //Si es router o model la instalacion cuesta 100 soles
       row.instalacion = 350;
     } else {
