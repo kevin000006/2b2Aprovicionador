@@ -166,8 +166,8 @@ export class OfertaServicioComponent implements OnInit {
     });
     await this.ofertaServicioService.listarCondicionServicios().subscribe(data => {      
       this.listaConcidionServicio = data;      
-    });    
-    
+
+    });        
     this.ofertaServicioService.obtenerOfertasDetalle({ oferta_id: this.ofertaBase.id, page: 0 }).subscribe(data => {
       if (data != null) {
         this.dataSourceList = data;
@@ -180,7 +180,7 @@ export class OfertaServicioComponent implements OnInit {
   crearNuevoServicio(ofertasDetalleId: number, ofertaId: number): OfertaDetalleModel {
     return {
       clienteId: null,
-      ofertasDetalleId: ofertasDetalleId,
+      ofertasDetalleId: ofertasDetalleId, 
       ofertaId: ofertaId,
       nombreSede: '',
       direccion: '',

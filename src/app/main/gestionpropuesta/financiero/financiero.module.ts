@@ -9,7 +9,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FinancieroService } from '../financiero/financiero.service';
 import { FormsModule } from '@angular/forms';
-import { FileInputModule } from '../oferta/componentes/fileinput/fileinput.module';
 import { MatButtonModule } from '@angular/material/button';
 import { NgxMaskModule } from 'ngx-mask';
 import { CMIModule } from './componentes/cmi/cmi.module';
@@ -35,8 +34,7 @@ const routes: Routes = [
         MatIconModule,
         MatTabsModule,
         MatTableModule,
-        FormsModule,
-        FileInputModule,
+        FormsModule,        
         NgxMaskModule.forRoot(),
         CMIModule,
         FlujoCajaModule

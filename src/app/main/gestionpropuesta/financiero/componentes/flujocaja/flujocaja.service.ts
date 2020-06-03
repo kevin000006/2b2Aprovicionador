@@ -11,6 +11,7 @@ export class FlujoCajaService {
   }
 
   Obtenerflujocaja(ofertaId:number):Observable<any[]>{
+    debugger;
     return this.http.get<any[]>('/finanzas/obtenerflujocaja?ofertaId=' + ofertaId);
   }
 
