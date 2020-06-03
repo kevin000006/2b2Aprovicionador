@@ -10,8 +10,10 @@ export class ParametroGlobalService {
   constructor(private http: HttpClient) {
   }
   obtenerparametros():Observable<any[]>{
-    return this.http.get<any[]>('/finanzas/obtenerparametros');
-    
+    return this.http.get<any[]>('/finanzas/obtenerparametros');    
+  }
+  guardarparametro(parametro_id:number, valor:number): Observable<any> {
+    return this.http.post<any>('/finanzas/guardarparametro?parametro_id=' + parametro_id + '&valor=' +valor, {});
   }
 //   downLoadFileContainers(data: any): Observable<any> {
 //     return this.http.get<FormData>('/Containers/downLoadFileContainers/' + data);
