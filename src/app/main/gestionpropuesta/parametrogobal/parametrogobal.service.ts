@@ -9,8 +9,9 @@ export class ParametroGlobalService {
 
   constructor(private http: HttpClient) {
   }
-  deleteFileContainers(id: string): Observable<any> {
-    return this.http.post<FormData>('/Containers/deleteFileContainers/' + id + '', {});
+  obtenerparametros():Observable<any[]>{
+    return this.http.get<any[]>('/finanzas/obtenerparametros');
+    
   }
 //   downLoadFileContainers(data: any): Observable<any> {
 //     return this.http.get<FormData>('/Containers/downLoadFileContainers/' + data);

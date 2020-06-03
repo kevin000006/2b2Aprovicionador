@@ -32,20 +32,20 @@
                                 <ng-container matColumnDef="grupo">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Grupo</mat-header-cell>
                                     <mat-cell *matCellDef="let row">
-                                        {{row.grupo}}
+                                        {{row.nombre}}
                                     </mat-cell>
                                 </ng-container>
                                 <ng-container matColumnDef="concepto">
                                     <mat-header-cell *matHeaderCellDef> Concepto </mat-header-cell>
                                     <mat-cell *matCellDef="let row">
-                                        {{row.concepto}}
+                                        {{row.descripcion}}
                                     </mat-cell>
                                 </ng-container>
 
                                 <ng-container matColumnDef="parametro">
                                     <mat-header-cell *matHeaderCellDef> Parametro </mat-header-cell>
                                     <mat-cell *matCellDef="let row">
-                                        {{row.parametro}} 
+                                        {{row.valor}} 
                                         <button mat-icon-button color="accent" (click)="editarRow(row)">
                                             <mat-icon>create</mat-icon>
                                           </button>

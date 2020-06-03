@@ -3,8 +3,9 @@
         <div class="form-horizontal">
             <div class="form-group">
                 <div class="col-md-2">
-                    <mat-form-field class="control-page-item" color="accent" appearance="legacy" [style.fontSize.px]="12">
-                        <mat-select  (selectionChange)="changeSizeItems($event.value)"  [(ngModel)]="_filtro.nroItmes">
+                    <mat-form-field class="control-page-item" color="accent" appearance="legacy"
+                        [style.fontSize.px]="12">
+                        <mat-select [(ngModel)]="_filtro.nroItmes">
                             <mat-option [value]="5">5 por pagina</mat-option>
                             <mat-option [value]="10">10 por pagina</mat-option>
                             <mat-option [value]="25">25 por pagina</mat-option>
@@ -58,7 +59,7 @@
                         <ng-container matColumnDef="productoaf">
                             <mat-header-cell *matHeaderCellDef> Producto_AF </mat-header-cell>
                             <mat-cell *matCellDef="let row">
-                                {{row.productoaf}}
+                                {{row.producto}}
                             </mat-cell>
                         </ng-container>
 
