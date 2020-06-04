@@ -62,8 +62,10 @@ export class OfertaServicioComponent implements OnInit {
   ];
 
   showSedeInfo:boolean=true;
-  showServActual:boolean=true;
+  showServActual:boolean=false;
+  showServActualCaudal:boolean=false;
   showServPropuesto:boolean=true;
+  showServPropuestoCaudal:boolean=false;
   showSisego:boolean=true;
 
   //public seldescrip: string;
@@ -175,7 +177,6 @@ export class OfertaServicioComponent implements OnInit {
       }
     });
   }
-
 
   crearNuevoServicio(ofertasDetalleId: number, ofertaId: number): OfertaDetalleModel {
     return {
@@ -298,6 +299,7 @@ export class OfertaServicioComponent implements OnInit {
       //, lstZonaSisego: []
     };
   }
+  
   addRow(): void {
     this.dataSourceList = [];
     var Id = this.dataSource.data.length == 0 ? 1 : this.dataSource.data[this.dataSource.data.length - 1].ofertasDetalleId + 1;
@@ -402,8 +404,8 @@ export class OfertaServicioComponent implements OnInit {
         id: item.ofertasDetalleId,
         idoferta: item.ofertaId,
         idaccionisis: item.accionIsisIdPropuesto ==0 ? null: item.accionIsisIdPropuesto,//item.accionIsisIdPropuesto,
-        idcircuito:  item.tipoCircuitoActual =="" ? null: item.accionIsisIdPropuesto,   //item.tipoCircuitoActual,
-        idcircuito2:  item.tipoCircuitoIdPropuesto ==0 ? null: item.accionIsisIdPropuesto, //item.tipoCircuitoIdPropuesto,
+        idcircuito:  item.tipoCircuitoActual =="" ? null: item.tipoCircuitoActual,   //item.tipoCircuitoActual,
+        idcircuito2:  item.tipoCircuitoIdPropuesto ==0 ? null: item.tipoCircuitoIdPropuesto, //item.tipoCircuitoIdPropuesto,
         iddistrito: item.distritoId,
         idmedio: item.servicioActual_medio ==0 ? null: item.servicioActual_medio, //item.servicioActual_medio,
         idmedio2: item.servicioPropuesto_medio ==0 ? null: item.servicioPropuesto_medio,//item.servicioPropuesto_medio,

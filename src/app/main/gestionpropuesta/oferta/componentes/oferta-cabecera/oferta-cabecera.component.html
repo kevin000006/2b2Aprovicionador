@@ -114,16 +114,24 @@
             <div class="col-sm-6 padding-l-none">
                <label class="font-body-oferta cliente-nombre">{{oferta.cliente.numeroidentificadorfiscal}} / {{oferta.cliente.descripcion}}</label>
             </div>
-             <div class="col-sm-4 content-control-oferta">
-                
+             <div class="col-sm-2 content-control-oferta">                
                     <div class="">
                         <label class="label-title">Segmento:</label>
                     </div>
                     <div class="">
                         <span class="font-body-oferta">{{oferta.cliente.segmentoNegocio}}</span>
                     </div>
-                
             </div> 
+
+            <div class="col-sm-2 content-control-oferta">                
+                <div class="">
+                    <label class="label-title">Estado:</label>
+                </div>
+                <div class="">
+                    <span [ngStyle]="{'background': oferta.estado.color}" class="font-body-oferta estado_">{{oferta.estado.descripcion}}</span>
+                </div>
+            </div> 
+
         </div>
         <div class="row content-control-oferta">
             <div class="col-sm-4 padding-l-none">
@@ -341,7 +349,7 @@
                             <div class="font-body-oferta">{{oferta.tiposervicio}}</div>
                         </div>
                         <div class="col-sm-4 padding-none text-center">
-                            <label class="label-title text-center">Estado</label>
+                            <label class="label-title text-center">Resultado</label>
                             <div class="font-body-oferta"> <span  class="estado-{{oferta.resultado}}">{{oferta.resultado}}</span></div>
                         </div>
                     </div>

@@ -112,13 +112,13 @@
                                             mask="separator.2" type="text" class="text-center">
                                     </mat-form-field>
                                 </td>
-                                <td class="text-center">
+                                <td class=" text-right ">
                                     <span class="total" mask="separator.2">
                                         {{row.total.toFixed(2) | mask: 'separator':','}}
                                     </span>
 
                                 </td>
-                                <td class="text-center">
+                                <td class="text-right">
                                     <span class="instalacion">
                                         {{ row.instalacion.toFixed(2) | mask: 'separator':','}}
                                     </span>
@@ -141,7 +141,7 @@
                             <div class="content">
                                 <div class="desc"> Total $ </div>
                                 <div class="total">
-                                    {{ calcularTotalDolares() | mask: 'separator':',' }}
+                                    {{ calcularTotalDolares().toFixed(2) | mask: 'separator':',' }}
                                 </div>
                             </div>
                         </div>
