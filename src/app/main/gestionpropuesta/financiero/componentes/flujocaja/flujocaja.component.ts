@@ -13,6 +13,7 @@ export class FlujoCajaComponent implements OnInit {
   ofertaBase = { id: 0 };
   currentUser: any = { nombres: '', apellidos: '', nombrecorto: '' };
   columns:any;
+  colores:boolean=true;
   displayedColumns:any;
   widthTabla:number;
   dataSource:any;

@@ -31,7 +31,7 @@ export class ParametroGlobalComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogeficienciaTecnicaComponent, {
       width: '650px',
       data: {
-        titulo: 'Eficiencia Tecnica IPVN',
+        titulo: row.nombre,
         valor : row.valor,
         buttonText: {
           ok: 'Guardar',

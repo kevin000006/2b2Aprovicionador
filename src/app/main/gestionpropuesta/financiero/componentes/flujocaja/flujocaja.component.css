@@ -24,3 +24,7 @@
 .lefttipo{
     justify-content: flex-start !important;    
 }
+
+.negrita{
+    font-weight: 900 !important;
+}
