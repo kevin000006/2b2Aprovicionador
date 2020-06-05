@@ -1,0 +1,55 @@
+<div id="oferta" class="page-layout carded fullwidth ">
+    <div class="center">
+        <br>
+        <br>
+        <div class="row oferta-head">
+            <div class="col-xs-12 col-sm-2 col-lg-12">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <h1>Matriz de Escalamiento</h1>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <mat-table #table mat-table [dataSource]="dataSource" class="tb-parametro-global">
+                                <ng-container matColumnDef="fcv">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>FCV</mat-header-cell>
+                                    <mat-cell *matCellDef="let row">
+                                        {{row.nombre}}
+                                    </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="aprobador">
+                                    <mat-header-cell *matHeaderCellDef> Aprobador </mat-header-cell>
+                                    <mat-cell *matCellDef="let row">
+                                        {{row.aprobador}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="van">
+                                    <mat-header-cell *matHeaderCellDef> VAN/VAI </mat-header-cell>
+                                    <mat-cell *matCellDef="let row">
+                                        {{row.vanvaimayor}}                                        
+                                        {{row.vanvaimenor}}  
+                                    </mat-cell>                                    
+                                </ng-container>
+
+                                <ng-container matColumnDef="pb">
+                                    <mat-header-cell *matHeaderCellDef> PB </mat-header-cell>
+                                    <mat-cell *matCellDef="let row">
+                                        {{row.paybackmayor}}                                        
+                                        {{row.paybackmenor}}    
+                                    </mat-cell>                                    
+                                </ng-container>
+
+                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumns; let i = index;"
+                                    [ngClass]=" i % 2 != 0 ? 'row-color-tb' : ''"></mat-row>
+                            </mat-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

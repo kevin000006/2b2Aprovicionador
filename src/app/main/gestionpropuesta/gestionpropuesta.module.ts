@@ -35,6 +35,10 @@ const routes = [
     loadChildren: () => import('./parametrogobal/parametrogobal.module').then(m => m.ParametroGlobalModule)
   },
   {
+    path: 'matrizescalamiento',
+    loadChildren: () => import('./matrizescalamiento/matrizescalamiento.module').then(m => m.MatrizEscalamientoModule)
+  },
+  {
     path: 'subirTrama',
     loadChildren: () => import('./subirTrama/subirTrama.module').then(m => m.SubirTramaModule)
   },

@@ -34,6 +34,12 @@ export const navigation: FuseNavigation[] = [
                         url  : '/gestion-propuesta/parametroglobal'
                     },
                     {
+                        id   : 'matrizescalamiento',
+                        title: 'Matriz de escalamiento',
+                        type : 'item',
+                        url  : '/gestion-propuesta/matrizescalamiento'
+                    },
+                    {
                         id       : 'gestionpropuestareporte',
                         title    : 'Reportes',
                         type     : 'collapsable',
