@@ -90,9 +90,13 @@ export class OfertaServicioService {
 
             element.nrocaudalBroncePropuesto = element.caudalBroncePropuesto !== null ? element.caudalBroncePropuesto.split(" ")[1] : "";
             element.caudalBroncePropuesto = element.caudalBroncePropuesto !== null ? element.caudalBroncePropuesto.split(" ")[0] : "";
+            if( element.zonaSisego){
+              element.IdZonaSigego = 1;
+              element.lstZonaSisego  = [{ id: 1, nombre: element.zonaSisego }]
+            }else{
+              element.IdZonaSigego = 0;
+            }
             
-            element.IdZonaSigego = 1;
-            element.lstZonaSisego  = [{ id: 1, nombre: element.zonaSisego }]
             return element;
           });
           return result.data;

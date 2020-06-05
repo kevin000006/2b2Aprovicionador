@@ -234,6 +234,25 @@ th.group-circuito .content-group .group-title span{
     padding: 0 10px !important;
 }
 
+.col_sp_condicion{
+    min-width: 150px;
+    padding: 0 10px !important;
+}
+
+.col_sp_residual{
+    min-width: 145px;
+    padding: 0 10px !important;
+}
+
+.col_sp_diasejecucion{
+    max-width: 135px;
+    padding: 0 10px !important;
+}
+
+.col_sp_plantaexterna{
+    max-width: 135px;
+    padding: 0 10px !important;
+}
 
 .col_accion{
     max-width: 40px;
