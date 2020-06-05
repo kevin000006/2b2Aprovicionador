@@ -9,7 +9,7 @@
                     </button> -->
                 </div>
                 <div class=" col-md-offset-8 col-md-2 text-right">
-                    <button  class="btn-telefonica-2" style="min-height: 36px;">
+                    <button class="btn-telefonica-2" (click)="ActualizarFlujoCaja()" style="min-height: 36px;">
                         <span>
                             <mat-icon class="icon">refresh</mat-icon> Actualizar
                         </span>
@@ -31,23 +31,18 @@
                                 'tipo lefttipoNegrita':column.width == true && row.grupo == 'T',
                                 'mesesNormal':column.width == false && row.grupo !== 'T',
                                 'mesesNegrita':column.width == false && row.grupo == 'T'
-                            }">{{ column.cell(row) }}                            
-                            <ng-container *ngIf="column.width">
-                                <ng-container *ngIf="!row.parametros?.length>0">
-                                    <button mat-icon-button color="accent" (click)="editarPorcentaje(row)">
-                                        <mat-icon>create</mat-icon>
-                                    </button>   
-                                </ng-container>                                
-                             </ng-container>
-
-                        </mat-cell>
-                            <!-- <mat-cell *matCellDef="let row"
-                            [ngClass]="{
-                                'tipo lefttipoNormal ':column.width == true && row.grupo !== 'T',                                
-                                'tipo lefttipoNegrita ':column.width == true && row.grupo == 'T',    
-                                'meses':column.width == false && row.grupo !== 'T' ,
-                                'meses negrita':column.width == false && row.grupo == 'T'
-                            }">{{ column.cell(row) }}</mat-cell> -->
+                            }">{{ column.cell(row) }}
+                                <ng-container *ngIf="column.width">                                    
+                                    <ng-container *ngIf="row.parametros?.length>0">
+                                        <span style="margin-left: 65px;">
+                                            ({{row.parametros.split(";")[1]}})
+                                        </span>                                        
+                                        <button mat-icon-button color="accent" (click)="editarPorcentaje(row)">
+                                            <mat-icon>create</mat-icon>
+                                        </button>
+                                    </ng-container>
+                                </ng-container>
+                            </mat-cell>
                         </ng-container>
                         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                         <mat-row *matRowDef="let row; columns: displayedColumns; let i = index;"

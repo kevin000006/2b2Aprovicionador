@@ -35,6 +35,10 @@ export class FlujoCajaComponent implements OnInit {
         this.ofertaBase = JSON.parse(window.sessionStorage.getItem('oferta'));
       }
     }    
+    this.ListarFlujoCaja();
+  }
+  ListarFlujoCaja() : void{
+    this.dataSource  =  null;
     this.servicioFlujoCaja.Obtenerflujocaja(this.ofertaBase.id).subscribe(data => {
       if (data != null) {        
         var contador = 0;
@@ -72,9 +76,10 @@ export class FlujoCajaComponent implements OnInit {
         this.dataSource = this.dataSource.map(item=>{
           var objectoFiltrado = listDistinct.find(obj=>{return obj.nombre === item.nombre});
           item.grupo = objectoFiltrado.grupo;
+          item.parametros = objectoFiltrado.parametros;
           return item;
         });
-        console.log(listDistinct);
+        console.log(this.dataSource);
       }
     });
   }
@@ -148,12 +153,17 @@ export class FlujoCajaComponent implements OnInit {
     }
     return ret;
   }
+  ActualizarFlujoCaja():void{
+    this.ListarFlujoCaja();
+  }
   editarPorcentaje(row: any): void {
+
+
     const dialogRef = this.dialog.open(DialogfinancierTecnicaComponent, {
       width: '650px',
       data: {
         titulo: row.nombre,
-        valor : 0,
+        valor : row.parametros.split(";")[1],
         buttonText: {
           ok: 'Guardar',
           cancel: 'Cancelar'
@@ -162,15 +172,24 @@ export class FlujoCajaComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((res: any) => {
-      if (true) {
+      if (res.respuesta) {
         const a = document.createElement('a');
         a.click();
-        a.remove();
-        row.valor=res.valor;
+        a.remove();        
+        let listParametros=[];
+        listParametros.push(row.parametros.split(";")[0])
+        listParametros.push(res.valor);
+        row.parametros = listParametros.join(';')  
         let request = {
-          parametro_oferta_id:0,
-          valor:0
-        };
+          concepto_id: 0,
+          descripcion: "",
+          nombre: "",
+          oferta_id: 0,
+          parametro_id: 0,
+          parametro_oferta_id:Number(row.parametros.split(";")[0]),
+          usuario_id: 0,
+          valor: res.valor          
+        };        
         this.servicioFlujoCaja.guardarparametrooferta(request).subscribe((res: any) => {
           console.log(res);
           if(res!=null){
