@@ -5,6 +5,7 @@ import { DecimalPipe } from '@angular/common';
 import { FlujoCajaService } from './flujocaja.service';
 import { DialogfinancierTecnicaComponent } from '../dialogfinancieroTecnica/dialogfinancieroTecnica.component';
 import * as Cookies from 'js-cookie';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'FlujoCaja',
   templateUrl: './flujocaja.component.html',
@@ -23,8 +24,9 @@ export class FlujoCajaComponent implements OnInit {
     private servicioFlujoCaja: FlujoCajaService,
     private _router: Router,
     public dialog: MatDialog,
+    private toastr: ToastrService
   ) { }
-  ngOnInit(): void {
+  ngOnInit(): void {   
     if (Cookies.get('currentUser') === undefined) {
       this._router.navigate(['pages/auth/login-2'], { state: {} });
     }
@@ -32,8 +34,7 @@ export class FlujoCajaComponent implements OnInit {
       if (window.sessionStorage.getItem('oferta') != null) {
         this.ofertaBase = JSON.parse(window.sessionStorage.getItem('oferta'));
       }
-    }
-    
+    }    
     this.servicioFlujoCaja.Obtenerflujocaja(this.ofertaBase.id).subscribe(data => {
       if (data != null) {        
         var contador = 0;
@@ -166,9 +167,20 @@ export class FlujoCajaComponent implements OnInit {
         a.click();
         a.remove();
         row.valor=res.valor;
-        // this.servicioParametroGlobal.guardarparametro(row.parametro_id ,res.valor).subscribe((res: any) => {
-        //   console.log(res);
-        // });       
+        let request = {
+          parametro_oferta_id:0,
+          valor:0
+        };
+        this.servicioFlujoCaja.guardarparametrooferta(request).subscribe((res: any) => {
+          console.log(res);
+          if(res!=null){
+            this.toastr.success('Se proceso correctamente la información!', '', {
+              progressBar: true,
+              progressAnimation: 'increasing',
+              closeButton: true
+            });
+          }
+        });       
       }
     });    
   }  
