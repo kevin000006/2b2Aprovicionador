@@ -29,16 +29,53 @@
                                 <ng-container matColumnDef="van">
                                     <mat-header-cell *matHeaderCellDef> VAN/VAI </mat-header-cell>
                                     <mat-cell *matCellDef="let row">
-                                        {{row.vanvaimayor}}                                        
-                                        {{row.vanvaimenor}}  
+                                        <div class="contenerdorvan" style="position: relative;display: flex;">
+                                            <div class="item1"  style="    margin-right: 26px;" >
+                                                <span>
+                                                    {{row.vanvaimayor}}%        
+                                                </span>
+                                                <br>
+                                                <span style="opacity: 0.5;">
+                                                   Mayor
+                                                </span>
+                                            </div>
+                                            <div class="item1">
+                                                <span>
+                                                    {{row.vanvaimenor}}%  
+                                                </span>
+                                                <br>
+                                                <span style="opacity: 0.5;">
+                                                   Menor
+                                                </span>
+                                            </div>                                            
+                                        </div>                                        
                                     </mat-cell>                                    
                                 </ng-container>
 
                                 <ng-container matColumnDef="pb">
                                     <mat-header-cell *matHeaderCellDef> PB </mat-header-cell>
                                     <mat-cell *matCellDef="let row">
-                                        {{row.paybackmayor}}                                        
-                                        {{row.paybackmenor}}    
+
+                                        <div class="contenerdorvan" style="position: relative;display: flex;">
+                                            <div class="item1"  style="    margin-right: 26px;" >
+                                                <span>
+                                                    {{row.paybackmayor}}  %        
+                                                </span>
+                                                <br>
+                                                <span style="opacity: 0.5;">
+                                                   Mayor
+                                                </span>
+                                            </div>
+                                            <div class="item1">
+                                                <span>
+                                                    {{row.paybackmenor}}%  
+                                                </span>
+                                                <br>
+                                                <span style="opacity: 0.5;">
+                                                   Menor
+                                                </span>
+                                            </div>                                            
+                                        </div>       
                                     </mat-cell>                                    
                                 </ng-container>
 
