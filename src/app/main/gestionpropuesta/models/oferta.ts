@@ -170,7 +170,17 @@ export class BitacoraModel {
   fecha: any;
 }
 
-
+export class FlujoCajaModel {
+  concepto_id: number;
+  periodo: number;
+  anio: number;
+  mes: number;
+  montosoles: number;
+  montodolares: number;
+  nombre: string;
+  parametros: string;
+  grupo: string;
+}
 export class OfertaDetalleModel {
   //Informacion del cliente
 

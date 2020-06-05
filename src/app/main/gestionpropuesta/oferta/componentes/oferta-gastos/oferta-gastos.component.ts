@@ -237,8 +237,7 @@ export class OfertaGastosComponent implements OnInit {
       if (confirmed) {
         const a = document.createElement('a');
         a.click();
-        a.remove();        
-        debugger;
+        a.remove();                
         var objetoOfertaOpex = this.dataSourceList.find(function (element) { return element.id == item.id; });
         if (objetoOfertaOpex.estado == 0) {// si el registro es agregado, entonce se elimina
           var ObjectIndex = this.dataSourceList.findIndex(function (obj) { return obj.id === item.id; });//Obtenemos el Index del List de Objetos        

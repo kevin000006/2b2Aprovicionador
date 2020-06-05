@@ -131,7 +131,6 @@ export class OfertaEquipamientoComponent implements OnInit {
   }
 
   calcularMontoTotalSoles(eq: OfertaEquipamientoModel) {
-
     let total = eq.unitario * eq.cantidad;
     if (eq.moneda.id == 1)
       total = total / this.tipoCambio;

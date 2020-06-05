@@ -15,12 +15,28 @@
 .row-color-tb {
     background: #F8F9FA;
 }
-.meses{
+.mesesNormal{
     flex: 0 0 100px !important
 }
+.mesesNegrita{
+    flex: 0 0 100px !important;
+    font-family: "TelefonicaBold" !important; 
+}
+
 .tipo{
     flex: 0 0 250px !important;    
+    font-family: "TelefonicaBold" !important; 
 }
-.lefttipo{
+.meses{
+    flex: 0 0 100px !important;
+    font-family: "TelefonicaBold" !important; 
+}
+.lefttipoNormal{
     justify-content: flex-start !important;    
+    flex: 0 0 250px !important;    
+}
+.lefttipoNegrita{
+    justify-content: flex-start !important;    
+    font-family: "TelefonicaBold" !important; 
+    flex: 0 0 250px !important;    
 }

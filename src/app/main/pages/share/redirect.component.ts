@@ -34,8 +34,7 @@ export class RedirectBandejaComponent implements OnInit {
         };
     }
 
-    ngOnInit(): void {       
-        debugger; 
+    ngOnInit(): void {               
         this.route.paramMap.subscribe(params => {
             let dataBase = JSON.parse(window.localStorage.getItem('bandeja') || '[]');
             let _params = params['params'];

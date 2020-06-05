@@ -166,7 +166,6 @@ export class OfertaServicioComponent implements OnInit {
     }
   }
   async ngOnInit() {
-
     await this.commonService.getCondicionEnlaceAll().subscribe(data => {
       this.listCondicionEnlace = data;
     });
