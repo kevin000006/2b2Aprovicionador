@@ -23,4 +23,4 @@ import { FormsModule } from '@angular/forms';
     //providers: [MySharedService],
     exports: [DialogfinancierTecnicaComponent],
  })
- export class DialogeficienciaTecnicaModule { }
+ export class DialogfinancierTecnicaModule { }

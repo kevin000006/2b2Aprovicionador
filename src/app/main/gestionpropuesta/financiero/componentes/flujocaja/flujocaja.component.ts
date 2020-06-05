@@ -162,7 +162,7 @@ export class FlujoCajaComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((res: any) => {
-      if (res.respuesta) {
+      if (true) {
         const a = document.createElement('a');
         a.click();
         a.remove();
