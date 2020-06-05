@@ -50,7 +50,6 @@ export class OfertaServicioComponent implements OnInit {
   listTipoCircuito = [];
   listTipoServicio = [];
   listViaAcceso = [];
-  lstZonaSisego = [];
   listLDN = [
     { id: 0, nombre: 'NO' },
     { id: 1, nombre: 'SI' }
@@ -60,6 +59,13 @@ export class OfertaServicioComponent implements OnInit {
     { id: 'mbps', nombre: 'Mbps' },
     { id: 'gbps', nombre: 'Gbps' },
   ];
+
+  showSedeInfo:boolean=true;
+  showServActual:boolean=false;
+  showServActualCaudal:boolean=false;
+  showServPropuesto:boolean=true;
+  showServPropuestoCaudal:boolean=false;
+  showSisego:boolean=true;
 
   //public seldescrip: string;
   //https://stackblitz.com/edit/mat-paginator-select-page?embed=1
@@ -84,7 +90,7 @@ export class OfertaServicioComponent implements OnInit {
 
     'equipos_equipoterminal', 'equipos_routers', 'equipos_otros', 'equipos_precio', 'equipos_observaciones', 'ofertaisis',
 
-    'sesego', 'sisego_zona', 'sisego_ultimamilla', 'sisego_diasejecucion',
+    'sesego', 'sisego_zona', 'sisego_ultimamilla','sisego_transmision', 'sisego_plantaexterna', 'sisego_diasejecucion','sisego_residual',
 
     'accion'];
   exampleDatabase: OfertaServicioService | null;
@@ -117,9 +123,34 @@ export class OfertaServicioComponent implements OnInit {
     row.distritoId = user.iddistrito
   }
 
-  selectedZona(event, row) {
+  calculoResidual(row:OfertaDetalleModel)
+  {
+    let residual = (row.costoantiguo || 0) * (120-(row.antiguedad || 0))/120;
+
+    row.costoUltimaMilla = (residual*0.1);
+    row.transmision = (residual*0.2);
+    row.plantaexterna = (residual*0.7);
+  }
+
+  selectedZona(event, row:OfertaDetalleModel) {
     let target = event.source._element.nativeElement;
     row.zonaSisego = target.innerText.trim();
+    if(row.IdZonaSigego == -1)
+    {
+      row.antiguedad=0;
+      row.costoantiguo=0;
+      row.costoUltimaMilla = 0;
+      row.transmision =0;
+      row.plantaexterna = 0;
+    }
+    if(row.IdZonaSigego == 3){
+      row.antiguedad=0;
+      row.costoantiguo=0;
+      row.costoUltimaMilla = 0;
+      row.transmision =0;
+      row.plantaexterna = 0;
+    }
+
   }
 
   inputChangeUbigeo(input: any, row: any): void {
@@ -135,7 +166,6 @@ export class OfertaServicioComponent implements OnInit {
     }
   }
   async ngOnInit() {
-    
     await this.commonService.getCondicionEnlaceAll().subscribe(data => {
       this.listCondicionEnlace = data;
     });
@@ -156,20 +186,30 @@ export class OfertaServicioComponent implements OnInit {
     });
     await this.ofertaServicioService.listarCondicionServicios().subscribe(data => {      
       this.listaConcidionServicio = data;      
+
     });        
     this.ofertaServicioService.obtenerOfertasDetalle({ oferta_id: this.ofertaBase.id, page: 0 }).subscribe(data => {
       if (data != null) {
+        
+        for(let d of data){
+          d['transmision'] = 0;
+          d['plantaexterna']= 0;
+        }
+
         this.dataSourceList = data;
         this.dataSource.data = data;        
       }
     });
   }
 
-
   crearNuevoServicio(ofertasDetalleId: number, ofertaId: number): OfertaDetalleModel {
     return {
+      transmision:0,
+      plantaexterna : 0,
+      antiguedad:0,
+      costoantiguo:0,
       clienteId: null,
-      ofertasDetalleId: ofertasDetalleId,
+      ofertasDetalleId: ofertasDetalleId, 
       ofertaId: ofertaId,
       nombreSede: '',
       direccion: '',
@@ -287,6 +327,7 @@ export class OfertaServicioComponent implements OnInit {
       //, lstZonaSisego: []
     };
   }
+  
   addRow(): void {
     this.dataSourceList = [];
     var Id = this.dataSource.data.length == 0 ? 1 : this.dataSource.data[this.dataSource.data.length - 1].ofertasDetalleId + 1;
@@ -295,6 +336,16 @@ export class OfertaServicioComponent implements OnInit {
     this.dataSourceList.push(objecto);
     this.dataSource.data = this.dataSourceList;
     // this.dataSource.filter = "";
+  }
+
+  duplicarRow(item:OfertaDetalleModel):void{
+    this.dataSourceList = [];
+    var Id = this.dataSource.data.length == 0 ? 1 : this.dataSource.data[this.dataSource.data.length - 1].ofertasDetalleId + 1;
+    let objecto = item;
+    objecto.ofertasDetalleId = 0;
+    this.dataSourceList = this.dataSource.data;
+    this.dataSourceList.push(objecto);
+    this.dataSource.data = this.dataSourceList;
   }
 
   deleteRow(item: any): void {
@@ -351,14 +402,28 @@ export class OfertaServicioComponent implements OnInit {
       $.ajax(settings).done(function (response) {
         let result_ = JSON.parse(response);
         if (result_.status == "success") {
-          let result__ = JSON.parse(result_['result']);          
+          let result__ = JSON.parse(result_['result']);
+         if(result__['zonas'].length > 0)
+         {
+
           item.lstZonaSisego = result__['zonas'].map(obj => {
             var entidad = {
               id: obj.id,
               nombre: obj.nom + ' - ' + obj.dis + ' m'
             };
+
             return entidad;
-          });          
+          }); 
+
+          if(result__['zonas'].length ==1 && result__['zonas'][0]['id'] == 3 )
+          {
+            item.lstZonaSisego.push({ id: -1, nombre: "Residual" });
+          }
+
+         }else{
+           item.lstZonaSisego = [{ id: 3, nombre: "Zona Gris" },{ id: -1, nombre: "Residual" }];
+         }
+                  
         }
       });
       this.dataSource.filter = '';
@@ -390,8 +455,8 @@ export class OfertaServicioComponent implements OnInit {
         id: item.ofertasDetalleId,
         idoferta: item.ofertaId,
         idaccionisis: item.accionIsisIdPropuesto ==0 ? null: item.accionIsisIdPropuesto,//item.accionIsisIdPropuesto,
-        idcircuito:  item.tipoCircuitoActual =="" ? null: item.accionIsisIdPropuesto,   //item.tipoCircuitoActual,
-        idcircuito2:  item.tipoCircuitoIdPropuesto ==0 ? null: item.accionIsisIdPropuesto, //item.tipoCircuitoIdPropuesto,
+        idcircuito:  item.tipoCircuitoActual =="" ? null: item.tipoCircuitoActual,   //item.tipoCircuitoActual,
+        idcircuito2:  item.tipoCircuitoIdPropuesto ==0 ? null: item.tipoCircuitoIdPropuesto, //item.tipoCircuitoIdPropuesto,
         iddistrito: item.distritoId,
         idmedio: item.servicioActual_medio ==0 ? null: item.servicioActual_medio, //item.servicioActual_medio,
         idmedio2: item.servicioPropuesto_medio ==0 ? null: item.servicioPropuesto_medio,//item.servicioPropuesto_medio,

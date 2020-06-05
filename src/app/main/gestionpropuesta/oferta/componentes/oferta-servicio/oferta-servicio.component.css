@@ -90,3 +90,182 @@ table {
     background-color: rgba(0, 0, 0, 0.12) !important;
     color: rgba(0, 0, 0, 0.26) !important;
 }
+
+th.group-circuito{
+    position: relative;
+    padding: 0 !important;
+    height: 100%;
+    background: #fff;
+}
+
+th.group-circuito .content-group{
+    height: 35px;
+    position: relative;
+}
+
+th.group-circuito .content-group .group-title{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    height: 2px;
+}
+
+th.group-circuito .content-group .group-title span{
+    border: 0px solid #fff;
+    padding: 3px 15px;
+    min-width: 150px;
+    display: block;
+    position: absolute;
+    top: -24px;
+    left: 0px;
+    right: 0px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    text-align: center;
+ 
+}
+
+.color-group-1{
+    background: #03a8dd;
+    color: #fff !important;
+}
+
+.color-group-2{
+    background: #cdeef4;
+    color: #03a8dd !important;
+}
+
+.group-servicio-title-color{
+    background: #e5e7ec;
+}
+
+.cbo-mostrar{
+    float: left;
+    position: absolute;
+    margin-left: 10px;
+    text-decoration: none;
+    outline: none !important;
+    min-width: 80px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    height: 33px;
+}
+
+[hidden] { display: none !important;}
+
+.col_sede{
+    max-width: 150px;
+    padding: 0 10px !important;
+}
+
+.col_direccion{
+    max-width: 150px;
+    padding: 0 10px !important;
+}
+
+.col_ubigeo{
+    max-width: 160px;
+    padding: 0 10px !important; 
+}
+
+.btn-geo{
+    line-height: 30px;
+    height: 30px;
+    width: 30px;
+}
+
+.col_geo{
+    min-width: 60px;
+    max-width: 60px;
+}
+
+.col-telefono{
+    max-width: 150px;
+    padding: 0 10px !important;
+}
+
+.col_sa_nrocircuito{
+
+    max-width: 120px;
+    padding: 0 10px !important;
+}
+
+.col_sa_servicio{
+    min-width: 200px;
+    padding: 0 10px !important;
+}
+
+.col_sa_medio{
+    min-width: 115px;
+    padding: 0 10px !important;
+}
+
+.col_sa_caudal{
+    min-width: 155px;
+    padding: 0 10px !important;
+}
+
+.col_sp_accionIsis{
+    min-width: 150px;
+    padding: 0 10px !important;
+}
+
+.col_sp_tipoSede{
+    min-width: 110px;
+    padding: 0 10px !important;
+}
+
+.col_sp_modo{
+    min-width: 70px;
+    padding: 0 10px !important;
+}
+
+.col_sp_sva{
+    max-width: 120px;
+    padding: 0 10px !important;
+}
+
+.col_sp_ofertaIsis{
+    min-width: 100px;
+    padding: 0 10px !important;
+}
+
+.col_sp_svaDes{
+    padding: 0 10px !important;
+}
+
+.col_sp_condicion{
+    min-width: 150px;
+    padding: 0 10px !important;
+}
+
+.col_sp_residual{
+    min-width: 145px;
+    padding: 0 10px !important;
+}
+
+.col_sp_diasejecucion{
+    max-width: 135px;
+    padding: 0 10px !important;
+}
+
+.col_sp_plantaexterna{
+    max-width: 135px;
+    padding: 0 10px !important;
+}
+
+.col_accion{
+    max-width: 40px;
+    padding: 0 10px !important;
+    box-shadow: -1px 5px 5px 0px rgba(220, 220, 220, 0.5)
+}
+
+.borde-group-left{
+    border-top-left-radius: 4px !important;
+    left: 1px !important;
+}
+
+.borde-group-right{
+    border-top-right-radius: 4px !important;
+    right: 1px !important;
+}

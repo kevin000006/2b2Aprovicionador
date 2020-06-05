@@ -184,6 +184,17 @@ export class FlujoCajaModel {
 export class OfertaDetalleModel {
   //Informacion del cliente
 
+  constructor()
+  {
+    this.transmision= 0;
+    this.plantaexterna=0;
+  }
+
+  transmision:number;
+  plantaexterna:number;
+  antiguedad:number;
+  costoantiguo:number;
+
   clienteId: number;
   ofertasDetalleId: number;
   ofertaId: number;

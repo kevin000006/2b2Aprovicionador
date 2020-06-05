@@ -17,17 +17,17 @@
                     <table class="tb-oferta-equipamiento">
                         <thead>
                             <tr class="">
-                                <th>Tipo</th>
-                                <th>Condición</th>
-                                <th>Ant</th>
-                                <th>Marca</th>
-                                <th>Modelo</th>
-                                <th>Cant</th>
-                                <th>Moneda</th>
-                                <th>Costo</th>
-                                <th>Total S/.</th>
-                                <th>Instalación S/.</th>
-                                <th></th>
+                                <th class="color-group-1">Tipo</th>
+                                <th class="color-group-1">Condición</th>
+                                <th class="color-group-1">Ant</th>
+                                <th class="color-group-1">Marca</th>
+                                <th class="color-group-1">Modelo</th>
+                                <th class="color-group-1">Cant</th>
+                                <th class="color-group-1">Moneda</th>
+                                <th class="color-group-1">Costo</th>
+                                <th class="color-group-1">Total US$</th>
+                                <th class="color-group-1">Instalación US$</th>
+                                <th class="color-group-1"></th>
                             </tr>
                         </thead>
                         <tbody *ngFor="let row of dataSource.data;let i = index">
@@ -37,7 +37,7 @@
                                     <mat-form-field color="accent" appearance="legacy" [style.fontSize.px]="12"
                                         class="tipo">
                                         <mat-select [(ngModel)]="row.tipoequipamiento"
-                                            (selectionChange)="selectedchangeTipoEquipamiento($event.value,row)"
+                                            (selectionChange)="calcularMontoTotalSoles(row)"
                                             [compareWith]="compareValCombos">
                                             <mat-option value="">--Seleccione--</mat-option>
                                             <mat-option [value]="o" *ngFor="let o of listaTipos">{{o.descripcion}}
@@ -48,7 +48,7 @@
                                 <td>
                                     <mat-form-field color="accent" appearance="legacy" [style.fontSize.px]="12"
                                         class="condicion"
-                                        [ngStyle]="{'width': row.equipamientoCondicion.id==5 ? '30%' : '90%' }">
+                                        [ngStyle]="{'width': row.equipamientoCondicion.id==5 ? '58%' : '90%' }">
                                         <mat-select [(ngModel)]="row.equipamientoCondicion"
                                             (selectionChange)="calcularMontoTotalSoles(row)"
                                             [compareWith]="compareValCombos">
@@ -58,7 +58,7 @@
                                         </mat-select>
                                     </mat-form-field>
                                     <mat-form-field color="accent" *ngIf="row.equipamientoCondicion.id==5"
-                                        [ngStyle]="{'width': row.equipamientoCondicion.id==5 ? '60%' : '0%' }"
+                                        [ngStyle]="{'width': row.equipamientoCondicion.id==5 ? '30%' : '0%' }"
                                         class="columnaTextoConcepto" appearance="legacy" [style.fontSize.px]="12">
                                         <input matInput [(ngModel)]="row.proveedor" type="text">
                                     </mat-form-field>
@@ -112,28 +112,23 @@
                                             mask="separator.2" type="text" class="text-center">
                                     </mat-form-field>
                                 </td>
-                                <td class="text-center">
+                                <td class=" text-right ">
                                     <span class="total" mask="separator.2">
                                         {{row.total.toFixed(2) | mask: 'separator':','}}
                                     </span>
 
                                 </td>
-                                <td class="text-center">
+                                <td class="text-right">
                                     <span class="instalacion">
-                                        {{ row.instalacion | mask: 'separator':','}}
+                                        {{ row.instalacion.toFixed(2) | mask: 'separator':','}}
                                     </span>
                                 </td>
                                 <td class="text-center">
-                                    <mat-menu #appMenu="matMenu">
-                                        <button style="font-size: 12px;" mat-menu-item (click)="deleteRow(row)">
-                                            <mat-icon class="icon" matSuffix>delete &nbsp;</mat-icon>
-                                            Eliminar
-                                        </button>
-                                    </mat-menu>
-                                    <a style="cursor:pointer;" class="accion" mat-icon-button
-                                        [matMenuTriggerFor]="appMenu">
-                                        <mat-icon>more_vert</mat-icon>
-                                    </a>
+                                    
+                                    <span style="font-size: 15px;cursor: pointer;" (click)="deleteRow(row)">
+                                        <mat-icon style="font-weight: bold;color: #00a9e0;font-size: 18px !important;" class="icon" >delete</mat-icon>
+                                    </span>
+                                   
                                 </td>
                             </tr>
                         </tbody>
@@ -146,10 +141,13 @@
                             <div class="content">
                                 <div class="desc"> Total $ </div>
                                 <div class="total">
-                                    {{ calcularTotalDolares() | mask: 'separator':',' }}
+                                    {{ calcularTotalDolares().toFixed(2) | mask: 'separator':',' }}
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="totales">
+                        <div class="monto separador"></div>
                         <div class="monto dolares">
                             <div class="content">
                                 <div class="desc"> Total S/. </div>
@@ -160,6 +158,7 @@
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             </div>
             <br />

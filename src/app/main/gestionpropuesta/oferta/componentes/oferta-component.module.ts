@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogAfComponent } from './dialog-af/dialog-af.component';
@@ -36,6 +37,7 @@ import { DialogAfComponent } from './dialog-af/dialog-af.component';
         MatInputModule,
         MatIconModule,
         MatTableModule,
+        MatCheckboxModule,
         MatMenuModule,
         MatButtonModule,
         MatDividerModule,

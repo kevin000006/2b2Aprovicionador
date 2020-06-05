@@ -15,7 +15,7 @@
                     <div class="table-responsive">
                         <mat-table #table mat-table [dataSource]="dataSource" class="tb-oferta-gastos">
                             <ng-container matColumnDef="concepto">
-                                <mat-header-cell *matHeaderCellDef class="columnaConcepto" mat-sort-header>Concepto</mat-header-cell>
+                                <mat-header-cell *matHeaderCellDef class="columnaConcepto color-group-1" mat-sort-header>Concepto</mat-header-cell>
                                 <mat-cell *matCellDef="let row" class="columnaConcepto">
                                     <mat-form-field color="accent" [ngStyle]="{'width': row.mostrarConcepto==true ? '30%' : '90%' }" class="columnaSelecConcepto" appearance="legacy" [style.fontSize.px]="12">
                                         <mat-select [(ngModel)]="row.conceptoId">
@@ -30,7 +30,7 @@
 
                             </ng-container>
                             <ng-container matColumnDef="cantidad">
-                                <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
+                                <mat-header-cell *matHeaderCellDef class="color-group-1"> Cantidad </mat-header-cell>
                                 <mat-cell *matCellDef="let element">
                                     <mat-form-field style="text-align: center; width: 90%;" appearance="legacy" [style.fontSize.px]="12">
                                         <input matInput (input)="inputChangeCantidad($event.target.value,element)" [(ngModel)]="element.cantidad" type="number">
@@ -39,7 +39,7 @@
 
                             </ng-container>
                             <ng-container matColumnDef="nromeses">
-                                <mat-header-cell *matHeaderCellDef> Nro. Meses </mat-header-cell>
+                                <mat-header-cell *matHeaderCellDef class="color-group-1"> Nro. Meses </mat-header-cell>
                                 <mat-cell *matCellDef="let element">
                                     <mat-form-field style="text-align: center; width: 60%;" appearance="legacy" [style.fontSize.px]="12">
                                         <input matInput (input)="inputChangeNumeroMeses($event.target.value,element)" [(ngModel)]="element.meses" type="number">
@@ -48,17 +48,17 @@
 
                             </ng-container>
                             <ng-container matColumnDef="factor">
-                                <mat-header-cell *matHeaderCellDef style="flex: 0 0 4% !important"> Factor </mat-header-cell>
-                                <mat-cell *matCellDef="let element" style="flex: 0 0 4% !important"> {{element.factor == 0 ? '':element.factor}} </mat-cell>
+                                <mat-header-cell *matHeaderCellDef style="flex: 0 0 4% !important" class="color-group-1"> Factor </mat-header-cell>
+                                <mat-cell *matCellDef="let element" style="flex: 0 0 4% !important"> <span style="font-size: 12px;">{{element.factor == 0 ? '':element.factor}}</span>  </mat-cell>
                                 <mat-footer-cell *matFooterCellDef style="background: #f8f9fa;font-family: telefonicabold;">
                                 </mat-footer-cell>
                             </ng-container>
 
                             <ng-container matColumnDef="moneda">
-                                <mat-header-cell *matHeaderCellDef> Moneda </mat-header-cell>
+                                <mat-header-cell *matHeaderCellDef class="color-group-1"> Moneda </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 40%;right: 8px;" appearance="legacy" [style.fontSize.px]="12">
-                                        <mat-select [(ngModel)]="row.moneda_id">
+                                        <mat-select [(ngModel)]="row.moneda_id" >
                                             <mat-option [value]="o.id" (onSelectionChange)="changeMoneda($event,row)" *ngFor="let o of listaMoneda">{{o.descBrv}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
@@ -67,33 +67,29 @@
                             </ng-container>
 
                             <ng-container matColumnDef="montounitmenusal">
-                                <mat-header-cell *matHeaderCellDef> Monto Unitario </mat-header-cell>
+                                <mat-header-cell *matHeaderCellDef class="color-group-1"> Monto Unitario </mat-header-cell>
                                 <mat-cell *matCellDef="let row" style="justify-content: flex-end;">
                                     <mat-form-field style="text-align: center; width: 96%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput (input)="inputChangeMontoUnitarioMensual($event.target.value,row)" [(ngModel)]="row.unitarioMensual" type="number" step="0.01">
+                                <mat-cell *matCellDef="let element" style="font-size: 12px;justify-content: flex-end;"> {{element.totalMensual.toFixed(2) | mask: 'separator':','}} </mat-cell>
+                                        <input style="font-size: 12px" matInput (input)="inputChangeMontoUnitarioMensual($event.target.value,row)" [(ngModel)]="row.unitarioMensual" type="number" step="0.01">
                                     </mat-form-field>
                                 </mat-cell>
 
                             </ng-container>
 
                             <ng-container matColumnDef="montototalmensual">
-                                <mat-header-cell *matHeaderCellDef> Monto Total S./</mat-header-cell>
-                                <mat-cell *matCellDef="let element" style="justify-content: flex-end;"> {{element.totalMensual.toFixed(2) | mask: 'separator':','}} </mat-cell>
+                                <mat-header-cell *matHeaderCellDef class="color-group-1"> Monto Total S./</mat-header-cell>
+                                <mat-cell *matCellDef="let element" style="font-size: 12px;justify-content: flex-end;"> {{element.totalMensual.toFixed(2) | mask: 'separator':','}} </mat-cell>
                                 <mat-footer-cell *matFooterCellDef style="background: #f8f9fa;font-family: telefonicabold;justify-content: flex-end;">
 
                                 </mat-footer-cell>
                             </ng-container>
                             <ng-container matColumnDef="accion">
-                                <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                                <mat-header-cell *matHeaderCellDef class="color-group-1"> </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
-                                    <mat-menu #appMenu="matMenu">
-                                        <button mat-menu-item style="font-size: 12px;" (click)="deleteRow(row)"> 
-                                            <mat-icon class="icon">delete</mat-icon>Eliminar
-                                        </button>
-                                    </mat-menu>
-                                    <button style="cursor:pointer;" mat-icon-button [matMenuTriggerFor]="appMenu">
-                                        <mat-icon>more_vert</mat-icon>
-                                    </button>
+                                    <span style="font-size: 15px;cursor: pointer;" (click)="deleteRow(row)">
+                                        <mat-icon style="font-weight: bold;color: #00a9e0;font-size: 18px !important;" class="icon" >delete</mat-icon>
+                                    </span>
                                 </mat-cell>
 
                             </ng-container>
@@ -111,6 +107,9 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="totales">
+                                <div class="monto separador"></div>
                                 <div class="monto dolares">
                                     <div class="content">
                                         <div class="desc"> Total S/. </div>
@@ -121,6 +120,7 @@
                                     </div>
                                 </div>
                             </div>
+                           
                         </div>
                     </div>
                 </div>
