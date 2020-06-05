@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { DialogeficienciaTecnicaComponent} from './dialogeficienciaTecnica.component';
+import { DialogfinancierTecnicaComponent} from './dialogfinancieroTecnica.component';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,7 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 @NgModule({
     imports: [
-        CommonModule,
+        CommonModule,        
         FormsModule,
         MatButtonModule,
         MatIconModule,
@@ -19,8 +19,8 @@ import { FormsModule } from '@angular/forms';
         MatFormFieldModule,        
         MatInputModule
     ],
-    declarations: [DialogeficienciaTecnicaComponent],
+    declarations: [DialogfinancierTecnicaComponent],
     //providers: [MySharedService],
-    exports: [DialogeficienciaTecnicaComponent],
+    exports: [DialogfinancierTecnicaComponent],
  })
  export class DialogeficienciaTecnicaModule { }

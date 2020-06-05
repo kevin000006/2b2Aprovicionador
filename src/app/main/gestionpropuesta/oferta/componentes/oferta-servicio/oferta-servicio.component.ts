@@ -135,11 +135,6 @@ export class OfertaServicioComponent implements OnInit {
     }
   }
   async ngOnInit() {
-
-    // this.listaConcidionServicio.push(new ModelCombo(1, "Alta Nueva"));
-    // this.listaConcidionServicio.push(new ModelCombo(2, "Upgrade"));
-    // this.listaConcidionServicio.push(new ModelCombo(3, "Renovación"));   
-    
     
     await this.commonService.getCondicionEnlaceAll().subscribe(data => {
       this.listCondicionEnlace = data;
@@ -356,8 +351,7 @@ export class OfertaServicioComponent implements OnInit {
       $.ajax(settings).done(function (response) {
         let result_ = JSON.parse(response);
         if (result_.status == "success") {
-          let result__ = JSON.parse(result_['result']);
-          debugger;
+          let result__ = JSON.parse(result_['result']);          
           item.lstZonaSisego = result__['zonas'].map(obj => {
             var entidad = {
               id: obj.id,
@@ -380,7 +374,7 @@ export class OfertaServicioComponent implements OnInit {
         item.ofertasDetalleId = item.ofertasDetalleId
       else if (item.estado == 2)
         item.activo = false
-      debugger;
+      
       var container = {
         bw_actual: item.bwActualActual + ' ' + item.nrobwActualActual,
         bronce_actual: item.caudalBronceActual + ' ' + item.nrocaudalBronceActual,

@@ -1,8 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 import { DecimalPipe } from '@angular/common';
 import { FlujoCajaService } from './flujocaja.service';
+import { DialogfinancierTecnicaComponent } from '../dialogfinancieroTecnica/dialogfinancieroTecnica.component';
 import * as Cookies from 'js-cookie';
 @Component({
   selector: 'FlujoCaja',
@@ -12,27 +13,29 @@ import * as Cookies from 'js-cookie';
 export class FlujoCajaComponent implements OnInit {
   ofertaBase = { id: 0 };
   currentUser: any = { nombres: '', apellidos: '', nombrecorto: '' };
-  columns:any;
-  colores:boolean=true;
-  displayedColumns:any;
-  widthTabla:number;
-  dataSource:any;
+  columns: any;
+  colores: boolean = true;
+  displayedColumns: any;
+  widthTabla: number;
+  dataSource: any;
   constructor(
-    private _decimalPipe: DecimalPipe, 
+    private _decimalPipe: DecimalPipe,
     private servicioFlujoCaja: FlujoCajaService,
     private _router: Router,
-    ) { }
-  ngOnInit(): void {         
+    public dialog: MatDialog,
+  ) { }
+  ngOnInit(): void {
     if (Cookies.get('currentUser') === undefined) {
-        this._router.navigate(['pages/auth/login-2'], { state: {} });
+      this._router.navigate(['pages/auth/login-2'], { state: {} });
     }
     else {
-        if (window.sessionStorage.getItem('oferta') != null) {
-            this.ofertaBase = JSON.parse(window.sessionStorage.getItem('oferta'));
-        }        
+      if (window.sessionStorage.getItem('oferta') != null) {
+        this.ofertaBase = JSON.parse(window.sessionStorage.getItem('oferta'));
+      }
     }
-    this.servicioFlujoCaja.Obtenerflujocaja(this.ofertaBase.id).subscribe(data => {       
-      if(data !=null){
+    
+    this.servicioFlujoCaja.Obtenerflujocaja(this.ofertaBase.id).subscribe(data => {
+      if (data != null) {        
         var contador = 0;
         this.columns = data.filter((item) => { return item.concepto_id == 0; }).map((item) => {
           contador++
@@ -40,13 +43,13 @@ export class FlujoCajaComponent implements OnInit {
             return {
               columnDef: "tipo",
               header: "Tipo",
-              width: true,
+              width: true,              
               cell: (element: any) => `${element.nombre}`
             }
           } else {
             return {
               columnDef: "periodo" + item.periodo,
-              width: false,
+              width: false,              
               header: this.RetornarNombreMeses(item.mes) + "-" + item.anio.toString().substr(2, 4),
               cell: (element: any) => {
                 if (`${element["periodo" + item.periodo]}` === 'undefined' || `${element["periodo" + item.periodo]}` === '-') {
@@ -59,10 +62,20 @@ export class FlujoCajaComponent implements OnInit {
           }
         });
         this.displayedColumns = this.columns.map(c => c.columnDef);
-        this.widthTabla = (this.columns.length * 100) + 150;  
-        this.dataSource = this.getPivotArray(data.filter((item) => { return item.concepto_id !== 0; }), "nombre", "periodo", "montosoles");        
+        this.widthTabla = (this.columns.length * 100) + 150;
+        this.dataSource = this.getPivotArray(data.filter((item) => { return item.concepto_id !== 0; }), "nombre", "periodo", "montosoles");
+        
+        let lisPivoteado=data.filter((item) => { return item.concepto_id != 0; });//Obtenemos el listado a pivotear
+        const listDistinct = [...new Map(lisPivoteado.map(item =>[item["nombre"], item])).values()];//Obtenenos el distinct de un list por una columna
+
+        this.dataSource = this.dataSource.map(item=>{
+          var objectoFiltrado = listDistinct.find(obj=>{return obj.nombre === item.nombre});
+          item.grupo = objectoFiltrado.grupo;
+          return item;
+        });
+        console.log(listDistinct);
       }
-    });    
+    });
   }
   RetornarNombreMeses(NroMeses): string {
     var nombreMeses = "";
@@ -134,4 +147,29 @@ export class FlujoCajaComponent implements OnInit {
     }
     return ret;
   }
+  editarPorcentaje(row: any): void {
+    const dialogRef = this.dialog.open(DialogfinancierTecnicaComponent, {
+      width: '650px',
+      data: {
+        titulo: row.nombre,
+        valor : 0,
+        buttonText: {
+          ok: 'Guardar',
+          cancel: 'Cancelar'
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((res: any) => {
+      if (res.respuesta) {
+        const a = document.createElement('a');
+        a.click();
+        a.remove();
+        row.valor=res.valor;
+        // this.servicioParametroGlobal.guardarparametro(row.parametro_id ,res.valor).subscribe((res: any) => {
+        //   console.log(res);
+        // });       
+      }
+    });    
+  }  
 }

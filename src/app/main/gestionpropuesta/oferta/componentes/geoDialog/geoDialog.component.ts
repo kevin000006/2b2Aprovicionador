@@ -26,8 +26,7 @@ export class GeodialogComponent {
     ) {
         
     }
-    ngOnInit(): void {
-        debugger;
+    ngOnInit(): void {        
         if ((this.data.latitud == 0) || (this.data.longitud == 0)){
             let variable: any = this.data;
             this.geocodeService.geocodeAddress(variable.direccion).subscribe((location: Location) => {            

@@ -53,8 +53,7 @@ export class FileInputComponent implements OnInit {
       modulo_id: this.IdOferta,
       usuario_id: this.usuario.id
     };
-    this.fileInputService.listFilesContainers(requestListarFies).subscribe((res: any) => {
-      debugger;
+    this.fileInputService.listFilesContainers(requestListarFies).subscribe((res: any) => {      
       if (res != null)
         this.listArchivo = res;
       this.showSpinner = false;
@@ -125,8 +124,7 @@ export class FileInputComponent implements OnInit {
   }
   btnGuardarArchivo() {
     var listArchivosAGuardar = this.listArchivo.filter(function (el) { return el.adjunto_id == ""; });//obtenemos los elementos que guardaremos en la base de datos
-    listArchivosAGuardar.forEach(obj => {
-      debugger;
+    listArchivosAGuardar.forEach(obj => {      
       obj.inProgress = true;
       const formData = new FormData();
       formData.append('file', obj.file);

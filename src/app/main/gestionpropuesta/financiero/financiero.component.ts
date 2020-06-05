@@ -17,8 +17,7 @@ export class FinancieroComponent implements OnInit {
             this._router.navigate(['pages/auth/login-2'], { state: {} });
         }
     }
-    ngOnInit(): void {
-        // debugger;
+    ngOnInit(): void {        
         // if (Cookies.get('currentUser') === undefined) {
         //     this._router.navigate(['pages/auth/login-2'], { state: {} });
         // }

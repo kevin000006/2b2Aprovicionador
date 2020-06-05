@@ -54,10 +54,7 @@ export class OfertaEquipamientoComponent implements OnInit {
   }
 
   getEquipamientos(): void {
-    this.equipamientoService.getEquipamientoForOfeta(this.ofertaBase.id).subscribe(data => {
-      // console.log(data);
-      // debugger;
-      // for (let d of data) { d['instalacion'] = 0; }
+    this.equipamientoService.getEquipamientoForOfeta(this.ofertaBase.id).subscribe(data => {      
       this.dataSource.data = data;
     });
   }
@@ -134,8 +131,6 @@ export class OfertaEquipamientoComponent implements OnInit {
   }
 
   calcularMontoTotalSoles(eq: OfertaEquipamientoModel) {
-    debugger;
-
     let total = eq.unitario * eq.cantidad;
     if (eq.moneda.id == 2)
       total = total * this.tipoCambio;
@@ -170,8 +165,7 @@ export class OfertaEquipamientoComponent implements OnInit {
   compareValCombos(c1: any, c2: any): boolean {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
-  public selectedchangeTipoEquipamiento(opcion, row) {
-    debugger;
+  public selectedchangeTipoEquipamiento(opcion, row) {    
     /*
     "11 - Modem"
     "13 - Router"

@@ -14,9 +14,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { NgxMaskModule } from 'ngx-mask';
 import { DecimalPipe } from '@angular/common';
+import { DialogfinancierTecnicaComponent} from '../dialogfinancieroTecnica/dialogfinancieroTecnica.component';
 @NgModule({
     declarations: [
-        FlujoCajaComponent
+        FlujoCajaComponent,
+        DialogfinancierTecnicaComponent
     ],
     imports: [
         FormsModule,
