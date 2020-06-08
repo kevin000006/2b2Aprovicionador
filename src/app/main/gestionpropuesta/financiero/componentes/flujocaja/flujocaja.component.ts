@@ -42,15 +42,30 @@ export class FlujoCajaComponent implements OnInit {
     this.servicioFlujoCaja.Obtenerflujocaja(this.ofertaBase.id).subscribe(data => {
       if (data != null) {        
         var contador = 0;
+        debugger;
+        var newItem = 
+          {
+            concepto_id: 0,
+            periodo: 0,
+            anio: 0,
+            mes: 0,
+            montosoles: null,
+            montodolares: null,
+            nombre: "tipo",
+            parametros: null,
+            grupo: ""
+          }  
+        
+        data.splice(0,0,newItem);
         this.columns = data.filter((item) => { return item.concepto_id == 0; }).map((item) => {
-          contador++
-          if (contador == 1) {
+          // contador++
+          if (item.nombre == "tipo") {
             return {
-              columnDef: "tipo",
+              columnDef: item.nombre,
               header: "Tipo",
               width: true,              
               cell: (element: any) => `${element.nombre}`
-            }
+            }            
           } else {
             return {
               columnDef: "periodo" + item.periodo,
@@ -66,6 +81,7 @@ export class FlujoCajaComponent implements OnInit {
             }
           }
         });
+        debugger;
         this.displayedColumns = this.columns.map(c => c.columnDef);
         this.widthTabla = (this.columns.length * 100) + 150;
         this.dataSource = this.getPivotArray(data.filter((item) => { return item.concepto_id !== 0; }), "nombre", "periodo", "montosoles");
