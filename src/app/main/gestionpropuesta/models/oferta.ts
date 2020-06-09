@@ -311,6 +311,22 @@ export class OfertaDetalleModel {
   estado: number;
   activo: boolean;
   isLoading: boolean;
+
+
+  dte: string;//Se agrego esta propiedad
+  recursotransporte: string;//Se agrego esta propiedad
+  tipoantena: string;//Se agrego esta propiedad
+  segmentosatelital: string;//Se agrego esta propiedad
+  segmentopozotierra: string;//Se agrego esta propiedad
+  ups: string;//Se agrego esta propiedad
+  VRF: string;//Se agrego esta propiedad
+
+
+  fechaLlegada: string;//Se agrego esta propiedad
+  componentes: string;//Se agrego esta propiedad
+  ServicioPropuestoVRF: string;//Se agrego esta propiedad
+  DetalleAccion: string;//Se agrego esta propiedad
+
 }
 
 

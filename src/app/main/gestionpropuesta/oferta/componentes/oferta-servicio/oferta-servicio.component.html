@@ -251,6 +251,28 @@
                                     </mat-form-field>
                                 </td>
                             </ng-container>
+                            
+                            <ng-container matColumnDef="servicioActual_router">
+                                <th [hidden]="!showServActual" mat-header-cell *matHeaderCellDef mat-sort-header class="color-group-2">Router Switch</th>
+                                <td [hidden]="!showServActual" mat-cell *matCellDef="let row">
+                                    <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                        <input matInput [(ngModel)]="row.routerSwitchActual" type="text" maxlength="100">
+                                    </mat-form-field>
+                                </td>
+                            </ng-container>
+
+
+                            <ng-container matColumnDef="servicioActual_dte">
+                                <th [hidden]="!showServActual" mat-header-cell *matHeaderCellDef mat-sort-header class="color-group-2">DTE</th>
+                                <td [hidden]="!showServActual" mat-cell *matCellDef="let row">
+                                    <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                        <input matInput [(ngModel)]="row.dte" type="text" maxlength="100">
+                                    </mat-form-field>
+                                </td>
+                            </ng-container>
+
+
+
                             <ng-container matColumnDef="servicioActual_equipoterminal">
                                 <th [hidden]="!showServActual" mat-header-cell *matHeaderCellDef mat-sort-header class="color-group-2">Equipo Terminal</th>
                                 <td [hidden]="!showServActual" mat-cell *matCellDef="let row">
@@ -259,14 +281,54 @@
                                     </mat-form-field>
                                 </td>
                             </ng-container>
-                            <ng-container matColumnDef="servicioActual_router">
-                                <th [hidden]="!showServActual" mat-header-cell *matHeaderCellDef mat-sort-header class="color-group-2">Router</th>
+
+
+                            
+                            <ng-container matColumnDef="servicioActual_recursotransporte">
+                                <th [hidden]="!showServActual" mat-header-cell *matHeaderCellDef mat-sort-header class="color-group-2">Recurso Transporte</th>
                                 <td [hidden]="!showServActual" mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput [(ngModel)]="row.routerSwitchActual" type="text" maxlength="100">
+                                        <input matInput [(ngModel)]="row.recursotransporte" type="text" maxlength="100">
                                     </mat-form-field>
                                 </td>
                             </ng-container>
+
+                            <ng-container matColumnDef="servicioActual_tipoantena">
+                                <th [hidden]="!showServActual" mat-header-cell *matHeaderCellDef mat-sort-header class="color-group-2">Tipo Antena</th>
+                                <td [hidden]="!showServActual" mat-cell *matCellDef="let row">
+                                    <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                        <input matInput [(ngModel)]="row.tipoantena" type="text" maxlength="100">
+                                    </mat-form-field>
+                                </td>
+                            </ng-container>
+
+                             <ng-container matColumnDef="servicioActual_segmentosatelital">
+                                <th [hidden]="!showServActual" mat-header-cell *matHeaderCellDef mat-sort-header class="color-group-2">Segmento Satelital</th>
+                                <td [hidden]="!showServActual" mat-cell *matCellDef="let row">
+                                    <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                        <input matInput [(ngModel)]="row.segmentosatelital" type="text" maxlength="100">
+                                    </mat-form-field>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="servicioActual_segmentopozotierra">
+                                <th [hidden]="!showServActual" mat-header-cell *matHeaderCellDef mat-sort-header class="color-group-2">Pozo a Tierra</th>
+                                <td [hidden]="!showServActual" mat-cell *matCellDef="let row">
+                                    <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                        <input matInput [(ngModel)]="row.segmentopozotierra" type="text" maxlength="100">
+                                    </mat-form-field>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="servicioActual_ups">
+                                <th [hidden]="!showServActual" mat-header-cell *matHeaderCellDef mat-sort-header class="color-group-2">UPS</th>
+                                <td [hidden]="!showServActual" mat-cell *matCellDef="let row">
+                                    <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                        <input matInput [(ngModel)]="row.ups" type="text" maxlength="100">
+                                    </mat-form-field>
+                                </td>
+                            </ng-container> 
+
                             <ng-container matColumnDef="servicioActual_otro">
                                 <th [hidden]="!showServActual" mat-header-cell *matHeaderCellDef mat-sort-header class="color-group-2"> Otros </th>
                                 <td [hidden]="!showServActual" mat-cell *matCellDef="let element">
@@ -283,6 +345,16 @@
                                     </mat-form-field>
                                 </td>
                             </ng-container>
+
+                            <ng-container matColumnDef="servicioActual_VRF">
+                                <th [hidden]="!showServActual" mat-header-cell *matHeaderCellDef mat-sort-header class="color-group-2">VRF</th>
+                                <td [hidden]="!showServActual" mat-cell *matCellDef="let row">
+                                    <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                        <input matInput [(ngModel)]="row.VRF" type="text" maxlength="100">
+                                    </mat-form-field>
+                                </td>
+                            </ng-container>
+
                             <!--servicioPropuesto-->
                             <ng-container matColumnDef="servicioPropuesto_acccionisis">
                                 <th [hidden]="!showServPropuesto" mat-header-cell *matHeaderCellDef mat-sort-header class="color-group-1 col_sp_accionIsis"> Acción ISIS </th>
@@ -500,7 +572,7 @@
                                         <input matInput [(ngModel)]="row.equipoTerminalPropuesto" type="text" maxlength="100">
                                     </mat-form-field>
                                 </td>
-                            </ng-container>
+                            </ng-container>                            
                             <ng-container matColumnDef="equipos_routers">
                                 <th [hidden]="!showServPropuesto" mat-header-cell *matHeaderCellDef mat-sort-header class="color-group-1">Router</th>
                                 <td [hidden]="!showServPropuesto" mat-cell *matCellDef="let row" style="flex: 0 0 230px !important;">
@@ -509,6 +581,43 @@
                                     </mat-form-field>
                                 </td>
                             </ng-container>
+
+
+                            <ng-container matColumnDef="servicioPropuesto_fechaLlegada">
+                                <th [hidden]="!showServPropuesto" mat-header-cell *matHeaderCellDef mat-sort-header class="color-group-1">Fecha Llegada</th>
+                                <td [hidden]="!showServPropuesto" mat-cell *matCellDef="let row" style="flex: 0 0 230px !important;">
+                                    <mat-form-field color="accent" style="text-align: center; width: 100%;" appearance="legacy" [style.fontSize.px]="12">                                        
+                                        <input matInput [textMask]="maskFechaLlegada" [(ngModel)]="row.fechaLlegada" type="text" >
+                                    </mat-form-field>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="servicioPropuesto_componentes">
+                                <th [hidden]="!showServPropuesto" mat-header-cell *matHeaderCellDef mat-sort-header class="color-group-1">Componentes</th>
+                                <td [hidden]="!showServPropuesto" mat-cell *matCellDef="let row" style="flex: 0 0 230px !important;">
+                                    <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                        <input matInput [(ngModel)]="row.componentes" type="text" maxlength="100">
+                                    </mat-form-field>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="servicioPropuesto_VRF">
+                                <th [hidden]="!showServPropuesto" mat-header-cell *matHeaderCellDef mat-sort-header class="color-group-1">VRF</th>
+                                <td [hidden]="!showServPropuesto" mat-cell *matCellDef="let row" style="flex: 0 0 230px !important;">
+                                    <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                        <input matInput [(ngModel)]="row.ServicioPropuestoVRF" type="text" maxlength="100">
+                                    </mat-form-field>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="servicioPropuesto_DetalleAccion">
+                                <th [hidden]="!showServPropuesto" mat-header-cell *matHeaderCellDef mat-sort-header class="color-group-1">Detalle Accion Enlace</th>
+                                <td [hidden]="!showServPropuesto" mat-cell *matCellDef="let row" style="flex: 0 0 230px !important;">
+                                    <mat-form-field color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
+                                        <input matInput [(ngModel)]="row.DetalleAccion" type="text" maxlength="100">
+                                    </mat-form-field>
+                                </td>
+                            </ng-container>
+
+
+
                             <ng-container matColumnDef="equipos_otros">
                                 <th [hidden]="!showServPropuesto" mat-header-cell *matHeaderCellDef mat-sort-header class="color-group-1"> Otros </th>
                                 <td [hidden]="!showServPropuesto" mat-cell *matCellDef="let element">
@@ -658,7 +767,7 @@
                                 </th>
                             </ng-container>
                             <ng-container matColumnDef="header-serv-actual-group_3">
-                                <th [hidden]="!showServActual" class="group-circuito" mat-header-cell *matHeaderCellDef  [attr.colspan]="4">
+                                <th [hidden]="!showServActual" class="group-circuito" mat-header-cell *matHeaderCellDef  [attr.colspan]="11">
                                     <div class="content-group">
                                         <div class="group-title color-group-2">
                                             <span class="color-group-2 borde-group-right">Servicio Actual</span>
@@ -668,7 +777,7 @@
                             </ng-container>
 
                             <ng-container matColumnDef="header-serv-propuesto-group_1">
-                                <th [hidden]="!showServPropuesto" class="group-circuito" mat-header-cell *matHeaderCellDef  [attr.colspan]="9">
+                                <th [hidden]="!showServPropuesto" class="group-circuito" mat-header-cell *matHeaderCellDef  [attr.colspan]="13">
                                     <div class="content-group">
                                         <div class="group-title color-group-1">
                                             <span class="color-group-1 borde-group-left">Servicio Propuesto</span>

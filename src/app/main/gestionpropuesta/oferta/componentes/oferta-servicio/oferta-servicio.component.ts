@@ -60,12 +60,12 @@ export class OfertaServicioComponent implements OnInit {
     { id: 'gbps', nombre: 'Gbps' },
   ];
 
-  showSedeInfo:boolean=true;
-  showServActual:boolean=false;
-  showServActualCaudal:boolean=false;
-  showServPropuesto:boolean=true;
-  showServPropuestoCaudal:boolean=false;
-  showSisego:boolean=true;
+  showSedeInfo: boolean = true;
+  showServActual: boolean = false;
+  showServActualCaudal: boolean = false;
+  showServPropuesto: boolean = true;
+  showServPropuestoCaudal: boolean = false;
+  showSisego: boolean = true;
 
   //public seldescrip: string;
   //https://stackblitz.com/edit/mat-paginator-select-page?embed=1
@@ -77,7 +77,17 @@ export class OfertaServicioComponent implements OnInit {
     'servicioActual_medio', 'servicioActual_bw', 'servicioActual_ldn',
     'servicioActual_voz', 'servicioActual_video', 'servicioActual_platinium',
     'servicioActual_oro', 'servicioActual_plata', 'servicioActual_bronce', 'servicioActual_equipoterminal',
-    'servicioActual_router', 'servicioActual_otro', 'servicioActual_facturacion',
+    'servicioActual_router',
+
+    'servicioActual_dte', //Se agrego este campo
+    'servicioActual_recursotransporte', //Se agrego este campo
+    'servicioActual_tipoantena', //Se agrego este campo
+    'servicioActual_segmentosatelital', //Se agrego este campo
+    'servicioActual_segmentopozotierra', //Se agrego este campo
+    'servicioActual_ups', //Se agrego este campo
+    'servicioActual_VRF', //Se agrego este campo
+
+    'servicioActual_otro', 'servicioActual_facturacion',
 
     'servicioPropuesto_acccionisis', 'servicioPropuesto_tiposede',
     'servicioPropuesto_modo', //Parece que esto es el campo Condicion    
@@ -86,11 +96,16 @@ export class OfertaServicioComponent implements OnInit {
     'servicioPropuesto_sva', 'servicioPropuesto_svadescripcion',//creo que son campos nuevo agregado pos jorge
     'servicioPropuesto_bw',
     'servicioPropuesto_ldn', 'servicioPropuesto_voz', 'servicioPropuesto_video', 'servicioPropuesto_platinium', 'servicioPropuesto_oro', 'servicioPropuesto_plata', //nuevos campos agregado por jorge
-    'servicioPropuesto_bronce','servicio_condicion',
+    'servicioPropuesto_bronce', 'servicio_condicion',
+
+    'servicioPropuesto_fechaLlegada',//Se agrego este campo
+    'servicioPropuesto_componentes',//Se agrego este campo
+    'servicioPropuesto_VRF',//Se agrego este campo
+    'servicioPropuesto_DetalleAccion',//Se agrego este campo
 
     'equipos_equipoterminal', 'equipos_routers', 'equipos_otros', 'equipos_precio', 'equipos_observaciones', 'ofertaisis',
 
-    'sesego', 'sisego_zona', 'sisego_ultimamilla','sisego_transmision', 'sisego_plantaexterna', 'sisego_diasejecucion','sisego_residual',
+    'sesego', 'sisego_zona', 'sisego_ultimamilla', 'sisego_transmision', 'sisego_plantaexterna', 'sisego_diasejecucion', 'sisego_residual',
 
     'accion'];
   exampleDatabase: OfertaServicioService | null;
@@ -108,6 +123,13 @@ export class OfertaServicioComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild('filter', { static: true }) filter: ElementRef;
   @ViewChild('pagesize', { static: true }) pagesize: ElementRef;
+
+  maskFechaLlegada = {
+    guide: true,
+    showMask : true,
+    mask: [/\d/, /\d/, '/', /\d/, /\d/, '/',/\d/, /\d/,/\d/, /\d/]
+  };
+
   constructor(
     public httpClient: HttpClient,
     public dialog: MatDialog,
@@ -123,31 +145,29 @@ export class OfertaServicioComponent implements OnInit {
     row.distritoId = user.iddistrito
   }
 
-  calculoResidual(row:OfertaDetalleModel)
-  {
-    let residual = (row.costoantiguo || 0) * (120-(row.antiguedad || 0))/120;
+  calculoResidual(row: OfertaDetalleModel) {
+    let residual = (row.costoantiguo || 0) * (120 - (row.antiguedad || 0)) / 120;
 
-    row.costoUltimaMilla = (residual*0.1);
-    row.transmision = (residual*0.2);
-    row.plantaexterna = (residual*0.7);
+    row.costoUltimaMilla = (residual * 0.1);
+    row.transmision = (residual * 0.2);
+    row.plantaexterna = (residual * 0.7);
   }
 
-  selectedZona(event, row:OfertaDetalleModel) {
+  selectedZona(event, row: OfertaDetalleModel) {
     let target = event.source._element.nativeElement;
     row.zonaSisego = target.innerText.trim();
-    if(row.IdZonaSigego == -1)
-    {
-      row.antiguedad=0;
-      row.costoantiguo=0;
+    if (row.IdZonaSigego == -1) {
+      row.antiguedad = 0;
+      row.costoantiguo = 0;
       row.costoUltimaMilla = 0;
-      row.transmision =0;
+      row.transmision = 0;
       row.plantaexterna = 0;
     }
-    if(row.IdZonaSigego == 3){
-      row.antiguedad=0;
-      row.costoantiguo=0;
+    if (row.IdZonaSigego == 3) {
+      row.antiguedad = 0;
+      row.costoantiguo = 0;
       row.costoUltimaMilla = 0;
-      row.transmision =0;
+      row.transmision = 0;
       row.plantaexterna = 0;
     }
 
@@ -160,7 +180,7 @@ export class OfertaServicioComponent implements OnInit {
         subscribe(data => {
           setTimeout(() => {
             row.isLoading = false;
-            this.filteredStates = data;            
+            this.filteredStates = data;
           }, 1000);
         });
     }
@@ -176,40 +196,40 @@ export class OfertaServicioComponent implements OnInit {
       this.listTipoCircuito = data;
     });
     await this.commonService.getTipoServicioAll().subscribe(data => {
-      this.listTipoServicio = data;      
+      this.listTipoServicio = data;
     });
     await this.commonService.getViaAccesoAll().subscribe(data => {
-      this.listViaAcceso = data;      
+      this.listViaAcceso = data;
     });
     await this.commonService.getAccionIsisAll().subscribe(data => {
       this.listAccionIsis = data;
     });
-    await this.ofertaServicioService.listarCondicionServicios().subscribe(data => {      
-      this.listaConcidionServicio = data;      
+    await this.ofertaServicioService.listarCondicionServicios().subscribe(data => {
+      this.listaConcidionServicio = data;
 
-    });        
+    });
     this.ofertaServicioService.obtenerOfertasDetalle({ oferta_id: this.ofertaBase.id, page: 0 }).subscribe(data => {
       if (data != null) {
-        
-        for(let d of data){
+
+        for (let d of data) {
           d['transmision'] = 0;
-          d['plantaexterna']= 0;
+          d['plantaexterna'] = 0;
         }
 
         this.dataSourceList = data;
-        this.dataSource.data = data;        
+        this.dataSource.data = data;
       }
     });
   }
 
   crearNuevoServicio(ofertasDetalleId: number, ofertaId: number): OfertaDetalleModel {
     return {
-      transmision:0,
-      plantaexterna : 0,
-      antiguedad:0,
-      costoantiguo:0,
+      transmision: 0,
+      plantaexterna: 0,
+      antiguedad: 0,
+      costoantiguo: 0,
       clienteId: null,
-      ofertasDetalleId: ofertasDetalleId, 
+      ofertasDetalleId: ofertasDetalleId,
       ofertaId: ofertaId,
       nombreSede: '',
       direccion: '',
@@ -288,7 +308,7 @@ export class OfertaServicioComponent implements OnInit {
 
       caudalBroncePropuesto: 'kbps',
       nrocaudalBroncePropuesto: '',
-      condicion_servicio : 0,
+      condicion_servicio: 0,
       equipoTerminalPropuesto: '',
       routerPropuesto: '',
       otrosEquiposPropuesto: '',
@@ -323,11 +343,24 @@ export class OfertaServicioComponent implements OnInit {
       ubigeo: '',
       estado: 0,
       activo: true,
-      isLoading: false
-      //, lstZonaSisego: []
+      isLoading: false,
+
+      dte: '',
+      recursotransporte: '',
+      tipoantena: '',
+      segmentosatelital: '',
+      segmentopozotierra: '',
+      ups: '',
+      VRF: '',
+
+      fechaLlegada:'',//Se agrego esta propiedad
+      componentes: '',//Se agrego esta propiedad
+      ServicioPropuestoVRF: '',//Se agrego esta propiedad
+      DetalleAccion: '',//Se agrego esta propiedad
+    
     };
   }
-  
+
   addRow(): void {
     this.dataSourceList = [];
     var Id = this.dataSource.data.length == 0 ? 1 : this.dataSource.data[this.dataSource.data.length - 1].ofertasDetalleId + 1;
@@ -338,7 +371,7 @@ export class OfertaServicioComponent implements OnInit {
     // this.dataSource.filter = "";
   }
 
-  duplicarRow(item:OfertaDetalleModel):void{
+  duplicarRow(item: OfertaDetalleModel): void {
     this.dataSourceList = [];
     var Id = this.dataSource.data.length == 0 ? 1 : this.dataSource.data[this.dataSource.data.length - 1].ofertasDetalleId + 1;
     let objecto = item;
@@ -403,27 +436,25 @@ export class OfertaServicioComponent implements OnInit {
         let result_ = JSON.parse(response);
         if (result_.status == "success") {
           let result__ = JSON.parse(result_['result']);
-         if(result__['zonas'].length > 0)
-         {
+          if (result__['zonas'].length > 0) {
 
-          item.lstZonaSisego = result__['zonas'].map(obj => {
-            var entidad = {
-              id: obj.id,
-              nombre: obj.nom + ' - ' + obj.dis + ' m'
-            };
+            item.lstZonaSisego = result__['zonas'].map(obj => {
+              var entidad = {
+                id: obj.id,
+                nombre: obj.nom + ' - ' + obj.dis + ' m'
+              };
 
-            return entidad;
-          }); 
+              return entidad;
+            });
 
-          if(result__['zonas'].length ==1 && result__['zonas'][0]['id'] == 3 )
-          {
-            item.lstZonaSisego.push({ id: -1, nombre: "Residual" });
+            if (result__['zonas'].length == 1 && result__['zonas'][0]['id'] == 3) {
+              item.lstZonaSisego.push({ id: -1, nombre: "Residual" });
+            }
+
+          } else {
+            item.lstZonaSisego = [{ id: 3, nombre: "Zona Gris" }, { id: -1, nombre: "Residual" }];
           }
 
-         }else{
-           item.lstZonaSisego = [{ id: 3, nombre: "Zona Gris" },{ id: -1, nombre: "Residual" }];
-         }
-                  
         }
       });
       this.dataSource.filter = '';
@@ -439,12 +470,12 @@ export class OfertaServicioComponent implements OnInit {
         item.ofertasDetalleId = item.ofertasDetalleId
       else if (item.estado == 2)
         item.activo = false
-      
+
       var container = {
         bw_actual: item.bwActualActual + ' ' + item.nrobwActualActual,
         bronce_actual: item.caudalBronceActual + ' ' + item.nrocaudalBronceActual,
         bronce_propuesto: item.caudalBroncePropuesto + ' ' + item.nrocaudalBroncePropuesto,
-        condicion_servicio: item.condicion_servicio ==0 ? null: item.condicion_servicio, // en el back se debe de enviar ese valor condicionServicio--> coordinar con omar
+        condicion_servicio: item.condicion_servicio == 0 ? null : item.condicion_servicio, // en el back se debe de enviar ese valor condicionServicio--> coordinar con omar
         bw_propuesto: item.bwPropuesto + ' ' + item.nrobwPropuesto,
         contacto: item.contacto,
         dias: item.diasEjecucion,
@@ -454,18 +485,18 @@ export class OfertaServicioComponent implements OnInit {
         facturacion: item.facturacion_actual,
         id: item.ofertasDetalleId,
         idoferta: item.ofertaId,
-        idaccionisis: item.accionIsisIdPropuesto ==0 ? null: item.accionIsisIdPropuesto,//item.accionIsisIdPropuesto,
-        idcircuito:  item.tipoCircuitoActual =="" ? null: item.tipoCircuitoActual,   //item.tipoCircuitoActual,
-        idcircuito2:  item.tipoCircuitoIdPropuesto ==0 ? null: item.tipoCircuitoIdPropuesto, //item.tipoCircuitoIdPropuesto,
+        idaccionisis: item.accionIsisIdPropuesto == 0 ? null : item.accionIsisIdPropuesto,//item.accionIsisIdPropuesto,
+        idcircuito: item.tipoCircuitoActual == "" ? null : item.tipoCircuitoActual,   //item.tipoCircuitoActual,
+        idcircuito2: item.tipoCircuitoIdPropuesto == 0 ? null : item.tipoCircuitoIdPropuesto, //item.tipoCircuitoIdPropuesto,
         iddistrito: item.distritoId,
-        idmedio: item.servicioActual_medio ==0 ? null: item.servicioActual_medio, //item.servicioActual_medio,
-        idmedio2: item.servicioPropuesto_medio ==0 ? null: item.servicioPropuesto_medio,//item.servicioPropuesto_medio,
-        idmodo: item.servicioPropuesto_modo ==0 ? null: item.servicioPropuesto_modo, //item.servicioPropuesto_modo,
-        idservicio: item.tipoServicioIdActual ==0 ? null: item.tipoServicioIdActual,
-        idservicio2: item.tipoServicioIdPropuesto ==0 ? null: item.tipoServicioIdPropuesto, //item.tipoServicioIdPropuesto,
-        idtiposede: item.servicioPropuesto_tiposede ==0 ? null: item.servicioPropuesto_tiposede,//item.servicioPropuesto_tiposede,
-        lat: item.latitud !=null ?  item.latitud.toString(): "",
-        lon: item.longitud!=null ?  item.longitud.toString(): "", 
+        idmedio: item.servicioActual_medio == 0 ? null : item.servicioActual_medio, //item.servicioActual_medio,
+        idmedio2: item.servicioPropuesto_medio == 0 ? null : item.servicioPropuesto_medio,//item.servicioPropuesto_medio,
+        idmodo: item.servicioPropuesto_modo == 0 ? null : item.servicioPropuesto_modo, //item.servicioPropuesto_modo,
+        idservicio: item.tipoServicioIdActual == 0 ? null : item.tipoServicioIdActual,
+        idservicio2: item.tipoServicioIdPropuesto == 0 ? null : item.tipoServicioIdPropuesto, //item.tipoServicioIdPropuesto,
+        idtiposede: item.servicioPropuesto_tiposede == 0 ? null : item.servicioPropuesto_tiposede,//item.servicioPropuesto_tiposede,
+        lat: item.latitud != null ? item.latitud.toString() : "",
+        lon: item.longitud != null ? item.longitud.toString() : "",
         ldn_actual: item.caudalLdnActual + ' ' + item.nrocaudalLdnActual,
         ldn_propuesto: item.caudalLdnPropuesto + ' ' + item.nrocaudalLdnPropuesto,
         ncircuito: item.nrotipoCircuitoActual,
@@ -497,10 +528,10 @@ export class OfertaServicioComponent implements OnInit {
         zona: item.zonaSisego,
         activo: item.activo,
         estado: 0,
-        idcliente : item.clienteId
+        idcliente: item.clienteId
       };
       return container;
-    });    
+    });
     this.inProgress = true;
     console.log(JSON.stringify(listOfertaDetalle));
     this.ofertaServicioService.guardarservicios(listOfertaDetalle).pipe(
