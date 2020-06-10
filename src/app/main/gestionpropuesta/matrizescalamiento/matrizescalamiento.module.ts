@@ -15,9 +15,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { NgxMaskModule } from 'ngx-mask';
-import { DialogeficienciaTecnicaModule } from '../dialogeficienciaTecnica/dialogeficienciaTecnica.module';
-// import { CMIModule } from './componentes/cmi/cmi.module';
-// import { FlujoCajaModule } from './componentes/flujocaja/flujocaja.module';
+import { DialogMatrizEscalamientoModule } from '../dialogMatrizEscalamiento/dialogMatrizEscalamiento.module';
+
 const routes: Routes = [
     {
         path: '**',
@@ -45,7 +44,7 @@ const routes: Routes = [
         FormsModule,
         FileInputModule,
         NgxMaskModule.forRoot(),
-        DialogeficienciaTecnicaModule,
+        DialogMatrizEscalamientoModule,
         // CMIModule,
         // FlujoCajaModule
     ],    
