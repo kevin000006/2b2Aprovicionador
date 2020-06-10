@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatrizEscalamientoService } from './matrizescalamiento.service';
-//import { DialogeficienciaTecnicaComponent } from '../dialogeficienciaTecnica/dialogeficienciaTecnica.component';
+import { DialogMatrizEscalamientoComponent } from '../dialogMatrizEscalamiento/dialogMatrizEscalamiento.component';
 @Component({
   selector: 'MatrizEscalamiento',
   templateUrl: './matrizescalamiento.component.html',
@@ -26,29 +26,29 @@ export class MatrizEscalamientoComponent implements OnInit {
     });
   }
   editarRow(row: any): void {
-    // const dialogRef = this.dialog.open(DialogeficienciaTecnicaComponent, {
-    //   width: '650px',
-    //   data: {
-    //     titulo: row.nombre,
-    //     valor : row.valor,
-    //     buttonText: {
-    //       ok: 'Guardar',
-    //       cancel: 'Cancelar'
-    //     }
-    //   }
-    // });
+    const dialogRef = this.dialog.open(DialogMatrizEscalamientoComponent, {
+      width: '650px',
+      data: {
+        titulo: "Matriz de Escalamiento",
+        valor : row.valor,
+        buttonText: {
+          ok: 'Guardar',
+          cancel: 'Cancelar'
+        }
+      }
+    });
 
-    // dialogRef.afterClosed().subscribe((res: any) => {
-    //   if (res.respuesta) {
-    //     const a = document.createElement('a');
-    //     a.click();
-    //     a.remove();
-    //     row.valor=res.valor,
-    //     // this.servicioParametroGlobal.guardarparametro(row.parametro_id ,res.valor).subscribe((res: any) => {
-    //     //   console.log(res);
-    //     // });       
-    //   }
-    // });    
+    dialogRef.afterClosed().subscribe((res: any) => {
+      if (res.respuesta) {
+        const a = document.createElement('a');
+        a.click();
+        a.remove();
+        row.valor=res.valor;
+        // this.servicioParametroGlobal.guardarparametro(row.parametro_id ,res.valor).subscribe((res: any) => {
+        //   console.log(res);
+        // });       
+      }
+    });    
   } 
   
 }
