@@ -11,13 +11,14 @@ export class DialogMatrizEscalamientoComponent {
     valor: number = 0
     confirmButtonText = "Yes"
     cancelButtonText = "Cancel"
+    row:any;
     constructor(
         @Inject(MAT_DIALOG_DATA) private data: any,
         private dialogRef: MatDialogRef<DialogMatrizEscalamientoComponent>) {
         if (data) {
             this.titulo = data.titulo || this.titulo;
-            this.valor = data.valor || this.valor;
-            
+            this.row =data.row;
+            console.log(this.row);
             if (data.buttonText) {
                 this.confirmButtonText = data.buttonText.ok || this.confirmButtonText;
                 this.cancelButtonText = data.buttonText.cancel || this.cancelButtonText;
@@ -28,7 +29,7 @@ export class DialogMatrizEscalamientoComponent {
     onConfirmClick(): void {
         let datos={
             respuesta: true,
-            valor:this.valor
+            row:this.row
         };
         this.dialogRef.close(datos);
     }

@@ -12,4 +12,7 @@ export class MatrizEscalamientoService {
   obtenermatrizescalamiento():Observable<any[]>{
     return this.http.get<any[]>('/finanzas/obtenermatrizescalamiento?oferta_id=1');    
   } 
+  guardarmatrizescalamiento(data: any): Observable<any> {    
+    return this.http.post<any>('/finanzas/guardarmatrizescalamiento', data);
+  }
 }

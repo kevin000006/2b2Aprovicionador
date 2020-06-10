@@ -352,7 +352,6 @@ export class OfertaServicioComponent implements OnInit {
       segmentopozotierra: '',
       ups: '',
       VRF: '',
-
       fechaLlegada:'',//Se agrego esta propiedad
       componentes: '',//Se agrego esta propiedad
       ServicioPropuestoVRF: '',//Se agrego esta propiedad
@@ -528,7 +527,19 @@ export class OfertaServicioComponent implements OnInit {
         zona: item.zonaSisego,
         activo: item.activo,
         estado: 0,
-        idcliente: item.clienteId
+        idcliente: item.clienteId,
+
+        dte_actual: item.dte,
+        recurso_transporte_actual: item.recursotransporte,
+        tipo_antena_actual: item.tipoantena,
+        segmento_satelital_actual: item.segmentosatelital,
+        pozo_tierra_actual: item.segmentopozotierra,
+        ups_actual: item.ups,
+        vrf_actual: item.VRF,
+        fecha_llegada_propuesto: item.fechaLlegada,
+        componentes_propuesto: item.componentes,
+        vrf_propuesto: item.ServicioPropuestoVRF,
+        detalle_accion_propuesto: item.DetalleAccion
       };
       return container;
     });
