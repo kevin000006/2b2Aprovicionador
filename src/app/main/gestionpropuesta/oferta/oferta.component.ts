@@ -82,6 +82,7 @@ export class OfertaComponent implements OnInit {
   openShared(): void {
     const dialogRef = this.dialog.open(ShareDialogComponent, {
       width: '650px',
+      minWidth: '650px',
       data: {
         id: this.ofertaBase['id'],
         codigo: this.ofertaBase['codigo'],
@@ -98,6 +99,7 @@ export class OfertaComponent implements OnInit {
   openBitacora(): void {
       const dialogRef = this.dialog.open(BitacoraDialogComponent, {
         width: '760px',
+        minWidth: '760px',
         data: {
           id:this.ofertaBase.id
         }
