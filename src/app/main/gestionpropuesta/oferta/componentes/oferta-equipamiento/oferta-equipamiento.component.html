@@ -114,13 +114,13 @@
                                 </td>
                                 <td class=" text-right ">
                                     <span class="total" mask="separator.2">
-                                        {{row.total.toFixed(2) | mask: 'separator':','}}
+                                        {{(row.total || 0).toFixed(2) | mask: 'separator':','}}
                                     </span>
 
                                 </td>
                                 <td class="text-right">
                                     <span class="instalacion">
-                                        {{ row.instalacion.toFixed(2) | mask: 'separator':','}}
+                                        {{ (row.instalacion || 0).toFixed(2) | mask: 'separator':','}}
                                     </span>
                                 </td>
                                 <td class="text-center">
