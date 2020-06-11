@@ -23,6 +23,7 @@ export class FileInputComponent implements OnInit {
   message: string = "Are you sure?"
   confirmButtonText = "Yes"
   cancelButtonText = "Cancel"
+  tipoArchivo:any= 0;
   IdOferta : string;
   usuario: { nombres: '', apellidos: '', id: 0 };
   public listArchivo: any = [];

@@ -673,7 +673,7 @@
                                 <th  [hidden]="!showSisego" mat-header-cell *matHeaderCellDef mat-sort-header class="color-group-2">Ultima Mila S/.</th>
                                 <td [hidden]="!showSisego" mat-cell *matCellDef="let row">
                                     <mat-form-field *ngIf="row.IdZonaSigego != -1" color="accent" style="text-align: center; width: 80%;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput [(ngModel)]="row.costoUltimaMilla.toF" type="number" maxlength="100">
+                                        <input matInput [(ngModel)]="row.costoUltimaMilla" type="number" maxlength="100">
                                     </mat-form-field>
                                     <span *ngIf="row.IdZonaSigego == -1">
                                         {{row.costoUltimaMilla.toFixed(2)}}
@@ -695,10 +695,10 @@
                                 <th [hidden]="!showSisego" mat-header-cell *matHeaderCellDef mat-sort-header class="color-group-2 col_sp_plantaexterna">Planta Externa S/.</th>
                                 <td [hidden]="!showSisego" mat-cell *matCellDef="let row" class="col_sp_plantaexterna">
                                     <mat-form-field *ngIf="row.IdZonaSigego != -1" color="accent" style="text-align: center;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input  matInput [(ngModel)]="row.plantaexterna" autocomplete="off" type="number" maxlength="100">
+                                        <input  matInput [(ngModel)]="row.planta_externa" autocomplete="off" type="number" maxlength="100">
                                     </mat-form-field>
                                     <span *ngIf="row.IdZonaSigego == -1">
-                                        {{row.plantaexterna.toFixed(2)}}
+                                        {{row.planta_externa.toFixed(2)}}
                                     </span>
                                 </td>
                             </ng-container>
@@ -714,10 +714,10 @@
                                 <th [hidden]="!showSisego" mat-header-cell *matHeaderCellDef mat-sort-header class="color-group-2 col_sp_residual">Residual</th>
                                 <td [hidden]="!showSisego" mat-cell *matCellDef="let row" class="col_sp_residual">
                                     <mat-form-field *ngIf="row.IdZonaSigego == -1" color="accent" style="text-align: center;width: 50px;margin-right: 5px;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput (keyup)="calculoResidual(row)" [(ngModel)]="row.antiguedad" placeholder="Ant." type="text" maxlength="100">
+                                        <input matInput (keyup)="calculoResidual(row)" [(ngModel)]="row.residual_antig" placeholder="Ant." type="text" maxlength="100">
                                     </mat-form-field>
                                     <mat-form-field *ngIf="row.IdZonaSigego == -1" color="accent" style="text-align: center; width: 70px;" appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput (keyup)="calculoResidual(row)" [(ngModel)]="row.costoantiguo" type="text" placeholder="Costo Ant." maxlength="100">
+                                        <input matInput (keyup)="calculoResidual(row)" [(ngModel)]="row.residual_antig_costo" type="text" placeholder="Costo Ant." maxlength="100">
                                     </mat-form-field>
                                 </td>
                             </ng-container>

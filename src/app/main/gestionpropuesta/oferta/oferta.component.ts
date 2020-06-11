@@ -58,6 +58,7 @@ export class OfertaComponent implements OnInit {
     const dialogRef = this.dialog.open(FileInputComponent, {
       height: '98%',
       width: '100vw',
+      minWidth: '100vw',
       panelClass: 'full-screen-modal',
       data: {
         id:this.ofertaBase['id'],

@@ -146,29 +146,30 @@ export class OfertaServicioComponent implements OnInit {
   }
 
   calculoResidual(row: OfertaDetalleModel) {
-    let residual = (row.costoantiguo || 0) * (120 - (row.antiguedad || 0)) / 120;
+    let residual = (row.residual_antig_costo || 0) * (120-(row.residual_antig || 0))/120;
 
-    row.costoUltimaMilla = (residual * 0.1);
-    row.transmision = (residual * 0.2);
-    row.plantaexterna = (residual * 0.7);
+    row.costoUltimaMilla = (residual*0.1);
+    row.transmision = (residual*0.2);
+    row.planta_externa = (residual*0.7);
   }
 
   selectedZona(event, row: OfertaDetalleModel) {
     let target = event.source._element.nativeElement;
     row.zonaSisego = target.innerText.trim();
-    if (row.IdZonaSigego == -1) {
-      row.antiguedad = 0;
-      row.costoantiguo = 0;
+    if(row.IdZonaSigego == -1 && row.lstZonaSisego.length > 1 )
+    {
+      row.residual_antig=0;
+      row.residual_antig_costo=0;
       row.costoUltimaMilla = 0;
-      row.transmision = 0;
-      row.plantaexterna = 0;
+      row.transmision =0;
+      row.planta_externa = 0;
     }
-    if (row.IdZonaSigego == 3) {
-      row.antiguedad = 0;
-      row.costoantiguo = 0;
+    if(row.IdZonaSigego == 3 && row.lstZonaSisego.length > 1 ){
+      row.residual_antig=0;
+      row.residual_antig_costo=0;
       row.costoUltimaMilla = 0;
-      row.transmision = 0;
-      row.plantaexterna = 0;
+      row.transmision =0;
+      row.planta_externa = 0;
     }
 
   }
@@ -210,12 +211,6 @@ export class OfertaServicioComponent implements OnInit {
     });
     this.ofertaServicioService.obtenerOfertasDetalle({ oferta_id: this.ofertaBase.id, page: 0 }).subscribe(data => {
       if (data != null) {
-
-        for (let d of data) {
-          d['transmision'] = 0;
-          d['plantaexterna'] = 0;
-        }
-
         this.dataSourceList = data;
         this.dataSource.data = data;
       }
@@ -225,9 +220,9 @@ export class OfertaServicioComponent implements OnInit {
   crearNuevoServicio(ofertasDetalleId: number, ofertaId: number): OfertaDetalleModel {
     return {
       transmision: 0,
-      plantaexterna: 0,
-      antiguedad: 0,
-      costoantiguo: 0,
+      planta_externa: 0,
+      residual_antig: 0,
+      residual_antig_costo: 0,
       clienteId: null,
       ofertasDetalleId: ofertasDetalleId,
       ofertaId: ofertaId,
@@ -528,7 +523,11 @@ export class OfertaServicioComponent implements OnInit {
         zona: item.zonaSisego,
         activo: item.activo,
         estado: 0,
-        idcliente: item.clienteId
+        idcliente: item.clienteId,
+        transmision: item.transmision,
+        planta_externa : item.planta_externa,
+        residual_antig : item.residual_antig,
+        residual_antig_costo: item.residual_antig_costo
       };
       return container;
     });

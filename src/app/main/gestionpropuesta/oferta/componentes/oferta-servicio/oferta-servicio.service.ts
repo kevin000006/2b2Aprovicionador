@@ -88,11 +88,17 @@ export class OfertaServicioService {
             element.nrocaudalPlataPropuesto = element.caudalPlataPropuesto !== null ? element.caudalPlataPropuesto.split(" ")[1] : "";
             element.caudalPlataPropuesto = element.caudalPlataPropuesto !== null ? element.caudalPlataPropuesto.split(" ")[0] : "";
 
+            element.transmision = !element.transmision ? 0 : element.transmision;
+            element.planta_externa = !element.planta_externa ? 0 : element.planta_externa;
+
             element.nrocaudalBroncePropuesto = element.caudalBroncePropuesto !== null ? element.caudalBroncePropuesto.split(" ")[1] : "";
             element.caudalBroncePropuesto = element.caudalBroncePropuesto !== null ? element.caudalBroncePropuesto.split(" ")[0] : "";
-            if( element.zonaSisego){
+            if( element.zonaSisego && element.zonaSisego != 'Residual'){
               element.IdZonaSigego = 1;
               element.lstZonaSisego  = [{ id: 1, nombre: element.zonaSisego }]
+            }else if(element.zonaSisego && element.zonaSisego == 'Residual'){
+              element.IdZonaSigego = -1;
+              element.lstZonaSisego  = [{ id: -1, nombre: element.zonaSisego }]
             }else{
               element.IdZonaSigego = 0;
             }

@@ -187,13 +187,13 @@ export class OfertaDetalleModel {
   constructor()
   {
     this.transmision= 0;
-    this.plantaexterna=0;
+    this.planta_externa=0;
   }
 
   transmision:number;
-  plantaexterna:number;
-  antiguedad:number;
-  costoantiguo:number;
+  planta_externa:number;
+  residual_antig:number;
+  residual_antig_costo:number;
 
   clienteId: number;
   ofertasDetalleId: number;
