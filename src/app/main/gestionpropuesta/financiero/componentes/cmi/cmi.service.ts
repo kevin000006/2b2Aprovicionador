@@ -9,7 +9,7 @@ export class CMIService {
 
   constructor(private http: HttpClient) {
   }
-  obtenercmi(ofertaId:number):Observable<any[]>{
+  obtenercmi(ofertaId: number): Observable<any[]> {
     return this.http.get<any[]>('/finanzas/obtenercmi?oferta_id=' + ofertaId);
   }
 }
