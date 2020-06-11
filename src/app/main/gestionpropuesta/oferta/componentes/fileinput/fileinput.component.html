@@ -7,10 +7,19 @@
     <div class="row oferta-head">
         <div class="col-xs-12 col-sm-2 col-lg-12">
             <div class="form-horizontal">
-                <div class="form-group container-fileinput">
+                <div class="form-group container-fileinput" style="padding: 0 18px 5px 0;">
                     <div class="col-xs-12 col-md-12">
                         <h1 style="font-size: 22px;font-family: TelefonicaBold;text-transform: capitalize !important;">!{{usuario.nombres}}, {{usuario.apellidos}}</h1>
                         <p style="font-size: 16px;">Recuerda subir tu archivo en <strong>Formato excel (XLS)</strong></p>
+                        <br>
+                        <mat-select  [(ngModel)]="tipoArchivo" style=" max-width: 258px;
+                        box-shadow: 0px 0px 14px -6px rgba(0,0,0,.5);padding: 8px 0;">
+                            <mat-option [value]="0">Tipo de Archivo</mat-option>
+                            <mat-option [value]="5">OTE</mat-option>
+                            <mat-option [value]="10">Cotizador</mat-option>
+                            <mat-option [value]="50">Sisego</mat-option>
+                            <mat-option [value]="100">Otros</mat-option>
+                        </mat-select>
                         <br>
                         <br>
                         <button mat-flat-button class="btn-subir-archivo" (click)="onClick()">  
@@ -29,16 +38,16 @@
                                 <div class="col-xs-12 col-md-12">
                                     <div class="form-horizontal">
                                         <div class="form-group">
-                                            <div class="col-xs-offset-4 col-xs-3 col-sm-12 col-md-offset-0 col-md-1">
+                                            <div class="col-xs-offset-4 col-xs-3 col-sm-12 col-md-offset-0 col-md-1 padding-r-none">
                                                 <div class="imagen-excel"></div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-2 text-xs-center">
+                                            <div class="col-xs-12 col-sm-12 col-md-4 text-xs-center padding-r-none">
                                                 <div class="nombrefileinput">
                                                     <p style="font-family: TelefonicaBold !important;">{{item.nombre}}</p>
                                                     <!-- <p>{{item.tx_tamanioArchivo}}</p> -->
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-2 text-xs-center">
+                                            <div class="col-xs-12 col-sm-12 col-md-3 text-xs-center padding-r-none">
                                                 <div class="usuariocreafileinput">
                                                     <p style="font-family: TelefonicaBold !important;text-transform: capitalize !important;">
                                                         {{item.usuario.nombres}} {{item.usuario.apellidos}}
@@ -47,7 +56,7 @@
                                                     <p>{{item.createdDate}}</p>
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-offset-6 col-md-1">
+                                            <div class="col-xs-12 col-sm-12 col-md-offset-3 col-md-1">
                                                 <button mat-icon-button class="close-trash" (click)="deleteFile(item)">
                                                     <mat-icon class=" close-icon " style="color: #00A9E0 !important; " >restore_from_trash</mat-icon>
                                                 </button>

@@ -107,29 +107,23 @@ export class OfertaGastosComponent implements OnInit {
       row.totalMensual = this.calcularMontoMensual(row);;//.toFixed(2);      
     }
   }
-  inputChangeCantidad(input: string, row: any): void {
-    if (input === "")
-      row.cantidad = 0;
-    else
-      row.cantidad = parseInt(input);
+  inputChangeCantidad(input: number, row: any): void {
+   
+      row.cantidad = input;
     row.totalMensual = this.calcularMontoMensual(row);
   }
-  inputChangeNumeroMeses(input: string, row: any): void {
-    if (input === "")
-      row.meses = 0;
-    else
-      row.meses = parseInt(input);
+  inputChangeNumeroMeses(input: number, row: any): void {
+   
+      row.meses = input;
     row.totalMensual = this.calcularMontoMensual(row);
   }
 
-  inputChangeMontoUnitarioMensual(input: string, row: any): void {
-    if (input === "")
-      row.unitarioMensual = 0;
-    else
-      row.unitarioMensual = parseInt(input);
+  inputChangeMontoUnitarioMensual(input: number, row: any): void {
+      row.unitarioMensual = input;
     row.totalMensual = this.calcularMontoMensual(row);
   }
   calcularMontoMensual(row: any): number {
+    
     var montoCalculado: number = 0;
     if (row.factor > 0)
       montoCalculado = row.cantidad * row.meses * ((row.moneda_id == 2 ? row.unitarioMensual * this.tipoCambio : row.unitarioMensual) * (row.factor + 1));

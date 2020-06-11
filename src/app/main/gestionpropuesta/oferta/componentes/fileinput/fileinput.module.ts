@@ -9,15 +9,19 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDividerModule } from '@angular/material/divider';
 import { AlertConfirmModule } from '../alertConfirm/alertConfirm.module';
 import { DatePipe } from '@angular/common';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AlertSuccessModule } from '../alertSuccess/alertSuccess.module';
 @NgModule({
     imports: [
         CommonModule,
+        FormsModule,
         MatButtonModule,
         MatIconModule,
         MatDialogModule,
         MatDividerModule,
+        MatSelectModule,
         AlertConfirmModule,
         MatProgressBarModule,
         MatProgressSpinnerModule,
