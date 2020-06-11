@@ -146,29 +146,28 @@ export class OfertaServicioComponent implements OnInit {
   }
 
   calculoResidual(row: OfertaDetalleModel) {
-    let residual = (row.residual_antig_costo || 0) * (120-(row.residual_antig || 0))/120;
+    let residual = (row.residual_antig_costo || 0) * (120 - (row.residual_antig || 0)) / 120;
 
-    row.costoUltimaMilla = (residual*0.1);
-    row.transmision = (residual*0.2);
-    row.planta_externa = (residual*0.7);
+    row.costoUltimaMilla = (residual * 0.1);
+    row.transmision = (residual * 0.2);
+    row.planta_externa = (residual * 0.7);
   }
 
   selectedZona(event, row: OfertaDetalleModel) {
     let target = event.source._element.nativeElement;
     row.zonaSisego = target.innerText.trim();
-    if(row.IdZonaSigego == -1 && row.lstZonaSisego.length > 1 )
-    {
-      row.residual_antig=0;
-      row.residual_antig_costo=0;
+    if (row.IdZonaSigego == -1 && row.lstZonaSisego.length > 1) {
+      row.residual_antig = 0;
+      row.residual_antig_costo = 0;
       row.costoUltimaMilla = 0;
-      row.transmision =0;
+      row.transmision = 0;
       row.planta_externa = 0;
     }
-    if(row.IdZonaSigego == 3 && row.lstZonaSisego.length > 1 ){
-      row.residual_antig=0;
-      row.residual_antig_costo=0;
+    if (row.IdZonaSigego == 3 && row.lstZonaSisego.length > 1) {
+      row.residual_antig = 0;
+      row.residual_antig_costo = 0;
       row.costoUltimaMilla = 0;
-      row.transmision =0;
+      row.transmision = 0;
       row.planta_externa = 0;
     }
 
@@ -340,17 +339,17 @@ export class OfertaServicioComponent implements OnInit {
       activo: true,
       isLoading: false,
 
-      dte: '',
-      recursotransporte: '',
-      tipoantena: '',
-      segmentosatelital: '',
-      segmentopozotierra: '',
-      ups: '',
-      VRF: '',
-      fechaLlegada: '',//Se agrego esta propiedad
-      componentes: '',//Se agrego esta propiedad
-      ServicioPropuestoVRF: '',//Se agrego esta propiedad
-      DetalleAccion: '',//Se agrego esta propiedad
+      // dte: '',
+      // recursotransporte: '',
+      // tipoantena: '',
+      // segmentosatelital: '',
+      // segmentopozotierra: '',
+      // ups: '',
+      // VRF: '',
+      // fechaLlegada: '',//Se agrego esta propiedad
+      // componentes: '',//Se agrego esta propiedad
+      // ServicioPropuestoVRF: '',//Se agrego esta propiedad
+      // DetalleAccion: '',//Se agrego esta propiedad
 
     };
   }
@@ -524,20 +523,20 @@ export class OfertaServicioComponent implements OnInit {
         estado: 0,
         idcliente: item.clienteId,
         transmision: item.transmision,
-        planta_externa : item.planta_externa,
-        residual_antig : item.residual_antig,
+        planta_externa: item.planta_externa,
+        residual_antig: item.residual_antig,
         residual_antig_costo: item.residual_antig_costo,
-        dte_actual: item.dte,
-        recurso_transporte_actual: item.recursotransporte,
-        tipo_antena_actual: item.tipoantena,
-        segmento_satelital_actual: item.segmentosatelital,
-        pozo_tierra_actual: item.segmentopozotierra,
-        ups_actual: item.ups,
-        vrf_actual: item.VRF,
-        fecha_llegada_propuesto: item.fechaLlegada,
-        componentes_propuesto: item.componentes,
-        vrf_propuesto: item.ServicioPropuestoVRF,
-        detalle_accion_propuesto: item.DetalleAccion
+        dte_actual: item.dteActual,
+        recurso_transporte_actual: item.recursoTransporteActual,
+        tipo_antena_actual: item.tipoAntenaActual,
+        segmento_satelital_actual: item.segmentoSatelitalActual,
+        pozo_tierra_actual: item.pozoTierraActual,
+        ups_actual: item.upsActual,
+        vrf_actual: item.vrf_actual,
+        fecha_llegada_propuesto: item.fechaLlegadaPropuesto,
+        componentes_propuesto: item.componentesPropuesto,
+        vrf_propuesto: item.vrfPropuesto,
+        detalle_accion_propuesto: item.detalleAccionEnlacePropuesto
       };
       return container;
     });
