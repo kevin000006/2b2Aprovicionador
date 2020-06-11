@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatrizEscalamientoService } from './matrizescalamiento.service';
 import { DialogMatrizEscalamientoComponent } from '../dialogMatrizEscalamiento/dialogMatrizEscalamiento.component';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'MatrizEscalamiento',
   templateUrl: './matrizescalamiento.component.html',
@@ -13,12 +14,13 @@ export class MatrizEscalamientoComponent implements OnInit {
   dataSource: any;  
   constructor(
     public dialog: MatDialog,
-    private servicioParametroGlobal: MatrizEscalamientoService
+    private toastr: ToastrService,
+    private servicioMatrizEscalamiento: MatrizEscalamientoService
   ) {
   }
 
   ngOnInit(): void {
-    this.servicioParametroGlobal.obtenermatrizescalamiento().subscribe(data => {
+    this.servicioMatrizEscalamiento.obtenermatrizescalamiento().subscribe(data => {
       if (data != null) {
         this.dataSource = data;
         console.log(data);
@@ -30,7 +32,7 @@ export class MatrizEscalamientoComponent implements OnInit {
       width: '650px',
       data: {
         titulo: "Matriz de Escalamiento",
-        valor : row.valor,
+        row : row,
         buttonText: {
           ok: 'Guardar',
           cancel: 'Cancelar'
@@ -43,10 +45,16 @@ export class MatrizEscalamientoComponent implements OnInit {
         const a = document.createElement('a');
         a.click();
         a.remove();
-        row.valor=res.valor;
-        // this.servicioParametroGlobal.guardarparametro(row.parametro_id ,res.valor).subscribe((res: any) => {
-        //   console.log(res);
-        // });       
+        row= res.row;
+        this.servicioMatrizEscalamiento.guardarmatrizescalamiento(res.row).subscribe((res: any) => {
+          debugger;
+          this.toastr.success('Se proceso correctamente la información!', '', {
+            progressBar: true,
+            progressAnimation: 'increasing',
+            closeButton: true
+          });
+        });       
+        return;
       }
     });    
   } 

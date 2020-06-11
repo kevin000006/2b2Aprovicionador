@@ -10,12 +10,51 @@
                 <br>    
                 <br>                    
                 <div class="form-group">
-                    <div class="col-md-12">
+                    <label class="col-md-2">FCV</label>
+                    <div class="col-md-10">
                         <mat-form-field color="accent" appearance="outline">
-                            <input autocomplete="off"  [(ngModel)]="valor" type="number"   matInput  placeholder="">
+                            <input autocomplete="off"  [(ngModel)]="row.fullcontracvalue" type="number"   matInput  placeholder="">
                             <mat-icon class="icon" matSuffix>info &nbsp;</mat-icon>                            
                         </mat-form-field>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2">Aprobador</label>
+                    <div class="col-md-10">
+                        <mat-form-field color="accent" appearance="outline">
+                            <input autocomplete="off"  [(ngModel)]="row.aprobador" type="text"   matInput  placeholder="">                        
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2">VAN/VAI</label>
+                    <div class="col-md-5">
+                        <mat-form-field color="accent" appearance="outline">
+                            <input autocomplete="off"  [(ngModel)]="row.vanvaimayor" type="text"   matInput  placeholder="">                            
+                            <mat-icon class="icon" matTooltip="Mayor" matSuffix>info &nbsp;</mat-icon>                            
+                        </mat-form-field>
+                    </div>                 
+                    <div class="col-md-5">
+                        <mat-form-field color="accent" appearance="outline">
+                            <input autocomplete="off"  [(ngModel)]="row.vanvaimenor" type="text"   matInput  placeholder="">                            
+                            <mat-icon class="icon" matTooltip="Menor" matSuffix>info &nbsp;</mat-icon>                            
+                        </mat-form-field>
+                    </div>              
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2">PB</label>
+                    <div class="col-md-5">
+                        <mat-form-field color="accent" appearance="outline">
+                            <input autocomplete="off"  [(ngModel)]="row.paybackmayor" type="text"   matInput  placeholder="">                            
+                            <mat-icon class="icon" matTooltip="Mayor" matSuffix>info &nbsp;</mat-icon>                            
+                        </mat-form-field>
+                    </div>                 
+                    <div class="col-md-5">
+                        <mat-form-field color="accent" appearance="outline">
+                            <input autocomplete="off"  [(ngModel)]="row.paybackmenor" type="text"   matInput  placeholder="">                            
+                            <mat-icon class="icon" matTooltip="Menor" matSuffix>info &nbsp;</mat-icon>                            
+                        </mat-form-field>
+                    </div>           
                 </div>
                 <br>                    
                 <div class="form-group">

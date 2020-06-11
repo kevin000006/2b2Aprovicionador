@@ -126,8 +126,8 @@ export class OfertaServicioComponent implements OnInit {
 
   maskFechaLlegada = {
     guide: true,
-    showMask : true,
-    mask: [/\d/, /\d/, '/', /\d/, /\d/, '/',/\d/, /\d/,/\d/, /\d/]
+    showMask: true,
+    mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   };
 
   constructor(
@@ -347,12 +347,11 @@ export class OfertaServicioComponent implements OnInit {
       segmentopozotierra: '',
       ups: '',
       VRF: '',
-
-      fechaLlegada:'',//Se agrego esta propiedad
+      fechaLlegada: '',//Se agrego esta propiedad
       componentes: '',//Se agrego esta propiedad
       ServicioPropuestoVRF: '',//Se agrego esta propiedad
       DetalleAccion: '',//Se agrego esta propiedad
-    
+
     };
   }
 
@@ -465,7 +464,7 @@ export class OfertaServicioComponent implements OnInit {
         item.ofertasDetalleId = item.ofertasDetalleId
       else if (item.estado == 2)
         item.activo = false
-
+      debugger;
       var container = {
         bw_actual: item.bwActualActual + ' ' + item.nrobwActualActual,
         bronce_actual: item.caudalBronceActual + ' ' + item.nrocaudalBronceActual,
@@ -527,7 +526,18 @@ export class OfertaServicioComponent implements OnInit {
         transmision: item.transmision,
         planta_externa : item.planta_externa,
         residual_antig : item.residual_antig,
-        residual_antig_costo: item.residual_antig_costo
+        residual_antig_costo: item.residual_antig_costo,
+        dte_actual: item.dte,
+        recurso_transporte_actual: item.recursotransporte,
+        tipo_antena_actual: item.tipoantena,
+        segmento_satelital_actual: item.segmentosatelital,
+        pozo_tierra_actual: item.segmentopozotierra,
+        ups_actual: item.ups,
+        vrf_actual: item.VRF,
+        fecha_llegada_propuesto: item.fechaLlegada,
+        componentes_propuesto: item.componentes,
+        vrf_propuesto: item.ServicioPropuestoVRF,
+        detalle_accion_propuesto: item.DetalleAccion
       };
       return container;
     });

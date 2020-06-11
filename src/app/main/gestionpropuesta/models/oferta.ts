@@ -320,8 +320,6 @@ export class OfertaDetalleModel {
   segmentopozotierra: string;//Se agrego esta propiedad
   ups: string;//Se agrego esta propiedad
   VRF: string;//Se agrego esta propiedad
-
-
   fechaLlegada: string;//Se agrego esta propiedad
   componentes: string;//Se agrego esta propiedad
   ServicioPropuestoVRF: string;//Se agrego esta propiedad
