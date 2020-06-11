@@ -126,8 +126,8 @@ export class OfertaServicioComponent implements OnInit {
 
   maskFechaLlegada = {
     guide: true,
-    showMask : true,
-    mask: [/\d/, /\d/, '/', /\d/, /\d/, '/',/\d/, /\d/,/\d/, /\d/]
+    showMask: true,
+    mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   };
 
   constructor(
@@ -352,11 +352,11 @@ export class OfertaServicioComponent implements OnInit {
       segmentopozotierra: '',
       ups: '',
       VRF: '',
-      fechaLlegada:'',//Se agrego esta propiedad
+      fechaLlegada: '',//Se agrego esta propiedad
       componentes: '',//Se agrego esta propiedad
       ServicioPropuestoVRF: '',//Se agrego esta propiedad
       DetalleAccion: '',//Se agrego esta propiedad
-    
+
     };
   }
 
@@ -469,7 +469,7 @@ export class OfertaServicioComponent implements OnInit {
         item.ofertasDetalleId = item.ofertasDetalleId
       else if (item.estado == 2)
         item.activo = false
-
+      debugger;
       var container = {
         bw_actual: item.bwActualActual + ' ' + item.nrobwActualActual,
         bronce_actual: item.caudalBronceActual + ' ' + item.nrocaudalBronceActual,
