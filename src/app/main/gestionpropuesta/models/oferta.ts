@@ -327,7 +327,6 @@ export class OfertaDetalleModel {
 
 }
 
-
 export class ResponseIsis {
   proyecto:number;
   version:number;
@@ -338,4 +337,22 @@ export class ResponseIsis {
   exceptionText:String;
   moreInfo:String;
   userMessage:String;
+}
+
+export class PlantaExternaModel
+{
+  accion:string;
+  circuito:string;
+  operacion:string;
+  item:string;
+  cantidad:string;
+  clasificacion:string;
+  tipo:string;
+  marca:string;
+  fabricante:string;
+  modelo:string;
+  descripcion:string;
+  serie:string;
+  propiedad:string;
+  selected:boolean;
 }

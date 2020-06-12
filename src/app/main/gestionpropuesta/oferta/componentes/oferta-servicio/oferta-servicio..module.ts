@@ -25,10 +25,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { TextMaskModule } from 'angular2-text-mask';
+import { PlantaExternaComponent } from '../planta-externa/planta-externa.component';
+import { PlantaExternaService } from '../planta-externa/planta-externa.service';
 @NgModule({
     declarations: [
         OfertaServicioComponent,
-        GeodialogComponent
+        GeodialogComponent,
+        PlantaExternaComponent
     ],
     imports: [
         FormsModule,
@@ -57,7 +60,7 @@ import { TextMaskModule } from 'angular2-text-mask';
     ],
     providers: [
         { provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() },
-        GeocodeService
+        GeocodeService,PlantaExternaService
     ],
     exports: [
         OfertaServicioComponent

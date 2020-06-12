@@ -12,6 +12,7 @@ import { FileInputModule } from '../oferta/componentes/fileinput/fileinput.modul
 import { MatButtonModule } from '@angular/material/button';
 import { NgxMaskModule } from 'ngx-mask';
 import { BitacoraDialogComponent } from './componentes/bitacora-dialog/bitacora-dialog.component';
+import { PlantaExternaComponent } from './componentes/planta-externa/planta-externa.component';
 
 const routes: Routes = [
     {

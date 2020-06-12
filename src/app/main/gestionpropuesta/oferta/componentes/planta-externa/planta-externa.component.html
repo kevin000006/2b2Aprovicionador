@@ -1,0 +1,119 @@
+<div class="text-right">
+    <div class="header" >
+        <div class="section title">
+            Planta Externa
+        </div>
+       <div class="section close">
+        <button mat-icon-button class="close-ico" (click)="onCancelcick()">
+            <mat-icon>close</mat-icon>
+        </button>
+       </div>
+    </div>
+</div>
+<mat-dialog-content>
+    <div class="body">
+
+        <div class="filtro">
+            <mat-form-field appearance="outline" color="accent" class="gray-seatrch" style="height: 40px;max-width: 60%;">
+                <input #filter matInput placeholder="Buscar" autocomplete="off" class="form-control">
+                <mat-icon matPrefix class="icon gray-seatrch">search</mat-icon>
+            </mat-form-field>
+        </div>
+
+        <div class="table-responsive">
+            <mat-table class="mat-cell oferta-bandeja" style="width: 1200px;" #tbbitacora [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="selected" sticky>
+                    <mat-header-cell *matHeaderCellDef>
+                        <mat-checkbox class="example-margin font-normal" [(ngModel)]="selectedAll" ></mat-checkbox>
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> 
+                        <mat-checkbox class="example-margin font-normal" [(ngModel)]="row.selected" ></mat-checkbox>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="accion">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header >Acción</mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.accion}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="circuito">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header >Circuito</mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.circuito}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="operacion">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header >Operación</mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.operacion}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="item">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header >Item</mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.item}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="cantidad">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header >Cantidad</mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.cantidad}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="clasificacion">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header >Casificación</mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.clasificacion}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="tipo">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header >Tipo</mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.tipo}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="marca">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header >Marca</mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.marca}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="fabricante">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header >Fabricante</mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.fabricante}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="modelo">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header >Modelo</mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.modelo}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="descripcion">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header >Descripción</mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.descripcion}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="serie">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header >Serie</mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.serie}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="propiedad">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header >Propiedad</mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.propiedad}} </mat-cell>
+                </ng-container>
+        
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns; let i = index;"></mat-row>
+        
+            </mat-table>
+        
+        </div>
+        <div class="text-center m-t-10 pagination" *ngIf="dataSource.filteredData.length >= 1">
+            <button [disabled]="(dataSource._pageIndex+1)==1" class="pag btn-pagination pointer" (click)="dataSource.paginar(-1)">
+                <mat-icon class="icon" >keyboard_arrow_left</mat-icon>
+            </button>
+            <div class="pag text-pag">Página</div>
+            <div class="pag btn-pagination text-pag">{{dataSource._pageIndex + 1}}</div>
+            <div class="pag text-pag">de {{dataSource.totalPages}}</div>
+            <button [disabled]="(dataSource._pageIndex+1)==dataSource.totalPages" class="pag btn-pagination pointer" (click)="dataSource.paginar(1)">
+                <mat-icon class="icon" >keyboard_arrow_right</mat-icon>
+            </button>
+        </div>
+    </div>
+    <br/>
+    <div class="header">
+        <div class="section">
+            <button class="btn-telefonica-gree-2 _btn" (click)="onCancelcick()">
+                Cancelar
+            </button>
+        </div>
+        <div class="section btn-ok">
+            <button class="btn-telefonica-gree _btn" (click)="onAceptclick()">
+                Aceptar
+            </button>
+        </div>
+    </div>
+</mat-dialog-content>
+
+

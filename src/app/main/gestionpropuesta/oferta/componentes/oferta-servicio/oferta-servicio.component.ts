@@ -17,6 +17,7 @@ import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { ThemePalette } from '@angular/material/core';
 import { ToastrService } from 'ngx-toastr';
+import { PlantaExternaComponent } from '../planta-externa/planta-externa.component';
 export interface State {
   flag: string;
   name: string;
@@ -373,6 +374,20 @@ export class OfertaServicioComponent implements OnInit {
     this.dataSourceList = this.dataSource.data;
     this.dataSourceList.push(objecto);
     this.dataSource.data = this.dataSourceList;
+  }
+
+  getPlantaExternaDialog():void{
+    const dialogRef = this.dialog.open(PlantaExternaComponent, {
+      width: '500px',
+      minWidth:'720px',
+      data: {asas:'ass'}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      
+    });
+
   }
 
   deleteRow(item: any): void {

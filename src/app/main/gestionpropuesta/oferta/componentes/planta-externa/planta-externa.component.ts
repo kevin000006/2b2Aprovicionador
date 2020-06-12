@@ -5,55 +5,56 @@ import { MatSort } from '@angular/material/sort';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DataSource } from   '@angular/cdk/collections';
-import { BitacoraModel } from 'app/main/gestionpropuesta/models/oferta';
-import { BitacoraDialogService } from './bitacora-dialog.service';
-
+import { PlantaExternaModel, BitacoraModel } from 'app/main/gestionpropuesta/models/oferta';
+import { BitacoraDialogService } from '../bitacora-dialog/bitacora-dialog.service';
+import { PlantaExternaService } from './planta-externa.service';
+import { CommonService } from 'app/common.service';
 
 @Component({
-  selector: 'app-bitacora-dialog',
-  templateUrl: './bitacora-dialog.component.html',
-  styleUrls: ['./bitacora-dialog.component.scss']
+  selector: 'app-planta-externa',
+  templateUrl: './planta-externa.component.html',
+  styleUrls: ['./planta-externa.component.scss']
 })
-export class BitacoraDialogComponent implements OnInit {
-  displayedColumns: string[] = ['estado', 'usuario', 'fecha'];
-  bitacoraDatabase: BitacoraDialogService | null;
-  dataSource: BitacoraDataSource | null;
-  
-  pageSize ="5";
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+export class PlantaExternaComponent implements OnInit {
 
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  displayedColumns: string[] = [
+    'selected','accion', 'circuito', 'operacion','item','cantidad','clasificacion','tipo',
+    'marca','fabricante','modelo','descripcion','serie','propiedad'];
+  bitacoraDatabase: PlantaExternaService | null;
+  dataSource: BitacoraDataSource | null;
+  selectedAll:boolean=false;
   constructor(
-    public dialogRef: MatDialogRef<BitacoraDialogComponent>,
+    public dialogRef: MatDialogRef<PlantaExternaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private httpClient:HttpClient
+    private httpClient:HttpClient,
+    private service :PlantaExternaService
     ) { 
       
     }  
-
-  closeDialog() {
-    this.dialogRef.close()
-  }
   ngOnInit(): void {
-    this.bitacoraDatabase = new BitacoraDialogService(this.httpClient);
-    this.dataSource = new BitacoraDataSource(this.bitacoraDatabase, this.sort,
-      {
-        ofertas:{
-          id  :this.data.id
-        }
-      },this.pageSize,0);
 
-  }
+    
+      this.bitacoraDatabase = new PlantaExternaService(this.httpClient);
+      this.dataSource = new BitacoraDataSource(this.bitacoraDatabase,this.sort,
+        {
+          oferta:{
+            id:1
+          }
+        },5,0);
+    
+    
 
-  changeSizeItems(items):void{
-    this.dataSource._pageSize = items;
-    this.dataSource.filter = "";
+         
+   
   }
 
 }
-export class BitacoraDataSource extends DataSource<BitacoraModel>{
+
+export class BitacoraDataSource extends DataSource<PlantaExternaModel>{
   _filterChange = new BehaviorSubject('');
-  filteredData: BitacoraModel[] = [];
-  renderedData: BitacoraModel[] = [];
+  filteredData: PlantaExternaModel[] = [];
+  renderedData: PlantaExternaModel[] = [];
   totalPages:number = 0;
 
   paginar(page:number):void{
@@ -68,30 +69,30 @@ export class BitacoraDataSource extends DataSource<BitacoraModel>{
     this._filterChange.next(filter);
   }
 
-  constructor(public bitacoraDatabase: BitacoraDialogService,    
+  constructor(public bitacoraDatabase: PlantaExternaService,    
       public _sort: MatSort,
       public _ofertaObj:any,
       public _pageSize:any,
       public _pageIndex: any) {
-              super();
+           super ();  
      
    }
 
-   connect(): Observable<BitacoraModel[]> {
+   connect(): Observable<PlantaExternaModel[]> {
     const displayDataChanges = [
       this.bitacoraDatabase.dataChange,
       this._sort.sortChange,
       this._filterChange
     ];
 
-    this.bitacoraDatabase.getBitacoraAll(this._ofertaObj);
+    this.bitacoraDatabase.getPlantaExternaAll(this._ofertaObj);
 
     return merge(...displayDataChanges).pipe(map(() => {
       
       let data_ = this.bitacoraDatabase.data || [];
 
-      this.filteredData = data_.slice().filter((issue: BitacoraModel) => {
-        const searchStr = (issue.estado.descripcion + issue.usuario.nombres  + issue.usuario.apellidos).toLowerCase();
+      this.filteredData = data_.slice().filter((issue: PlantaExternaModel) => {
+        const searchStr = (issue.accion + issue.circuito  + issue.clasificacion).toLowerCase();
         return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
       });
 
@@ -108,7 +109,7 @@ export class BitacoraDataSource extends DataSource<BitacoraModel>{
 
   disconnect() { }
 
-  sortData(data: BitacoraModel[]): BitacoraModel[] {
+  sortData(data: PlantaExternaModel[]): PlantaExternaModel[] {
     if (!this._sort.active || this._sort.direction === '') {
     
       return data;
@@ -120,9 +121,9 @@ export class BitacoraDataSource extends DataSource<BitacoraModel>{
       let propertyB: number | string = '';
 
       switch (this._sort.active) {
-        case 'estado': [propertyA, propertyB] = [a.estado.descripcion, b.estado.descripcion]; break;
-        case 'usuario': [propertyA, propertyB] = [a.usuario.nombres, b.usuario.nombres]; break;
-        case 'fecha': [propertyA, propertyB] = [a.fecha, b.fecha]; break;
+        case 'accion': [propertyA, propertyB] = [a.accion, b.accion]; break;
+        case 'circuito': [propertyA, propertyB] = [a.circuito, b.circuito]; break;
+        case 'clasificacion': [propertyA, propertyB] = [a.clasificacion, b.clasificacion]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
@@ -133,7 +134,3 @@ export class BitacoraDataSource extends DataSource<BitacoraModel>{
   }
 
 }
-
-
-
-
