@@ -533,7 +533,7 @@ export class OfertaServicioComponent implements OnInit {
         pozo_tierra_actual: item.pozoTierraActual,
         ups_actual: item.upsActual,
         vrf_actual: item.vrf_actual,
-        fecha_llegada_propuesto: item.fechaLlegadaPropuesto,
+        fecha_llegada_propuesto: new Date(item.fechaLlegadaPropuesto),//; new Date(),//,
         componentes_propuesto: item.componentesPropuesto,
         vrf_propuesto: item.vrfPropuesto,
         detalle_accion_propuesto: item.detalleAccionEnlacePropuesto

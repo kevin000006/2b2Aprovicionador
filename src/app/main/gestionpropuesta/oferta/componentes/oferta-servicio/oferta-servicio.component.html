@@ -352,7 +352,7 @@
                                 <td [hidden]="!showServActual" mat-cell *matCellDef="let row">
                                     <mat-form-field color="accent" style="text-align: center; width: 80%;"
                                         appearance="legacy" [style.fontSize.px]="12">
-                                        <input matInput [(ngModel)]="row.dteActual" type="text" maxlength="100">
+                                        <input matInput [(ngModel)]="row.dteActual" type="number" maxlength="100">
                                     </mat-form-field>
                                 </td>
                             </ng-container>
