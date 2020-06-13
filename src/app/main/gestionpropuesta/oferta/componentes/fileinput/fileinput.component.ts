@@ -112,6 +112,7 @@ export class FileInputComponent implements OnInit {
           file: file,
           inProgress: false, //Si esta el false el progreebar estara ocultado si es true el progressbar se mostrara
           progress: 0,
+          tipo_adjunto:null,
           usuario: this.usuario,
           idUsuario: this.usuario.id.toString()
         });
@@ -131,6 +132,8 @@ export class FileInputComponent implements OnInit {
       formData.append('file', obj.file);
       formData.append('usuario_id', obj.idUsuario);
       formData.append('modulo_id', this.IdOferta);
+      formData.append('tipo_id', obj.tipo_adjunto); 
+      
       this.fileInputService.uploadToContainers(formData).pipe(
         map(event => {
           switch (event.type) {

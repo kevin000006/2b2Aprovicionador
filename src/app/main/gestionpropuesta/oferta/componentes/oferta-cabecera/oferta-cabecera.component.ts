@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UsuarioModel } from 'app/main/gestionpropuesta/models/oferta';
 import * as Cookies from 'js-cookie';
 import { DialogAfComponent } from '../dialog-af/dialog-af.component';
+import { RechazarOfertaComponent } from '../rechazar-oferta/rechazar-oferta.component';
 
 @Component({
   selector: 'oferta-cabecera',
@@ -31,6 +32,7 @@ export class OfertaCabeceraComponent implements OnInit {
   dataSourceCliente: any[] = [];
   dataSourceOportunidad: any[] = [];
   lstComplejidad = [];
+  lstmotivosRechazo:Array<any>=[];
   lstTipoContrato = [];
   lstMoneda = [];
   lstTipoProyecto = [];
@@ -119,8 +121,6 @@ export class OfertaCabeceraComponent implements OnInit {
       this.getOfertaData();
     });
   }
-
-  
   private getOfertaData() {
     if (this.ofertaBase.id > 0) {
       this.service.getOfertaById(this.ofertaBase.id).subscribe(data => {
@@ -273,14 +273,67 @@ export class OfertaCabeceraComponent implements OnInit {
 
   }
 
-  devolverPreventa():void{
+  rechazarOferta():void{
+
+    const dialogRef = this.dialog.open(RechazarOfertaComponent, {
+      width: '500px',
+      data: {
+        motivo:0,
+        lstmotivosRechazo:this.lstmotivosRechazo,
+        hiddenlogo:true,
+        hiddentitle:true,
+        message: '¿Está seguro que desea rechazar la oferta?',
+        buttonText: {
+          ok: 'Aceptar',
+          cancel: 'Cancelar'
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((motivo: number) => {
+      if (motivo > 0) {
+        
+        const param={
+          ofertaId:this.oferta.oferta_id,
+          usuarioId:this.currentUser.id,
+          motivoid: motivo
+        };
+
+        this.service.rechazarOferta(param).subscribe(response =>{
+
+          if(response && response.error)
+          {
+            this.toastr.error(response.error, '', {
+              progressBar: true,
+              progressAnimation: 'increasing',
+              closeButton: true
+            });
+          }else{
+            this.toastr.success('Se rechazo la oferta con éxito.', '', {
+              progressBar: true,
+              progressAnimation: 'increasing',
+              closeButton: true
+            });
+            this.getOfertaData();
+          }
+
+        });
+      }
+    });
+
+
+
+
+  }
+
+  aprobarOferta():void{
 
     const dialogRef = this.dialog.open(AlertConfirmComponent, {
       width: '650px',
       data: {
         hiddenlogo:true,
         hiddentitle:true,
-        message: '¿Está seguro que desea devolver la oferta a preventa?',
+        message: '¿Está seguro que desea aprobar la oferta?',
         buttonText: {
           ok: 'Aceptar',
           cancel: 'Cancelar'
@@ -297,7 +350,7 @@ export class OfertaCabeceraComponent implements OnInit {
           ofertaId:this.oferta.oferta_id,
           usuarioId:this.currentUser.id
         };
-        this.service.devolverOfertaPreventa(param).subscribe(response =>{
+        this.service.aprobarOferta(param).subscribe(response =>{
 
           if(response && response.error)
           {
@@ -307,7 +360,7 @@ export class OfertaCabeceraComponent implements OnInit {
               closeButton: true
             });
           }else{
-            this.toastr.success('Se devolvio la oferta al preventa con éxito.', '', {
+            this.toastr.success('Se aprobó la oferta con éxito.', '', {
               progressBar: true,
               progressAnimation: 'increasing',
               closeButton: true
@@ -368,6 +421,10 @@ export class OfertaCabeceraComponent implements OnInit {
   ngOnInit(): void {
     this.commonService.getComplejidadAll().subscribe(data => {
       this.lstComplejidad = data;
+    });
+
+    this.commonService.getMotivoRechazoAll().subscribe(data => {
+      this.lstmotivosRechazo = data;
     });
 
     this.commonService.getTipoContratoAll().subscribe(data => {

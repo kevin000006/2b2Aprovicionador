@@ -19,12 +19,14 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogAfComponent } from './dialog-af/dialog-af.component';
+import { RechazarOfertaComponent } from './rechazar-oferta/rechazar-oferta.component';
 @NgModule({
 
     declarations: [
         ShareDialogComponent,
         BitacoraDialogComponent,
-        DialogAfComponent],
+        DialogAfComponent,
+        RechazarOfertaComponent],
     imports: [
         MatFormFieldModule,
         MatSelectModule,

@@ -19,7 +19,7 @@ export class FileInputService {
     return this.http.post<any>('/Containers/listFilesContainers'+'?modulo_id=' + request.modulo_id + '&usuario_id=' + request.usuario_id, {});
   }
   uploadToContainers(data: FormData): Observable<any> {
-    return this.http.post<FormData>('/Containers/uploadToContainers', data, {
+    return this.http.post<FormData>('/Containers/subirarchivosportipo', data, {
       reportProgress: true,
       observe: 'events'
     });

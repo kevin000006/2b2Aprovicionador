@@ -51,6 +51,8 @@ export class OfertaServicioComponent implements OnInit {
   listTipoCircuito = [];
   listTipoServicio = [];
   listViaAcceso = [];
+  listCostoEspecialBase=[];
+
   listLDN = [
     { id: 0, nombre: 'NO' },
     { id: 1, nombre: 'SI' }
@@ -146,30 +148,39 @@ export class OfertaServicioComponent implements OnInit {
     row.distritoId = user.iddistrito
   }
 
-  calculoResidual(row: OfertaDetalleModel) {
-    let residual = (row.residual_antig_costo || 0) * (120-(row.residual_antig || 0))/120;
+  selectedTipoServicio(item,row):void{    
+    row.listCostoEspecial = this.listCostoEspecialBase.filter(x => x.grupo_satelital == item.grupoSatelital);
+    row.tipoServicioIdPropuesto = item.id;
+  }
 
-    row.costoUltimaMilla = (residual*0.1);
-    row.transmision = (residual*0.2);
-    row.planta_externa = (residual*0.7);
+  compareValCombos(c1: any, c2: any): boolean {
+    
+    return c1 && c2 ? c1.id === c2.id : c1 === c2;
+  }
+
+  calculoResidual(row: OfertaDetalleModel) {
+    let residual = (row.residual_antig_costo || 0) * (120 - (row.residual_antig || 0)) / 120;
+
+    row.costoUltimaMilla = (residual * 0.1);
+    row.transmision = (residual * 0.2);
+    row.planta_externa = (residual * 0.7);
   }
 
   selectedZona(event, row: OfertaDetalleModel) {
     let target = event.source._element.nativeElement;
     row.zonaSisego = target.innerText.trim();
-    if(row.IdZonaSigego == -1 && row.lstZonaSisego.length > 1 )
-    {
-      row.residual_antig=0;
-      row.residual_antig_costo=0;
+    if (row.IdZonaSigego == -1 && row.lstZonaSisego.length > 1) {
+      row.residual_antig = 0;
+      row.residual_antig_costo = 0;
       row.costoUltimaMilla = 0;
-      row.transmision =0;
+      row.transmision = 0;
       row.planta_externa = 0;
     }
-    if(row.IdZonaSigego == 3 && row.lstZonaSisego.length > 1 ){
-      row.residual_antig=0;
-      row.residual_antig_costo=0;
+    if (row.IdZonaSigego == 3 && row.lstZonaSisego.length > 1) {
+      row.residual_antig = 0;
+      row.residual_antig_costo = 0;
       row.costoUltimaMilla = 0;
-      row.transmision =0;
+      row.transmision = 0;
       row.planta_externa = 0;
     }
 
@@ -188,6 +199,10 @@ export class OfertaServicioComponent implements OnInit {
     }
   }
   async ngOnInit() {
+
+    await this.commonService.getCostoEspecialAll().subscribe(data => {
+      this.listCostoEspecialBase = data;
+    });
     await this.commonService.getCondicionEnlaceAll().subscribe(data => {
       this.listCondicionEnlace = data;
     });
@@ -212,6 +227,13 @@ export class OfertaServicioComponent implements OnInit {
     });
     this.ofertaServicioService.obtenerOfertasDetalle({ oferta_id: this.ofertaBase.id, page: 0 }).subscribe(data => {
       if (data != null) {
+
+        for(let d of data){
+          d.tipoServicioPropuesto = this.listTipoServicio.find( x=> x.id == d.tipoServicioIdPropuesto) ||  {id:0};
+          d.listCostoEspecial = this.listCostoEspecialBase.filter(x => x.grupo_satelital == d.tipoServicioPropuesto.grupoSatelital);
+          
+        }
+
         this.dataSourceList = data;
         this.dataSource.data = data;
       }
@@ -248,7 +270,7 @@ export class OfertaServicioComponent implements OnInit {
       nrocaudalLdnActual: '',
       caudalVozActual: 'kbps',
       nrocaudalVozActual: '',
-
+      listCostoEspecial:[],
       caudalVideoActual: 'kbps',
       nrocaudalVideoActual: '',
 
@@ -257,7 +279,7 @@ export class OfertaServicioComponent implements OnInit {
 
       caudalOroActual: 'kbps',
       nrocaudalOroActual: '',
-
+      tipoServicioPropuesto:{satelital:false,id:0},
       caudal_plata_actual: 'kbps',
       nrocaudal_plata_actual: '',
 
@@ -341,17 +363,17 @@ export class OfertaServicioComponent implements OnInit {
       activo: true,
       isLoading: false,
 
-      dte: '',
-      recursotransporte: '',
-      tipoantena: '',
-      segmentosatelital: '',
-      segmentopozotierra: '',
-      ups: '',
-      VRF: '',
-      fechaLlegada: '',//Se agrego esta propiedad
-      componentes: '',//Se agrego esta propiedad
-      ServicioPropuestoVRF: '',//Se agrego esta propiedad
-      DetalleAccion: '',//Se agrego esta propiedad
+      // dte: '',
+      // recursotransporte: '',
+      // tipoantena: '',
+      // segmentosatelital: '',
+      // segmentopozotierra: '',
+      // ups: '',
+      // VRF: '',
+      // fechaLlegada: '',//Se agrego esta propiedad
+      // componentes: '',//Se agrego esta propiedad
+      // ServicioPropuestoVRF: '',//Se agrego esta propiedad
+      // DetalleAccion: '',//Se agrego esta propiedad
 
     };
   }
@@ -479,7 +501,7 @@ export class OfertaServicioComponent implements OnInit {
         item.ofertasDetalleId = item.ofertasDetalleId
       else if (item.estado == 2)
         item.activo = false
-      debugger;
+      
       var container = {
         bw_actual: item.bwActualActual + ' ' + item.nrobwActualActual,
         bronce_actual: item.caudalBronceActual + ' ' + item.nrocaudalBronceActual,
@@ -539,20 +561,20 @@ export class OfertaServicioComponent implements OnInit {
         estado: 0,
         idcliente: item.clienteId,
         transmision: item.transmision,
-        planta_externa : item.planta_externa,
-        residual_antig : item.residual_antig,
+        planta_externa: item.planta_externa,
+        residual_antig: item.residual_antig,
         residual_antig_costo: item.residual_antig_costo,
-        dte_actual: item.dte,
-        recurso_transporte_actual: item.recursotransporte,
-        tipo_antena_actual: item.tipoantena,
-        segmento_satelital_actual: item.segmentosatelital,
-        pozo_tierra_actual: item.segmentopozotierra,
-        ups_actual: item.ups,
-        vrf_actual: item.VRF,
-        fecha_llegada_propuesto: item.fechaLlegada,
-        componentes_propuesto: item.componentes,
-        vrf_propuesto: item.ServicioPropuestoVRF,
-        detalle_accion_propuesto: item.DetalleAccion
+        dte_actual: item.dteActual,
+        recurso_transporte_actual: item.recursoTransporteActual,
+        tipo_antena_actual: item.tipoAntenaActual,
+        segmento_satelital_actual: item.segmentoSatelitalActual,
+        pozo_tierra_actual: item.pozoTierraActual,
+        ups_actual: item.upsActual,
+        vrf_actual: item.vrf_actual,
+        fecha_llegada_propuesto: new Date(item.fechaLlegadaPropuesto),//; new Date(),//,
+        componentes_propuesto: item.componentesPropuesto,
+        vrf_propuesto: item.vrfPropuesto,
+        detalle_accion_propuesto: item.detalleAccionEnlacePropuesto
       };
       return container;
     });

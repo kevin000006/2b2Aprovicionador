@@ -15,6 +15,18 @@ export class CommonService{
     
     constructor(private http: HttpClient) { }
 
+    getTipoAdjuntoAll():Observable<any[]>{
+        return this.http.post<ClienteModel[]>('/tipoadjuntos/findAll', null);
+    }
+
+    getMotivoRechazoAll():Observable<any[]>{
+        return this.http.post<ClienteModel[]>('/motivorechazo/findAll', null);
+    }
+
+    getCostoEspecialAll():Observable<any[]>{
+        return this.http.post<ClienteModel[]>('/costosespeciales/findAll', null);
+    }
+
     getClienteAll(): Observable<ClienteModel[]> {
         return this.http.post<ClienteModel[]>('/clientes/findAll', null);
     }

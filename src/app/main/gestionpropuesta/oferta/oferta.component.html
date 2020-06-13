@@ -28,11 +28,8 @@
                     </button>
                 </div>
                 <div class="col-sm-2 text-right">
-                    <mat-menu #appMenu="matMenu">
-                        <button mat-menu-item> Caratula </button>
-                        <button mat-menu-item>FET </button>
-                        <button mat-menu-item> FCA </button>
-                        <button mat-menu-item> P Implantación </button>
+                    <mat-menu #appMenu="matMenu">                        
+                        <button mat-menu-item (click)="descargarPImplantacion()"> P Implantación </button>
                     </mat-menu>
                     <button mat-flat-button [matMenuTriggerFor]="appMenu" class="btn-descargar"> Descargar
                         <mat-icon style="color: #4df109;height: 0;min-height: 0;line-height: 38px;position: absolute;"

@@ -1,4 +1,56 @@
-<div style="color: #50535A;position: relative;width: 100%;">
+<div id="orders" class="page-layout carded fullwidth ">
+    <div class="top-bg accent"></div>
+    <div class="center" style="padding-top: 30px;">
+        <mat-card>
+            <div class="row" style="position: relative;">
+                <div class="col-xs-12 col-sm-3">
+                    <mat-form-field>
+                        <mat-label class="font-normal">Estado</mat-label>
+                        <mat-select style="height: 17.5px;"  class="form-control" [(ngModel)]="filtro.estado">
+                            <mat-option *ngFor="let o of lstEstado" [value]="o.id">{{o.descripcion}}</mat-option>                                      
+                        </mat-select>
+                        <span matSuffix>&nbsp; &nbsp;</span>
+                    </mat-form-field>
+                </div>
+                <div class="col-xs-12 col-sm-3">
+                    <mat-form-field>
+                        <mat-label>Hasta</mat-label>
+                        <input autocomplete="off" matInput [matDatepicker]="desde" class="form-control" [(ngModel)]="filtro.desde">
+                        <mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
+                        <mat-datepicker #desde></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col-xs-12 col-sm-3">
+                    <mat-form-field>
+                        <mat-label>Hasta</mat-label>
+                        <input autocomplete="off" matInput [matDatepicker]="hasta" class="form-control" [(ngModel)]="filtro.hasta">
+                        <mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
+                        <mat-datepicker #hasta></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col-xs-12 col-sm-3 text-right" style="line-height: 60px;">
+                    <button style="line-height: 27px;" class="btn-telefonica-gree" (click)="descargarExcel()" >Descargar</button>
+                    
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div style="color: #50535A;position: relative;width: 100%;">
     <div class="row" style="
     background: #e1e2e2;
     color: #50535A;
@@ -35,4 +87,4 @@
         </div>
     </div>
     
-</div>
+</div>-->

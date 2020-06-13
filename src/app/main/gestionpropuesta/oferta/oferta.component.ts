@@ -7,6 +7,7 @@ import { FileInputComponent } from '../oferta/componentes/fileinput/fileinput.co
 import { BitacoraDialogComponent } from './componentes/bitacora-dialog/bitacora-dialog.component';
 import * as Cookies from 'js-cookie';
 import { OfertaService } from './oferta.service';
+import { CommonService } from 'app/common.service';
 
 
 @Component({
@@ -17,12 +18,15 @@ import { OfertaService } from './oferta.service';
 })
 export class OfertaComponent implements OnInit {
 
+  tipoAdjuntos:Array<any>=[];
+  
   ofertaBase = {id:0};
   currentUser: any = { nombres: '', apellidos: '', nombrecorto: '' };
   constructor(
     private _router: Router,
     public dialog: MatDialog,
-    private ofertaService : OfertaService
+    private ofertaService : OfertaService,
+    private commonService: CommonService
   ){
 
     if (Cookies.get('currentUser') === undefined) {
@@ -37,6 +41,12 @@ export class OfertaComponent implements OnInit {
       this._router.navigate(['pages/auth/login-2'], { state: {} });
     }
     else {
+
+      this.commonService.getTipoAdjuntoAll().subscribe(data => {
+        this.tipoAdjuntos = data;
+      });
+      
+
       this.currentUser = JSON.parse(Cookies.get('currentUser'));
      
       if (window.sessionStorage.getItem('oferta') != null) {
@@ -61,6 +71,7 @@ export class OfertaComponent implements OnInit {
       minWidth: '100vw',
       panelClass: 'full-screen-modal',
       data: {
+        tipoAdjuntos:this.tipoAdjuntos ,
         id:this.ofertaBase['id'],
         message: '¿Esta seguro que desea eliminar esta fila?',
         buttonText: {
@@ -106,6 +117,10 @@ export class OfertaComponent implements OnInit {
         }
       });
     
+  }
+
+  descargarPImplantacion():void{
+    window.location.href="https://b2bback.azurewebsites.net/api/reportes/plantillaImplantacion?ofertaId=" + this.ofertaBase.id;
   }
 
   regresar() {

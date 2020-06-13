@@ -1,15 +1,15 @@
 import { MonedaModel, ComplejidadModel, TipoContratoModel, TipoProyectoModel, EquipamientoCondicionModel, EquipamientoMarcaModel, TipoEquipamientoModel } from 'app/model/Common';
 
 export class UsuarioModel {
-  constructor(){
+  constructor() {
     this.token = '';
   }
   nombres: string;
   apellidos: string;
-  usuario:string;
-  token:string;
-  nombrecorto:string;
-  id:number;
+  usuario: string;
+  token: string;
+  nombrecorto: string;
+  id: number;
 }
 
 export class SegmentoNegocioModel {
@@ -130,8 +130,8 @@ export class EquipamientoRequest {
   total: number;
   unitario: number;
   estado: number;
-  proveedor:string;
-  instalacion:number;
+  proveedor: string;
+  instalacion: number;
 }
 
 export class OfertaEquipamientoModel {
@@ -160,8 +160,8 @@ export class OfertaEquipamientoModel {
   tipoequipamiento: TipoEquipamientoModel;
   total: number;
   unitario: number;
-  instalacion:number;
-  proveedor:string; 
+  instalacion: number;
+  proveedor: string;
 }
 
 export class BitacoraModel {
@@ -184,16 +184,15 @@ export class FlujoCajaModel {
 export class OfertaDetalleModel {
   //Informacion del cliente
 
-  constructor()
-  {
-    this.transmision= 0;
-    this.planta_externa=0;
+  constructor() {
+    this.transmision = 0;
+    this.planta_externa = 0;
   }
 
-  transmision:number;
-  planta_externa:number;
-  residual_antig:number;
-  residual_antig_costo:number;
+  transmision: number;
+  planta_externa: number;
+  residual_antig: number;
+  residual_antig_costo: number;
 
   clienteId: number;
   ofertasDetalleId: number;
@@ -206,14 +205,14 @@ export class OfertaDetalleModel {
   latitud: string;
   longitud: string;
   contacto: string;
-  telefono: string;  
-  tipoCircuitoActual: string;  
-  nrotipoCircuitoActual: string;   
+  telefono: string;
+  tipoCircuitoActual: string;
+  nrotipoCircuitoActual: string;
   tipoServicioIdActual: number;
   servicioActual_medio: number;
   bwActualActual: string;
   nrobwActualActual: string;
-  
+
   caudalLdnActual: string;
   nrocaudalLdnActual: string;
 
@@ -238,17 +237,19 @@ export class OfertaDetalleModel {
   equipoTerminalActual: string;
   routerSwitchActual: string;
   facturacion_actual: number;
-  servicioActual_otro : string;
+  servicioActual_otro: string;
   equipo_adicional_actual: string;
 
   //Servicio Propuesto y Caudal presupuesto
   accionIsisIdPropuesto: number;
   servicioPropuesto_tiposede: number;
-  servicioPropuesto_modo : number;
+  servicioPropuesto_modo: number;
   tipoCircuitoIdPropuesto: number;
   servicioPropuesto_nrocircuito: string;
   tipoServicioIdPropuesto: number;
-  servicioPropuesto_medio : number;
+  tipoServicioPropuesto:any;
+  listCostoEspecial:any[];
+  servicioPropuesto_medio: number;
   svaPropuesto: string;
   descripcionSvaPropuesto: string;
 
@@ -263,25 +264,25 @@ export class OfertaDetalleModel {
 
   caudalVideoPropuesto: string;
   nrocaudalVideoPropuesto: string;
-  
-  caudalPlatinumPropuesto: string;  
-  nrocaudalPlatinumPropuesto: string;  
+
+  caudalPlatinumPropuesto: string;
+  nrocaudalPlatinumPropuesto: string;
 
   caudalOroPropuesto: string;
   nrocaudalOroPropuesto: string;
 
   caudalPlataPropuesto: string;
   nrocaudalPlataPropuesto: string;
-  
+
   caudalBroncePropuesto: string;
   nrocaudalBroncePropuesto: string;
   condicion_servicio: number; // se agrego este nuevo campo
   equipoTerminalPropuesto: string;
   routerPropuesto: string;
   otrosEquiposPropuesto: string;
-  precioPropuesto: number;  
+  precioPropuesto: number;
   observacionesPropuesto: string;
-  
+
   ofertaIsisPropuesto: string;
   codigoSisego: string;
   zonaSisego: string;
@@ -289,22 +290,22 @@ export class OfertaDetalleModel {
   costoUltimaMilla: number;
   diasEjecucion: number;
 
-  componentesPropuesto: string;  
-  fechaLlegadaPropuesto: string;
-  equipoStockPropuesto: string; 
+  componentesPropuesto: string;   //Se agrego esta propiedad
+  fechaLlegadaPropuesto: string; //Se agrego esta propiedad
+  equipoStockPropuesto: string;
   viaAccesoIdPropuesto: number;
-  vrfPropuesto: string; 
-  detalleAccionEnlacePropuesto: string;  
-  dteActual: number;
+  vrfPropuesto: string; //Se agrego esta propiedad
+  detalleAccionEnlacePropuesto: string;   //Se agrego esta propiedad
+  dteActual: number;//Se agrego esta propiedad
   numeroCdActual: string;
-  pozoTierraActual: string;
-  recursoTransporteActual: string;
-  segmentoSatelitalActual: number;
-  tipoAntenaActual: string;
+  pozoTierraActual: string;//Se agrego esta propiedad
+  recursoTransporteActual: string;//Se agrego esta propiedad
+  segmentoSatelitalActual: number;//Se agrego esta propiedad
+  tipoAntenaActual: string;//Se agrego esta propiedad
   secuencia: number;
   ultimaMillaActual: number;
-  upsActual: string;
-  vrf_actual: string;  
+  upsActual: string;//Se agrego esta propiedad
+  vrf_actual: string;  //Se agrego esta propiedad
   lstZonaSisego: [];
   zoom: string;
   ubigeo: string;
@@ -313,30 +314,30 @@ export class OfertaDetalleModel {
   isLoading: boolean;
 
 
-  dte: string;//Se agrego esta propiedad
-  recursotransporte: string;//Se agrego esta propiedad
-  tipoantena: string;//Se agrego esta propiedad
-  segmentosatelital: string;//Se agrego esta propiedad
-  segmentopozotierra: string;//Se agrego esta propiedad
-  ups: string;//Se agrego esta propiedad
-  VRF: string;//Se agrego esta propiedad
-  fechaLlegada: string;//Se agrego esta propiedad
-  componentes: string;//Se agrego esta propiedad
-  ServicioPropuestoVRF: string;//Se agrego esta propiedad
-  DetalleAccion: string;//Se agrego esta propiedad
+  // dte: string;//Se agrego esta propiedad
+  // recursotransporte: string;//Se agrego esta propiedad
+  // tipoantena: string;//Se agrego esta propiedad
+  // segmentosatelital: string;//Se agrego esta propiedad
+  // segmentopozotierra: string;//Se agrego esta propiedad
+  // ups: string;//Se agrego esta propiedad
+  // VRF: string;//Se agrego esta propiedad
+  // fechaLlegada: string;//Se agrego esta propiedad
+  // componentes: string;//Se agrego esta propiedad
+  // ServicioPropuestoVRF: string;//Se agrego esta propiedad
+  // DetalleAccion: string;//Se agrego esta propiedad
 
 }
 
 export class ResponseIsis {
-  proyecto:number;
-  version:number;
-  transaccion : number;
-  error_bd:number;
-  mensaje_transaccion:String;
-  exceptionId:String;
-  exceptionText:String;
-  moreInfo:String;
-  userMessage:String;
+  proyecto: number;
+  version: number;
+  transaccion: number;
+  error_bd: number;
+  mensaje_transaccion: String;
+  exceptionId: String;
+  exceptionText: String;
+  moreInfo: String;
+  userMessage: String;
 }
 
 export class PlantaExternaModel

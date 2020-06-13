@@ -8,9 +8,9 @@ import * as Cookies from 'js-cookie';
   styleUrls: ['./cmi.component.css'],
 })
 export class CMIComponent implements OnInit {
-  displayedColumns: string[] = ['linea', 'sublinea', 'serviciocmi', 'productoaf', 'porcentaje'];  
+  displayedColumns: string[] = ['linea', 'sublinea', 'serviciocmi', 'productoaf', 'porcentaje'];
   dataSource: any;
-  _filtro: any = { nroItmes: 5 };  
+  _filtro: any = { nroItmes: 5 };
   ofertaBase = { id: 0 };
   constructor(
     private _router: Router,
@@ -26,7 +26,7 @@ export class CMIComponent implements OnInit {
         this.ofertaBase = JSON.parse(window.sessionStorage.getItem('oferta'));
       }
     }
-    this.servicioCMI.obtenercmi(2).subscribe(data => {
+    this.servicioCMI.obtenercmi(this.ofertaBase.id).subscribe(data => {
       if (data != null) {
         this.dataSource = data
       }

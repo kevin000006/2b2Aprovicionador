@@ -40,17 +40,10 @@ export const navigation: FuseNavigation[] = [
                         url  : '/gestion-propuesta/matrizescalamiento'
                     },
                     {
-                        id       : 'gestionpropuestareporte',
-                        title    : 'Reportes',
-                        type     : 'collapsable',
-                        children : [
-                            {
-                                id   : 'reportepropuestas',
-                                title: 'Propuestas',
-                                type : 'item',
-                                url  : '/gestion-propuesta/reporte-propuestas'
-                            }
-                        ]
+                        id   : 'reportepropuestas',
+                        title: 'Reporte',
+                        type : 'item',
+                        url  : '/gestion-propuesta/reporte'
                     }
                 ]
             },

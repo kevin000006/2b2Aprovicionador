@@ -393,10 +393,11 @@
                             </button>
                             <button *ngIf="oferta.resultado == 'NO GO' && showActionPreventa " class="btn btn-md btn-telefonica-gree-2" (click)="derivarOfertaAF()" >Derivar Oferta a AF
                             </button>
-                            <button *ngIf="showDevolverPreventa" class="btn btn-md btn-telefonica-gree-2" (click)="devolverPreventa()" >Devolver a Preventa</button>
+                            <button *ngIf="showDevolverPreventa" class="btn btn-md btn-telefonica-gree" (click)="aprobarOferta()" style="color: #fff !important;">Aprobar</button>
                         </div>
-                        <div *ngIf="showActionPreventa" class="col col-g" >
-                            <button  [disabled]="!formControl.valid" class="btn-telefonica-gree btn-guardar-oferta" (click)="guardarOferta()">Guardar</button>
+                        <div  class="col col-g" >
+                            <button *ngIf="showDevolverPreventa" class="btn btn-md btn-telefonica-gree-2" (click)="rechazarOferta()" >Rechazar</button>
+                            <button *ngIf="showActionPreventa"  [disabled]="!formControl.valid" class="btn-telefonica-gree btn-guardar-oferta" (click)="guardarOferta()">Guardar</button>
                         </div>
                        
                         

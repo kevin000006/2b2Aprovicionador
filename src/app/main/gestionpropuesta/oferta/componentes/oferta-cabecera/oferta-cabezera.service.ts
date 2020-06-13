@@ -43,8 +43,12 @@ export class OfertaCabezeraService {
       return this.http.post('/oferta/_asignaraf?analistafinancieroId=' + param.analistafinancieroId + '&ofertaId=' + param.ofertaId + '&usuarioId=' + param.usuarioId ,{});
     }
 
-    devolverOfertaPreventa(param):Observable<any>{
-      return this.http.post('/oferta/_devolverpv?ofertaId=' + param.ofertaId + '&usuarioId=' + param.usuarioId ,{});
+    aprobarOferta(param):Observable<any>{
+      return this.http.post('/oferta/_aprobadoaf?ofertaId=' + param.ofertaId + '&usuarioId=' + param.usuarioId ,{});
+    }
+
+    rechazarOferta(param):Observable<any>{
+      return this.http.post('/oferta/_rechazadoaf?ofertaId=' + param.ofertaId + '&usuarioId=' + param.usuarioId + '&motivoid=' + param.motivoid ,{});
     }
 
 }

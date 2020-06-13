@@ -15,7 +15,7 @@ const routes = [
     loadChildren: () => import('./bandeja/bandeja.module').then(m => m.BandejaModule)
   },
   {
-    path: 'reporte-propuestas',
+    path: 'reporte',
     loadChildren: () => import('./reportepropuesta/reportepropuesta.module').then(m => m.ReportepropuestaModule)
   },
   {

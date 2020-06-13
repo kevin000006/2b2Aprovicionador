@@ -1,0 +1,19 @@
+.header{
+    display: table;
+    width: 100%;
+}
+.header .section{
+    display: table-cell;
+    text-align: center;
+}
+.header .title{
+    vertical-align: middle;
+    text-align: center;
+    font-size: 15px;
+    font-family: TelefonicaRegular;
+}
+
+.header .section ._btn{
+    width: 85%;
+    min-height: 40px;
+}
