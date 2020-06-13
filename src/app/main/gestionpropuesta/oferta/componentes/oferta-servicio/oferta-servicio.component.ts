@@ -77,39 +77,58 @@ export class OfertaServicioComponent implements OnInit {
     'sede', 'direccion', 'ubigeo', 'geo', 'contacto', 'telefono',
 
     'servicioActual_circuito', 'servicioActual_nrocircuito', 'servicioActual_servicio',
-    'servicioActual_medio', 'servicioActual_bw', 'servicioActual_ldn',
-    'servicioActual_voz', 'servicioActual_video', 'servicioActual_platinium',
-    'servicioActual_oro', 'servicioActual_plata', 'servicioActual_bronce', 'servicioActual_equipoterminal',
-    'servicioActual_router',
+    'servicioActual_bw',
 
+
+    'servicioActual_bronce',
+    'servicioActual_plata',
+    'servicioActual_oro',
+    'servicioActual_platinium',
+    'servicioActual_voz',
+    'servicioActual_video',
+    'servicioActual_ldn',
+    'servicioActual_medio',
+    'servicioActual_router',
     'servicioActual_dte', //Se agrego este campo
+    'servicioActual_equipoterminal',
     'servicioActual_recursotransporte', //Se agrego este campo
     'servicioActual_tipoantena', //Se agrego este campo
     'servicioActual_segmentosatelital', //Se agrego este campo
     'servicioActual_segmentopozotierra', //Se agrego este campo
     'servicioActual_ups', //Se agrego este campo
-    'servicioActual_VRF', //Se agrego este campo
-
+    'servicioActual_VRF', //Se agrego este campo    
     'servicioActual_otro', 'servicioActual_facturacion',
-
+    'ofertaisis',
     'servicioPropuesto_acccionisis', 'servicioPropuesto_tiposede',
     'servicioPropuesto_modo', //Parece que esto es el campo Condicion    
     'servicioPropuesto_circuito', 'servicioPropuesto_nrocircuito',
-    'servicioPropuesto_servicio', 'servicioPropuesto_medio',
+    'servicioPropuesto_servicio',
     'servicioPropuesto_sva', 'servicioPropuesto_svadescripcion',//creo que son campos nuevo agregado pos jorge
     'servicioPropuesto_bw',
-    'servicioPropuesto_ldn', 'servicioPropuesto_voz', 'servicioPropuesto_video', 'servicioPropuesto_platinium', 'servicioPropuesto_oro', 'servicioPropuesto_plata', //nuevos campos agregado por jorge
-    'servicioPropuesto_bronce', 'servicio_condicion',
-
+    'servicioPropuesto_bronce',
+    'servicioPropuesto_plata', //nuevos campos agregado por jorge
+    'servicioPropuesto_oro',
+    'servicioPropuesto_platinium',
+    'servicioPropuesto_voz',
+    'servicioPropuesto_video',
+    'servicioPropuesto_ldn',
+    'servicioPropuesto_medio',
+    'equipos_equipoterminal', 'equipos_routers',
+    'servicio_condicion',
     'servicioPropuesto_fechaLlegada',//Se agrego este campo
+    'equipos_otros', 'equipos_precio',
     'servicioPropuesto_componentes',//Se agrego este campo
     'servicioPropuesto_VRF',//Se agrego este campo
     'servicioPropuesto_DetalleAccion',//Se agrego este campo
+    'equipos_observaciones',
 
-    'equipos_equipoterminal', 'equipos_routers', 'equipos_otros', 'equipos_precio', 'equipos_observaciones', 'ofertaisis',
-
-    'sesego', 'sisego_zona', 'sisego_ultimamilla', 'sisego_transmision', 'sisego_plantaexterna', 'sisego_diasejecucion', 'sisego_residual',
-
+    'sisego_ultimamilla',
+    'sesego',
+    'sisego_zona',
+    'sisego_transmision',
+    'sisego_plantaexterna',
+    'sisego_diasejecucion',
+    'sisego_residual',
     'accion'];
   exampleDatabase: OfertaServicioService | null;
   //dataSource = new MatTableDataSource<ServicioElement>(dataSourceList);//:  EjemploDataSource | null;

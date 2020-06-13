@@ -468,7 +468,14 @@
                                     </mat-form-field>
                                 </td>
                             </ng-container>
-
+                            <ng-container matColumnDef="ofertaisis">
+                                <th [hidden]="!showServPropuesto" mat-header-cell *matHeaderCellDef mat-sort-header
+                                    class="color-group-1 col_sp_ofertaIsis">Oferta ISIS</th>
+                                <td [hidden]="!showServPropuesto" mat-cell *matCellDef="let row"
+                                    class="col_sp_ofertaIsis">
+                                    <span>{{row.ofertaIsisPropuesto}}</span>
+                                </td>
+                            </ng-container>
                             <!--servicioPropuesto-->
                             <ng-container matColumnDef="servicioPropuesto_acccionisis">
                                 <th [hidden]="!showServPropuesto" mat-header-cell *matHeaderCellDef mat-sort-header
@@ -877,14 +884,7 @@
                                     </mat-form-field>
                                 </td>
                             </ng-container>
-                            <ng-container matColumnDef="ofertaisis">
-                                <th [hidden]="!showServPropuesto" mat-header-cell *matHeaderCellDef mat-sort-header
-                                    class="color-group-1 col_sp_ofertaIsis">Oferta ISIS</th>
-                                <td [hidden]="!showServPropuesto" mat-cell *matCellDef="let row"
-                                    class="col_sp_ofertaIsis">
-                                    <span>{{row.ofertaIsisPropuesto}}</span>
-                                </td>
-                            </ng-container>
+
 
                             <!--sisego-->
                             <ng-container matColumnDef="sesego">
