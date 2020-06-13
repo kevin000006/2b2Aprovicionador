@@ -42,7 +42,7 @@ export class FlujoCajaComponent implements OnInit {
     this.servicioFlujoCaja.Obtenerflujocaja(this.ofertaBase.id).subscribe(data => {
       if (data != null) {        
         var contador = 0;
-        debugger;
+      
         var newItem = 
           {
             concepto_id: 0,
@@ -81,7 +81,7 @@ export class FlujoCajaComponent implements OnInit {
             }
           }
         });
-        debugger;
+        
         this.displayedColumns = this.columns.map(c => c.columnDef);
         this.widthTabla = (this.columns.length * 100) + 150;
         this.dataSource = this.getPivotArray(data.filter((item) => { return item.concepto_id !== 0; }), "nombre", "periodo", "montosoles");

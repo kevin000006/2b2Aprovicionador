@@ -47,7 +47,7 @@ export class MatrizEscalamientoComponent implements OnInit {
         a.remove();
         row= res.row;
         this.servicioMatrizEscalamiento.guardarmatrizescalamiento(res.row).subscribe((res: any) => {
-          debugger;
+          
           this.toastr.success('Se proceso correctamente la información!', '', {
             progressBar: true,
             progressAnimation: 'increasing',

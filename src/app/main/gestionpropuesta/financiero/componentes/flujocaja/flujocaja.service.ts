@@ -12,7 +12,7 @@ export class FlujoCajaService {
     return this.http.get<FlujoCajaModel[]>('/finanzas/obtenerflujocaja?ofertaId=' + ofertaId);
   }
   guardarparametrooferta(data: any): Observable<any> {    
-    debugger;
+    
     return this.http.post<any>('/finanzas/guardarparametrooferta',data);
   }
 }
