@@ -1,26 +1,33 @@
+.content-header{
+  display: block;
+  width: 100%;
+  position: relative;
+  height: 60px;
+}
+
 .header{
-    display: table;
-    width: 100%;
-    position: relative;
+  display: table;
+  width: 100%;
+  position: relative;
+  height: 60px;
+  vertical-align: middle;
 }
 .header .section{
     display: table-cell;
     text-align: center;
 }
 .header .title{
-    text-align: center;
-    border-bottom: 1px inset #f5f4f4;
-    font-family: TelefonicaRegular;
-    width: 100%;
-    display: block;
-    float: left;
-    height: 40px;
-    line-height: 40px;
-    font-size: 20px;
+  text-align: left;
+  font-family: TelefonicaRegular;
+  width: 80%;
+  height: 40px;
+  line-height: 40px;
+  font-size: 20px;
+  padding: 0 0 0 13%;
+  position: relative;
 }
 
 .header .close{
-    float: right;
     position: absolute;
     right: 0;
 }

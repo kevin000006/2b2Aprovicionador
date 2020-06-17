@@ -419,8 +419,10 @@ export class OfertaServicioComponent implements OnInit {
 
   getPlantaExternaDialog():void{
     const dialogRef = this.dialog.open(PlantaExternaComponent, {
-      width: '500px',
-      minWidth:'720px',
+      height: '99%',
+      width: '100vw',
+      minWidth: '100vw',
+      panelClass: 'full-screen-modal',
       data: {asas:'ass'}
     });
 

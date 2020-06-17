@@ -553,3 +553,11 @@ body.theme-default th.mat-header-cell .mat-sort-header-container
     width: fit-content;
     margin: 0 auto;
 }
+
+.autocompletecliente {
+    min-width: 450px !important;
+}
+
+.mat-dialog-content{
+    max-height: 100vw !important;
+}
