@@ -111,7 +111,7 @@
                 </mat-form-field>
                   
             </div>
-            <div class="col-sm-6 padding-l-none">
+            <div class="col-sm-6 padding-l-none" style="line-height: 65px;">
                <label class="font-body-oferta cliente-nombre">{{oferta.cliente.numeroidentificadorfiscal}} / {{oferta.cliente.descripcion}}</label>
             </div>
              <div class="col-sm-2 content-control-oferta">                
@@ -356,7 +356,7 @@
                     <div class="row content-control-oferta">
                         <div class="col-sm-4 padding-l-none">
                             <label class="label-title">VAN/VAI:</label>
-                            <div class="font-body-oferta">{{(oferta.vanvai * 100) + '%' }}</div>
+                            <div class="font-body-oferta">{{((oferta.vanvai || 0) * 100).toFixed(0) + '%' }}</div>
                         </div>
                         <div class="col-sm-4">
                             <label class="label-title">Payback:</label>

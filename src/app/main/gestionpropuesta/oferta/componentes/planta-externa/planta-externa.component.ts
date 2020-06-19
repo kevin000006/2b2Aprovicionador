@@ -32,22 +32,27 @@ export class PlantaExternaComponent implements OnInit {
     ) { 
       
     }  
-  ngOnInit(): void {
 
-    
-      this.bitacoraDatabase = new PlantaExternaService(this.httpClient);
-      this.dataSource = new BitacoraDataSource(this.bitacoraDatabase,this.sort,
-        {
-          oferta:{
-            id:1
-          }
-        },5,0);
-    
-    
+    onCancel():void{
+      this.dialogRef.close();
+    }
 
-         
-   
-  }
+    ngOnInit(): void {
+
+      
+        this.bitacoraDatabase = new PlantaExternaService(this.httpClient);
+        this.dataSource = new BitacoraDataSource(this.bitacoraDatabase,this.sort,
+          {
+            oferta:{
+              id:1
+            }
+          },5,0);
+      
+      
+
+          
+    
+    }
 
 }
 

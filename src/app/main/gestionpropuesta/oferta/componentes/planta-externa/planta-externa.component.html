@@ -1,27 +1,30 @@
-<div class="text-right content-header">
-    <div class="header" >
-        <div class="section title">
-            Planta Externa
-        </div>
-       <div class="section close">
-        <button mat-icon-button class="close-ico">
-            <mat-icon>close</mat-icon>
-        </button>
-       </div>
-    </div>
-</div>
+
 <mat-dialog-content>
-    <div class="body">
+
+    <div class="text-right content-header">
+        <div class="header" >
+            <div class="section title">
+                Planta Externa
+            </div>
+           <div class="section close">
+            <button mat-icon-button class="close-ico" (click)="onCancel()">
+                <mat-icon>close</mat-icon>
+            </button>
+           </div>
+        </div>
+    </div>
+
+    <div class="body pe">
 
         <div class="filtro">
-            <mat-form-field appearance="outline" color="accent" class="gray-seatrch" style="height: 40px;max-width: 60%;">
+            <mat-form-field appearance="outline" color="accent" class="gray-seatrch" style="height: 40px;max-width: 30%;">
                 <input #filter matInput placeholder="Buscar" autocomplete="off" class="form-control">
                 <mat-icon matPrefix class="icon gray-seatrch">search</mat-icon>
             </mat-form-field>
         </div>
 
         <div class="table-responsive">
-            <mat-table class="mat-cell oferta-bandeja" style="width: 1200px;" #tbbitacora [dataSource]="dataSource" matSort>
+            <mat-table class="mat-cell oferta-bandeja"  #tbbitacora [dataSource]="dataSource" matSort>
                 <ng-container matColumnDef="selected" sticky>
                     <mat-header-cell *matHeaderCellDef>
                         <mat-checkbox class="example-margin font-normal" [(ngModel)]="selectedAll" ></mat-checkbox>
@@ -103,13 +106,12 @@
     </div>
     <br/>
     <div class="header">
-        <div class="section">
-            <button class="btn-telefonica-gree-2 _btn" >
+        <div class="section ">
+            <button class="btn-telefonica-gree-2 _btn" (click)="onCancel()">
                 Cancelar
             </button>
-        </div>
-        <div class="section btn-ok">
-            <button class="btn-telefonica-gree _btn" >
+
+            <button class="btn-telefonica-gree _btn btn-ok" (click)="onCancel()">
                 Aceptar
             </button>
         </div>

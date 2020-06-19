@@ -190,6 +190,7 @@ export class BandejaComponent implements OnInit {
   }
 
   public changeSizeItems(items):void{
+    this.pageIndex=1;
     this.filtrarData(items);
   }
 

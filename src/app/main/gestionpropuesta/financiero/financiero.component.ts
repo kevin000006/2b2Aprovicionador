@@ -38,8 +38,9 @@ export class FinancieroComponent implements OnInit {
         // }
     }
     regresar() {
-        window.sessionStorage.removeItem('oferta');
-        this._router.navigate(['gestion-propuesta/bandeja'], { state: {} });
+       // window.sessionStorage.removeItem('oferta');
+       // this._router.navigate(['gestion-propuesta/bandeja'], { state: {} });
+        window.history.back();
     }
 }
 

@@ -122,9 +122,10 @@ export class OfertaServicioComponent implements OnInit {
     'servicioPropuesto_DetalleAccion',//Se agrego este campo
     'equipos_observaciones',
 
-    'sisego_ultimamilla',
+    
     'sesego',
     'sisego_zona',
+    'sisego_ultimamilla',
     'sisego_transmision',
     'sisego_plantaexterna',
     'sisego_diasejecucion',
@@ -422,7 +423,7 @@ export class OfertaServicioComponent implements OnInit {
       height: '99%',
       width: '100vw',
       minWidth: '100vw',
-      panelClass: 'full-screen-modal',
+      panelClass: 'full-screen-modal_pe',
       data: {asas:'ass'}
     });
 

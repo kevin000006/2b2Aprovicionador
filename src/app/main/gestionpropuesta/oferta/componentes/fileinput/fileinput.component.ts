@@ -112,7 +112,7 @@ export class FileInputComponent implements OnInit {
           file: file,
           inProgress: false, //Si esta el false el progreebar estara ocultado si es true el progressbar se mostrara
           progress: 0,
-          tipo_adjunto:null,
+          tipo_adjunto:0,
           usuario: this.usuario,
           idUsuario: this.usuario.id.toString()
         });
